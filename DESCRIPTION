@@ -8,8 +8,8 @@ Authors@R:
            email = "faken@fakenmc.com",
            comment = c(ORCID = "0000-0002-8487-5837"))
 Description: an algorithm for generating multidimensional clusters. Each
-    cluster is supported by a line segment, the position, orientation and length
-    of which guide where the respective points are placed.
+  cluster is supported by a line segment, the position, orientation and length
+  of which guide where the respective points are placed.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
