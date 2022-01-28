@@ -8,15 +8,15 @@ based on the distances from the center given in \code{dist_center}.}
 points_on_line(center, direction, dist_center)
 }
 \arguments{
-\item{center}{Center of the line (n-component vector).}
+\item{center}{Center of the line (\eqn{n}-component vector).}
 
-\item{direction}{Line direction (n-component unit vector).}
+\item{direction}{Line direction (\eqn{n}-component unit vector).}
 
 \item{dist_center}{Distance of each point to the center of the line
-(p-component vector, where p is the number of points).}
+(\eqn{n}-component vector, where \eqn{n} is the number of points).}
 }
 \value{
-Coordinates of points on the specified line (p x n matrix).
+Coordinates of points on the specified line (\eqn{p \times n} matrix).
 }
 \description{
 Determine coordinates of points on a line with \code{center} and \code{direction},

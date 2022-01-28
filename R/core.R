@@ -4,12 +4,12 @@
 #' Determine coordinates of points on a line with `center` and `direction`,
 #' based on the distances from the center given in `dist_center`.
 #'
-#' @param center Center of the line (n-component vector).
-#' @param direction Line direction (n-component unit vector).
+#' @param center Center of the line (\eqn{n}-component vector).
+#' @param direction Line direction (\eqn{n}-component unit vector).
 #' @param dist_center  Distance of each point to the center of the line
-#' (p-component vector, where p is the number of points).
+#' (\eqn{n}-component vector, where \eqn{n} is the number of points).
 #'
-#' @return Coordinates of points on the specified line (p x n matrix).
+#' @return Coordinates of points on the specified line (\eqn{p \times n} matrix).
 #'
 #' @export
 points_on_line <- function(center, direction, dist_center) {
