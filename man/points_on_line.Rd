@@ -8,17 +8,17 @@ based on the distances from the center given in \code{dist_center}.}
 points_on_line(center, direction, dist_center)
 }
 \arguments{
-\item{center}{Center of the line (\eqn{n}-component vector).}
+\item{center}{Center of the line (\mjeqn{n}{n}-component vector).}
 
-\item{direction}{Line direction (\eqn{n}-component unit vector).}
+\item{direction}{Line direction (\mjeqn{n}{n}-component unit vector).}
 
 \item{dist_center}{Distance of each point to the center of the line
-(\eqn{n}-component vector, where \eqn{n} is the number of points).}
+(\eqn{n}-component vector, where \mjeqn{n}{n} is the number of points).}
 }
 \value{
-Coordinates of points on the specified line (\eqn{p \times n} matrix).
+Coordinates of points on the specified line
+(\mjeqn{p \times n}{p x n} matrix).
 }
 \description{
-Determine coordinates of points on a line with \code{center} and \code{direction},
-based on the distances from the center given in \code{dist_center}.
+\loadmathjax
 }
