@@ -2,18 +2,17 @@
 % Please edit documentation in R/core.R
 \name{points_on_line}
 \alias{points_on_line}
-\title{Determine coordinates of points on a line with \code{center} and \code{direction},
-based on the distances from the center given in \code{dist_center}.}
+\title{Determine coordinates of points on a line.}
 \usage{
 points_on_line(center, direction, dist_center)
 }
 \arguments{
-\item{center}{Center of the line (\mjeqn{n}{n}-component vector).}
+\item{center}{Center of the line (\mjseqn{n}-component vector).}
 
-\item{direction}{Line direction (\mjeqn{n}{n}-component unit vector).}
+\item{direction}{Line direction (\mjseqn{n}-component unit vector).}
 
 \item{dist_center}{Distance of each point to the center of the line
-(\eqn{n}-component vector, where \mjeqn{n}{n} is the number of points).}
+(\mjseqn{n}-component vector, where \mjseqn{n} is the number of points).}
 }
 \value{
 Coordinates of points on the specified line
@@ -21,4 +20,20 @@ Coordinates of points on the specified line
 }
 \description{
 \loadmathjax
+Determine coordinates of points on a line with \code{center} and \code{direction},
+based on the distances from the center given in \code{dist_center}.
+
+This works by using the vector formulation of the line equation assuming
+\code{direction} is a \mjseqn{n}-dimensional unit vector. In other words,
+considering \mjeqn{\mathbf{d}=}{d =} \code{as.matrix(direction)} (\mjeqn{n \times
+1}{n x 1} vector), \mjeqn{\mathbf{c}=}{c =} \code{as.matrix(center)} (\mjeqn{n
+\times 1}{n x 1} vector), and \mjeqn{\mathbf{w}=}{w =}
+\code{as.matrix(dist_center)} (\mjeqn{p \times 1}{p x 1} vector), the coordinates
+of points on the line are given by:
+
+\mjdeqn{\mathbf{P}=\mathbf{1}\,\mathbf{c}^T + \mathbf{w}\mathbf{d}^T}{P = 1c' + wd'}
+
+where \mjeqn{\mathbf{P}}{P} is the \mjeqn{p \times n}{p x n} matrix of point
+coordinates on the line, and \mjeqn{\mathbf{1}}{1} is a \mjeqn{p \times 1}{p
+x 1} vector with all entries equal to 1.
 }
