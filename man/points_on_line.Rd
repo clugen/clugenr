@@ -31,7 +31,8 @@ considering \mjeqn{\mathbf{d}=}{d =} \code{as.matrix(direction)} (\mjeqn{n \time
 \code{as.matrix(dist_center)} (\mjeqn{p \times 1}{p x 1} vector), the coordinates
 of points on the line are given by:
 
-\mjdeqn{\mathbf{P}=\mathbf{1}\,\mathbf{c}^T + \mathbf{w}\mathbf{d}^T}{P = 1c' + wd'}
+\mjdeqn{\mathbf{P}=\mathbf{1}\,\mathbf{c}^T + \mathbf{w}\mathbf{d}^T}{
+P = 1c' + wd'}
 
 where \mjeqn{\mathbf{P}}{P} is the \mjeqn{p \times n}{p x n} matrix of point
 coordinates on the line, and \mjeqn{\mathbf{1}}{1} is a \mjeqn{p \times 1}{p
