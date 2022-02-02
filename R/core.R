@@ -52,7 +52,19 @@ points_on_line <- function(center, direction, dist_center) {
     dist_center %*% matrix(direction, nrow = 1)
 }
 
+#' Get a random unit vector with `num_dims` components.
+#'
+#' @param num_dims Number of components in vector (i.e. vector size).
+#'
+#' @return A random unit vector with `num_dims` components.
+#'
 #' @export
+#'
+#' @examples
+#'
+#' r <- rand_unit_vector(4)
+#' norm(r, "2")
+#' # 1
 rand_unit_vector <- function(num_dims) {
   r <- stats::runif(num_dims)
   r / norm(r, "2")
