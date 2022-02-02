@@ -66,6 +66,6 @@ points_on_line <- function(center, direction, dist_center) {
 #' norm(r, "2")
 #' # 1
 rand_unit_vector <- function(num_dims) {
-  r <- stats::runif(num_dims)
+  r <- stats::runif(num_dims) - 0.5
   r / norm(r, "2")
 }
