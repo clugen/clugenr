@@ -115,3 +115,39 @@ rand_unit_vector <- function(num_dims) {
   r <- stats::runif(num_dims) - 0.5
   r / norm(r, "2")
 }
+
+#' Get a random unit vector at a given angle with another vector.
+#'
+#' @description
+#' \loadmathjax
+#' Get a random unit vector which is at `angle` radians of vector `u`.
+#' Note that `u` is expected to be a unit vector itself.
+#'
+#' @param u Unit vector with \mjseqn{n} components.
+#' @param angle Angle in radians.
+#'
+#' @return Random unit vector with \mjseqn{n} components which is at `angle`
+#' radians with vector `u`.
+#'
+#' @export
+#'
+#' @examples
+#'
+#' u <- c(1.0, 0, 0.5, -0.5)            # Define a 4D vector
+#' u <- u / norm(u, "2")                # Normalize the vector
+#' v <- rand_vector_at_angle(u, pi / 4) # Get a vector at 45 degrees
+#' arad <- acos((u %*% v) / norm(u,"2") * norm(v, "2")) # Get angle in radians
+#' arad * 180 / pi # Convert to degrees, should be close to 45 degrees
+#' # 45
+rand_vector_at_angle <- function(u, angle) {
+  if (isTRUE(all.equal(abs(angle), pi / 2)) && length(u) > 1) {
+    v <- rand_ortho_vector(u)
+  } else if ((abs(angle) < pi / 2) && length(u) > 1) {
+    v <- u + rand_ortho_vector(u) * tan(angle)
+    v <- v / norm(v, "2")
+  } else {
+    # For |θ| > π/2 or the 1D case, simply return a random vector
+    v <- rand_unit_vector(length(u))
+  }
+  v
+}

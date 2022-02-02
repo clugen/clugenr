@@ -3,3 +3,4 @@
 export(points_on_line)
 export(rand_ortho_vector)
 export(rand_unit_vector)
+export(rand_vector_at_angle)

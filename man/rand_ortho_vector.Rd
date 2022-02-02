@@ -20,5 +20,5 @@ r <- stats::runif(3)      # Get a random 3D vector
 r <- r / norm(r, "2")     # Normalize it
 o <- rand_ortho_vector(r) # Get a random unit vector orthogonal to r
 r \%*\% o                   # Check that r and o are orthogonal
-# 0
+# 0 # Result should be close to zero
 }
