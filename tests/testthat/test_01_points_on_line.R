@@ -44,7 +44,7 @@ for (i in seq.int(1, nrow(targs))) {
     test_that(test_desc, {
 
       # Create some random distances from center
-      dist2ctr <- len * runif(tpts) - len / 2
+      dist2ctr <- len * stats::runif(tpts) - len / 2
 
       # Check that the points_on_line function runs without warnings
       expect_warning(pts <- points_on_line(ctr, direc, dist2ctr),
