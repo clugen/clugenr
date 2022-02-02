@@ -56,8 +56,7 @@ for (i in seq.int(1, nrow(targs))) {
       # Check that distance of points to the line is approximately zero
       for (pt in asplit(pts, 1)) {
         # Get distance from current point to line
-        ptv <- as.vector(pt)
-        dp2l <- (ptv - ctr) - c((ptv - ctr) %*% direc) * direc
+        dp2l <- (pt - ctr) - c((pt - ctr) %*% direc) * direc
         d <- norm(as.matrix(dp2l, type = "2"))
         # Check that it is approximately zero
         expect_equal(d, 0)
