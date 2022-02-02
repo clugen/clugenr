@@ -51,3 +51,9 @@ points_on_line <- function(center, direction, dist_center) {
   rep(center, each = length(dist_center)) +
     dist_center %*% matrix(direction, nrow = 1)
 }
+
+#' @export
+rand_unit_vector <- function(num_dims) {
+  r <- runif(num_dims)
+  r / norm(r, "2")
+}
