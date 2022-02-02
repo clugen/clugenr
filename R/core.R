@@ -52,6 +52,52 @@ points_on_line <- function(center, direction, dist_center) {
     dist_center %*% matrix(direction, nrow = 1)
 }
 
+#' Get a random unit vector orthogonal to `u`.
+#'
+#' @param u A unit vector.
+#'
+#' @return A random unit vector orthogonal to `u`.
+#'
+#' @export
+#'
+#' @examples
+#' r <- stats::runif(3)      # Get a random 3D vector
+#' r <- r / norm(r, "2")     # Normalize it
+#' o <- rand_ortho_vector(r) # Get a random unit vector orthogonal to r
+#' r %*% o                   # Check that r and o are orthogonal
+#' # 0 # Result should be close to zero
+rand_ortho_vector <- function(u) {
+
+  if (length(u) == 1) {
+
+    # If 1D, just return a random unit vector
+    v <- rand_unit_vector(1)
+
+  } else {
+
+    # Otherwise find a random, non-parallel vector to u
+    while (TRUE) {
+
+      # Find normalized random vector
+      r <- rand_unit_vector(length(u))
+
+      # If not parallel to u we can keep it and break the loop
+      if (!isTRUE(all.equal(abs(u %*% r), 1))) {
+        break
+      }
+    }
+
+    # Get vector orthogonal to u using 1st iteration of Gram-Schmidt process
+    v <- r - c(u %*% r) / c(u %*% u) * u
+
+    # Normalize it
+    v <- v / norm(v, "2")
+  }
+
+  # Return it
+  v
+}
+
 #' Get a random unit vector with `num_dims` components.
 #'
 #' @param num_dims Number of components in vector (i.e. vector size).
