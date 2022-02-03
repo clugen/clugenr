@@ -4,7 +4,7 @@
 \alias{fix_empty}
 \title{Certifies that, given enough points, no clusters are left empty}
 \usage{
-fix_empty(clu_num_points, allow_empty)
+fix_empty(clu_num_points, allow_empty = FALSE)
 }
 \arguments{
 \item{clu_num_points}{Number of points in each cluster (vector of size
@@ -28,4 +28,11 @@ to \code{TRUE}), this function does nothing.
 This function is used internally by \link{clusizes} and might be useful for custom
 cluster sizing implementations given as the \code{clusizes_fn} parameter of the
 main \link{clugen} function.
+}
+\examples{
+
+clusters <- c(3, 4, 5, 0, 0)    # A vector with some empty elements
+clusters <- fix_empty(clusters) # Apply this function
+clusters                        # Check that there's no more empty elements
+# [1] 3 3 4 1 1
 }
