@@ -3,6 +3,7 @@
 export(clugen)
 export(clusizes)
 export(fix_empty)
+export(fix_num_points)
 export(points_on_line)
 export(rand_ortho_vector)
 export(rand_unit_vector)

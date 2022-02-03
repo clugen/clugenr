@@ -1,7 +1,7 @@
 # Copyright (c) 2020-2022 Nuno Fachada
 # Distributed under the MIT License (http://opensource.org/licenses/MIT)
 
-#' Certifies that, given enough points, no clusters are left empty
+#' Certify that, given enough points, no clusters are left empty
 #'
 #' @description
 #' \loadmathjax
@@ -25,7 +25,6 @@
 #' @export
 #'
 #' @examples
-#'
 #' clusters <- c(3, 4, 5, 0, 0)    # A vector with some empty elements
 #' clusters <- fix_empty(clusters) # Apply this function
 #' clusters                        # Check that there's no more empty elements
@@ -53,6 +52,48 @@ fix_empty <- function(clu_num_points, allow_empty = FALSE) {
         clu_num_points[i0] <- 1
       }
     }
+  }
+
+  clu_num_points
+}
+
+#' Certify that array values add up to a specific total
+#'
+#' @description
+#' \loadmathjax
+#' Certifies that the values in the `clu_num_points` array, i.e. the number of
+#' points in each cluster, add up to `num_points`. If this is not the case, the
+#' `clu_num_points` array is modified in-place, incrementing the value
+#' corresponding to the smallest cluster while
+#' `sum(clu_num_points) < num_points`, or decrementing the value corresponding
+#' to the largest cluster while `sum(clu_num_points) > num_points`.
+#'
+#' @details
+#' This function is used internally by [clusizes] and might be useful for
+#' custom cluster sizing implementations given as the `clusizes_fn` parameter of
+#' the main [clugen] function.
+#'
+#' @param clu_num_points Number of points in each cluster (vector of size
+#' \mjseqn{c}), where \mjseqn{c} is the number of clusters.
+#' @param num_points The expected total number of points.
+#' @return Number of points in each cluster, after being fixed by this function.
+#'
+#' @export
+#'
+#' @examples
+#' clusters <- c(1, 6, 3)                   # 10 total points
+#' clusters <- fix_num_points(clusters, 12) # But we want 12 total points
+#' clusters                                 # Check that we now have 12 points
+#' # [1] 3 6 3
+fix_num_points <- function(clu_num_points, num_points) {
+
+  while (sum(clu_num_points) < num_points) {
+    imin <- which.min(clu_num_points)
+    clu_num_points[imin] <- clu_num_points[imin] + 1
+  }
+  while (sum(clu_num_points) > num_points) {
+    imax <- which.max(clu_num_points)
+    clu_num_points[imax] <- clu_num_points[imax] - 1
   }
 
   clu_num_points

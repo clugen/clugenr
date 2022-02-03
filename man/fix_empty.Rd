@@ -2,7 +2,7 @@
 % Please edit documentation in R/helper.R
 \name{fix_empty}
 \alias{fix_empty}
-\title{Certifies that, given enough points, no clusters are left empty}
+\title{Certify that, given enough points, no clusters are left empty}
 \usage{
 fix_empty(clu_num_points, allow_empty = FALSE)
 }
@@ -30,7 +30,6 @@ cluster sizing implementations given as the \code{clusizes_fn} parameter of the
 main \link{clugen} function.
 }
 \examples{
-
 clusters <- c(3, 4, 5, 0, 0)    # A vector with some empty elements
 clusters <- fix_empty(clusters) # Apply this function
 clusters                        # Check that there's no more empty elements
