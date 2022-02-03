@@ -49,7 +49,7 @@ for (i in seq.int(1, nrow(targs))) {
 
       # Check that vectors u and r have an angle of a between them
       if (nd > 1 && abs(a) < pi / 2) {
-        expect(angle_btw(u, r), abs(a))
+        expect_equal(angle_btw(u, r), abs(a))
       }
     })
   }
