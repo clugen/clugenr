@@ -31,7 +31,7 @@
 #' dir <- c(1, 0)
 #' pdist <- c(-0.5, -0.2, 0.1, 0.3)
 #' proj <- points_on_line(ctr, dir, pdist)
-#' clupoints_n_1_template(proj, 0, dir, function (p, l) stats::runif(p))
+#' clupoints_n_1_template(proj, 0, dir, function(p, l) stats::runif(p))
 #' #      [,1]       [,2]
 #' # [1,] -0.5 -0.2875775
 #' # [2,] -0.2  0.7883051
