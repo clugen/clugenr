@@ -12,3 +12,17 @@
 clusizes <- function(num_clusters, num_points, allow_empty) {
 
 }
+
+#' Todo this text.
+#'
+#' @param projs TODO.
+#' @param lat_disp TODO.
+#' @param line_len TODO.
+#' @param clu_dir TODO.
+#' @param clu_ctr TODO.
+#' @return TODO. TODO.
+#'
+#' @export
+clupoints_n_1 <- function(projs, lat_disp, line_len, clu_dir, clu_ctr) {
+
+}
