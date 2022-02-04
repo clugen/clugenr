@@ -199,19 +199,67 @@ clupoints_n <- function(projs, lat_disp, line_len, clu_dir, clu_ctr) {
   projs + displ
 }
 
-#' Todo this text.
+#' Determine cluster sizes, i.e., the number of points in each cluster
+#'
+#' @description
+#' \loadmathjax
+#' Cluster sizes are determined using the normal distribution
+#' (\mjeqn{\mu=}{μ=}`num_points`\mjseqn{/}`num_clusters`,
+#' \mjeqn{\sigma=\mu/3}{σ=μ/3}), and then assuring that the final cluster sizes
+#' add up to `num_points` via the [fix_num_points] function.
 #'
 #' @note This function is stochastic. For reproducibility set a PRNG seed with
 #' [set.seed].
 #'
-#' @param num_clusters TODO.
-#' @param num_points TODO.
-#' @param allow_empty TODO.
-#' @return TODO.
+#' @param num_clusters Number of clusters.
+#' @param num_points Total number of points.
+#' @param allow_empty Allow empty clusters?
+#' @return Number of points in each cluster (vector of length `num_clusters`).
 #'
 #' @export
+#'
+#' @examples
+#' set.seed(123)
+#' sizes <- clusizes(4, 1000, TRUE)
+#' sizes
+#' # [1] 190 216 355 239
+#' sum(sizes)
+#' # 1000
 clusizes <- function(num_clusters, num_points, allow_empty) {
 
+    # Determine number of points in each cluster using the normal distribution
+
+    # Consider the mean an equal division of points between clusters
+    mean <- num_points / num_clusters
+    # The standard deviation is such that the interval [0, 2 * mean] will
+    # contain ≈99.7% of cluster sizes
+    std <- mean / 3
+
+    # Determine points with the normal distribution
+    clu_num_points <- stats::rnorm(num_clusters, mean = mean, sd = std)
+
+    # Set negative values to zero
+    clu_num_points <- sapply(clu_num_points, function(x) if (x > 0) x else 0)
+
+    # Fix imbalances, so that num_points is respected
+    if (sum(clu_num_points) > 0) { # Be careful not to divide by zero
+      clu_num_points <- num_points / sum(clu_num_points) * clu_num_points
+    }
+
+    # Round the real values to integers since a cluster sizes is represented by
+    # an integer
+    clu_num_points <- as.integer(round(clu_num_points))
+
+    # Make sure total points is respected, which may not be the case at this
+    # time due to rounding
+    clu_num_points <- fix_num_points(clu_num_points, num_points)
+
+    # If empty clusters are not allowed, make sure there aren't any
+    if (!allow_empty) {
+      clu_num_points <- fix_empty(clu_num_points, allow_empty)
+    }
+
+    clu_num_points
 }
 
 #' Todo this text.

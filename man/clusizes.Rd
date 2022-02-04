@@ -2,24 +2,36 @@
 % Please edit documentation in R/module.R
 \name{clusizes}
 \alias{clusizes}
-\title{Todo this text.}
+\title{Determine cluster sizes, i.e., the number of points in each cluster}
 \usage{
 clusizes(num_clusters, num_points, allow_empty)
 }
 \arguments{
-\item{num_clusters}{TODO.}
+\item{num_clusters}{Number of clusters.}
 
-\item{num_points}{TODO.}
+\item{num_points}{Total number of points.}
 
-\item{allow_empty}{TODO.}
+\item{allow_empty}{Allow empty clusters?}
 }
 \value{
-TODO.
+Number of points in each cluster (vector of length \code{num_clusters}).
 }
 \description{
-Todo this text.
+\loadmathjax
+Cluster sizes are determined using the normal distribution
+(\mjeqn{\mu=}{μ=}\code{num_points}\mjseqn{/}\code{num_clusters},
+\mjeqn{\sigma=\mu/3}{σ=μ/3}), and then assuring that the final cluster sizes
+add up to \code{num_points} via the \link{fix_num_points} function.
 }
 \note{
 This function is stochastic. For reproducibility set a PRNG seed with
 \link{set.seed}.
+}
+\examples{
+set.seed(123)
+sizes <- clusizes(4, 1000, TRUE)
+sizes
+# [1] 190 216 355 239
+sum(sizes)
+# 1000
 }
