@@ -2,14 +2,77 @@
 % Please edit documentation in R/main.R
 \name{clugen}
 \alias{clugen}
-\title{Main function.}
+\title{Generate multidimensional clusters.}
 \usage{
-clugen()
+clugen(
+  num_dims,
+  num_clusters,
+  num_points,
+  direction,
+  angle_disp,
+  cluster_sep,
+  llength,
+  llength_disp,
+  lateral_disp,
+  allow_empty = FALSE,
+  cluster_offset = NA,
+  proj_dist_fn = "norm",
+  point_dist_fn = "n-1",
+  clusizes_fn = clusizes,
+  clucenters_fn = clucenters,
+  llengths_fn = llengths,
+  angle_deltas_fn = angle_deltas
+)
+}
+\arguments{
+\item{num_dims}{TODO.}
+
+\item{num_clusters}{TODO.}
+
+\item{num_points}{TODO.}
+
+\item{direction}{TODO.}
+
+\item{angle_disp}{TODO.}
+
+\item{cluster_sep}{TODO.}
+
+\item{llength}{TODO.}
+
+\item{llength_disp}{TODO.}
+
+\item{lateral_disp}{TODO.}
+
+\item{allow_empty}{TODO.}
+
+\item{cluster_offset}{TODO.}
+
+\item{proj_dist_fn}{TODO.}
+
+\item{point_dist_fn}{TODO.}
+
+\item{clusizes_fn}{TODO.}
+
+\item{clucenters_fn}{TODO.}
+
+\item{llengths_fn}{TODO.}
+
+\item{angle_deltas_fn}{TODO.}
+}
+\value{
+TODO.
 }
 \description{
-Main function.
+\loadmathjax
+TODO
+}
+\details{
+TODO
 }
 \note{
 This function is stochastic. For reproducibility set a PRNG seed with
 \link{set.seed}.
+}
+\examples{
+clugen(3, 5, 1000, c(2,3,4), 0.1, c(1,3,4), 10, 0.1, 0.1)
 }
