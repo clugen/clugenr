@@ -20,6 +20,17 @@ get_angles <- function(n) {
   2 * pi * stats::runif(n) - pi
 }
 
+# Get cluster offsets
+get_clu_offsets <- function(nd) {
+  clo <- matrix(0, 3, nd)
+  clo[2, ] <- 1
+  clo[3, ] <- stats::rnorm(nd, sd = 1000)
+  clo
+}
+
+# Get cluster separators
+get_clu_seps <- get_clu_offsets
+
 # Get angle between two vectors, useful for checking correctness of results
 # Based on AngleBetweenVectors.jl by Jeffrey Sarnoff (MIT license),
 # https://github.com/JeffreySarnoff/AngleBetweenVectors.jl
