@@ -26,6 +26,10 @@ Note this is different from the standard wrapped normal distribution, the
 support of which is given by the interval
 \mjeqn{\left[-\pi,\pi\right]}{[-π,π]}.
 }
+\note{
+This function is stochastic. For reproducibility set a PRNG seed with
+\link{set.seed}.
+}
 \examples{
 set.seed(123)
 arad <- angle_deltas(4, pi / 8) # Angle dispersion of 22.5 degrees

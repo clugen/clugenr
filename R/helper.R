@@ -15,6 +15,9 @@
 #' constructing user-defined final point placement strategies for the
 #' `point_dist_fn` parameter of the main [clugen] function.
 #'
+#' @note This function is stochastic. For reproducibility set a PRNG seed with
+#' [set.seed].
+#'
 #' @param projs Point projections on the cluster-supporting line
 #' (\mjeqn{p \times n}{p x n} matrix).
 #' @param lat_disp Dispersion of points from their projection.

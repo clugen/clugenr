@@ -20,6 +20,10 @@ radians with vector \code{u}.
 Get a random unit vector which is at \code{angle} radians of vector \code{u}.
 Note that \code{u} is expected to be a unit vector itself.
 }
+\note{
+This function is stochastic. For reproducibility set a PRNG seed with
+\link{set.seed}.
+}
 \examples{
 
 u <- c(1.0, 0, 0.5, -0.5)            # Define a 4D vector

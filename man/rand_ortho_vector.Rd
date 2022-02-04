@@ -15,6 +15,10 @@ A random unit vector orthogonal to \code{u}.
 \description{
 Get a random unit vector orthogonal to \code{u}.
 }
+\note{
+This function is stochastic. For reproducibility set a PRNG seed with
+\link{set.seed}.
+}
 \examples{
 r <- stats::runif(3)      # Get a random 3D vector
 r <- r / norm(r, "2")     # Normalize it

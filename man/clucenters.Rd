@@ -2,20 +2,49 @@
 % Please edit documentation in R/module.R
 \name{clucenters}
 \alias{clucenters}
-\title{Todo this text.}
+\title{Determine cluster centers using the uniform distribution}
 \usage{
 clucenters(num_clusters, clu_sep, clu_offset)
 }
 \arguments{
-\item{num_clusters}{TODO.}
+\item{num_clusters}{Number of clusters.}
 
-\item{clu_sep}{TODO.}
+\item{clu_sep}{Average cluster separation (\mjeqn{n \times 1}{n x 1} vector).}
 
-\item{clu_offset}{TODO.}
+\item{clu_offset}{Cluster offsets (\mjeqn{n \times 1}{n x 1} vector).}
 }
 \value{
-TODO.
+A \mjeqn{c \times n}{c x n} matrix containing the cluster centers.
 }
 \description{
-Todo this text.
+\loadmathjax
+Determine cluster centers using the uniform distribution, taking into account
+the number of clusters (\code{num_clusters}) and the average cluster separation
+(\code{clu_sep}).
+
+More specifically, let \mjseqn{c=}\code{num_clusters},
+\mjeqn{\mathbf{s}=}{s=}\code{clu_sep}, \mjeqn{\mathbf{o}=}{o=}\code{clu_offset},
+\mjseqn{n=}\code{length(clu_sep)} (i.e., number of dimensions). Cluster centers
+are obtained according to the following equation:
+
+\mjdeqn{\mathbf{C}=c\mathbf{U}\cdot\operatorname{diag}(\mathbf{s}) +
+\mathbf{1}\,\mathbf{o}^T}{C=cU.diag(s) + 1o'}
+
+where \mjeqn{\mathbf{C}}{C} is the \mjeqn{c \times n}{c x n} matrix of
+cluster centers, \mjeqn{\mathbf{U}}{U} is an \mjeqn{c \times n}{c x n} matrix
+of random values drawn from the uniform distribution between -0.5 and 0.5,
+and \mjeqn{\mathbf{1}}{1} is an \mjeqn{c \times 1}{c x 1} vector with all
+entries equal to 1.
+}
+\note{
+This function is stochastic. For reproducibility set a PRNG seed with
+\link{set.seed}.
+}
+\examples{
+set.seed(321)
+clucenters(3, c(30, 10), c(-50,50))
+#            [,1]     [,2]
+# [1,]  -8.969561 42.65221
+# [2,] -10.644303 46.71536
+# [3,] -73.560159 45.23540
 }

@@ -27,7 +27,6 @@
 #' @param direction Line direction (\mjseqn{n}-component unit vector).
 #' @param dist_center  Distance of each point to the center of the line
 #' (\mjseqn{n}-component vector, where \mjseqn{n} is the number of points).
-#'
 #' @return Coordinates of points on the specified line
 #' (\mjeqn{p \times n}{p x n} matrix).
 #'
@@ -54,8 +53,10 @@ points_on_line <- function(center, direction, dist_center) {
 
 #' Get a random unit vector orthogonal to `u`.
 #'
-#' @param u A unit vector.
+#' @note This function is stochastic. For reproducibility set a PRNG seed with
+#' [set.seed].
 #'
+#' @param u A unit vector.
 #' @return A random unit vector orthogonal to `u`.
 #'
 #' @export
@@ -100,8 +101,10 @@ rand_ortho_vector <- function(u) {
 
 #' Get a random unit vector with `num_dims` components.
 #'
-#' @param num_dims Number of components in vector (i.e. vector size).
+#' @note This function is stochastic. For reproducibility set a PRNG seed with
+#' [set.seed].
 #'
+#' @param num_dims Number of components in vector (i.e. vector size).
 #' @return A random unit vector with `num_dims` components.
 #'
 #' @export
@@ -123,9 +126,11 @@ rand_unit_vector <- function(num_dims) {
 #' Get a random unit vector which is at `angle` radians of vector `u`.
 #' Note that `u` is expected to be a unit vector itself.
 #'
+#' @note This function is stochastic. For reproducibility set a PRNG seed with
+#' [set.seed].
+#'
 #' @param u Unit vector with \mjseqn{n} components.
 #' @param angle Angle in radians.
-#'
 #' @return Random unit vector with \mjseqn{n} components which is at `angle`
 #' radians with vector `u`.
 #'

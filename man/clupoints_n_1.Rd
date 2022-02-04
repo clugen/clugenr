@@ -23,3 +23,7 @@ TODO.
 \description{
 Todo this text.
 }
+\note{
+This function is stochastic. For reproducibility set a PRNG seed with
+\link{set.seed}.
+}

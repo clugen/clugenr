@@ -32,6 +32,10 @@ This function is used internally by \link{clupoints_n_1} and may be useful for
 constructing user-defined final point placement strategies for the
 \code{point_dist_fn} parameter of the main \link{clugen} function.
 }
+\note{
+This function is stochastic. For reproducibility set a PRNG seed with
+\link{set.seed}.
+}
 \examples{
 set.seed(123)
 ctr <- c(0, 0)

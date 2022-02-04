@@ -15,6 +15,10 @@ A random unit vector with \code{num_dims} components.
 \description{
 Get a random unit vector with \code{num_dims} components.
 }
+\note{
+This function is stochastic. For reproducibility set a PRNG seed with
+\link{set.seed}.
+}
 \examples{
 
 r <- rand_unit_vector(4)
