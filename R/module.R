@@ -145,21 +145,58 @@ clupoints_n_1 <- function(projs, lat_disp, line_len, clu_dir, clu_ctr) {
   clupoints_n_1_template(projs, lat_disp, clu_dir, dist_fn)
 }
 
-#' Todo this text.
+#' Create points from their projections on a cluster-supporting line
+#'
+#' @description
+#' \loadmathjax
+#' Each point is placed around its projection using the normal distribution
+#' (\mjeqn{\mu=0}{μ=0}, \mjeqn{\sigma=}{σ=}`lat_disp`).
+#'
+#' @details
+#' This function's main intended use is by the main [clugen] function,
+#' generating the final points when the `point_dist_fn` parameter is set to
+#' `"n"`.
 #'
 #' @note This function is stochastic. For reproducibility set a PRNG seed with
 #' [set.seed].
 #'
-#' @param projs TODO.
-#' @param lat_disp TODO.
-#' @param line_len TODO.
-#' @param clu_dir TODO.
-#' @param clu_ctr TODO.
-#' @return TODO.
+#' @param projs Point projections on the cluster-supporting line
+#' (\mjeqn{p \times n}{p x n} matrix).
+#' @param lat_disp Standard deviation for the normal distribution, i.e., cluster
+#' lateral dispersion.
+#' @param line_len Length of cluster-supporting line (ignored).
+#' @param clu_dir Direction of the cluster-supporting line.
+#' @param clu_ctr Center position of the cluster-supporting line (ignored).
+#' @return Generated points (\mjeqn{p \times n}{p x n} matrix).
 #'
 #' @export
+#'
+#' @examples
+#' set.seed(123)
+#' ctr <- c(0, 0)
+#' dir <- c(1, 0)
+#' pdist <- c(-0.5, -0.2, 0.1, 0.3)
+#' proj <- points_on_line(ctr, dir, pdist)
+#' clupoints_n(proj, 0.01, NA, dir, NA)
+#' #            [,1]         [,2]
+#' # [1,] -0.5056048  0.001292877
+#' # [2,] -0.2023018  0.017150650
+#' # [3,]  0.1155871  0.004609162
+#' # [4,]  0.3007051 -0.012650612
 clupoints_n <- function(projs, lat_disp, line_len, clu_dir, clu_ctr) {
 
+  # Number of dimensions
+  num_dims <- length(clu_dir)
+
+  # Number of points in this cluster
+  clu_num_points <- dim(projs)[1]
+
+  # Get random displacement vectors for each point projection
+  displ <- matrix(stats::rnorm(clu_num_points * num_dims, sd = lat_disp),
+                  nrow = clu_num_points)
+
+  # Add displacement vectors to each point projection and return the result
+  projs + displ
 }
 
 #' Todo this text.
