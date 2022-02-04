@@ -96,21 +96,53 @@ clucenters <- function(num_clusters, clu_sep, clu_offset) {
   num_clusters * ctr_rel %*% clu_sep + rep(clu_offset, each = num_clusters)
 }
 
-#' Todo this text.
+#' Create points from their projections on a cluster-supporting line
+#'
+#' @description
+#' \loadmathjax
+#' Each point is placed on a hyperplane orthogonal to that line and centered at
+#' the point's projection, using the normal distribution (\mjeqn{\mu=0}{μ=0},
+#' \mjeqn{\sigma=}{σ=}`lat_disp`).
+#'
+#' @details
+#' This function's main intended use is by the main [clugen] function,
+#' generating the final points when the `point_dist_fn` parameter is set to
+#' `"n-1"`.
 #'
 #' @note This function is stochastic. For reproducibility set a PRNG seed with
 #' [set.seed].
 #'
-#' @param projs TODO.
-#' @param lat_disp TODO.
-#' @param line_len TODO.
-#' @param clu_dir TODO.
-#' @param clu_ctr TODO.
-#' @return TODO.
+#' @param projs Point projections on the cluster-supporting line
+#' (\mjeqn{p \times n}{p x n} matrix).
+#' @param lat_disp Standard deviation for the normal distribution, i.e., cluster
+#' lateral dispersion.
+#' @param line_len Length of cluster-supporting line (ignored).
+#' @param clu_dir Direction of the cluster-supporting line.
+#' @param clu_ctr Center position of the cluster-supporting line (ignored).
+#' @return Generated points (\mjeqn{p \times n}{p x n} matrix).
 #'
 #' @export
+#'
+#' @examples
+#' set.seed(123)
+#' ctr <- c(0, 0)
+#' dir <- c(1, 0)
+#' pdist <- c(-0.5, -0.2, 0.1, 0.3)
+#' proj <- points_on_line(ctr, dir, pdist)
+#' clupoints_n_1(proj, 0.1, 5, dir, ctr)
+#' #      [,1]         [,2]
+#' # [1,] -0.5 -0.056047565
+#' # [2,] -0.2 -0.023017749
+#' # [3,]  0.1  0.155870831
+#' # [4,]  0.3  0.007050839
 clupoints_n_1 <- function(projs, lat_disp, line_len, clu_dir, clu_ctr) {
 
+  # Define function to get distances from points to their projections on the
+  # line (i.e., using the normal distribution)
+  dist_fn <- function(clu_npoints, ldisp) stats::rnorm(clu_npoints, sd = ldisp)
+
+  # Use clupoints_n_1_template() to do the heavy lifting
+  clupoints_n_1_template(projs, lat_disp, clu_dir, dist_fn)
 }
 
 #' Todo this text.

@@ -2,28 +2,51 @@
 % Please edit documentation in R/module.R
 \name{clupoints_n_1}
 \alias{clupoints_n_1}
-\title{Todo this text.}
+\title{Create points from their projections on a cluster-supporting line}
 \usage{
 clupoints_n_1(projs, lat_disp, line_len, clu_dir, clu_ctr)
 }
 \arguments{
-\item{projs}{TODO.}
+\item{projs}{Point projections on the cluster-supporting line
+(\mjeqn{p \times n}{p x n} matrix).}
 
-\item{lat_disp}{TODO.}
+\item{lat_disp}{Standard deviation for the normal distribution, i.e., cluster
+lateral dispersion.}
 
-\item{line_len}{TODO.}
+\item{line_len}{Length of cluster-supporting line (ignored).}
 
-\item{clu_dir}{TODO.}
+\item{clu_dir}{Direction of the cluster-supporting line.}
 
-\item{clu_ctr}{TODO.}
+\item{clu_ctr}{Center position of the cluster-supporting line (ignored).}
 }
 \value{
-TODO.
+Generated points (\mjeqn{p \times n}{p x n} matrix).
 }
 \description{
-Todo this text.
+\loadmathjax
+Each point is placed on a hyperplane orthogonal to that line and centered at
+the point's projection, using the normal distribution (\mjeqn{\mu=0}{μ=0},
+\mjeqn{\sigma=}{σ=}\code{lat_disp}).
+}
+\details{
+This function's main intended use is by the main \link{clugen} function,
+generating the final points when the \code{point_dist_fn} parameter is set to
+\code{"n-1"}.
 }
 \note{
 This function is stochastic. For reproducibility set a PRNG seed with
 \link{set.seed}.
+}
+\examples{
+set.seed(123)
+ctr <- c(0, 0)
+dir <- c(1, 0)
+pdist <- c(-0.5, -0.2, 0.1, 0.3)
+proj <- points_on_line(ctr, dir, pdist)
+clupoints_n_1(proj, 0.1, 5, dir, ctr)
+#      [,1]         [,2]
+# [1,] -0.5 -0.056047565
+# [2,] -0.2 -0.023017749
+# [3,]  0.1  0.155870831
+# [4,]  0.3  0.007050839
 }
