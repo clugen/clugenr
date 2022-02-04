@@ -7,9 +7,6 @@ ndirs <- 1
 # Number of line centers to test
 ncts <- 1
 
-# Distance from points to projections will be 10
-dist_pt <- 10
-
 # Create parameter combinations to test
 targs <- expand.grid(seed = seeds, nd = num_dims, len = llengths_mus,
                      tpts = num_points[num_points < 1000], lat_std = lat_stds)
