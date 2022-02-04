@@ -43,7 +43,7 @@ ctr <- c(0, 0)
 dir <- c(1, 0)
 pdist <- c(-0.5, -0.2, 0.1, 0.3)
 proj <- points_on_line(ctr, dir, pdist)
-clupoints_n_1(proj, 0.1, 5, dir, ctr)
+clupoints_n_1(proj, 0.1, NA, dir, NA)
 #      [,1]         [,2]
 # [1,] -0.5 -0.056047565
 # [2,] -0.2 -0.023017749
