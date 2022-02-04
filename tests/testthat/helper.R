@@ -17,7 +17,7 @@ get_unitvecs <- function(n, nd) {
 
 # Get n angles
 get_angles <- function(n) {
-  2 * pi * stats::runif(n) - pi
+  stats::runif(n, min = -pi, max = pi)
 }
 
 # Get cluster offsets

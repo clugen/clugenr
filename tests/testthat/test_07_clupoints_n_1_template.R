@@ -48,7 +48,7 @@ for (i in seq.int(1, nrow(targs))) {
     test_that(test_desc, {
 
       # Create some random distances from center
-      proj_dist_fn2ctr <- len * stats::runif(tpts) - len / 2
+      proj_dist_fn2ctr <- stats::runif(tpts, min = -len / 2, max = len / 2)
       proj <- points_on_line(ctr, direc, proj_dist_fn2ctr)
 
       # Very simple dist_fn, always puts points at a distance of dist_pt

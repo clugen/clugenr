@@ -2,7 +2,7 @@
 % Please edit documentation in R/module.R
 \name{llengths}
 \alias{llengths}
-\title{Determine length of cluster-supporting lines.}
+\title{Determine length of cluster-supporting lines}
 \usage{
 llengths(num_clusters, llength, llength_disp)
 }
