@@ -115,7 +115,7 @@ rand_ortho_vector <- function(u) {
 #' norm(r, "2")
 #' # 1
 rand_unit_vector <- function(num_dims) {
-  r <- stats::runif(num_dims) - 0.5
+  r <- stats::runif(num_dims, min = -0.5, max = 0.5)
   r / norm(r, "2")
 }
 
