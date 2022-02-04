@@ -262,17 +262,27 @@ clusizes <- function(num_clusters, num_points, allow_empty) {
     clu_num_points
 }
 
-#' Todo this text.
+#' Determine length of cluster-supporting lines
+#'
+#' @description
+#' \loadmathjax
+#' Line lengths are determined using the folded normal distribution
+#' (\mjeqn{\mu=}{μ=}`llength`, \mjeqn{\sigma=}{σ=}`llength_disp`).
 #'
 #' @note This function is stochastic. For reproducibility set a PRNG seed with
 #' [set.seed].
 #'
-#' @param num_clusters TODO.
-#' @param llength TODO.
-#' @param llength_disp TODO.
-#' @return TODO.
+#' @param num_clusters Number of clusters.
+#' @param llength Average line length.
+#' @param llength_disp Line length dispersion.
+#' @return Lengths of cluster-supporting lines (vector of size `num_clusters`).
 #'
 #' @export
+#'
+#' @examples
+#' set.seed(123)
+#' llengths(4, 20, 3.5)
+#' # [1] 18.03834 19.19438 25.45548 20.24678
 llengths <- function(num_clusters, llength, llength_disp) {
-
+  abs(stats::rnorm(num_clusters, mean = llength, sd = llength_disp))
 }

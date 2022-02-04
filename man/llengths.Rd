@@ -2,24 +2,31 @@
 % Please edit documentation in R/module.R
 \name{llengths}
 \alias{llengths}
-\title{Todo this text.}
+\title{Determine length of cluster-supporting lines.}
 \usage{
 llengths(num_clusters, llength, llength_disp)
 }
 \arguments{
-\item{num_clusters}{TODO.}
+\item{num_clusters}{Number of clusters.}
 
-\item{llength}{TODO.}
+\item{llength}{Average line length.}
 
-\item{llength_disp}{TODO.}
+\item{llength_disp}{Line length dispersion.}
 }
 \value{
-TODO.
+Lengths of cluster-supporting lines (vector of size \code{num_clusters}).
 }
 \description{
-Todo this text.
+\loadmathjax
+Line lengths are determined using the folded normal distribution
+(\mjeqn{\mu=}{μ=}\code{llength}, \mjeqn{\sigma=}{σ=}\code{llength_disp}).
 }
 \note{
 This function is stochastic. For reproducibility set a PRNG seed with
 \link{set.seed}.
+}
+\examples{
+set.seed(123)
+llengths(4, 20, 3.5)
+# [1] 18.03834 19.19438 25.45548 20.24678
 }
