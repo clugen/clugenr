@@ -105,14 +105,14 @@ for (i in seq.int(1, nrow(targs))) {
 # Valid arguments
 nclu <- 7
 tpts <- 500
-astd <- pi/256
+astd <- pi / 256
 len_mu <- 9
 len_std <- 1.2
 lat_std <- 2
 
 # Alternative functions used for testing
-ptdist_equi <- function(l, n) seq(from = -l / 2, to = l / 2, length.out = n)
-ptoff_projs_plus_1 <- function(projs, ls, l, cd, cc) projs + 1
+prjdist_equi <- function(l, n) seq(from = -l / 2, to = l / 2, length.out = n)
+ptdist_projs_plus_1 <- function(projs, ls, l, cd, cc) projs + 1
 csz_equi <- function(nclu, tpts, ae) {
   cs <- vector(mode = "integer", length = nclu)
   for (i in 1:tpts) {
@@ -120,12 +120,20 @@ csz_equi <- function(nclu, tpts, ae) {
   }
   cs
 }
+cctr_on_a_line <- function(nclu, cs, co) {
+  1:nclu * matrix(0, nrow = nclu, ncol = length(cs))
+}
+llen_unif_10_20 <- function(nclu, l, lsd) stats::runif(nclu, min = 10, max = 20)
+lang_same <- function(nclu, astd) vector(mode = "double", length = nclu)
 
 # Create parameter combinations to test
 targs <- expand.grid(seed = seeds, nd = c(2, 7), ae = allow_empties,
-                     ptdist_fn = c("norm", "unif", ptdist_equi),
-                     ptoff_fn = c("n-1", "n", ptoff_projs_plus_1),
-                     csz_fn = c(clusizes, csz_equi))
+                     prjdist_fn = c("norm", "unif", prjdist_equi),
+                     ptdist_fn = c("n-1", "n", ptdist_projs_plus_1),
+                     csz_fn = c(clusizes, csz_equi),
+                     cctr_fn = c(clucenters, cctr_on_a_line),
+                     llen_fn = c(llengths, llen_unif_10_20),
+                     lang_fn = c(angle_deltas, lang_same))
 
 # Loop through all parameter combinations
 for (i in seq.int(1, nrow(targs))) {
@@ -133,9 +141,12 @@ for (i in seq.int(1, nrow(targs))) {
   # Get current parameters
   seed <- targs[i, "seed"]
   ae <- targs[i, "ae"]
+  prjdist_fn <- targs[i, "prjdist_fn"][[1]]
   ptdist_fn <- targs[i, "ptdist_fn"][[1]]
-  ptoff_fn <- targs[i, "ptoff_fn"][[1]]
   csz_fn <- targs[i, "csz_fn"][[1]]
+  cctr_fn <- targs[i, "cctr_fn"][[1]]
+  llen_fn <- targs[i, "llen_fn"][[1]]
+  lang_fn <- targs[i, "lang_fn"][[1]]
 
   # Set seed
   set.seed(seed)
@@ -155,9 +166,9 @@ for (i in seq.int(1, nrow(targs))) {
     test_desc <- paste0("clugen optional params: ae=", ae,
                         ", nclu=", nclu, ", tpts=", tpts,
                         ", ptdist_fn='",
-                        format(ptdist_fn)[length(format(ptdist_fn))],
+                        format(prjdist_fn)[length(format(prjdist_fn))],
                         "', ptoff_fn='",
-                        format(ptoff_fn)[length(format(ptoff_fn))],
+                        format(ptdist_fn)[length(format(ptdist_fn))],
                         "', czn_fn='",
                         format(csz_fn)[length(format(csz_fn))],
                         "'")
@@ -168,9 +179,12 @@ for (i in seq.int(1, nrow(targs))) {
       # ...in which case it runs without problem
       expect_warning(r <- clugen(nd, nclu, tpts, direc, astd,
                                  clusep, len_mu, len_std, lat_std,
-                                 point_dist_fn = ptoff_fn,
-                                 proj_dist_fn = ptdist_fn,
-                                 clusizes_fn = csz_fn),
+                                 point_dist_fn = ptdist_fn,
+                                 proj_dist_fn = prjdist_fn,
+                                 clusizes_fn = csz_fn,
+                                 clucenters_fn = cctr_fn,
+                                 llengths_fn = llen_fn,
+                                 angle_deltas_fn = lang_fn),
                      regexp = NA)
 
       # Check dimensions of result variables
