@@ -278,16 +278,21 @@ clugen <- function(num_dims, num_clusters, num_points, direction, angle_disp,
     # Determine coordinates of point projections on the line using the
     # parametric line equation (this works since cluster direction is
     # normalized)
-    point_projections[idx_start:idx_end, ] <- points_on_line(
-      cluster_centers[i, ], cluster_directions[i, ], ptproj_dist_fn_center)
+    proj  <- points_on_line(cluster_centers[i, ],
+                            cluster_directions[i, ],
+                            ptproj_dist_fn_center)
+    point_projections[idx_start:idx_end, ] <- proj
+
+    # If we only have one point in this cluster, convert proj to matrix,
+    # which is the format expected by pt_from_proj_fn
+    if (is.vector(proj)) dim(proj) <- c(1, num_dims)
 
     # Determine points from their projections on the line
-    points[idx_start:idx_end, ] <- pt_from_proj_fn(
-      point_projections[idx_start:idx_end, ],
-      lateral_disp,
-      cluster_lengths[i],
-      cluster_directions[i, ],
-      cluster_centers[i, ])
+    points[idx_start:idx_end, ] <- pt_from_proj_fn(proj,
+                                                   lateral_disp,
+                                                   cluster_lengths[i],
+                                                   cluster_directions[i, ],
+                                                   cluster_centers[i, ])
   }
 
   # Return result
