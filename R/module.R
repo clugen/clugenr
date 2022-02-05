@@ -89,8 +89,8 @@ clucenters <- function(num_clusters, clu_sep, clu_offset) {
   ctr_rel <- stats::runif(num_clusters * length(clu_sep), min = -0.5, max = 0.5)
   ctr_rel <- matrix(ctr_rel, nrow = num_clusters)
 
-  # Convert clu_sep to diagonal matrix; if it's a one-element vector just use
-  # as.matrix()
+  # Convert clu_sep to diagonal matrix; if it's a one-element vector just
+  # use as.matrix()
   clu_sep <- if (length(clu_sep) == 1) as.matrix(clu_sep) else diag(clu_sep)
 
   num_clusters * ctr_rel %*% clu_sep + rep(clu_offset, each = num_clusters)
