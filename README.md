@@ -34,6 +34,26 @@ _clugenr_ help page as follows:
 help("clugenr")
 ```
 
+## Examples
+
+2D example:
+
+```R
+library(clugenr)
+r <- clugen(2, 5, 1000, c(2,3), 0.6, c(4,6), 3, 0.1, 0.5, cluster_offset =  c(1,3), point_dist_fn = "n")
+plot(r$points[,1], r$points[,2], pch=19, col=factor(r$point_clusters))
+```
+
+3D example:
+
+```R
+library(clugenr)
+library(rgl) # For plots
+r <- clugen(3, 5, 1000, c(2,3,4), 0.5, c(15,13,14), 7, 1, 2, cluster_offset =  c(1,3,3), point_dist_fn = "n")
+plot3d(r$points[,1], r$points[,2], r$points[,3], pch=19, col=factor(r$point_clusters))
+```
+
+
 ## Development
 
 Test the package:
