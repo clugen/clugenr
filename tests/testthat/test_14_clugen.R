@@ -179,8 +179,9 @@ for (i in seq.int(1, nrow(targs))) {
       # ...in which case it runs without problem
       expect_warning(r <- clugen(nd, nclu, tpts, direc, astd,
                                  clusep, len_mu, len_std, lat_std,
-                                 point_dist_fn = ptdist_fn,
+                                 allow_empty = ae,
                                  proj_dist_fn = prjdist_fn,
+                                 point_dist_fn = ptdist_fn,
                                  clusizes_fn = csz_fn,
                                  clucenters_fn = cctr_fn,
                                  llengths_fn = llen_fn,
@@ -219,4 +220,193 @@ for (i in seq.int(1, nrow(targs))) {
       }
     })
   }
+}
+
+# ######################## #
+# Test clugen() exceptions #
+# ######################## #
+
+for (seed in seeds) {
+
+  # Set seed
+  set.seed(seed)
+
+  # Valid parameters
+  nd <- 3
+  nclu <- 5
+  tpts <- 1000
+  direc <- c(1, 0, 0)
+  astd <- pi / 64
+  clusep <- c(10, 10, 5)
+  len_mu <- 5
+  len_std <- 0.5
+  lat_std <- 0.3
+  ae <- TRUE
+  clu_off <- c(-1.5, 0, 2)
+  prj_dist <- "unif"
+  pt_dist <- "n-1"
+  csizes_fn <- clusizes
+  ccenters_fn <- clucenters
+  llengths_fn <- llengths
+  langles_fn <- angle_deltas
+
+  test_that(paste0("clugen exceptions: seed=", seed), {
+
+    # Test passes with valid arguments
+    expect_warning(r <- clugen(nd, nclu, tpts, direc, astd, clusep,
+                               len_mu, len_std, lat_std,
+                               allow_empty = ae,
+                               cluster_offset = clu_off,
+                               proj_dist_fn = prj_dist,
+                               point_dist_fn = pt_dist,
+                               clusizes_fn = csizes_fn,
+                               clucenters_fn = ccenters_fn,
+                               llengths_fn = llengths_fn,
+                               angle_deltas_fn = langles_fn),
+                   regexp = NA)
+
+    # Test passes with zero points since allow_empty is set to true
+    expect_warning(r <- clugen(nd, nclu, 0, direc, astd, clusep,
+                               len_mu, len_std, lat_std,
+                               allow_empty = ae,
+                               cluster_offset = clu_off,
+                               proj_dist_fn = prj_dist,
+                               point_dist_fn = pt_dist,
+                               clusizes_fn = csizes_fn,
+                               clucenters_fn = ccenters_fn,
+                               llengths_fn = llengths_fn,
+                               angle_deltas_fn = langles_fn),
+                   regexp = NA)
+
+    # Invalid number of dimensions
+    expect_error(r <- clugen(0, nclu, tpts, direc, astd, clusep,
+                             len_mu, len_std, lat_std,
+                             allow_empty = ae,
+                             cluster_offset = clu_off,
+                             proj_dist_fn = prj_dist,
+                             point_dist_fn = pt_dist,
+                             clusizes_fn = csizes_fn,
+                             clucenters_fn = ccenters_fn,
+                             llengths_fn = llengths_fn,
+                             angle_deltas_fn = langles_fn),
+                 fixed = TRUE,
+                 "Number of dimensions, `num_dims`, must be > 0")
+
+    # Invalid number of clusters
+    expect_error(r <- clugen(nd, 0, tpts, direc, astd, clusep,
+                             len_mu, len_std, lat_std,
+                             allow_empty = ae,
+                             cluster_offset = clu_off,
+                             proj_dist_fn = prj_dist,
+                             point_dist_fn = pt_dist,
+                             clusizes_fn = csizes_fn,
+                             clucenters_fn = ccenters_fn,
+                             llengths_fn = llengths_fn,
+                             angle_deltas_fn = langles_fn),
+                 fixed = TRUE,
+                 "Number of clusters, `num_clust`, must be > 0")
+
+    # Direction needs to have magnitude > 0
+    expect_error(r <- clugen(nd, nclu, tpts, c(0, 0, 0), astd, clusep,
+                             len_mu, len_std, lat_std,
+                             allow_empty = ae,
+                             cluster_offset = clu_off,
+                             proj_dist_fn = prj_dist,
+                             point_dist_fn = pt_dist,
+                             clusizes_fn = csizes_fn,
+                             clucenters_fn = ccenters_fn,
+                             llengths_fn = llengths_fn,
+                             angle_deltas_fn = langles_fn),
+                 fixed = TRUE,
+                 "`direction` must have magnitude > 0")
+
+    # Direction needs to have nd dims
+    bad_dir <- c(1, 1)
+    expect_error(r <- clugen(nd, nclu, tpts, bad_dir, astd, clusep,
+                             len_mu, len_std, lat_std,
+                             allow_empty = ae,
+                             cluster_offset = clu_off,
+                             proj_dist_fn = prj_dist,
+                             point_dist_fn = pt_dist,
+                             clusizes_fn = csizes_fn,
+                             clucenters_fn = ccenters_fn,
+                             llengths_fn = llengths_fn,
+                             angle_deltas_fn = langles_fn),
+                 fixed = TRUE,
+                 paste0("Length of `direction` must be equal to `num_dims` (",
+                        length(bad_dir), " != ", nd, ")"))
+
+    # cluster_offset needs to have nd dims
+    bad_cluoff = c(0, 1)
+    expect_error(r <- clugen(nd, nclu, tpts, direc, astd, clusep,
+                             len_mu, len_std, lat_std,
+                             allow_empty = ae,
+                             cluster_offset = bad_cluoff,
+                             proj_dist_fn = prj_dist,
+                             point_dist_fn = pt_dist,
+                             clusizes_fn = csizes_fn,
+                             clucenters_fn = ccenters_fn,
+                             llengths_fn = llengths_fn,
+                             angle_deltas_fn = langles_fn),
+                 fixed = TRUE,
+                 paste0("Length of `cluster_offset` must be equal to ",
+                        "`num_dims` (", length(bad_cluoff), " != ", nd, ")"))
+
+    # Unknown proj_dist_fn given as string
+    expect_error(r <- clugen(nd, nclu, tpts, direc, astd, clusep,
+                             len_mu, len_std, lat_std,
+                             allow_empty = ae,
+                             cluster_offset = clu_off,
+                             proj_dist_fn = "invalid",
+                             point_dist_fn = pt_dist,
+                             clusizes_fn = csizes_fn,
+                             clucenters_fn = ccenters_fn,
+                             llengths_fn = llengths_fn,
+                             angle_deltas_fn = langles_fn),
+                 fixed = TRUE,
+                 paste0("`proj_dist_fn` has to be either \"norm\", \"unif\" or",
+                        " user-defined function"))
+
+    # Invalid proj_dist_fn given as function
+    expect_error(r <- clugen(nd, nclu, tpts, direc, astd, clusep,
+                             len_mu, len_std, lat_std,
+                             allow_empty = ae,
+                             cluster_offset = clu_off,
+                             proj_dist_fn = csizes_fn,
+                             point_dist_fn = pt_dist,
+                             clusizes_fn = csizes_fn,
+                             clucenters_fn = ccenters_fn,
+                             llengths_fn = llengths_fn,
+                             angle_deltas_fn = langles_fn),
+                 "argument")
+
+    # Unknown point_dist_fn given as string
+    expect_error(r <- clugen(nd, nclu, tpts, direc, astd, clusep,
+                             len_mu, len_std, lat_std,
+                             allow_empty = ae,
+                             cluster_offset = clu_off,
+                             proj_dist_fn = prj_dist,
+                             point_dist_fn = "invalid",
+                             clusizes_fn = csizes_fn,
+                             clucenters_fn = ccenters_fn,
+                             llengths_fn = llengths_fn,
+                             angle_deltas_fn = langles_fn),
+                 fixed = TRUE,
+                 paste0("point_dist_fn has to be either \"n-1\", \"n\" or ",
+                        "a user-defined function"))
+
+    # Invalid point_dist_fn given as function
+    expect_error(r <- clugen(nd, nclu, tpts, direc, astd, clusep,
+                             len_mu, len_std, lat_std,
+                             allow_empty = ae,
+                             cluster_offset = clu_off,
+                             proj_dist_fn = prj_dist,
+                             point_dist_fn = llengths_fn,
+                             clusizes_fn = csizes_fn,
+                             clucenters_fn = ccenters_fn,
+                             llengths_fn = llengths_fn,
+                             angle_deltas_fn = langles_fn),
+                 "argument")
+
+  })
 }
