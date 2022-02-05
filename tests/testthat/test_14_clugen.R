@@ -64,6 +64,28 @@ for (i in seq.int(1, nrow(targs))) {
 
         # Check dimensions of result variables
         expect_equal(dim(r$points), c(tpts, nd))
+        expect_equal(length(r$point_clusters), tpts)
+        expect_equal(dim(r$point_projections), c(tpts, nd))
+        expect_equal(length(r$cluster_sizes), nclu)
+        expect_equal(dim(r$cluster_centers), c(nclu, nd))
+        expect_equal(dim(r$cluster_directions), c(nclu, nd))
+        expect_equal(length(r$cluster_angles), nclu)
+        expect_equal(length(r$cluster_lengths), nclu)
+
+        # Check point cluster indexes
+        expect_equal(unique(r$point_clusters), 1:nclu)
+
+        # Check total points
+        expect_equal(sum(r$cluster_sizes), tpts)
+
+        # Check that cluster directions have the correct angles with the main
+        # direction
+        if (nd > 1) {
+          for (i in 1:nclu) {
+            expect_equal(angle_btw(direc, r$cluster_directions[i, ]),
+                         abs(r$cluster_angles[i]))
+          }
+        }
 
       } else {
         # ...otherwise an error will be thrown
@@ -71,7 +93,6 @@ for (i in seq.int(1, nrow(targs))) {
                                  clusep, len, len_std, lat_std),
                      paste("A total of", tpts, "points is not enough for", nclu,
                            "non-empty clusters"))
-
       }
     })
   }
