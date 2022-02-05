@@ -265,6 +265,11 @@ clugen <- function(num_dims, num_clusters, num_points, direction, angle_disp,
   # Loop through clusters and create points for each one
   for (i in 1:num_clusters) {
 
+    # Skip iteration if this cluster is empty
+    if (cluster_sizes[i] == 0) {
+      next
+    }
+
     # Start and end indexes for points in current cluster
     idx_start <- cumsum_points[i] + 1
     idx_end <- cumsum_points[i + 1]
