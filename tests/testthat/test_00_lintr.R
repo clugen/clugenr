@@ -22,7 +22,8 @@ if (requireNamespace("lintr", quietly = TRUE)) {
     }
 
     if (!is.null(find_package("."))) {
-      expect_lint_free()
+      expect_lint_free(linters = with_defaults(
+        cyclocomp_linter = cyclocomp_linter(complexity_limit = 33)))
     }
   })
 }
