@@ -2,7 +2,7 @@
 % Please edit documentation in R/main.R
 \name{clugen}
 \alias{clugen}
-\title{Generate multidimensional clusters.}
+\title{Generate multidimensional clusters}
 \usage{
 clugen(
   num_dims,
@@ -25,54 +25,141 @@ clugen(
 )
 }
 \arguments{
-\item{num_dims}{TODO.}
+\item{num_dims}{Number of dimensions.}
 
-\item{num_clusters}{TODO.}
+\item{num_clusters}{Number of clusters to generate.}
 
-\item{num_points}{TODO.}
+\item{num_points}{Total number of points to generate.}
 
-\item{direction}{TODO.}
+\item{direction}{Average direction of the cluster-supporting lines (vector of
+length \code{num_dims}).}
 
-\item{angle_disp}{TODO.}
+\item{angle_disp}{Angle dispersion of cluster-supporting lines (radians).}
 
-\item{cluster_sep}{TODO.}
+\item{cluster_sep}{Average cluster separation in each dimension (vector of
+length \code{num_dims}).}
 
-\item{llength}{TODO.}
+\item{llength}{Average length of cluster-supporting lines.}
 
-\item{llength_disp}{TODO.}
+\item{llength_disp}{Length dispersion of cluster-supporting lines.}
 
-\item{lateral_disp}{TODO.}
+\item{lateral_disp}{Cluster lateral dispersion, i.e., dispersion of points
+from their projection on the cluster-supporting line.}
 
-\item{allow_empty}{TODO.}
+\item{allow_empty}{Allow empty clusters? \code{FALSE} by default.}
 
-\item{cluster_offset}{TODO.}
+\item{cluster_offset}{Offset to add to all cluster centers (vector of length
+\code{num_dims}). By default there will be no offset.}
 
-\item{proj_dist_fn}{TODO.}
+\item{proj_dist_fn}{Distribution of point projections along
+cluster-supporting lines, with three possible values:
+\itemize{
+\item \code{"norm"} (default): Distribute point projections along lines using a normal
+distribution (\mjeqn{\mu=}{μ=}\emph{line_center},
+\mjeqn{\sigma=}{σ=}\code{llength/6}).
+\item \code{"unif"}: Distribute points uniformly along the line.
+\item User-defined function, which accepts two parameters, line length (\code{double})
+and number of points (\code{integer}), and returns a vector containing the
+distance of each point projection to the center of the line. For example,
+the \code{"norm"} option roughly corresponds to
+\code{function(l, n) stats::rnorm(n, sd = l / 6)}.
+}}
 
-\item{point_dist_fn}{TODO.}
+\item{point_dist_fn}{Controls how the final points are created from their
+projections on the cluster-supporting lines, with three possible values:
+\itemize{
+\item \code{"n-1"} (default): Final points are placed on a hyperplane orthogonal to
+the cluster-supporting line, centered at each point's projection, using the
+normal distribution (\mjeqn{\mu=0}{μ=0},
+\mjeqn{\sigma=}{σ=}\code{lateral_disp}). This is done by the \link{clupoints_n_1}
+function.
+\item \code{"n"}: Final points are placed around their projection on the
+cluster-supporting line using the normal distribution (\mjeqn{\mu=0}{μ=0},
+\mjeqn{\sigma=}{σ=}\code{lateral_disp}). This is done by the \link{clupoints_n}
+function.
+\item User-defined function: The user can specify a custom point placement
+strategy by passing a function with the same signature as \link{clupoints_n_1}
+and \link{clupoints_n}.
+}}
 
-\item{clusizes_fn}{TODO.}
+\item{clusizes_fn}{Distribution of cluster sizes. By default, cluster sizes
+are determined by the \link{clusizes} function, which uses the normal distribution
+(\mjeqn{\mu=}{μ=}\code{num_points}/\code{num_clusters}, \mjeqn{\sigma=\mu/3}{σ=μ/3}),
+and assures that the final cluster sizes add up to \code{num_points}. This
+parameter allows the user to specify a custom function for this purpose,
+which must follow \link{clusizes} signature. Note that custom functions are not
+required to strictly obey the \code{num_points} parameter.}
 
-\item{clucenters_fn}{TODO.}
+\item{clucenters_fn}{Distribution of cluster centers. By default, cluster
+centers are determined by the \link{clucenters} function, which uses the uniform
+distribution, and takes into account the \code{num_clusters} and \code{cluster_sep}
+parameters for generating well-distributed cluster centers. This parameter
+allows the user to specify a custom function for this purpose, which must
+follow \link{clucenters} signature.}
 
-\item{llengths_fn}{TODO.}
+\item{llengths_fn}{Distribution of line lengths. By default, the lengths of
+cluster-supporting lines are determined by the \link{llengths} function, which
+uses the folded normal distribution (\mjeqn{\mu=}{μ=}\code{llength},
+\mjeqn{\sigma=}{σ=}\code{llength_disp}). This parameter allows the user to specify
+a custom function for this purpose, which must follow \link{llengths} signature.}
 
-\item{angle_deltas_fn}{TODO.}
+\item{angle_deltas_fn}{Distribution of line angle differences with respect to
+\code{direction}. By default, the angles between \code{direction} and the direction of
+cluster-supporting lines are determined by the \link{angle_deltas} function, which
+uses the wrapped normal distribution (\mjeqn{\mu=0}{μ=0},
+\mjeqn{\sigma=}{σ=}\code{angle_disp}) with support in the interval
+\mjeqn{\left[-\pi/2,\pi/2\right]}{[-π/2,π/2]}. This parameter allows the
+user to specify a custom function for this purpose, which must follow
+\link{angle_deltas} signature.}
 }
 \value{
-TODO.
+A named list with the following elements:
+\itemize{
+\item \code{points}: A \code{num_points} x \code{num_dims} matrix with the generated points for
+all clusters.
+\item \code{point_clusters}: A \code{num_points} x 1 vector indicating which cluster each
+point in \code{points} belongs to.
+\item \code{point_projections}: A \code{num_points} x \code{num_dims} matrix with the point
+projections on the cluster-supporting lines.
+\item \code{cluster_sizes}: A \code{num_clusters} x 1 vector with the number of points in
+each cluster.
+\item \code{cluster_centers}: A \code{num_clusters} x \code{num_dims} matrix with the
+coordinates of the cluster centers.
+\item \code{cluster_directions}: A \code{num_clusters} x \code{num_dims} matrix with the
+direction of each cluster-supporting line.
+\item \code{cluster_angles}: A \code{num_clusters} x 1 vector with the angles between the
+cluster-supporting lines and the main direction.
+\item \code{cluster_lengths}: A \code{num_clusters} x 1 vector with the lengths of the
+cluster-supporting lines.
+}
 }
 \description{
 \loadmathjax
-TODO
+This is the main function of the CluGen package, and possibly the only
+function most users will need.
 }
 \details{
-TODO
+If a custom function was given in the \code{clusizes_fn} parameter, it is
+possible that \code{num_points} may have a different value than what was
+specified in the \code{num_points} parameter.
+
+The terms "average" and "dispersion" refer to measures of central
+tendency and statistical dispersion, respectively. Their exact meaning
+depends on the optional arguments.
 }
 \note{
 This function is stochastic. For reproducibility set a PRNG seed with
 \link{set.seed}.
 }
 \examples{
-clugen(3, 5, 1000, c(2,3,4), 0.1, c(1,3,4), 10, 0.1, 0.1)
+# 2D example
+r <- clugen(2, 5, 1000, c(1,3), 0.5, c(10, 10), 8, 1.5, 2)
+graphics::plot(r$points[, 1], r$points[, 2], pch = 19,
+               col = factor(r$point_clusters))
+\dontrun{
+# 3D examples, requires rgl library for plotting
+r <- clugen(3, 5, 1000, c(2, 3, 4), 0.5, c(15, 13, 14), 7, 1, 2)
+rgl::plot3d(r$points[,1], r$points[,2], r$points[,3], pch=19,
+            col=factor(r$point_clusters))
+}
 }
