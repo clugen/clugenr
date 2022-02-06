@@ -116,7 +116,7 @@ ptdist_projs_plus_1 <- function(projs, ls, l, cd, cc) projs + 1
 csz_equi <- function(nclu, tpts, ae) {
   cs <- vector(mode = "integer", length = nclu)
   for (i in 1:tpts) {
-    cs[i %% nclu + 1] = cs[i %% nclu + 1] + 1
+    cs[i %% nclu + 1] <- cs[i %% nclu + 1] + 1
   }
   cs
 }
@@ -337,7 +337,7 @@ for (seed in seeds) {
                         length(bad_dir), " != ", nd, ")"))
 
     # cluster_offset needs to have nd dims
-    bad_cluoff = c(0, 1)
+    bad_cluoff <- c(0, 1)
     expect_error(r <- clugen(nd, nclu, tpts, direc, astd, clusep,
                              len_mu, len_std, lat_std,
                              allow_empty = ae,
