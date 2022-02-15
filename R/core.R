@@ -11,8 +11,8 @@
 #' acos((v1 %*% v2) / (norm(v1, "2") * norm(v2, "2")))
 #' ```
 #' However, this approach is numerically unstable. The version provided here is
-#' numerically stable and based on the
-#' [AngleBetweenVectors.jl](https://github.com/JeffreySarnoff/AngleBetweenVectors.jl/blob/master/src/AngleBetweenVectors.jl)
+#' numerically stable and based on the [Angle Between
+#' Vectors](https://github.com/JeffreySarnoff/AngleBetweenVectors.jl)
 #' Julia package by Jeffrey Sarnoff (MIT license), implementing an algorithm
 #' provided by Prof. W. Kahan in
 #' [these notes](https://people.eecs.berkeley.edu/~wkahan/MathH110/Cross.pdf)

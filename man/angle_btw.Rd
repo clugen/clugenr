@@ -20,8 +20,7 @@ Typically, the angle between two vectors \code{v1} and \code{v2} can be obtained
 }\if{html}{\out{</div>}}
 
 However, this approach is numerically unstable. The version provided here is
-numerically stable and based on the
-\href{https://github.com/JeffreySarnoff/AngleBetweenVectors.jl/blob/master/src/AngleBetweenVectors.jl}{AngleBetweenVectors.jl}
+numerically stable and based on the \href{https://github.com/JeffreySarnoff/AngleBetweenVectors.jl}{Angle Between Vectors}
 Julia package by Jeffrey Sarnoff (MIT license), implementing an algorithm
 provided by Prof. W. Kahan in
 \href{https://people.eecs.berkeley.edu/~wkahan/MathH110/Cross.pdf}{these notes}
