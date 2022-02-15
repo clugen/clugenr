@@ -1,6 +1,58 @@
 # Copyright (c) 2020-2022 Nuno Fachada
 # Distributed under the MIT License (http://opensource.org/licenses/MIT)
 
+#' Angle between two \mjseqn{n}-dimensional vectors.
+#'
+#' @description
+#' \loadmathjax
+#' Typically, the angle between two vectors `v1` and `v2` can be obtained with:
+#'
+#' ```R
+#' acos((v1 %*% v2) / (norm(v1, "2") * norm(v2, "2")))
+#' ```
+#' However, this approach is numerically unstable. The version provided here is
+#' numerically stable and based on the
+#' [AngleBetweenVectors.jl](https://github.com/JeffreySarnoff/AngleBetweenVectors.jl/blob/master/src/AngleBetweenVectors.jl)
+#' Julia package by Jeffrey Sarnoff (MIT license), implementing an algorithm
+#' provided by Prof. W. Kahan in
+#' [these notes](https://people.eecs.berkeley.edu/~wkahan/MathH110/Cross.pdf)
+#' (see page 15).
+#'
+#' @param v1 First vector.
+#' @param v2 Second vector.
+#' @return Angle between `v1` and `v2` in radians.
+#'
+#' @export
+#'
+#' @examples
+#'
+#' angle_btw(c(1.0, 1.0, 1.0, 1.0), c(1.0, 0.0, 0.0, 0.0)) * 180 / pi
+#' # 60
+angle_btw <- function(v1, v2) {
+
+  signbit <- function(x) {
+    x < 0
+  }
+
+  u1 <- v1 / norm(v1, "2")
+  u2 <- v2 / norm(v2, "2")
+
+  y <- u1 - u2
+  x <- u1 + u2
+
+  a0 <- 2 * atan(norm(y, "2") / norm(x, "2"))
+
+  if (!(signbit(a0) || signbit(pi - a0))) {
+    a <- a0
+  } else if (signbit(a0)) {
+    a <- 0.0
+  } else {
+    a <- pi
+  }
+
+  a
+}
+
 #' Determine coordinates of points on a line
 #'
 #' @description
