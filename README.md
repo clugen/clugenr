@@ -68,7 +68,7 @@ Check the package:
 devtools::check()
 ```
 
-Build the docs:
+Build the internal docs:
 
 ```r
 devtools::document()
@@ -80,6 +80,12 @@ Install locally (e.g. after clone):
 devtools::install()
 ```
 
+Build the documentation website (requires [pkgdown]):
+
+```r
+pkgdown::build_site()
+```
+
 ## License
 
 [MIT License](LICENSE)
@@ -87,3 +93,4 @@ devtools::install()
 [R]: https://www.r-project.org/
 [devtools]: https://cran.r-project.org/package=devtools
 [CRAN]: https://cran.r-project.org/
+[pkgdown]: https://pkgdown.r-lib.org/
