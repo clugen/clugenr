@@ -109,7 +109,7 @@
 #' # 2D example
 #' r <- clugen(2, 5, 1000, c(1,3), 0.5, c(10, 10), 8, 1.5, 2)
 #' graphics::plot(r$points[, 1], r$points[, 2], pch = 19,
-#'                col = factor(r$point_clusters))
+#'                col = factor(r$point_clusters), xlab = "x", ylab = "y")
 #' \dontrun{
 #' # 3D examples, requires rgl library for plotting
 #' r <- clugen(3, 5, 1000, c(2, 3, 4), 0.5, c(15, 13, 14), 7, 1, 2)

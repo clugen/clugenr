@@ -1,8 +1,8 @@
-# clugenr
+# clugenr <img src="man/figures/logo.svg" align="right" />
 
 ## Summary
 
-_clugenr_ is an [R] package for generating multidimensional clusters. Each
+`clugenr` is an [R] package for generating multidimensional clusters. Each
 cluster is supported by a line segment, the position, orientation and length of
 which guide where the respective points are placed.
 
@@ -28,7 +28,7 @@ install.packages("clugenr")
 
 All methods and functions are fully documented and can be queried using the
 built-in help system. After installation, to access the man pages, invoke the
-_clugenr_ help page as follows:
+`clugenr` help page as follows:
 
 ```R
 help("clugenr")

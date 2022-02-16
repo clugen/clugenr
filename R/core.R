@@ -33,7 +33,6 @@
 #' @export
 #'
 #' @examples
-#'
 #' points_on_line(c(5, 5), c(1, 0), seq(-4, 4, length.out=5)) # 2D, 5 points
 #'
 #' points_on_line(c(-2, 0, 0, 2), c(0, 0, -1, 0), c(10, -10)) # 4D, 2 points
@@ -100,7 +99,6 @@ rand_ortho_vector <- function(u) {
 #' @export
 #'
 #' @examples
-#'
 #' r <- rand_unit_vector(4)
 #' norm(r, "2")
 rand_unit_vector <- function(num_dims) {
@@ -126,7 +124,6 @@ rand_unit_vector <- function(num_dims) {
 #' @export
 #'
 #' @examples
-#'
 #' u <- c(1.0, 0, 0.5, -0.5)            # Define a 4D vector
 #' u <- u / norm(u, "2")                # Normalize the vector
 #' v <- rand_vector_at_angle(u, pi / 4) # Get a vector at 45 degrees

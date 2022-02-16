@@ -25,7 +25,6 @@ This function is stochastic. For reproducibility set a PRNG seed with
 \link{set.seed}.
 }
 \examples{
-
 u <- c(1.0, 0, 0.5, -0.5)            # Define a 4D vector
 u <- u / norm(u, "2")                # Normalize the vector
 v <- rand_vector_at_angle(u, pi / 4) # Get a vector at 45 degrees

@@ -39,7 +39,6 @@ coordinates on the line, and \mjeqn{\mathbf{1}}{1} is a \mjeqn{p \times 1}{p
 x 1} vector with all entries equal to 1.
 }
 \examples{
-
 points_on_line(c(5, 5), c(1, 0), seq(-4, 4, length.out=5)) # 2D, 5 points
 
 points_on_line(c(-2, 0, 0, 2), c(0, 0, -1, 0), c(10, -10)) # 4D, 2 points

@@ -20,7 +20,6 @@ This function is stochastic. For reproducibility set a PRNG seed with
 \link{set.seed}.
 }
 \examples{
-
 r <- rand_unit_vector(4)
 norm(r, "2")
 }
