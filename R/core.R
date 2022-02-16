@@ -35,17 +35,8 @@
 #' @examples
 #'
 #' points_on_line(c(5, 5), c(1, 0), seq(-4, 4, length.out=5)) # 2D, 5 points
-#' #      [,1] [,2]
-#' # [1,]    1    5
-#' # [2,]    3    5
-#' # [3,]    5    5
-#' # [4,]    7    5
-#' # [5,]    9    5
 #'
 #' points_on_line(c(-2, 0, 0, 2), c(0, 0, -1, 0), c(10, -10)) # 4D, 2 points
-#' #      [,1] [,2] [,3] [,4]
-#' # [1,]   -2    0  -10    2
-#' # [2,]   -2    0   10    2
 points_on_line <- function(center, direction, dist_center) {
   rep(center, each = length(dist_center)) +
     dist_center %*% matrix(direction, nrow = 1)
@@ -65,8 +56,7 @@ points_on_line <- function(center, direction, dist_center) {
 #' r <- stats::runif(3)      # Get a random 3D vector
 #' r <- r / norm(r, "2")     # Normalize it
 #' o <- rand_ortho_vector(r) # Get a random unit vector orthogonal to r
-#' r %*% o                   # Check that r and o are orthogonal
-#' # 0 # Result should be close to zero
+#' r %*% o            # Check that r and o are orthogonal (result should be ~0)
 rand_ortho_vector <- function(u) {
 
   if (length(u) == 1) {
@@ -113,7 +103,6 @@ rand_ortho_vector <- function(u) {
 #'
 #' r <- rand_unit_vector(4)
 #' norm(r, "2")
-#' # 1
 rand_unit_vector <- function(num_dims) {
   r <- stats::runif(num_dims, min = -0.5, max = 0.5)
   r / norm(r, "2")
@@ -143,7 +132,6 @@ rand_unit_vector <- function(num_dims) {
 #' v <- rand_vector_at_angle(u, pi / 4) # Get a vector at 45 degrees
 #' arad <- acos((u %*% v) / norm(u,"2") * norm(v, "2")) # Get angle in radians
 #' arad * 180 / pi # Convert to degrees, should be close to 45 degrees
-#' # 45
 rand_vector_at_angle <- function(u, angle) {
   if (isTRUE(all.equal(abs(angle), pi / 2)) && length(u) > 1) {
     v <- rand_ortho_vector(u)

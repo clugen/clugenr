@@ -28,5 +28,4 @@ This function is stochastic. For reproducibility set a PRNG seed with
 \examples{
 set.seed(123)
 llengths(4, 20, 3.5)
-# [1] 18.03834 19.19438 25.45548 20.24678
 }

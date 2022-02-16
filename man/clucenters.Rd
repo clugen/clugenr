@@ -43,8 +43,4 @@ This function is stochastic. For reproducibility set a PRNG seed with
 \examples{
 set.seed(321)
 clucenters(3, c(30, 10), c(-50,50))
-#            [,1]     [,2]
-# [1,]  -8.969561 42.65221
-# [2,] -10.644303 46.71536
-# [3,] -73.560159 45.23540
 }

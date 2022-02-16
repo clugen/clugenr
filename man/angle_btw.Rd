@@ -29,5 +29,4 @@ provided by Prof. W. Kahan in
 \examples{
 
 angle_btw(c(1.0, 1.0, 1.0, 1.0), c(1.0, 0.0, 0.0, 0.0)) * 180 / pi
-# 60
 }

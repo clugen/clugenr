@@ -34,7 +34,5 @@ This function is stochastic. For reproducibility set a PRNG seed with
 set.seed(123)
 arad <- angle_deltas(4, pi / 8) # Angle dispersion of 22.5 degrees
 arad                            # What angles deltas did we get?
-# [1] -0.22009827 -0.09039049  0.61210332  0.02768858
-arad * 180 / pi                  #  Show angle deltas in degrees
-# [1] -12.610702  -5.178994  35.070937   1.586439
+arad * 180 / pi                 #  Show angle deltas in degrees
 }

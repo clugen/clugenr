@@ -27,7 +27,6 @@
 #' @examples
 #'
 #' angle_btw(c(1.0, 1.0, 1.0, 1.0), c(1.0, 0.0, 0.0, 0.0)) * 180 / pi
-#' # 60
 angle_btw <- function(v1, v2) {
 
   signbit <- function(x) {
@@ -87,11 +86,6 @@ angle_btw <- function(v1, v2) {
 #' pdist <- c(-0.5, -0.2, 0.1, 0.3)
 #' proj <- points_on_line(ctr, dir, pdist)
 #' clupoints_n_1_template(proj, 0, dir, function(p, l) stats::runif(p))
-#' #      [,1]       [,2]
-#' # [1,] -0.5 -0.2875775
-#' # [2,] -0.2  0.7883051
-#' # [3,]  0.1 -0.4089769
-#' # [4,]  0.3 -0.8830174
 clupoints_n_1_template <- function(projs, lat_disp, clu_dir, dist_fn) {
 
   # Number of dimensions
@@ -147,7 +141,6 @@ clupoints_n_1_template <- function(projs, lat_disp, clu_dir, dist_fn) {
 #' clusters <- c(3, 4, 5, 0, 0)    # A vector with some empty elements
 #' clusters <- fix_empty(clusters) # Apply this function
 #' clusters                        # Check that there's no more empty elements
-#' # [1] 3 3 4 1 1
 fix_empty <- function(clu_num_points, allow_empty = FALSE) {
 
   # If the allow_empty parameter is set to true, don't change the number of
@@ -203,7 +196,6 @@ fix_empty <- function(clu_num_points, allow_empty = FALSE) {
 #' clusters <- c(1, 6, 3)                   # 10 total points
 #' clusters <- fix_num_points(clusters, 12) # But we want 12 total points
 #' clusters                                 # Check that we now have 12 points
-#' # [1] 3 6 3
 fix_num_points <- function(clu_num_points, num_points) {
 
   while (sum(clu_num_points) < num_points) {

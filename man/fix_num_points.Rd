@@ -33,5 +33,4 @@ the main \link{clugen} function.
 clusters <- c(1, 6, 3)                   # 10 total points
 clusters <- fix_num_points(clusters, 12) # But we want 12 total points
 clusters                                 # Check that we now have 12 points
-# [1] 3 6 3
 }

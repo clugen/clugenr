@@ -31,5 +31,4 @@ u <- u / norm(u, "2")                # Normalize the vector
 v <- rand_vector_at_angle(u, pi / 4) # Get a vector at 45 degrees
 arad <- acos((u \%*\% v) / norm(u,"2") * norm(v, "2")) # Get angle in radians
 arad * 180 / pi # Convert to degrees, should be close to 45 degrees
-# 45
 }

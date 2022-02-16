@@ -33,5 +33,4 @@ main \link{clugen} function.
 clusters <- c(3, 4, 5, 0, 0)    # A vector with some empty elements
 clusters <- fix_empty(clusters) # Apply this function
 clusters                        # Check that there's no more empty elements
-# [1] 3 3 4 1 1
 }

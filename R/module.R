@@ -28,9 +28,7 @@
 #' set.seed(123)
 #' arad <- angle_deltas(4, pi / 8) # Angle dispersion of 22.5 degrees
 #' arad                            # What angles deltas did we get?
-#' # [1] -0.22009827 -0.09039049  0.61210332  0.02768858
-#' arad * 180 / pi                  #  Show angle deltas in degrees
-#' # [1] -12.610702  -5.178994  35.070937   1.586439
+#' arad * 180 / pi                 #  Show angle deltas in degrees
 angle_deltas <- function(num_clusters, angle_disp) {
 
   # Get random angle differences using the normal distribution
@@ -78,10 +76,6 @@ angle_deltas <- function(num_clusters, angle_disp) {
 #' @examples
 #' set.seed(321)
 #' clucenters(3, c(30, 10), c(-50,50))
-#' #            [,1]     [,2]
-#' # [1,]  -8.969561 42.65221
-#' # [2,] -10.644303 46.71536
-#' # [3,] -73.560159 45.23540
 clucenters <- function(num_clusters, clu_sep, clu_offset) {
 
   # Obtain a num_clusters x num_dims matrix of uniformly distributed values
@@ -130,11 +124,6 @@ clucenters <- function(num_clusters, clu_sep, clu_offset) {
 #' pdist <- c(-0.5, -0.2, 0.1, 0.3)
 #' proj <- points_on_line(ctr, dir, pdist)
 #' clupoints_n_1(proj, 0.1, NA, dir, NA)
-#' #      [,1]         [,2]
-#' # [1,] -0.5 -0.056047565
-#' # [2,] -0.2 -0.023017749
-#' # [3,]  0.1  0.155870831
-#' # [4,]  0.3  0.007050839
 clupoints_n_1 <- function(projs, lat_disp, line_len, clu_dir, clu_ctr) {
 
   # Define function to get distances from points to their projections on the
@@ -178,11 +167,6 @@ clupoints_n_1 <- function(projs, lat_disp, line_len, clu_dir, clu_ctr) {
 #' pdist <- c(-0.5, -0.2, 0.1, 0.3)
 #' proj <- points_on_line(ctr, dir, pdist)
 #' clupoints_n(proj, 0.01, NA, dir, NA)
-#' #            [,1]         [,2]
-#' # [1,] -0.5056048  0.001292877
-#' # [2,] -0.2023018  0.017150650
-#' # [3,]  0.1155871  0.004609162
-#' # [4,]  0.3007051 -0.012650612
 clupoints_n <- function(projs, lat_disp, line_len, clu_dir, clu_ctr) {
 
   # Number of dimensions
@@ -222,9 +206,7 @@ clupoints_n <- function(projs, lat_disp, line_len, clu_dir, clu_ctr) {
 #' set.seed(123)
 #' sizes <- clusizes(4, 1000, TRUE)
 #' sizes
-#' # [1] 190 216 355 239
 #' sum(sizes)
-#' # 1000
 clusizes <- function(num_clusters, num_points, allow_empty) {
 
     # Determine number of points in each cluster using the normal distribution
@@ -282,7 +264,6 @@ clusizes <- function(num_clusters, num_points, allow_empty) {
 #' @examples
 #' set.seed(123)
 #' llengths(4, 20, 3.5)
-#' # [1] 18.03834 19.19438 25.45548 20.24678
 llengths <- function(num_clusters, llength, llength_disp) {
   abs(stats::rnorm(num_clusters, mean = llength, sd = llength_disp))
 }
