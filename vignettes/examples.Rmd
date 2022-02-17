@@ -24,6 +24,10 @@ library(plotly)  # Required for plotting
 
 ## 2D examples
 
+```{r}
+marker2d <- list(line = list(color = 'black', width = 0.3))
+```
+
 ### Manipulating the direction of cluster-supporting lines
 
 ```{r}
@@ -36,23 +40,66 @@ yaxis <- list(scaleanchor = "x", scaleratio = 1, range = c(-22, 22))
 ```{r}
 set.seed(123)
 e01 <- clugen(2, 4, 200, c(1, 0), 0, c(10, 10), 10, 1.5, 0.5)
-plot_ly(x = e01$points[,1], y = e01$points[,2], color = as.character(e01$point_clusters),
-        type = "scatter", mode = "markers") %>%
-  layout(title = "e01: direction = [1, 0]", xaxis = xaxis, yaxis = yaxis, showlegend = FALSE)
+plot_ly(x = e01$points[, 1], y = e01$points[, 2], color = as.character(e01$point_clusters),
+        type = "scatter", mode = "markers", marker = marker2d) %>%
+  layout(title = "e01: direction = [1, 0]", xaxis = xaxis, yaxis = yaxis, showlegend = F)
 ```
 
 ```{r}
 set.seed(123)
 e02 <- clugen(2, 4, 200, c(1, 1), 0, c(10, 10), 10, 1.5, 0.5)
-plot_ly(x = e02$points[,1], y = e02$points[,2], color = as.character(e02$point_clusters),
-        type = "scatter", mode = "markers") %>%
-  layout(title = "e02: direction = [1, 1]", xaxis = xaxis, yaxis = yaxis, showlegend = FALSE)
+plot_ly(x = e02$points[, 1], y = e02$points[, 2], color = as.character(e02$point_clusters),
+        type = "scatter", mode = "markers", marker = marker2d) %>%
+  layout(title = "e02: direction = [1, 1]", xaxis = xaxis, yaxis = yaxis, showlegend = F)
 ```
 
 ```{r}
 set.seed(123)
 e03 <- clugen(2, 4, 200, c(0, 1), 0, c(10, 10), 10, 1.5, 0.5)
-plot_ly(x = e03$points[,1], y = e03$points[,2], color = as.character(e03$point_clusters),
-        type = "scatter", mode = "markers") %>%
-  layout(title = "e03: direction = [0, 1]", xaxis = xaxis, yaxis = yaxis, showlegend = FALSE)
+plot_ly(x = e03$points[, 1], y = e03$points[, 2], color = as.character(e03$point_clusters),
+        type = "scatter", mode = "markers", marker = marker2d) %>%
+  layout(title = "e03: direction = [0, 1]", xaxis = xaxis, yaxis = yaxis, showlegend = F)
+```
+
+## 3D examples
+
+```{r}
+marker3d <- list(size = 3, line = list(color = 'black', width = 0.3))
+```
+
+### Manipulating the direction of cluster-supporting lines
+
+```{r}
+scene <- list(xaxis = list(range = list(-12, 27), dtick = 10),
+              yaxis = list(range = list(-17, 22), dtick = 10),
+              zaxis = list(range = list(-22, 22), dtick = 10))
+```
+
+#### Using the `direction` parameter
+
+```{r}
+set.seed(123)
+e40 <- clugen(3, 4, 500, c(1, 0, 0), 0, c(10, 10, 10), 15, 1.5, 0.5)
+plot_ly(x = e40$points[, 1], y = e40$points[, 2], z = e40$points[, 3],
+        color = as.character(e40$point_clusters),
+        type = "scatter3d", mode = "markers", marker = marker3d) %>%
+  layout(title = "e40: direction = [1, 0, 0]", showlegend= F, scene = scene)
+```
+
+```{r}
+set.seed(123)
+e41 <- clugen(3, 4, 500, c(1, 1, 1), 0, c(10, 10, 10), 15, 1.5, 0.5)
+plot_ly(x = e41$points[, 1], y = e41$points[, 2], z = e41$points[, 3],
+        color = as.character(e41$point_clusters),
+        type = "scatter3d", mode = "markers", marker = marker3d) %>%
+  layout(title = "e41: direction = [1, 1, 1]", showlegend= F, scene = scene)
+```
+
+```{r}
+set.seed(123)
+e42 <- clugen(3, 4, 500, c(0, 0, 1), 0, c(10, 10, 10), 15, 1.5, 0.5)
+plot_ly(x = e42$points[, 1], y = e42$points[, 2], z = e42$points[, 3],
+        color = as.character(e42$point_clusters),
+        type = "scatter3d", mode = "markers", marker = marker3d) %>%
+  layout(title = "e42: direction = [0, 0, 1]", showlegend= F, scene = scene)
 ```
