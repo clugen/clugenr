@@ -730,3 +730,104 @@ plot_ly(x = e57$points[, 1], y = e57$points[, 2], z = e57$points[, 3],
   layout(title = "e57: custom clucenters function", showlegend = F, scene = scene)
 ```
 
+### Lateral dispersion and placement of point projections on the line
+
+```{r}
+scene <- list(xaxis = list(),#range = list(-12, 27), dtick = 10),
+              yaxis = list(),#range = list(-17, 22), dtick = 10),
+              zaxis = list(),#range = list(-22, 22), dtick = 10),
+              aspectmode = "cube")
+seed <- 456
+```
+
+#### Normal projection placement (default): `proj_dist_fn = "norm"`
+
+```{r}
+set.seed(seed)
+e58 <- clugen(3, 4, 1000, c(1, 0, 0), pi / 2, c(20, 20, 20), 13, 2, 0.0)
+plot_ly(x = e58$points[, 1], y = e58$points[, 2], z = e58$points[, 3],
+        color = as.character(e58$point_clusters),
+        type = "scatter3d", mode = "markers", marker = marker3d) %>%
+  layout(title = "e58: lateral_disp = 0", showlegend = F, scene = scene)
+```
+
+```{r}
+set.seed(seed)
+e59 <- clugen(3, 4, 1000, c(1, 0, 0), pi / 2, c(20, 20, 20), 13, 2, 1.0)
+plot_ly(x = e59$points[, 1], y = e59$points[, 2], z = e59$points[, 3],
+        color = as.character(e59$point_clusters),
+        type = "scatter3d", mode = "markers", marker = marker3d) %>%
+  layout(title = "e59: lateral_disp = 1", showlegend = F, scene = scene)
+```
+
+```{r}
+set.seed(seed)
+e60 <- clugen(3, 4, 1000, c(1, 0, 0), pi / 2, c(20, 20, 20), 13, 2, 3.0)
+plot_ly(x = e60$points[, 1], y = e60$points[, 2], z = e60$points[, 3],
+        color = as.character(e60$point_clusters),
+        type = "scatter3d", mode = "markers", marker = marker3d) %>%
+  layout(title = "e60: lateral_disp = 3", showlegend = F, scene = scene)
+```
+
+#### Uniform projection placement: `proj_dist_fn = "unif"`
+
+```{r}
+set.seed(seed)
+e61 <- clugen(3, 4, 1000, c(1, 0, 0), pi / 2, c(20, 20, 20), 13, 2, 0.0, proj_dist_fn = "unif")
+plot_ly(x = e61$points[, 1], y = e61$points[, 2], z = e61$points[, 3],
+        color = as.character(e61$point_clusters),
+        type = "scatter3d", mode = "markers", marker = marker3d) %>%
+  layout(title = "e61: lateral_disp = 0", showlegend = F, scene = scene)
+```
+
+```{r}
+set.seed(seed)
+e62 <- clugen(3, 4, 1000, c(1, 0, 0), pi / 2, c(20, 20, 20), 13, 2, 1.0, proj_dist_fn = "unif")
+plot_ly(x = e62$points[, 1], y = e62$points[, 2], z = e62$points[, 3],
+        color = as.character(e62$point_clusters),
+        type = "scatter3d", mode = "markers", marker = marker3d) %>%
+  layout(title = "e62: lateral_disp = 1", showlegend = F, scene = scene)
+```
+
+```{r}
+set.seed(seed)
+e63 <- clugen(3, 4, 1000, c(1, 0, 0), pi / 2, c(20, 20, 20), 13, 2, 3.0, proj_dist_fn = "unif")
+plot_ly(x = e63$points[, 1], y = e63$points[, 2], z = e63$points[, 3],
+        color = as.character(e63$point_clusters),
+        type = "scatter3d", mode = "markers", marker = marker3d) %>%
+  layout(title = "e63: lateral_disp = 3", showlegend = F, scene = scene)
+```
+
+#### Custom projection placement using the Beta distribution
+
+```{r}
+# Custom proj_dist_fn: point projections placed using the Beta distribution
+proj_beta <- function(len, n) len * rbeta(n, 0.1, 0.1) - len / 2
+```
+
+```{r}
+set.seed(seed)
+e64 <- clugen(3, 4, 1000, c(1, 0, 0), pi / 2, c(20, 20, 20), 13, 2, 0.0, proj_dist_fn = proj_beta)
+plot_ly(x = e64$points[, 1], y = e64$points[, 2], z = e64$points[, 3],
+        color = as.character(e64$point_clusters),
+        type = "scatter3d", mode = "markers", marker = marker3d) %>%
+  layout(title = "e64: lateral_disp = 0", showlegend = F, scene = scene)
+```
+
+```{r}
+set.seed(seed)
+e65 <- clugen(3, 4, 1000, c(1, 0, 0), pi / 2, c(20, 20, 20), 13, 2, 1.0, proj_dist_fn = proj_beta)
+plot_ly(x = e65$points[, 1], y = e65$points[, 2], z = e65$points[, 3],
+        color = as.character(e65$point_clusters),
+        type = "scatter3d", mode = "markers", marker = marker3d) %>%
+  layout(title = "e65: lateral_disp = 1", showlegend = F, scene = scene)
+```
+
+```{r}
+set.seed(seed)
+e66 <- clugen(3, 4, 1000, c(1, 0, 0), pi / 2, c(20, 20, 20), 13, 2, 3.0, proj_dist_fn = proj_beta)
+plot_ly(x = e66$points[, 1], y = e66$points[, 2], z = e66$points[, 3],
+        color = as.character(e66$point_clusters),
+        type = "scatter3d", mode = "markers", marker = marker3d) %>%
+  layout(title = "e66: lateral_disp = 3", showlegend = F, scene = scene)
+```
