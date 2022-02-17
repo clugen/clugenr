@@ -1,0 +1,58 @@
+---
+title: "Examples"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Examples}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+This section contains a number of examples on how to use `clugenr`. Each example
+must be preceded with:
+
+```{r setup, message=FALSE, warning=FALSE}
+library(clugenr)
+library(plotly)  # Required for plotting
+```
+
+## 2D examples
+
+### Manipulating the direction of cluster-supporting lines
+
+```{r}
+xaxis <- list(range = c(-10, 30))
+yaxis <- list(scaleanchor = "x", scaleratio = 1, range = c(-22, 22))
+```
+
+#### Using the `direction` parameter
+
+```{r}
+set.seed(123)
+e01 <- clugen(2, 4, 200, c(1, 0), 0, c(10, 10), 10, 1.5, 0.5)
+plot_ly(x = e01$points[,1], y = e01$points[,2], color = as.character(e01$point_clusters),
+        type = "scatter", mode = "markers") %>%
+  layout(title = "e01: direction = [1, 0]", xaxis = xaxis, yaxis = yaxis, showlegend = FALSE)
+```
+
+```{r}
+set.seed(123)
+e02 <- clugen(2, 4, 200, c(1, 1), 0, c(10, 10), 10, 1.5, 0.5)
+plot_ly(x = e02$points[,1], y = e02$points[,2], color = as.character(e02$point_clusters),
+        type = "scatter", mode = "markers") %>%
+  layout(title = "e02: direction = [1, 1]", xaxis = xaxis, yaxis = yaxis, showlegend = FALSE)
+```
+
+```{r}
+set.seed(123)
+e03 <- clugen(2, 4, 200, c(0, 1), 0, c(10, 10), 10, 1.5, 0.5)
+plot_ly(x = e03$points[,1], y = e03$points[,2], color = as.character(e03$point_clusters),
+        type = "scatter", mode = "markers") %>%
+  layout(title = "e03: direction = [0, 1]", xaxis = xaxis, yaxis = yaxis, showlegend = FALSE)
+```
