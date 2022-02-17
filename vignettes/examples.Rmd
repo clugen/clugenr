@@ -240,7 +240,96 @@ plot_ly(x = e18$points[, 1], y = e18$points[, 2], color = as.character(e18$point
   layout(title = "e18: custom clucenters function", xaxis = xaxis, yaxis = yaxis, showlegend = F)
 ```
 
+### Lateral dispersion and placement of point projections on the line
 
+```{r}
+xaxis <- list(range = c(-30, 45))
+yaxis <- list(scaleanchor = "x", scaleratio = 1, range = c(-60, 22))
+seed <- 234
+```
+
+#### Normal projection placement (default): `proj_dist_fn = "norm"`
+
+```{r}
+set.seed(seed)
+e19 <- clugen(2, 4, 1000, c(1, 0), pi / 2, c(20, 20), 13, 2, 0.0)
+plot_ly(x = e19$points[, 1], y = e19$points[, 2], color = as.character(e19$point_clusters),
+        type = "scatter", mode = "markers", marker = marker2d) %>%
+  layout(title = "e19: lateral_disp = 0", xaxis = xaxis, yaxis = yaxis, showlegend = F)
+```
+
+```{r}
+set.seed(seed)
+e20 <- clugen(2, 4, 1000, c(1, 0), pi / 2, c(20, 20), 13, 2, 1.0)
+plot_ly(x = e20$points[, 1], y = e20$points[, 2], color = as.character(e20$point_clusters),
+        type = "scatter", mode = "markers", marker = marker2d) %>%
+  layout(title = "e20: lateral_disp = 1", xaxis = xaxis, yaxis = yaxis, showlegend = F)
+```
+
+```{r}
+set.seed(seed)
+e21 <- clugen(2, 4, 1000, c(1, 0), pi / 2, c(20, 20), 13, 2, 3.0)
+plot_ly(x = e21$points[, 1], y = e21$points[, 2], color = as.character(e21$point_clusters),
+        type = "scatter", mode = "markers", marker = marker2d) %>%
+  layout(title = "e21: lateral_disp = 3", xaxis = xaxis, yaxis = yaxis, showlegend = F)
+```
+
+#### Uniform projection placement: `proj_dist_fn = "unif"`
+
+```{r}
+set.seed(seed)
+e22 <- clugen(2, 4, 1000, c(1, 0), pi / 2, c(20, 20), 13, 2, 0.0, proj_dist_fn = "unif")
+plot_ly(x = e22$points[, 1], y = e22$points[, 2], color = as.character(e22$point_clusters),
+        type = "scatter", mode = "markers", marker = marker2d) %>%
+  layout(title = "e22: lateral_disp = 0", xaxis = xaxis, yaxis = yaxis, showlegend = F)
+```
+
+```{r}
+set.seed(seed)
+e23 <- clugen(2, 4, 1000, c(1, 0), pi / 2, c(20, 20), 13, 2, 1.0, proj_dist_fn = "unif")
+plot_ly(x = e23$points[, 1], y = e23$points[, 2], color = as.character(e23$point_clusters),
+        type = "scatter", mode = "markers", marker = marker2d) %>%
+  layout(title = "e23: lateral_disp = 1", xaxis = xaxis, yaxis = yaxis, showlegend = F)
+```
+
+```{r}
+set.seed(seed)
+e24 <- clugen(2, 4, 1000, c(1, 0), pi / 2, c(20, 20), 13, 2, 3.0, proj_dist_fn = "unif")
+plot_ly(x = e24$points[, 1], y = e24$points[, 2], color = as.character(e24$point_clusters),
+        type = "scatter", mode = "markers", marker = marker2d) %>%
+  layout(title = "e24: lateral_disp = 3", xaxis = xaxis, yaxis = yaxis, showlegend = F)
+```
+
+#### Custom projection placement using the Beta distribution
+
+```{r}
+# Custom proj_dist_fn: point projections placed using the Beta distribution
+proj_beta <- function(len, n) len * rbeta(n, 0.1, 0.1)
+```
+
+```{r}
+set.seed(seed)
+e25 <- clugen(2, 4, 1000, c(1, 0), pi / 2, c(20, 20), 13, 2, 0.0, proj_dist_fn = proj_beta)
+plot_ly(x = e25$points[, 1], y = e25$points[, 2], color = as.character(e25$point_clusters),
+        type = "scatter", mode = "markers", marker = marker2d) %>%
+  layout(title = "e25: lateral_disp = 0", xaxis = xaxis, yaxis = yaxis, showlegend = F)
+```
+
+```{r}
+set.seed(seed)
+e26 <- clugen(2, 4, 1000, c(1, 0), pi / 2, c(20, 20), 13, 2, 1.0, proj_dist_fn = proj_beta)
+plot_ly(x = e26$points[, 1], y = e26$points[, 2], color = as.character(e26$point_clusters),
+        type = "scatter", mode = "markers", marker = marker2d) %>%
+  layout(title = "e26: lateral_disp = 1", xaxis = xaxis, yaxis = yaxis, showlegend = F)
+```
+
+```{r}
+set.seed(seed)
+e27 <- clugen(2, 4, 1000, c(1, 0), pi / 2, c(20, 20), 13, 2, 3.0, proj_dist_fn = proj_beta)
+plot_ly(x = e27$points[, 1], y = e27$points[, 2], color = as.character(e27$point_clusters),
+        type = "scatter", mode = "markers", marker = marker2d) %>%
+  layout(title = "e27: lateral_disp = 3", xaxis = xaxis, yaxis = yaxis, showlegend = F)
+```
 
 
 
