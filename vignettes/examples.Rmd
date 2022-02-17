@@ -573,5 +573,76 @@ plot_ly(x = e45$points[, 1], y = e45$points[, 2], z = e45$points[, 3],
   layout(title = "e45: custom angle_deltas function", showlegend = F, scene = scene)
 ```
 
+### Manipulating the length of cluster-supporting lines
+
+```{r}
+scene <- list(xaxis = list(range = list(-35, 35), dtick = 10),
+              yaxis = list(range = list(-30, 30), dtick = 10),
+              zaxis = list(range = list(1, 30), dtick = 10),
+              aspectmode = "cube")
+seed <- 123
+```
+
+#### Using the `llength` parameter
+
+```{r}
+set.seed(seed)
+e46 <- clugen(3, 5, 800, c(1, 0, 0), pi / 10, c(10, 10, 10), 0, 0, 0.5, point_dist_fn = "n")
+plot_ly(x = e46$points[, 1], y = e46$points[, 2], z = e46$points[, 3],
+        color = as.character(e46$point_clusters),
+        type = "scatter3d", mode = "markers", marker = marker3d) %>%
+  layout(title = "e46: llength = 0", showlegend = F, scene = scene)
+```
+
+```{r}
+set.seed(seed)
+e47 <- clugen(3, 5, 800, c(1, 0, 0), pi / 10, c(10, 10, 10), 10, 0, 0.5, point_dist_fn = "n")
+plot_ly(x = e47$points[, 1], y = e47$points[, 2], z = e47$points[, 3],
+        color = as.character(e47$point_clusters),
+        type = "scatter3d", mode = "markers", marker = marker3d) %>%
+  layout(title = "e47: llength = 10", showlegend = F, scene = scene)
+```
+
+```{r}
+set.seed(seed)
+e48 <- clugen(3, 5, 800, c(1, 0, 0), pi / 10, c(10, 10, 10), 30, 0, 0.5, point_dist_fn = "n")
+plot_ly(x = e48$points[, 1], y = e48$points[, 2], z = e48$points[, 3],
+        color = as.character(e48$point_clusters),
+        type = "scatter3d", mode = "markers", marker = marker3d) %>%
+  layout(title = "e48: llength = 30", showlegend = F, scene = scene)
+```
+
+#### Changing the `llength_disp` parameter and using a custom `llengths_fn` function
+
+```{r}
+set.seed(seed)
+e49 <- clugen(3, 5, 800, c(1, 0, 0), pi / 10, c(10, 10, 10), 15,  0.0, 0.5, point_dist_fn = "n")
+plot_ly(x = e49$points[, 1], y = e49$points[, 2], z = e49$points[, 3],
+        color = as.character(e49$point_clusters),
+        type = "scatter3d", mode = "markers", marker = marker3d) %>%
+  layout(title = "e49: llength_disp = 0.0", showlegend = F, scene = scene)
+```
+
+```{r}
+set.seed(seed)
+e50 <- clugen(3, 5, 800, c(1, 0, 0), pi / 10, c(10, 10, 10), 15, 10.0, 0.5, point_dist_fn = "n")
+plot_ly(x = e50$points[, 1], y = e50$points[, 2], z = e50$points[, 3],
+        color = as.character(e50$point_clusters),
+        type = "scatter3d", mode = "markers", marker = marker3d) %>%
+  layout(title = "e50: llength_disp = 10.0", showlegend = F, scene = scene)
+```
+
+```{r}
+# Custom llengths function: line lengths tend to grow for each new cluster
+llen_grow <- function(nclu, llen, llenstd) llen * (0:(nclu - 1) + rnorm(nclu, sd = llenstd))
+
+set.seed(seed)
+e51 <- clugen(3, 5, 800, c(1, 0, 0), pi / 10, c(10, 10, 10), 10,  0.1, 0.5, point_dist_fn = "n",
+              llengths_fn = llen_grow)
+plot_ly(x = e51$points[, 1], y = e51$points[, 2], z = e51$points[, 3],
+        color = as.character(e51$point_clusters),
+        type = "scatter3d", mode = "markers", marker = marker3d) %>%
+  layout(title = "e51: custom llengths function", showlegend = F, scene = scene)
+```
 
 
