@@ -304,7 +304,7 @@ plot_ly(x = e24$points[, 1], y = e24$points[, 2], color = as.character(e24$point
 
 ```{r}
 # Custom proj_dist_fn: point projections placed using the Beta distribution
-proj_beta <- function(len, n) len * rbeta(n, 0.1, 0.1)
+proj_beta <- function(len, n) len * rbeta(n, 0.1, 0.1) - len / 2
 ```
 
 ```{r}
@@ -329,6 +329,72 @@ e27 <- clugen(2, 4, 1000, c(1, 0), pi / 2, c(20, 20), 13, 2, 3.0, proj_dist_fn =
 plot_ly(x = e27$points[, 1], y = e27$points[, 2], color = as.character(e27$point_clusters),
         type = "scatter", mode = "markers", marker = marker2d) %>%
   layout(title = "e27: lateral_disp = 3", xaxis = xaxis, yaxis = yaxis, showlegend = F)
+```
+
+### Controlling final point positions from their projections on the cluster-supporting line
+
+```{r}
+xaxis <- list(range = c(-45, 30))
+yaxis <- list(scaleanchor = "x", scaleratio = 1, range = c(-20, 40))
+seed <- 12321
+```
+
+#### Points on hyperplane orthogonal to cluster-supporting line (default): `point_dist_fn = "n-1"`
+
+```{r}
+set.seed(seed)
+e28 <- clugen(2, 5, 1500, c(1, 0), pi / 4, c(20, 20), 14, 2, 2.0)
+plot_ly(x = e28$points[, 1], y = e28$points[, 2], color = as.character(e28$point_clusters),
+        type = "scatter", mode = "markers", marker = marker2d) %>%
+  layout(title = "e28: proj_dist_fn=\"norm\" (default)", xaxis = xaxis, yaxis = yaxis, showlegend = F)
+```
+
+```{r}
+set.seed(seed)
+e29 <- clugen(2, 5, 1500, c(1, 0), pi / 4, c(20, 20), 14, 2, 2.0, proj_dist_fn = "unif")
+plot_ly(x = e29$points[, 1], y = e29$points[, 2], color = as.character(e29$point_clusters),
+        type = "scatter", mode = "markers", marker = marker2d) %>%
+  layout(title = "e29: proj_dist_fn=\"unif\"", xaxis = xaxis, yaxis = yaxis, showlegend = F)
+```
+
+```{r}
+# Custom proj_dist_fn: point projections placed using the Beta distribution
+proj_beta <- function(len, n) len * rbeta(n, 0.1, 0.1) - len / 2
+
+set.seed(seed)
+e30 <- clugen(2, 5, 1500, c(1, 0), pi / 4, c(20, 20), 14, 2, 2.0, proj_dist_fn = proj_beta)
+plot_ly(x = e30$points[, 1], y = e30$points[, 2], color = as.character(e30$point_clusters),
+        type = "scatter", mode = "markers", marker = marker2d) %>%
+  layout(title = "e30: custom proj_dist_fn (Beta)", xaxis = xaxis, yaxis = yaxis, showlegend = F)
+```
+
+#### Points around projection on cluster-supporting line: `point_dist_fn = "n"`
+
+```{r}
+set.seed(seed)
+e31 <- clugen(2, 5, 1500, c(1, 0), pi / 4, c(20, 20), 14, 2, 2.0, point_dist_fn = "n")
+plot_ly(x = e31$points[, 1], y = e31$points[, 2], color = as.character(e31$point_clusters),
+        type = "scatter", mode = "markers", marker = marker2d) %>%
+  layout(title = "e31: proj_dist_fn=\"norm\" (default)", xaxis = xaxis, yaxis = yaxis, showlegend = F)
+```
+
+```{r}
+set.seed(seed)
+e32 <- clugen(2, 5, 1500, c(1, 0), pi / 4, c(20, 20), 14, 2, 2.0, point_dist_fn = "n", proj_dist_fn = "unif")
+plot_ly(x = e32$points[, 1], y = e32$points[, 2], color = as.character(e32$point_clusters),
+        type = "scatter", mode = "markers", marker = marker2d) %>%
+  layout(title = "e32: proj_dist_fn=\"unif\"", xaxis = xaxis, yaxis = yaxis, showlegend = F)
+```
+
+```{r}
+# Custom proj_dist_fn: point projections placed using the Beta distribution
+proj_beta <- function(len, n) len * rbeta(n, 0.1, 0.1) - len / 2
+
+set.seed(seed)
+e33 <- clugen(2, 5, 1500, c(1, 0), pi / 4, c(20, 20), 14, 2, 2.0, point_dist_fn = "n", proj_dist_fn = proj_beta)
+plot_ly(x = e33$points[, 1], y = e33$points[, 2], color = as.character(e33$point_clusters),
+        type = "scatter", mode = "markers", marker = marker2d) %>%
+  layout(title = "e33: custom proj_dist_fn (Beta)", xaxis = xaxis, yaxis = yaxis, showlegend = F)
 ```
 
 
