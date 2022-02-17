@@ -501,7 +501,8 @@ marker3d <- list(size = 3, line = list(color = 'black', width = 0.3))
 ```{r}
 scene <- list(xaxis = list(range = list(-12, 27), dtick = 10),
               yaxis = list(range = list(-17, 22), dtick = 10),
-              zaxis = list(range = list(-22, 22), dtick = 10))
+              zaxis = list(range = list(-22, 22), dtick = 10),
+              aspectmode = "cube")
 seed <- 123
 ```
 
@@ -531,3 +532,46 @@ plot_ly(x = e42$points[, 1], y = e42$points[, 2], z = e42$points[, 3],
         type = "scatter3d", mode = "markers", marker = marker3d) %>%
   layout(title = "e42: direction = [0, 0, 1]", showlegend= F, scene = scene)
 ```
+
+#### Changing the `angle_disp` parameter and using a custom `angle_deltas_fn` function
+
+```{r}
+scene <- list(xaxis = list(range = list(-35, 30), dtick = 10),
+              yaxis = list(range = list(-15, 40), dtick = 10),
+              zaxis = list(range = list(-25, 17), dtick = 10),
+              aspectmode = "cube")
+seed <- 123
+```
+
+```{r}
+set.seed(seed)
+e43 <- clugen(3, 6, 1000, c(1, 0, 0), 0, c(10, 10, 10), 15, 1.5, 0.5)
+plot_ly(x = e43$points[, 1], y = e43$points[, 2], z = e43$points[, 3],
+        color = as.character(e43$point_clusters),
+        type = "scatter3d", mode = "markers", marker = marker3d) %>%
+  layout(title = "e43: angle_disp = 0", showlegend = F, scene = scene)
+```
+
+```{r}
+set.seed(seed)
+e44 <- clugen(3, 6, 1000, c(1, 0, 0), pi / 8, c(10, 10, 10), 15, 1.5, 0.5)
+plot_ly(x = e44$points[, 1], y = e44$points[, 2], z = e44$points[, 3],
+        color = as.character(e44$point_clusters),
+        type = "scatter3d", mode = "markers", marker = marker3d) %>%
+  layout(title = "e44: angle_disp = π/8", showlegend = F, scene = scene)
+```
+
+```{r}
+# Custom angle_deltas function: arbitrarily rotate some clusters by 90 degrees
+angdel_90 <- function(nclu, astd) sample(c(0, pi / 2), nclu, replace = T)
+
+set.seed(seed)
+e45 <- clugen(3, 6, 1000, c(1, 0, 0), 0, c(10, 10, 10), 15, 1.5, 0.5, angle_deltas_fn = angdel_90)
+plot_ly(x = e45$points[, 1], y = e45$points[, 2], z = e45$points[, 3],
+        color = as.character(e45$point_clusters),
+        type = "scatter3d", mode = "markers", marker = marker3d) %>%
+  layout(title = "e45: custom angle_deltas function", showlegend = F, scene = scene)
+```
+
+
+
