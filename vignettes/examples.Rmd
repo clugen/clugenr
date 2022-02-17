@@ -229,13 +229,13 @@ plot_ly(x = e17$points[, 1], y = e17$points[, 2], color = as.character(e17$point
 
 ```{r}
 # Custom clucenters function: places clusters in a diagonal
-centers_diag_fn <- function(nclu, csep, coff) {
+centers_diag <- function(nclu, csep, coff) {
   matrix(1, nrow = nclu, ncol = length(csep)) * (1:nclu * max(csep)) + rep(coff, each = nclu)
 }
 
 set.seed(seed)
 e18 <- clugen(2, 8, 1000, c(1, 1), pi / 4, c(10, 10), 10, 2, 2.5, 
-              cluster_offset = c(-50, -50), clucenters_fn = centers_diag_fn)
+              cluster_offset = c(-50, -50), clucenters_fn = centers_diag)
 plot_ly(x = e18$points[, 1], y = e18$points[, 2], color = as.character(e18$point_clusters),
         type = "scatter", mode = "markers", marker = marker2d) %>%
   layout(title = "e18: custom clucenters function", xaxis = xaxis, yaxis = yaxis, showlegend = F)
@@ -645,4 +645,88 @@ plot_ly(x = e51$points[, 1], y = e51$points[, 2], z = e51$points[, 3],
   layout(title = "e51: custom llengths function", showlegend = F, scene = scene)
 ```
 
+### Manipulating relative cluster positions
+
+#### Using the `cluster_sep` parameter
+
+```{r}
+scene <- list(xaxis = list(range = list(-60, 150), dtick = 40),
+              yaxis = list(range = list(-100, 130), dtick = 40),
+              zaxis = list(range = list(-130, 130), dtick = 40),
+              aspectmode = "cube",
+              camera = list(eye = list(x = 1.9, y = 0.75, z = 0.5)))
+seed <- 321
+```
+
+```{r}
+set.seed(seed)
+e52 <- clugen(3, 8, 1000, c(1, 1, 1), pi / 4, c(30, 10, 10), 25, 4, 3)
+plot_ly(x = e52$points[, 1], y = e52$points[, 2], z = e52$points[, 3],
+        color = as.character(e52$point_clusters),
+        type = "scatter3d", mode = "markers", marker = marker3d) %>%
+  layout(title = "e52: cluster_sep = [30, 10, 10]", showlegend = F, scene = scene)
+```
+
+```{r}
+set.seed(seed)
+e53 <- clugen(3, 8, 1000, c(1, 1, 1), pi / 4, c(10, 30, 10), 25, 4, 3)
+plot_ly(x = e53$points[, 1], y = e53$points[, 2], z = e53$points[, 3],
+        color = as.character(e53$point_clusters),
+        type = "scatter3d", mode = "markers", marker = marker3d) %>%
+  layout(title = "e53: cluster_sep = [10, 30, 10]", showlegend = F, scene = scene)
+```
+
+```{r}
+set.seed(seed)
+e54 <- clugen(3, 8, 1000, c(1, 1, 1), pi / 4, c(10, 10, 30), 25, 4, 3)
+plot_ly(x = e54$points[, 1], y = e54$points[, 2], z = e54$points[, 3],
+        color = as.character(e54$point_clusters),
+        type = "scatter3d", mode = "markers", marker = marker3d) %>%
+  layout(title = "e54: cluster_sep = [10, 10, 30]", showlegend = F, scene = scene)
+```
+
+#### Changing the `cluster_offset` parameter and using a custom `clucenters_fn` function
+
+```{r}
+scene <- list(xaxis = list(range = list(-45, 70), dtick = 20),
+              yaxis = list(range = list(-55, 45), dtick = 20),
+              zaxis = list(range = list(-45, 65), dtick = 20),
+              aspectmode = "cube",
+              camera = list(eye = list(x = 1.9, y = 0.75, z = 0.5)))
+seed <- 321
+```
+
+```{r}
+set.seed(seed)
+e55 <- clugen(3, 8, 1000, c(1, 1, 1), pi / 4, c(10, 10, 10), 12, 3, 2.5)
+plot_ly(x = e55$points[, 1], y = e55$points[, 2], z = e55$points[, 3],
+        color = as.character(e55$point_clusters),
+        type = "scatter3d", mode = "markers", marker = marker3d) %>%
+  layout(title = "e55: default", showlegend = F, scene = scene)
+```
+
+```{r}
+set.seed(seed)
+e56 <- clugen(3, 8, 1000, c(1, 1, 1), pi / 4, c(10, 10, 10), 12, 3, 2.5,
+              cluster_offset = c(20, -20, 20))
+plot_ly(x = e56$points[, 1], y = e56$points[, 2], z = e56$points[, 3],
+        color = as.character(e56$point_clusters),
+        type = "scatter3d", mode = "markers", marker = marker3d) %>%
+  layout(title = "e56: cluster_offset = [20, -20, 20]", showlegend = F, scene = scene)
+```
+
+```{r}
+# Custom clucenters function: places clusters in a diagonal
+centers_diag <- function(nclu, csep, coff) {
+  matrix(1, nrow = nclu, ncol = length(csep)) * (1:nclu * max(csep)) + rep(coff, each = nclu)
+}
+
+set.seed(seed)
+e57 <- clugen(3, 8, 1000, c(1, 1, 1), pi / 4, c(10, 10, 10), 12, 3, 2.5,
+              cluster_offset = c(-50, -50, -50), clucenters_fn = centers_diag)
+plot_ly(x = e57$points[, 1], y = e57$points[, 2], z = e57$points[, 3],
+        color = as.character(e57$point_clusters),
+        type = "scatter3d", mode = "markers", marker = marker3d) %>%
+  layout(title = "e57: custom clucenters function", showlegend = F, scene = scene)
+```
 
