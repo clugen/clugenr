@@ -19,7 +19,8 @@ example must be preceded with:
 
 ```{r setup, message=FALSE, warning=FALSE}
 library(clugenr)
-library(plotly)  # Required for plotting
+library(plotly)     # Required for plotting
+RNGversion("3.6.0") # Keep examples reproducible in newer R versions 
 ```
 
 ## 2D examples
@@ -440,8 +441,52 @@ plot_ly(x = e36$points[, 1], y = e36$points[, 2], color = as.character(e36$point
   layout(title = "e36: custom proj_dist_fn (Beta)", xaxis = xaxis, yaxis = yaxis, showlegend = F)
 ```
 
+### Manipulating cluster sizes
 
+```{r}
+xaxis <- list(range = c(-40, 40))
+yaxis <- list(scaleanchor = "x", scaleratio = 1, range = c(-40, 40))
+seed <- 87
 
+# Custom clucenters_fn (all): yields fixed positions for the clusters
+centers_fixed <- function(nclu, csep, coff) {
+  matrix(c(-csep[1], -csep[2], csep[1], -csep[2], -csep[1], csep[2], csep[1], csep[2]),
+         nrow = nclu, byrow = T)
+}
+```
+
+```{r}
+set.seed(seed)
+e37 <- clugen(2, 4, 1500, c(1, 1), pi, c(20, 20), 0, 0, 5, 
+             clucenters_fn = centers_fixed, point_dist_fn = "n")
+plot_ly(x = e37$points[, 1], y = e37$points[, 2], color = as.character(e37$point_clusters),
+        type = "scatter", mode = "markers", marker = marker2d) %>%
+  layout(title = "e37: normal dist. (default)", xaxis = xaxis, yaxis = yaxis, showlegend = F)
+```
+
+```{r}
+# Custom clusizes_fn (e38): cluster sizes determined via the uniform distribution, no correction for total points
+clusizes_unif <- function(nclu, npts, ae) sample(2 * npts / nclu, nclu, replace = T)
+
+set.seed(seed)
+e38 <- clugen(2, 4, 1500, c(1, 1), pi, c(20, 20), 0, 0, 5,
+             clucenters_fn = centers_fixed, clusizes_fn = clusizes_unif, point_dist_fn = "n")
+plot_ly(x = e38$points[, 1], y = e38$points[, 2], color = as.character(e38$point_clusters),
+        type = "scatter", mode = "markers", marker = marker2d) %>%
+  layout(title = "e38: unif. dist. (custom)", xaxis = xaxis, yaxis = yaxis, showlegend = F)
+```
+
+```{r}
+# Custom clusizes_fn (e39): clusters all have the same size, no correction for total points
+clusizes_equal <- function(nclu, npts, ae) npts %/% nclu * rep.int(1, nclu)
+
+set.seed(seed)
+e39 <- clugen(2, 4, 1500, c(1, 1), pi, c(20, 20), 0, 0, 5,
+             clucenters_fn = centers_fixed, clusizes_fn = clusizes_equal, point_dist_fn = "n")
+plot_ly(x = e39$points[, 1], y = e39$points[, 2], color = as.character(e39$point_clusters),
+        type = "scatter", mode = "markers", marker = marker2d) %>%
+  layout(title = "e39: equal size (custom)", xaxis = xaxis, yaxis = yaxis, showlegend = F)
+```
 
 ## 3D examples
 
