@@ -20,6 +20,9 @@ example must be preceded with:
 ```{r setup, message=FALSE, warning=FALSE}
 library(clugenr)    # The clugenr library
 library(plotly)     # Required for plotting
+options(rgl.useNULL = TRUE)  # Create RGL plots in systems without displays (CI)
+library(rgl)
+setupKnitr(autoprint = TRUE) # Render RGL plots directly on generated page
 
 # Keep examples reproducible in newer R versions 
 RNGversion("3.6.0") 
@@ -48,6 +51,13 @@ plot_ly(x = e40$points[, 1], y = e40$points[, 2], z = e40$points[, 3],
         type = "scatter3d", mode = "markers", marker = marker3d) %>%
   layout(title = "e40: direction = [1, 0, 0]", showlegend= F, scene = scene)
 ```
+
+
+```{r}
+library(rgl)
+plot3d(e40$points[,1], e40$points[,2], e40$points[,3], pch=19, col=factor(e40$point_clusters))
+```
+
 
 ```{r}
 set.seed(seed)
