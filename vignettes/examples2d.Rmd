@@ -18,14 +18,41 @@ This vignette contains a number of examples on how to use `clugenr` in 2D. Each
 example must be preceded with:
 
 ```{r setup, message=FALSE, warning=FALSE}
-library(clugenr)    # The clugenr library
-library(plotly)     # Required for plotting
+library(clugenr)   # The clugenr library
+library(ggplot2)   # For plotting
+library(patchwork) # For combining plots
 
 # Keep examples reproducible in newer R versions 
 RNGversion("3.6.0") 
 
-# Marker style for 2D plots
-marker2d <- list(size = 4, line = list(color = 'black', width = 0.2))
+# Function for plotting a series of related examples
+plot_examples <- function(...) {
+  pmargin <- 0.1
+  ets <- list(...)
+  xmax <- max(sapply(ets, function(et) max(et$e$points[, 1])))
+  xmin <- min(sapply(ets, function(et) min(et$e$points[, 1])))
+  ymax <- max(sapply(ets, function(et) max(et$e$points[, 2])))
+  ymin <- min(sapply(ets, function(et) min(et$e$points[, 2])))
+  xd <- pmargin * abs(xmax - xmin)
+  yd <- pmargin * abs(ymax - ymin)
+  xmax <- xmax + xd
+  xmin <- xmin - xd
+  ymax <- ymax + yd
+  ymin <- ymin - yd
+  plts <- lapply(
+    ets,
+    function(et) {
+      e <- et$e
+      t <- et$t
+      ggplot(data.frame(e$points), aes(x = X1, y = X2)) +
+      geom_point(shape = 21, colour = "black", stroke = 0.1,
+                 aes(fill = factor(e$point_clusters))) +
+      xlab(NULL) + ylab(NULL) + ggtitle(t) +
+      theme(legend.position = "none", plot.title = element_text(size = rel(0.9))) +
+      coord_fixed(xlim = c(xmin, xmax), ylim = c(ymin, ymax))
+    })
+  wrap_plots(plts)
+}
 ```
 
 ## Manipulating the direction of cluster-supporting lines
@@ -33,69 +60,42 @@ marker2d <- list(size = 4, line = list(color = 'black', width = 0.2))
 ### Using the `direction` parameter
 
 ```{r}
-xaxis <- list(range = c(-10, 30))
-yaxis <- list(scaleanchor = "x", scaleratio = 1, range = c(-22, 22))
 seed <- 123
 ```
 
 ```{r}
 set.seed(seed)
 e01 <- clugen(2, 4, 200, c(1, 0), 0, c(10, 10), 10, 1.5, 0.5)
-plot_ly(x = e01$points[, 1], y = e01$points[, 2], color = as.character(e01$point_clusters),
-        type = "scatter", mode = "markers", marker = marker2d) %>%
-  layout(title = "e01: direction = [1, 0]", xaxis = xaxis, yaxis = yaxis, showlegend = F)
-```
-
-```{r}
 set.seed(seed)
 e02 <- clugen(2, 4, 200, c(1, 1), 0, c(10, 10), 10, 1.5, 0.5)
-plot_ly(x = e02$points[, 1], y = e02$points[, 2], color = as.character(e02$point_clusters),
-        type = "scatter", mode = "markers", marker = marker2d) %>%
-  layout(title = "e02: direction = [1, 1]", xaxis = xaxis, yaxis = yaxis, showlegend = F)
-```
-
-```{r}
 set.seed(seed)
 e03 <- clugen(2, 4, 200, c(0, 1), 0, c(10, 10), 10, 1.5, 0.5)
-plot_ly(x = e03$points[, 1], y = e03$points[, 2], color = as.character(e03$point_clusters),
-        type = "scatter", mode = "markers", marker = marker2d) %>%
-  layout(title = "e03: direction = [0, 1]", xaxis = xaxis, yaxis = yaxis, showlegend = F)
+
+plot_examples(list(e = e01, t = "e01: direction = [1, 0]"),
+              list(e = e02, t = "e02: direction = [1, 1]"),
+              list(e = e03, t = "e03: direction = [0, 1]"))
 ```
 
 ### Changing the `angle_disp` parameter and using a custom `angle_deltas_fn` function
 
 ```{r}
-xaxis <- list(range = c(-38, 38))
-yaxis <- list(scaleanchor = "x", scaleratio = 1, range = c(-20, 40))
 seed <- 123
+
+# Custom angle_deltas function: arbitrarily rotate some clusters by 90 degrees
+angdel_90_fn <- function(nclu, astd) sample(c(0, pi / 2), nclu, replace = T)
 ```
 
 ```{r}
 set.seed(seed)
 e04 <- clugen(2, 6, 500, c(1, 0), 0, c(10, 10), 10, 1.5, 0.5)
-plot_ly(x = e04$points[, 1], y = e04$points[, 2], color = as.character(e04$point_clusters),
-        type = "scatter", mode = "markers", marker = marker2d) %>%
-  layout(title = "e04: angle_disp = 0", xaxis = xaxis, yaxis = yaxis, showlegend = F)
-```
-
-
-```{r}
 set.seed(seed)
 e05 <- clugen(2, 6, 500, c(1, 0), pi / 8, c(10, 10), 10, 1.5, 0.5)
-plot_ly(x = e05$points[, 1], y = e05$points[, 2], color = as.character(e05$point_clusters),
-        type = "scatter", mode = "markers", marker = marker2d) %>%
-  layout(title = "e05: angle_disp = π/8", xaxis = xaxis, yaxis = yaxis, showlegend = F)
-```
-
-```{r}
-# Custom angle_deltas function: arbitrarily rotate some clusters by 90 degrees
-angdel_90_fn <- function(nclu, astd) sample(c(0, pi / 2), nclu, replace = T)
-
 set.seed(seed)
 e06 <- clugen(2, 6, 500, c(1, 0), 0, c(10, 10), 10, 1.5, 0.5, angle_deltas_fn = angdel_90_fn)
-plot_ly(x = e06$points[, 1], y = e06$points[, 2], color = as.character(e06$point_clusters),
-        type = "scatter", mode = "markers", marker = marker2d) %>%
-  layout(title = "e06: custom angle_deltas function", xaxis = xaxis, yaxis = yaxis, showlegend = F)
+
+plot_examples(list(e = e04, t = "e04: angle_disp = 0"),
+              list(e = e05, t = "e05: angle_disp = π/8"),
+              list(e = e06, t = "e06: custom angle_deltas function"))
 ```
 
 ## Manipulating the length of cluster-supporting lines
@@ -103,68 +103,42 @@ plot_ly(x = e06$points[, 1], y = e06$points[, 2], color = as.character(e06$point
 ### Using the `llength` parameter
 
 ```{r}
-xaxis <- list() #range = c(-38, 38))
-yaxis <- list(scaleanchor = "x", scaleratio = 1) #, range = c(-20, 40))
 seed <- 321
 ```
 
 ```{r}
 set.seed(seed)
 e07 <- clugen(2, 5, 800, c(1, 0), pi / 10, c(10, 10), 0, 0, 0.5, point_dist_fn = "n")
-plot_ly(x = e07$points[, 1], y = e07$points[, 2], color = as.character(e07$point_clusters),
-        type = "scatter", mode = "markers", marker = marker2d) %>%
-  layout(title = "e06: llength = 0", xaxis = xaxis, yaxis = yaxis, showlegend = F)
-```
-
-```{r}
 set.seed(seed)
 e08 <- clugen(2, 5, 800, c(1, 0), pi / 10, c(10, 10), 10, 0, 0.5, point_dist_fn = "n")
-plot_ly(x = e08$points[, 1], y = e08$points[, 2], color = as.character(e08$point_clusters),
-        type = "scatter", mode = "markers", marker = marker2d) %>%
-  layout(title = "e08: llength = 10", xaxis = xaxis, yaxis = yaxis, showlegend = F)
-```
-
-```{r}
 set.seed(seed)
 e09 <- clugen(2, 5, 800, c(1, 0), pi / 10, c(10, 10), 30, 0, 0.5, point_dist_fn = "n")
-plot_ly(x = e09$points[, 1], y = e09$points[, 2], color = as.character(e09$point_clusters),
-        type = "scatter", mode = "markers", marker = marker2d) %>%
-  layout(title = "e09: length = 30", xaxis = xaxis, yaxis = yaxis, showlegend = F)
+
+plot_examples(list(e = e07, t = "e07: llength = 0"),
+              list(e = e08, t = "e08: llength = 10"),
+              list(e = e09, t = "e09: llength = 30"))
 ```
 
 ### Changing the `llength_disp` parameter and using a custom `llengths_fn` function
 
 ```{r}
-xaxis <- list(range = c(-20, 29))
-yaxis <- list(scaleanchor = "x", scaleratio = 1, range = c(-35, 20))
 seed <- 765
+
+# Custom llengths function: line lengths grow for each new cluster
+llen_grow_fn <- function(nclu, llen, llenstd) llen * 0:(nclu - 1) + rnorm(nclu, sd = llenstd)
 ```
 
 ```{r}
 set.seed(seed)
 e10 <- clugen(2, 5, 800, c(1, 0), pi / 10, c(10, 10), 15,  0.0, 0.5, point_dist_fn = "n")
-plot_ly(x = e10$points[, 1], y = e10$points[, 2], color = as.character(e10$point_clusters),
-        type = "scatter", mode = "markers", marker = marker2d) %>%
-  layout(title = "e10: llength_disp = 0.0", xaxis = xaxis, yaxis = yaxis, showlegend = F)
-```
-
-```{r}
 set.seed(seed)
 e11 <- clugen(2, 5, 800, c(1, 0), pi / 10, c(10, 10), 15, 10.0, 0.5, point_dist_fn = "n")
-plot_ly(x = e11$points[, 1], y = e11$points[, 2], color = as.character(e11$point_clusters),
-        type = "scatter", mode = "markers", marker = marker2d) %>%
-  layout(title = "e11: llength_disp = 5.0", xaxis = xaxis, yaxis = yaxis, showlegend = F)
-```
-
-```{r}
-# Custom llengths function: line lengths grow for each new cluster
-llen_grow_fn <- function(nclu, llen, llenstd) llen * 0:(nclu - 1) + rnorm(nclu, sd = llenstd)
-
 set.seed(seed)
 e12 <- clugen(2, 5, 800, c(1, 0), pi / 10, c(10, 10), 10,  0.1, 0.5, llengths_fn = llen_grow_fn, point_dist_fn = "n")
-plot_ly(x = e12$points[, 1], y = e12$points[, 2], color = as.character(e12$point_clusters),
-        type = "scatter", mode = "markers", marker = marker2d) %>%
-  layout(title = "e12: custom llengths function", xaxis = xaxis, yaxis = yaxis, showlegend = F)
+
+plot_examples(list(e = e10, t = "e10: llength_disp = 0.0"),
+              list(e = e11, t = "e11: llength_disp = 5.0"),
+              list(e = e12, t = "e12: custom llengths function"))
 ```
 
 ## Manipulating relative cluster positions
@@ -172,79 +146,51 @@ plot_ly(x = e12$points[, 1], y = e12$points[, 2], color = as.character(e12$point
 ### Using the `cluster_sep` parameter
 
 ```{r}
-xaxis <- list(range = c(-130, 100))
-yaxis <- list(scaleanchor = "x", scaleratio = 1, range = c(-100, 120))
 seed <- 222
 ```
 
 ```{r}
 set.seed(seed)
 e13 <- clugen(2, 8, 1000, c(1, 1), pi / 4, c(10, 10), 15, 2, 4)
-plot_ly(x = e13$points[, 1], y = e13$points[, 2], color = as.character(e13$point_clusters),
-        type = "scatter", mode = "markers", marker = marker2d) %>%
-  layout(title = "e13: cluster_sep = [10, 10]", xaxis = xaxis, yaxis = yaxis, showlegend = F)
-```
-
-```{r}
 set.seed(seed)
 e14 <- clugen(2, 8, 1000, c(1, 1), pi / 4, c(30, 10), 15, 2, 4)
-plot_ly(x = e14$points[, 1], y = e14$points[, 2], color = as.character(e14$point_clusters),
-        type = "scatter", mode = "markers", marker = marker2d) %>%
-  layout(title = "e14: cluster_sep = [30, 10]", xaxis = xaxis, yaxis = yaxis, showlegend = F)
-```
-
-```{r}
 set.seed(seed)
 e15 <- clugen(2, 8, 1000, c(1, 1), pi / 4, c(10, 30), 15, 2, 4)
-plot_ly(x = e15$points[, 1], y = e15$points[, 2], color = as.character(e15$point_clusters),
-        type = "scatter", mode = "markers", marker = marker2d) %>%
-  layout(title = "e15: cluster_sep = [10, 30]", xaxis = xaxis, yaxis = yaxis, showlegend = F)
+
+plot_examples(list(e = e13, t = "e13: cluster_sep = [10, 10]"),
+              list(e = e14, t = "e14: cluster_sep = [30, 10]"),
+              list(e = e15, t = "e15: cluster_sep = [10, 30]"))
 ```
 
 ### Changing the `cluster_offset` parameter and using a custom `clucenters_fn` function
 
 ```{r}
-xaxis <- list(range = c(-55, 55))
-yaxis <- list(scaleanchor = "x", scaleratio = 1, range = c(-57, 45))
 seed <- 222
+
+# Custom clucenters function: places clusters in a diagonal
+centers_diag <- function(nclu, csep, coff) {
+  matrix(1, nrow = nclu, ncol = length(csep)) * (1:nclu * max(csep)) + rep(coff, each = nclu)
+}
 ```
 
 ```{r}
 set.seed(seed)
 e16 <- clugen(2, 8, 1000, c(1, 1), pi / 4, c(10, 10), 10, 2, 2.5)
-plot_ly(x = e16$points[, 1], y = e16$points[, 2], color = as.character(e16$point_clusters),
-        type = "scatter", mode = "markers", marker = marker2d) %>%
-  layout(title = "e16: default", xaxis = xaxis, yaxis = yaxis, showlegend = F)
-```
-
-```{r}
 set.seed(seed)
 e17 <- clugen(2, 8, 1000, c(1, 1), pi / 4, c(10, 10), 10, 2, 2.5,
               cluster_offset = c(20, -20))
-plot_ly(x = e17$points[, 1], y = e17$points[, 2], color = as.character(e17$point_clusters),
-        type = "scatter", mode = "markers", marker = marker2d) %>%
-  layout(title = "e17: cluster_offset = [20, -20]", xaxis = xaxis, yaxis = yaxis, showlegend = F)
-```
-
-```{r}
-# Custom clucenters function: places clusters in a diagonal
-centers_diag <- function(nclu, csep, coff) {
-  matrix(1, nrow = nclu, ncol = length(csep)) * (1:nclu * max(csep)) + rep(coff, each = nclu)
-}
-
 set.seed(seed)
 e18 <- clugen(2, 8, 1000, c(1, 1), pi / 4, c(10, 10), 10, 2, 2.5, 
               cluster_offset = c(-50, -50), clucenters_fn = centers_diag)
-plot_ly(x = e18$points[, 1], y = e18$points[, 2], color = as.character(e18$point_clusters),
-        type = "scatter", mode = "markers", marker = marker2d) %>%
-  layout(title = "e18: custom clucenters function", xaxis = xaxis, yaxis = yaxis, showlegend = F)
+
+plot_examples(list(e = e16, t = "e16: default"),
+              list(e = e17, t = "e17: cluster_offset = [20, -20]"),
+              list(e = e18, t = "e18: custom clucenters function"))
 ```
 
 ## Lateral dispersion and placement of point projections on the line
 
 ```{r}
-xaxis <- list(range = c(-30, 45))
-yaxis <- list(scaleanchor = "x", scaleratio = 1, range = c(-60, 22))
 seed <- 234
 ```
 
@@ -253,25 +199,14 @@ seed <- 234
 ```{r}
 set.seed(seed)
 e19 <- clugen(2, 4, 1000, c(1, 0), pi / 2, c(20, 20), 13, 2, 0.0)
-plot_ly(x = e19$points[, 1], y = e19$points[, 2], color = as.character(e19$point_clusters),
-        type = "scatter", mode = "markers", marker = marker2d) %>%
-  layout(title = "e19: lateral_disp = 0", xaxis = xaxis, yaxis = yaxis, showlegend = F)
-```
-
-```{r}
 set.seed(seed)
 e20 <- clugen(2, 4, 1000, c(1, 0), pi / 2, c(20, 20), 13, 2, 1.0)
-plot_ly(x = e20$points[, 1], y = e20$points[, 2], color = as.character(e20$point_clusters),
-        type = "scatter", mode = "markers", marker = marker2d) %>%
-  layout(title = "e20: lateral_disp = 1", xaxis = xaxis, yaxis = yaxis, showlegend = F)
-```
-
-```{r}
 set.seed(seed)
 e21 <- clugen(2, 4, 1000, c(1, 0), pi / 2, c(20, 20), 13, 2, 3.0)
-plot_ly(x = e21$points[, 1], y = e21$points[, 2], color = as.character(e21$point_clusters),
-        type = "scatter", mode = "markers", marker = marker2d) %>%
-  layout(title = "e21: lateral_disp = 3", xaxis = xaxis, yaxis = yaxis, showlegend = F)
+
+plot_examples(list(e = e19, t = "e19: lateral_disp = 0"),
+              list(e = e20, t = "e20: lateral_disp = 1"),
+              list(e = e21, t = "e21: lateral_disp = 3"))
 ```
 
 ### Uniform projection placement: `proj_dist_fn = "unif"`
@@ -279,25 +214,14 @@ plot_ly(x = e21$points[, 1], y = e21$points[, 2], color = as.character(e21$point
 ```{r}
 set.seed(seed)
 e22 <- clugen(2, 4, 1000, c(1, 0), pi / 2, c(20, 20), 13, 2, 0.0, proj_dist_fn = "unif")
-plot_ly(x = e22$points[, 1], y = e22$points[, 2], color = as.character(e22$point_clusters),
-        type = "scatter", mode = "markers", marker = marker2d) %>%
-  layout(title = "e22: lateral_disp = 0", xaxis = xaxis, yaxis = yaxis, showlegend = F)
-```
-
-```{r}
 set.seed(seed)
 e23 <- clugen(2, 4, 1000, c(1, 0), pi / 2, c(20, 20), 13, 2, 1.0, proj_dist_fn = "unif")
-plot_ly(x = e23$points[, 1], y = e23$points[, 2], color = as.character(e23$point_clusters),
-        type = "scatter", mode = "markers", marker = marker2d) %>%
-  layout(title = "e23: lateral_disp = 1", xaxis = xaxis, yaxis = yaxis, showlegend = F)
-```
-
-```{r}
 set.seed(seed)
 e24 <- clugen(2, 4, 1000, c(1, 0), pi / 2, c(20, 20), 13, 2, 3.0, proj_dist_fn = "unif")
-plot_ly(x = e24$points[, 1], y = e24$points[, 2], color = as.character(e24$point_clusters),
-        type = "scatter", mode = "markers", marker = marker2d) %>%
-  layout(title = "e24: lateral_disp = 3", xaxis = xaxis, yaxis = yaxis, showlegend = F)
+
+plot_examples(list(e = e22, t = "e22: lateral_disp = 0"),
+              list(e = e23, t = "e23: lateral_disp = 1"),
+              list(e = e24, t = "e24: lateral_disp = 3"))
 ```
 
 ### Custom projection placement using the Beta distribution
@@ -310,33 +234,23 @@ proj_beta <- function(len, n) len * rbeta(n, 0.1, 0.1) - len / 2
 ```{r}
 set.seed(seed)
 e25 <- clugen(2, 4, 1000, c(1, 0), pi / 2, c(20, 20), 13, 2, 0.0, proj_dist_fn = proj_beta)
-plot_ly(x = e25$points[, 1], y = e25$points[, 2], color = as.character(e25$point_clusters),
-        type = "scatter", mode = "markers", marker = marker2d) %>%
-  layout(title = "e25: lateral_disp = 0", xaxis = xaxis, yaxis = yaxis, showlegend = F)
-```
-
-```{r}
 set.seed(seed)
 e26 <- clugen(2, 4, 1000, c(1, 0), pi / 2, c(20, 20), 13, 2, 1.0, proj_dist_fn = proj_beta)
-plot_ly(x = e26$points[, 1], y = e26$points[, 2], color = as.character(e26$point_clusters),
-        type = "scatter", mode = "markers", marker = marker2d) %>%
-  layout(title = "e26: lateral_disp = 1", xaxis = xaxis, yaxis = yaxis, showlegend = F)
-```
-
-```{r}
 set.seed(seed)
 e27 <- clugen(2, 4, 1000, c(1, 0), pi / 2, c(20, 20), 13, 2, 3.0, proj_dist_fn = proj_beta)
-plot_ly(x = e27$points[, 1], y = e27$points[, 2], color = as.character(e27$point_clusters),
-        type = "scatter", mode = "markers", marker = marker2d) %>%
-  layout(title = "e27: lateral_disp = 3", xaxis = xaxis, yaxis = yaxis, showlegend = F)
+
+plot_examples(list(e = e25, t = "e25: lateral_disp = 0"),
+              list(e = e26, t = "e26: lateral_disp = 1"),
+              list(e = e27, t = "e27: lateral_disp = 3"))
 ```
 
 ## Controlling final point positions from their projections on the cluster-supporting line
 
 ```{r}
-xaxis <- list(range = c(-45, 31))
-yaxis <- list(scaleanchor = "x", scaleratio = 1, range = c(-20, 40))
 seed <- 12321
+
+# Custom proj_dist_fn: point projections placed using the Beta distribution
+proj_beta <- function(len, n) len * rbeta(n, 0.1, 0.1) - len / 2
 ```
 
 ### Points on hyperplane orthogonal to cluster-supporting line (default): `point_dist_fn = "n-1"`
@@ -344,28 +258,14 @@ seed <- 12321
 ```{r}
 set.seed(seed)
 e28 <- clugen(2, 5, 1500, c(1, 0), pi / 4, c(20, 20), 14, 2, 2.0)
-plot_ly(x = e28$points[, 1], y = e28$points[, 2], color = as.character(e28$point_clusters),
-        type = "scatter", mode = "markers", marker = marker2d) %>%
-  layout(title = "e28: proj_dist_fn=\"norm\" (default)", xaxis = xaxis, yaxis = yaxis, showlegend = F)
-```
-
-```{r}
 set.seed(seed)
 e29 <- clugen(2, 5, 1500, c(1, 0), pi / 4, c(20, 20), 14, 2, 2.0, proj_dist_fn = "unif")
-plot_ly(x = e29$points[, 1], y = e29$points[, 2], color = as.character(e29$point_clusters),
-        type = "scatter", mode = "markers", marker = marker2d) %>%
-  layout(title = "e29: proj_dist_fn=\"unif\"", xaxis = xaxis, yaxis = yaxis, showlegend = F)
-```
-
-```{r}
-# Custom proj_dist_fn: point projections placed using the Beta distribution
-proj_beta <- function(len, n) len * rbeta(n, 0.1, 0.1) - len / 2
-
 set.seed(seed)
 e30 <- clugen(2, 5, 1500, c(1, 0), pi / 4, c(20, 20), 14, 2, 2.0, proj_dist_fn = proj_beta)
-plot_ly(x = e30$points[, 1], y = e30$points[, 2], color = as.character(e30$point_clusters),
-        type = "scatter", mode = "markers", marker = marker2d) %>%
-  layout(title = "e30: custom proj_dist_fn (Beta)", xaxis = xaxis, yaxis = yaxis, showlegend = F)
+
+plot_examples(list(e = e28, t = "e28: proj_dist_fn = 'norm' (default)"),
+              list(e = e29, t = "e29: proj_dist_fn = 'unif'"),
+              list(e = e30, t = "e30: custom proj_dist_fn (Beta dist.)"))
 ```
 
 ### Points around projection on cluster-supporting line: `point_dist_fn = "n"`
@@ -374,30 +274,16 @@ plot_ly(x = e30$points[, 1], y = e30$points[, 2], color = as.character(e30$point
 set.seed(seed)
 e31 <- clugen(2, 5, 1500, c(1, 0), pi / 4, c(20, 20), 14, 2, 2.0,
               point_dist_fn = "n")
-plot_ly(x = e31$points[, 1], y = e31$points[, 2], color = as.character(e31$point_clusters),
-        type = "scatter", mode = "markers", marker = marker2d) %>%
-  layout(title = "e31: proj_dist_fn=\"norm\" (default)", xaxis = xaxis, yaxis = yaxis, showlegend = F)
-```
-
-```{r}
 set.seed(seed)
 e32 <- clugen(2, 5, 1500, c(1, 0), pi / 4, c(20, 20), 14, 2, 2.0,
               point_dist_fn = "n", proj_dist_fn = "unif")
-plot_ly(x = e32$points[, 1], y = e32$points[, 2], color = as.character(e32$point_clusters),
-        type = "scatter", mode = "markers", marker = marker2d) %>%
-  layout(title = "e32: proj_dist_fn=\"unif\"", xaxis = xaxis, yaxis = yaxis, showlegend = F)
-```
-
-```{r}
-# Custom proj_dist_fn: point projections placed using the Beta distribution
-proj_beta <- function(len, n) len * rbeta(n, 0.1, 0.1) - len / 2
-
 set.seed(seed)
 e33 <- clugen(2, 5, 1500, c(1, 0), pi / 4, c(20, 20), 14, 2, 2.0,
               point_dist_fn = "n", proj_dist_fn = proj_beta)
-plot_ly(x = e33$points[, 1], y = e33$points[, 2], color = as.character(e33$point_clusters),
-        type = "scatter", mode = "markers", marker = marker2d) %>%
-  layout(title = "e33: custom proj_dist_fn (Beta)", xaxis = xaxis, yaxis = yaxis, showlegend = F)
+
+plot_examples(list(e = e31, t = "e31: proj_dist_fn = 'norm' (default)"),
+              list(e = e32, t = "e32: proj_dist_fn = 'unif'"),
+              list(e = e33, t = "e33: custom proj_dist_fn (Beta dist.)"))
 ```
 
 ### Custom point placement using the exponential distribution
@@ -414,37 +300,21 @@ clupoints_n_1_exp <- function(projs, lat_std, len, clu_dir, clu_ctr) {
 set.seed(seed)
 e34 <- clugen(2, 5, 1500, c(1, 0), pi / 4, c(20, 20), 14, 2, 2.0,
               point_dist_fn = clupoints_n_1_exp)
-plot_ly(x = e34$points[, 1], y = e34$points[, 2], color = as.character(e34$point_clusters),
-        type = "scatter", mode = "markers", marker = marker2d) %>%
-  layout(title = "e34: proj_dist_fn=\"norm\" (default)", xaxis = xaxis, yaxis = yaxis, showlegend = F)
-```
-
-```{r}
 set.seed(seed)
 e35 <- clugen(2, 5, 1500, c(1, 0), pi / 4, c(20, 20), 14, 2, 2.0,
               point_dist_fn = clupoints_n_1_exp, proj_dist_fn = "unif")
-plot_ly(x = e35$points[, 1], y = e35$points[, 2], color = as.character(e35$point_clusters),
-        type = "scatter", mode = "markers", marker = marker2d) %>%
-  layout(title = "e35: proj_dist_fn=\"unif\"", xaxis = xaxis, yaxis = yaxis, showlegend = F)
-```
-
-```{r}
-# Custom proj_dist_fn: point projections placed using the Beta distribution
-proj_beta <- function(len, n) len * rbeta(n, 0.1, 0.1) - len / 2
-
 set.seed(seed)
 e36 <- clugen(2, 5, 1500, c(1, 0), pi / 4, c(20, 20), 14, 2, 2.0,
               point_dist_fn = clupoints_n_1_exp, proj_dist_fn = proj_beta)
-plot_ly(x = e36$points[, 1], y = e36$points[, 2], color = as.character(e36$point_clusters),
-        type = "scatter", mode = "markers", marker = marker2d) %>%
-  layout(title = "e36: custom proj_dist_fn (Beta)", xaxis = xaxis, yaxis = yaxis, showlegend = F)
+
+plot_examples(list(e = e34, t = "e34: proj_dist_fn = 'norm' (default)"),
+              list(e = e35, t = "e35: proj_dist_fn = 'unif'"),
+              list(e = e36, t = "e36: custom proj_dist_fn (Beta dist.)"))
 ```
 
 ## Manipulating cluster sizes
 
 ```{r}
-xaxis <- list(range = c(-40, 40))
-yaxis <- list(scaleanchor = "x", scaleratio = 1, range = c(-40, 40))
 seed <- 87
 
 # Custom clucenters_fn (all): yields fixed positions for the clusters
@@ -452,37 +322,26 @@ centers_fixed <- function(nclu, csep, coff) {
   matrix(c(-csep[1], -csep[2], csep[1], -csep[2], -csep[1], csep[2], csep[1], csep[2]),
          nrow = nclu, byrow = T)
 }
+
+# Custom clusizes_fn (e38): cluster sizes determined via the uniform distribution, no correction for total points
+clusizes_unif <- function(nclu, npts, ae) sample(2 * npts / nclu, nclu, replace = T)
+
+# Custom clusizes_fn (e39): clusters all have the same size, no correction for total points
+clusizes_equal <- function(nclu, npts, ae) npts %/% nclu * rep.int(1, nclu)
 ```
 
 ```{r}
 set.seed(seed)
 e37 <- clugen(2, 4, 1500, c(1, 1), pi, c(20, 20), 0, 0, 5, 
              clucenters_fn = centers_fixed, point_dist_fn = "n")
-plot_ly(x = e37$points[, 1], y = e37$points[, 2], color = as.character(e37$point_clusters),
-        type = "scatter", mode = "markers", marker = marker2d) %>%
-  layout(title = "e37: normal dist. (default)", xaxis = xaxis, yaxis = yaxis, showlegend = F)
-```
-
-```{r}
-# Custom clusizes_fn (e38): cluster sizes determined via the uniform distribution, no correction for total points
-clusizes_unif <- function(nclu, npts, ae) sample(2 * npts / nclu, nclu, replace = T)
-
 set.seed(seed)
 e38 <- clugen(2, 4, 1500, c(1, 1), pi, c(20, 20), 0, 0, 5,
              clucenters_fn = centers_fixed, clusizes_fn = clusizes_unif, point_dist_fn = "n")
-plot_ly(x = e38$points[, 1], y = e38$points[, 2], color = as.character(e38$point_clusters),
-        type = "scatter", mode = "markers", marker = marker2d) %>%
-  layout(title = "e38: unif. dist. (custom)", xaxis = xaxis, yaxis = yaxis, showlegend = F)
-```
-
-```{r}
-# Custom clusizes_fn (e39): clusters all have the same size, no correction for total points
-clusizes_equal <- function(nclu, npts, ae) npts %/% nclu * rep.int(1, nclu)
-
 set.seed(seed)
 e39 <- clugen(2, 4, 1500, c(1, 1), pi, c(20, 20), 0, 0, 5,
              clucenters_fn = centers_fixed, clusizes_fn = clusizes_equal, point_dist_fn = "n")
-plot_ly(x = e39$points[, 1], y = e39$points[, 2], color = as.character(e39$point_clusters),
-        type = "scatter", mode = "markers", marker = marker2d) %>%
-  layout(title = "e39: equal size (custom)", xaxis = xaxis, yaxis = yaxis, showlegend = F)
+
+plot_examples(list(e = e37, t = "e37: normal dist. (default)"),
+              list(e = e38, t = "e38: unif. dist. (custom)"),
+              list(e = e39, t = "e39: equal size (custom)"))
 ```
