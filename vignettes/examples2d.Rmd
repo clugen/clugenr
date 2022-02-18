@@ -14,8 +14,8 @@ knitr::opts_chunk$set(
 )
 ```
 
-This vignette contains a number of examples on how to use `clugenr` in 2D. Each
-example must be preceded with:
+This vignette contains a number of examples on how to use `clugenr` in 2D.
+Examples require the following setup code:
 
 ```{r setup, message=FALSE, warning=FALSE}
 library(clugenr)   # The clugenr library
@@ -48,7 +48,8 @@ plot_examples <- function(...) {
       geom_point(shape = 21, colour = "black", stroke = 0.1,
                  aes(fill = factor(e$point_clusters))) +
       xlab(NULL) + ylab(NULL) + ggtitle(t) +
-      theme(legend.position = "none", plot.title = element_text(size = rel(0.9))) +
+      theme(legend.position = "none",
+            plot.title = element_text(size = rel(0.9))) +
       coord_fixed(xlim = c(xmin, xmax), ylim = c(ymin, ymax))
     })
   wrap_plots(plts)
@@ -91,7 +92,8 @@ e04 <- clugen(2, 6, 500, c(1, 0), 0, c(10, 10), 10, 1.5, 0.5)
 set.seed(seed)
 e05 <- clugen(2, 6, 500, c(1, 0), pi / 8, c(10, 10), 10, 1.5, 0.5)
 set.seed(seed)
-e06 <- clugen(2, 6, 500, c(1, 0), 0, c(10, 10), 10, 1.5, 0.5, angle_deltas_fn = angdel_90_fn)
+e06 <- clugen(2, 6, 500, c(1, 0), 0, c(10, 10), 10, 1.5, 0.5,
+              angle_deltas_fn = angdel_90_fn)
 
 plot_examples(list(e = e04, t = "e04: angle_disp = 0"),
               list(e = e05, t = "e05: angle_disp = π/8"),
@@ -108,11 +110,14 @@ seed <- 321
 
 ```{r}
 set.seed(seed)
-e07 <- clugen(2, 5, 800, c(1, 0), pi / 10, c(10, 10), 0, 0, 0.5, point_dist_fn = "n")
+e07 <- clugen(2, 5, 800, c(1, 0), pi / 10, c(10, 10), 0, 0, 0.5,
+              point_dist_fn = "n")
 set.seed(seed)
-e08 <- clugen(2, 5, 800, c(1, 0), pi / 10, c(10, 10), 10, 0, 0.5, point_dist_fn = "n")
+e08 <- clugen(2, 5, 800, c(1, 0), pi / 10, c(10, 10), 10, 0, 0.5,
+              point_dist_fn = "n")
 set.seed(seed)
-e09 <- clugen(2, 5, 800, c(1, 0), pi / 10, c(10, 10), 30, 0, 0.5, point_dist_fn = "n")
+e09 <- clugen(2, 5, 800, c(1, 0), pi / 10, c(10, 10), 30, 0, 0.5,
+              point_dist_fn = "n")
 
 plot_examples(list(e = e07, t = "e07: llength = 0"),
               list(e = e08, t = "e08: llength = 10"),
@@ -130,11 +135,14 @@ llen_grow_fn <- function(nclu, llen, llenstd) llen * 0:(nclu - 1) + rnorm(nclu, 
 
 ```{r}
 set.seed(seed)
-e10 <- clugen(2, 5, 800, c(1, 0), pi / 10, c(10, 10), 15,  0.0, 0.5, point_dist_fn = "n")
+e10 <- clugen(2, 5, 800, c(1, 0), pi / 10, c(10, 10), 15,  0.0, 0.5,
+              point_dist_fn = "n")
 set.seed(seed)
-e11 <- clugen(2, 5, 800, c(1, 0), pi / 10, c(10, 10), 15, 10.0, 0.5, point_dist_fn = "n")
+e11 <- clugen(2, 5, 800, c(1, 0), pi / 10, c(10, 10), 15, 10.0, 0.5,
+              point_dist_fn = "n")
 set.seed(seed)
-e12 <- clugen(2, 5, 800, c(1, 0), pi / 10, c(10, 10), 10,  0.1, 0.5, llengths_fn = llen_grow_fn, point_dist_fn = "n")
+e12 <- clugen(2, 5, 800, c(1, 0), pi / 10, c(10, 10), 10,  0.1, 0.5,
+              llengths_fn = llen_grow_fn, point_dist_fn = "n")
 
 plot_examples(list(e = e10, t = "e10: llength_disp = 0.0"),
               list(e = e11, t = "e11: llength_disp = 5.0"),
@@ -169,7 +177,8 @@ seed <- 222
 
 # Custom clucenters function: places clusters in a diagonal
 centers_diag <- function(nclu, csep, coff) {
-  matrix(1, nrow = nclu, ncol = length(csep)) * (1:nclu * max(csep)) + rep(coff, each = nclu)
+  matrix(1, nrow = nclu, ncol = length(csep)) * (1:nclu * max(csep)) +
+    rep(coff, each = nclu)
 }
 ```
 
@@ -213,11 +222,14 @@ plot_examples(list(e = e19, t = "e19: lateral_disp = 0"),
 
 ```{r}
 set.seed(seed)
-e22 <- clugen(2, 4, 1000, c(1, 0), pi / 2, c(20, 20), 13, 2, 0.0, proj_dist_fn = "unif")
+e22 <- clugen(2, 4, 1000, c(1, 0), pi / 2, c(20, 20), 13, 2, 0.0,
+              proj_dist_fn = "unif")
 set.seed(seed)
-e23 <- clugen(2, 4, 1000, c(1, 0), pi / 2, c(20, 20), 13, 2, 1.0, proj_dist_fn = "unif")
+e23 <- clugen(2, 4, 1000, c(1, 0), pi / 2, c(20, 20), 13, 2, 1.0,
+              proj_dist_fn = "unif")
 set.seed(seed)
-e24 <- clugen(2, 4, 1000, c(1, 0), pi / 2, c(20, 20), 13, 2, 3.0, proj_dist_fn = "unif")
+e24 <- clugen(2, 4, 1000, c(1, 0), pi / 2, c(20, 20), 13, 2, 3.0,
+              proj_dist_fn = "unif")
 
 plot_examples(list(e = e22, t = "e22: lateral_disp = 0"),
               list(e = e23, t = "e23: lateral_disp = 1"),
@@ -233,11 +245,14 @@ proj_beta <- function(len, n) len * rbeta(n, 0.1, 0.1) - len / 2
 
 ```{r}
 set.seed(seed)
-e25 <- clugen(2, 4, 1000, c(1, 0), pi / 2, c(20, 20), 13, 2, 0.0, proj_dist_fn = proj_beta)
+e25 <- clugen(2, 4, 1000, c(1, 0), pi / 2, c(20, 20), 13, 2, 0.0,
+              proj_dist_fn = proj_beta)
 set.seed(seed)
-e26 <- clugen(2, 4, 1000, c(1, 0), pi / 2, c(20, 20), 13, 2, 1.0, proj_dist_fn = proj_beta)
+e26 <- clugen(2, 4, 1000, c(1, 0), pi / 2, c(20, 20), 13, 2, 1.0,
+              proj_dist_fn = proj_beta)
 set.seed(seed)
-e27 <- clugen(2, 4, 1000, c(1, 0), pi / 2, c(20, 20), 13, 2, 3.0, proj_dist_fn = proj_beta)
+e27 <- clugen(2, 4, 1000, c(1, 0), pi / 2, c(20, 20), 13, 2, 3.0,
+              proj_dist_fn = proj_beta)
 
 plot_examples(list(e = e25, t = "e25: lateral_disp = 0"),
               list(e = e26, t = "e26: lateral_disp = 1"),
@@ -259,9 +274,11 @@ proj_beta <- function(len, n) len * rbeta(n, 0.1, 0.1) - len / 2
 set.seed(seed)
 e28 <- clugen(2, 5, 1500, c(1, 0), pi / 4, c(20, 20), 14, 2, 2.0)
 set.seed(seed)
-e29 <- clugen(2, 5, 1500, c(1, 0), pi / 4, c(20, 20), 14, 2, 2.0, proj_dist_fn = "unif")
+e29 <- clugen(2, 5, 1500, c(1, 0), pi / 4, c(20, 20), 14, 2, 2.0,
+              proj_dist_fn = "unif")
 set.seed(seed)
-e30 <- clugen(2, 5, 1500, c(1, 0), pi / 4, c(20, 20), 14, 2, 2.0, proj_dist_fn = proj_beta)
+e30 <- clugen(2, 5, 1500, c(1, 0), pi / 4, c(20, 20), 14, 2, 2.0,
+              proj_dist_fn = proj_beta)
 
 plot_examples(list(e = e28, t = "e28: proj_dist_fn = 'norm' (default)"),
               list(e = e29, t = "e29: proj_dist_fn = 'unif'"),
@@ -323,10 +340,12 @@ centers_fixed <- function(nclu, csep, coff) {
          nrow = nclu, byrow = T)
 }
 
-# Custom clusizes_fn (e38): cluster sizes determined via the uniform distribution, no correction for total points
+# Custom clusizes_fn (e38): cluster sizes determined via the uniform distribution,
+# no correction for total points
 clusizes_unif <- function(nclu, npts, ae) sample(2 * npts / nclu, nclu, replace = T)
 
-# Custom clusizes_fn (e39): clusters all have the same size, no correction for total points
+# Custom clusizes_fn (e39): clusters all have the same size, no correction for
+# total points
 clusizes_equal <- function(nclu, npts, ae) npts %/% nclu * rep.int(1, nclu)
 ```
 
@@ -336,10 +355,12 @@ e37 <- clugen(2, 4, 1500, c(1, 1), pi, c(20, 20), 0, 0, 5,
              clucenters_fn = centers_fixed, point_dist_fn = "n")
 set.seed(seed)
 e38 <- clugen(2, 4, 1500, c(1, 1), pi, c(20, 20), 0, 0, 5,
-             clucenters_fn = centers_fixed, clusizes_fn = clusizes_unif, point_dist_fn = "n")
+             clucenters_fn = centers_fixed, clusizes_fn = clusizes_unif,
+             point_dist_fn = "n")
 set.seed(seed)
 e39 <- clugen(2, 4, 1500, c(1, 1), pi, c(20, 20), 0, 0, 5,
-             clucenters_fn = centers_fixed, clusizes_fn = clusizes_equal, point_dist_fn = "n")
+             clucenters_fn = centers_fixed, clusizes_fn = clusizes_equal,
+             point_dist_fn = "n")
 
 plot_examples(list(e = e37, t = "e37: normal dist. (default)"),
               list(e = e38, t = "e38: unif. dist. (custom)"),
