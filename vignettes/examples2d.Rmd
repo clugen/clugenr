@@ -21,41 +21,14 @@ This vignette contains a number of examples on how to use `clugenr` in 2D.
 Examples require the following setup code:
 
 ```{r setup, message=FALSE, warning=FALSE}
-library(clugenr)   # The clugenr library
-library(ggplot2)   # For plotting
-library(patchwork) # For combining plots
+# Load the clugenr library
+library(clugenr)
+
+# Load functions for plotting examples
+source("plot_examples.R", local = knitr::knit_global())
 
 # Keep examples reproducible in newer R versions 
 RNGversion("3.6.0") 
-
-# Function for plotting a series of related examples
-plot_examples_2d <- function(..., pmargin = 0.1) {
-  ets <- list(...)
-  xmax <- max(sapply(ets, function(et) max(et$e$points[, 1])))
-  xmin <- min(sapply(ets, function(et) min(et$e$points[, 1])))
-  ymax <- max(sapply(ets, function(et) max(et$e$points[, 2])))
-  ymin <- min(sapply(ets, function(et) min(et$e$points[, 2])))
-  xd <- pmargin * abs(xmax - xmin)
-  yd <- pmargin * abs(ymax - ymin)
-  xmax <- xmax + xd
-  xmin <- xmin - xd
-  ymax <- ymax + yd
-  ymin <- ymin - yd
-  plts <- lapply(
-    ets,
-    function(et) {
-      e <- et$e
-      t <- et$t
-      ggplot(NULL, aes(x = e$points[, 1], y = e$points[, 2])) +
-      geom_point(shape = 21, colour = "black", stroke = 0.1,
-                 aes(fill = factor(e$point_clusters))) +
-      xlab(NULL) + ylab(NULL) + ggtitle(t) +
-      theme(legend.position = "none",
-            plot.title = element_text(size = rel(0.9))) +
-      coord_fixed(xlim = c(xmin, xmax), ylim = c(ymin, ymax))
-    })
-  wrap_plots(plts)
-}
 ```
 
 ## Manipulating the direction of cluster-supporting lines

@@ -21,55 +21,21 @@ This vignette contains a number of examples on how to use `clugenr` in 1D and
 5D. Examples require the following setup code:
 
 ```{r setup, message=FALSE, warning=FALSE}
-library(clugenr)   # The clugenr library
-library(ggplot2)   # For plotting
-library(patchwork) # For combining plots
+# Load the clugenr library
+library(clugenr)
+
+# Load functions for plotting examples
+source("plot_examples.R", local = knitr::knit_global())
 
 # Keep examples reproducible in newer R versions 
 RNGversion("3.6.0") 
 ```
 
-#### Basic 1D example with density plot
+## Basic 1D example with density plot
 
 ```{r}
 # Custom proj_dist_fn: point projections placed using the Weibull distribution
 proj_wbull <- function(len, n) rweibull(n, shape = 1.5, scale = len / 2) - len / 2
-
-# Function for plotting the 1D clusters, showing density
-plot_examples_1d <- function(..., pmargin = 0.1, ymax = 0.6) {
-  ets <- list(...)
-  xmax <- max(sapply(ets, function(et) max(et$e$points)))
-  xmin <- min(sapply(ets, function(et) min(et$e$points)))
-  xd <- pmargin * abs(xmax - xmin)
-  xmax <- xmax + xd
-  xmin <- xmin - xd
-  plts <- lapply(
-    ets,
-    function(et) {
-      e <- et$e
-      t <- et$t
-      ggplot() +
-        geom_density(mapping = aes(x = e$points,
-                                   colour = factor(e$point_clusters),
-                                   fill = factor(e$point_clusters)),
-                     alpha = 0.3) +
-        geom_point(mapping = aes(x = e$points,
-                                 y = -0.02,
-                                 fill = factor(e$point_clusters)),
-                   shape = 21,
-                   colour = "black",
-                   stroke = 0.1,
-                   alpha = 0.2) +
-        ggtitle(t) + xlab(NULL) + ylab(NULL) +
-        xlim(xmin, xmax) + ylim(-0.025, ymax) +
-        theme(legend.position = "none",
-              plot.title = element_text(size = rel(0.9)),
-              axis.ticks.y = element_blank(),
-              axis.text.y = element_blank()
-              )
-    })
-  wrap_plots(plts)
-}
 
 seed <- 222
 ```
@@ -89,44 +55,9 @@ plot_examples_1d(list(e = e79, t = "e79: proj_dist_fn='norm'"),
                  ymax = 0.575)
 ```
 
-#### 5D example with default optional arguments
+## 5D example with default optional arguments
 
 ```{r}
-# Function for plotting the nD clusters
-plot_examples_nd <- function(e, title, pstroke = 0.05, psize = 0.75) {
-
-  # All possible combinations
-  idxs <- expand.grid(1:nd, 1:nd)
-
-  plts <- apply(idxs,
-                1,
-                function(x) {
-                  if (x[1] == x[2]) {
-                    grid::textGrob(paste0("x", x[1]))
-                  }
-                  else {
-                    ggplot(NULL,
-                           aes(x = e$points[, x[1]],
-                               y = e$points[, x[2]],
-                               colour = factor(e$point_clusters))) +
-                      geom_point(shape = 21,
-                                 colour = "black",
-                                 stroke = pstroke,
-                                 size = psize,
-                                 aes(fill = factor(e$point_clusters))) +
-                      xlab(NULL) + ylab(NULL) +
-                      theme(legend.position = "none",
-                            axis.ticks.x = element_blank(),
-                            axis.text.x = element_blank(),
-                            axis.ticks.y = element_blank(),
-                            axis.text.y = element_blank()) +
-                      coord_fixed()
-                  }
-                },
-                simplify = F)
-  wrap_plots(plts) + plot_annotation(title = title)
-}
-
 nd <- 5
 seed <- 321
 ```
@@ -138,7 +69,7 @@ e82 <- clugen(nd, 6, 1500, c(1, 1, 0.5, 0, 0), pi / 16, rep.int(30, nd), 30, 4, 
 plot_examples_nd(e82, "e82: 5D with optional parameters set to defaults")
 ```
 
-#### 5D example with `proj_dist_fn = "unif"` and `point_dist_fn = "n"`
+## 5D example with `proj_dist_fn = "unif"` and `point_dist_fn = "n"`
 
 ```{r}
 nd <- 5

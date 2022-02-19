@@ -1,0 +1,105 @@
+# Copyright (c) 2020-2022 Nuno Fachada
+# Distributed under the MIT License (http://opensource.org/licenses/MIT)
+
+library(ggplot2)   # For plotting
+library(patchwork) # For combining plots
+
+# Function for plotting a series of related 2D examples
+plot_examples_2d <- function(..., pmargin = 0.1) {
+  ets <- list(...)
+  xmax <- max(sapply(ets, function(et) max(et$e$points[, 1])))
+  xmin <- min(sapply(ets, function(et) min(et$e$points[, 1])))
+  ymax <- max(sapply(ets, function(et) max(et$e$points[, 2])))
+  ymin <- min(sapply(ets, function(et) min(et$e$points[, 2])))
+  xd <- pmargin * abs(xmax - xmin)
+  yd <- pmargin * abs(ymax - ymin)
+  xmax <- xmax + xd
+  xmin <- xmin - xd
+  ymax <- ymax + yd
+  ymin <- ymin - yd
+  plts <- lapply(
+    ets,
+    function(et) {
+      e <- et$e
+      t <- et$t
+      ggplot(NULL, aes(x = e$points[, 1], y = e$points[, 2])) +
+        geom_point(shape = 21, colour = "black", stroke = 0.1,
+                   aes(fill = factor(e$point_clusters))) +
+        xlab(NULL) + ylab(NULL) + ggtitle(t) +
+        theme(legend.position = "none",
+              plot.title = element_text(size = rel(0.9))) +
+        coord_fixed(xlim = c(xmin, xmax), ylim = c(ymin, ymax))
+    })
+  wrap_plots(plts)
+}
+
+# Function for plotting the 1D clusters, showing density
+plot_examples_1d <- function(..., pmargin = 0.1, ymax = 0.6) {
+  ets <- list(...)
+  xmax <- max(sapply(ets, function(et) max(et$e$points)))
+  xmin <- min(sapply(ets, function(et) min(et$e$points)))
+  xd <- pmargin * abs(xmax - xmin)
+  xmax <- xmax + xd
+  xmin <- xmin - xd
+  plts <- lapply(
+    ets,
+    function(et) {
+      e <- et$e
+      t <- et$t
+      ggplot() +
+        geom_density(mapping = aes(x = e$points,
+                                   colour = factor(e$point_clusters),
+                                   fill = factor(e$point_clusters)),
+                     alpha = 0.3) +
+        geom_point(mapping = aes(x = e$points,
+                                 y = -0.02,
+                                 fill = factor(e$point_clusters)),
+                   shape = 21,
+                   colour = "black",
+                   stroke = 0.1,
+                   alpha = 0.2) +
+        ggtitle(t) + xlab(NULL) + ylab(NULL) +
+        xlim(xmin, xmax) + ylim(-0.025, ymax) +
+        theme(legend.position = "none",
+              plot.title = element_text(size = rel(0.9)),
+              axis.ticks.y = element_blank(),
+              axis.text.y = element_blank()
+        )
+    })
+  wrap_plots(plts)
+}
+
+# Function for plotting the nD clusters
+plot_examples_nd <- function(e, title, pstroke = 0.05, psize = 0.75) {
+
+  # All possible combinations
+  idxs <- expand.grid(1:nd, 1:nd)
+
+  plts <- apply(idxs,
+                1,
+                function(x) {
+                  if (x[1] == x[2]) {
+                    grid::textGrob(paste0("x", x[1]))
+                  }
+                  else {
+                    ggplot(NULL,
+                           aes(x = e$points[, x[1]],
+                               y = e$points[, x[2]],
+                               colour = factor(e$point_clusters))) +
+                      geom_point(shape = 21,
+                                 colour = "black",
+                                 stroke = pstroke,
+                                 size = psize,
+                                 aes(fill = factor(e$point_clusters))) +
+                      xlab(NULL) + ylab(NULL) +
+                      theme(legend.position = "none",
+                            axis.ticks.x = element_blank(),
+                            axis.text.x = element_blank(),
+                            axis.ticks.y = element_blank(),
+                            axis.text.y = element_blank()) +
+                      coord_fixed()
+                  }
+                },
+                simplify = F)
+  wrap_plots(plts) + plot_annotation(title = title)
+}
