@@ -10,7 +10,10 @@ vignette: >
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>"
+  comment = "#>",
+  out.width = "100%",
+  fig.asp=0.4,
+  fig.width=8
 )
 ```
 
@@ -24,11 +27,11 @@ options(rgl.useNULL = TRUE)  # Create RGL plots in systems without displays (CI)
 library(rgl)
 setupKnitr(autoprint = TRUE) # Render RGL plots directly on generated page
 
+# Load functions for plotting examples
+source("plot_examples.R", local = knitr::knit_global())
+
 # Keep examples reproducible in newer R versions 
 RNGversion("3.6.0") 
-
-# Marker style for 3D plots
-marker3d <- list(size = 3, line = list(color = 'black', width = 0.3))
 ```
 
 ## Manipulating the direction of cluster-supporting lines
@@ -46,332 +49,15 @@ seed <- 123
 ```{r}
 set.seed(seed)
 e40 <- clugen(3, 4, 500, c(1, 0, 0), 0, c(10, 10, 10), 15, 1.5, 0.5)
-plot_ly(x = e40$points[, 1], y = e40$points[, 2], z = e40$points[, 3],
-        color = as.character(e40$point_clusters),
-        type = "scatter3d", mode = "markers", marker = marker3d) %>%
-  layout(title = "e40: direction = [1, 0, 0]", showlegend= F, scene = scene)
-```
-
-
-```{r}
-library(rgl)
-plot3d(e40$points[,1], e40$points[,2], e40$points[,3], pch=19, col=factor(e40$point_clusters))
-```
-
-
-```{r}
 set.seed(seed)
 e41 <- clugen(3, 4, 500, c(1, 1, 1), 0, c(10, 10, 10), 15, 1.5, 0.5)
-plot_ly(x = e41$points[, 1], y = e41$points[, 2], z = e41$points[, 3],
-        color = as.character(e41$point_clusters),
-        type = "scatter3d", mode = "markers", marker = marker3d) %>%
-  layout(title = "e41: direction = [1, 1, 1]", showlegend= F, scene = scene)
-```
-
-```{r}
 set.seed(seed)
 e42 <- clugen(3, 4, 500, c(0, 0, 1), 0, c(10, 10, 10), 15, 1.5, 0.5)
-plot_ly(x = e42$points[, 1], y = e42$points[, 2], z = e42$points[, 3],
-        color = as.character(e42$point_clusters),
-        type = "scatter3d", mode = "markers", marker = marker3d) %>%
-  layout(title = "e42: direction = [0, 0, 1]", showlegend= F, scene = scene)
-```
-
-### Changing the `angle_disp` parameter and using a custom `angle_deltas_fn` function
-
-```{r}
-scene <- list(xaxis = list(range = list(-35, 30), dtick = 10),
-              yaxis = list(range = list(-15, 40), dtick = 10),
-              zaxis = list(range = list(-25, 17), dtick = 10),
-              aspectmode = "cube")
-seed <- 123
 ```
 
 ```{r}
-set.seed(seed)
-e43 <- clugen(3, 6, 1000, c(1, 0, 0), 0, c(10, 10, 10), 15, 1.5, 0.5)
-plot_ly(x = e43$points[, 1], y = e43$points[, 2], z = e43$points[, 3],
-        color = as.character(e43$point_clusters),
-        type = "scatter3d", mode = "markers", marker = marker3d) %>%
-  layout(title = "e43: angle_disp = 0", showlegend = F, scene = scene)
+plot_examples_3d(list(e = e40, t = "e40: direction = [1, 0, 0]"),
+                 list(e = e41, t = "e41: direction = [1, 1, 1]"),
+                 list(e = e42, t = "e42: direction = [0, 0, 1]"))
 ```
 
-```{r}
-set.seed(seed)
-e44 <- clugen(3, 6, 1000, c(1, 0, 0), pi / 8, c(10, 10, 10), 15, 1.5, 0.5)
-plot_ly(x = e44$points[, 1], y = e44$points[, 2], z = e44$points[, 3],
-        color = as.character(e44$point_clusters),
-        type = "scatter3d", mode = "markers", marker = marker3d) %>%
-  layout(title = "e44: angle_disp = π/8", showlegend = F, scene = scene)
-```
-
-```{r}
-# Custom angle_deltas function: arbitrarily rotate some clusters by 90 degrees
-angdel_90 <- function(nclu, astd) sample(c(0, pi / 2), nclu, replace = T)
-
-set.seed(seed)
-e45 <- clugen(3, 6, 1000, c(1, 0, 0), 0, c(10, 10, 10), 15, 1.5, 0.5, angle_deltas_fn = angdel_90)
-plot_ly(x = e45$points[, 1], y = e45$points[, 2], z = e45$points[, 3],
-        color = as.character(e45$point_clusters),
-        type = "scatter3d", mode = "markers", marker = marker3d) %>%
-  layout(title = "e45: custom angle_deltas function", showlegend = F, scene = scene)
-```
-
-## Manipulating the length of cluster-supporting lines
-
-```{r}
-scene <- list(xaxis = list(range = list(-35, 35), dtick = 10),
-              yaxis = list(range = list(-30, 30), dtick = 10),
-              zaxis = list(range = list(1, 30), dtick = 10),
-              aspectmode = "cube")
-seed <- 123
-```
-
-### Using the `llength` parameter
-
-```{r}
-set.seed(seed)
-e46 <- clugen(3, 5, 800, c(1, 0, 0), pi / 10, c(10, 10, 10), 0, 0, 0.5, point_dist_fn = "n")
-plot_ly(x = e46$points[, 1], y = e46$points[, 2], z = e46$points[, 3],
-        color = as.character(e46$point_clusters),
-        type = "scatter3d", mode = "markers", marker = marker3d) %>%
-  layout(title = "e46: llength = 0", showlegend = F, scene = scene)
-```
-
-```{r}
-set.seed(seed)
-e47 <- clugen(3, 5, 800, c(1, 0, 0), pi / 10, c(10, 10, 10), 10, 0, 0.5, point_dist_fn = "n")
-plot_ly(x = e47$points[, 1], y = e47$points[, 2], z = e47$points[, 3],
-        color = as.character(e47$point_clusters),
-        type = "scatter3d", mode = "markers", marker = marker3d) %>%
-  layout(title = "e47: llength = 10", showlegend = F, scene = scene)
-```
-
-```{r}
-set.seed(seed)
-e48 <- clugen(3, 5, 800, c(1, 0, 0), pi / 10, c(10, 10, 10), 30, 0, 0.5, point_dist_fn = "n")
-plot_ly(x = e48$points[, 1], y = e48$points[, 2], z = e48$points[, 3],
-        color = as.character(e48$point_clusters),
-        type = "scatter3d", mode = "markers", marker = marker3d) %>%
-  layout(title = "e48: llength = 30", showlegend = F, scene = scene)
-```
-
-### Changing the `llength_disp` parameter and using a custom `llengths_fn` function
-
-```{r}
-set.seed(seed)
-e49 <- clugen(3, 5, 800, c(1, 0, 0), pi / 10, c(10, 10, 10), 15,  0.0, 0.5, point_dist_fn = "n")
-plot_ly(x = e49$points[, 1], y = e49$points[, 2], z = e49$points[, 3],
-        color = as.character(e49$point_clusters),
-        type = "scatter3d", mode = "markers", marker = marker3d) %>%
-  layout(title = "e49: llength_disp = 0.0", showlegend = F, scene = scene)
-```
-
-```{r}
-set.seed(seed)
-e50 <- clugen(3, 5, 800, c(1, 0, 0), pi / 10, c(10, 10, 10), 15, 10.0, 0.5, point_dist_fn = "n")
-plot_ly(x = e50$points[, 1], y = e50$points[, 2], z = e50$points[, 3],
-        color = as.character(e50$point_clusters),
-        type = "scatter3d", mode = "markers", marker = marker3d) %>%
-  layout(title = "e50: llength_disp = 10.0", showlegend = F, scene = scene)
-```
-
-```{r}
-# Custom llengths function: line lengths tend to grow for each new cluster
-llen_grow <- function(nclu, llen, llenstd) llen * (0:(nclu - 1) + rnorm(nclu, sd = llenstd))
-
-set.seed(seed)
-e51 <- clugen(3, 5, 800, c(1, 0, 0), pi / 10, c(10, 10, 10), 10,  0.1, 0.5, point_dist_fn = "n",
-              llengths_fn = llen_grow)
-plot_ly(x = e51$points[, 1], y = e51$points[, 2], z = e51$points[, 3],
-        color = as.character(e51$point_clusters),
-        type = "scatter3d", mode = "markers", marker = marker3d) %>%
-  layout(title = "e51: custom llengths function", showlegend = F, scene = scene)
-```
-
-## Manipulating relative cluster positions
-
-### Using the `cluster_sep` parameter
-
-```{r}
-scene <- list(xaxis = list(range = list(-60, 150), dtick = 40),
-              yaxis = list(range = list(-100, 130), dtick = 40),
-              zaxis = list(range = list(-130, 130), dtick = 40),
-              aspectmode = "cube",
-              camera = list(eye = list(x = 1.9, y = 0.75, z = 0.5)))
-seed <- 321
-```
-
-```{r}
-set.seed(seed)
-e52 <- clugen(3, 8, 1000, c(1, 1, 1), pi / 4, c(30, 10, 10), 25, 4, 3)
-plot_ly(x = e52$points[, 1], y = e52$points[, 2], z = e52$points[, 3],
-        color = as.character(e52$point_clusters),
-        type = "scatter3d", mode = "markers", marker = marker3d) %>%
-  layout(title = "e52: cluster_sep = [30, 10, 10]", showlegend = F, scene = scene)
-```
-
-```{r}
-set.seed(seed)
-e53 <- clugen(3, 8, 1000, c(1, 1, 1), pi / 4, c(10, 30, 10), 25, 4, 3)
-plot_ly(x = e53$points[, 1], y = e53$points[, 2], z = e53$points[, 3],
-        color = as.character(e53$point_clusters),
-        type = "scatter3d", mode = "markers", marker = marker3d) %>%
-  layout(title = "e53: cluster_sep = [10, 30, 10]", showlegend = F, scene = scene)
-```
-
-```{r}
-set.seed(seed)
-e54 <- clugen(3, 8, 1000, c(1, 1, 1), pi / 4, c(10, 10, 30), 25, 4, 3)
-plot_ly(x = e54$points[, 1], y = e54$points[, 2], z = e54$points[, 3],
-        color = as.character(e54$point_clusters),
-        type = "scatter3d", mode = "markers", marker = marker3d) %>%
-  layout(title = "e54: cluster_sep = [10, 10, 30]", showlegend = F, scene = scene)
-```
-
-### Changing the `cluster_offset` parameter and using a custom `clucenters_fn` function
-
-```{r}
-scene <- list(xaxis = list(range = list(-45, 70), dtick = 20),
-              yaxis = list(range = list(-55, 45), dtick = 20),
-              zaxis = list(range = list(-45, 65), dtick = 20),
-              aspectmode = "cube",
-              camera = list(eye = list(x = 1.9, y = 0.75, z = 0.5)))
-seed <- 321
-```
-
-```{r}
-set.seed(seed)
-e55 <- clugen(3, 8, 1000, c(1, 1, 1), pi / 4, c(10, 10, 10), 12, 3, 2.5)
-plot_ly(x = e55$points[, 1], y = e55$points[, 2], z = e55$points[, 3],
-        color = as.character(e55$point_clusters),
-        type = "scatter3d", mode = "markers", marker = marker3d) %>%
-  layout(title = "e55: default", showlegend = F, scene = scene)
-```
-
-```{r}
-set.seed(seed)
-e56 <- clugen(3, 8, 1000, c(1, 1, 1), pi / 4, c(10, 10, 10), 12, 3, 2.5,
-              cluster_offset = c(20, -20, 20))
-plot_ly(x = e56$points[, 1], y = e56$points[, 2], z = e56$points[, 3],
-        color = as.character(e56$point_clusters),
-        type = "scatter3d", mode = "markers", marker = marker3d) %>%
-  layout(title = "e56: cluster_offset = [20, -20, 20]", showlegend = F, scene = scene)
-```
-
-```{r}
-# Custom clucenters function: places clusters in a diagonal
-centers_diag <- function(nclu, csep, coff) {
-  matrix(1, nrow = nclu, ncol = length(csep)) * (1:nclu * max(csep)) + rep(coff, each = nclu)
-}
-
-set.seed(seed)
-e57 <- clugen(3, 8, 1000, c(1, 1, 1), pi / 4, c(10, 10, 10), 12, 3, 2.5,
-              cluster_offset = c(-50, -50, -50), clucenters_fn = centers_diag)
-plot_ly(x = e57$points[, 1], y = e57$points[, 2], z = e57$points[, 3],
-        color = as.character(e57$point_clusters),
-        type = "scatter3d", mode = "markers", marker = marker3d) %>%
-  layout(title = "e57: custom clucenters function", showlegend = F, scene = scene)
-```
-
-## Lateral dispersion and placement of point projections on the line
-
-```{r}
-scene <- list(xaxis = list(),#range = list(-12, 27), dtick = 10),
-              yaxis = list(),#range = list(-17, 22), dtick = 10),
-              zaxis = list(),#range = list(-22, 22), dtick = 10),
-              aspectmode = "cube")
-seed <- 456
-```
-
-### Normal projection placement (default): `proj_dist_fn = "norm"`
-
-```{r}
-set.seed(seed)
-e58 <- clugen(3, 4, 1000, c(1, 0, 0), pi / 2, c(20, 20, 20), 13, 2, 0.0)
-plot_ly(x = e58$points[, 1], y = e58$points[, 2], z = e58$points[, 3],
-        color = as.character(e58$point_clusters),
-        type = "scatter3d", mode = "markers", marker = marker3d) %>%
-  layout(title = "e58: lateral_disp = 0", showlegend = F, scene = scene)
-```
-
-```{r}
-set.seed(seed)
-e59 <- clugen(3, 4, 1000, c(1, 0, 0), pi / 2, c(20, 20, 20), 13, 2, 1.0)
-plot_ly(x = e59$points[, 1], y = e59$points[, 2], z = e59$points[, 3],
-        color = as.character(e59$point_clusters),
-        type = "scatter3d", mode = "markers", marker = marker3d) %>%
-  layout(title = "e59: lateral_disp = 1", showlegend = F, scene = scene)
-```
-
-```{r}
-set.seed(seed)
-e60 <- clugen(3, 4, 1000, c(1, 0, 0), pi / 2, c(20, 20, 20), 13, 2, 3.0)
-plot_ly(x = e60$points[, 1], y = e60$points[, 2], z = e60$points[, 3],
-        color = as.character(e60$point_clusters),
-        type = "scatter3d", mode = "markers", marker = marker3d) %>%
-  layout(title = "e60: lateral_disp = 3", showlegend = F, scene = scene)
-```
-
-### Uniform projection placement: `proj_dist_fn = "unif"`
-
-```{r}
-set.seed(seed)
-e61 <- clugen(3, 4, 1000, c(1, 0, 0), pi / 2, c(20, 20, 20), 13, 2, 0.0, proj_dist_fn = "unif")
-plot_ly(x = e61$points[, 1], y = e61$points[, 2], z = e61$points[, 3],
-        color = as.character(e61$point_clusters),
-        type = "scatter3d", mode = "markers", marker = marker3d) %>%
-  layout(title = "e61: lateral_disp = 0", showlegend = F, scene = scene)
-```
-
-```{r}
-set.seed(seed)
-e62 <- clugen(3, 4, 1000, c(1, 0, 0), pi / 2, c(20, 20, 20), 13, 2, 1.0, proj_dist_fn = "unif")
-plot_ly(x = e62$points[, 1], y = e62$points[, 2], z = e62$points[, 3],
-        color = as.character(e62$point_clusters),
-        type = "scatter3d", mode = "markers", marker = marker3d) %>%
-  layout(title = "e62: lateral_disp = 1", showlegend = F, scene = scene)
-```
-
-```{r}
-set.seed(seed)
-e63 <- clugen(3, 4, 1000, c(1, 0, 0), pi / 2, c(20, 20, 20), 13, 2, 3.0, proj_dist_fn = "unif")
-plot_ly(x = e63$points[, 1], y = e63$points[, 2], z = e63$points[, 3],
-        color = as.character(e63$point_clusters),
-        type = "scatter3d", mode = "markers", marker = marker3d) %>%
-  layout(title = "e63: lateral_disp = 3", showlegend = F, scene = scene)
-```
-
-### Custom projection placement using the Beta distribution
-
-```{r}
-# Custom proj_dist_fn: point projections placed using the Beta distribution
-proj_beta <- function(len, n) len * rbeta(n, 0.1, 0.1) - len / 2
-```
-
-```{r}
-set.seed(seed)
-e64 <- clugen(3, 4, 1000, c(1, 0, 0), pi / 2, c(20, 20, 20), 13, 2, 0.0, proj_dist_fn = proj_beta)
-plot_ly(x = e64$points[, 1], y = e64$points[, 2], z = e64$points[, 3],
-        color = as.character(e64$point_clusters),
-        type = "scatter3d", mode = "markers", marker = marker3d) %>%
-  layout(title = "e64: lateral_disp = 0", showlegend = F, scene = scene)
-```
-
-```{r}
-set.seed(seed)
-e65 <- clugen(3, 4, 1000, c(1, 0, 0), pi / 2, c(20, 20, 20), 13, 2, 1.0, proj_dist_fn = proj_beta)
-plot_ly(x = e65$points[, 1], y = e65$points[, 2], z = e65$points[, 3],
-        color = as.character(e65$point_clusters),
-        type = "scatter3d", mode = "markers", marker = marker3d) %>%
-  layout(title = "e65: lateral_disp = 1", showlegend = F, scene = scene)
-```
-
-```{r}
-set.seed(seed)
-e66 <- clugen(3, 4, 1000, c(1, 0, 0), pi / 2, c(20, 20, 20), 13, 2, 3.0, proj_dist_fn = proj_beta)
-plot_ly(x = e66$points[, 1], y = e66$points[, 2], z = e66$points[, 3],
-        color = as.character(e66$point_clusters),
-        type = "scatter3d", mode = "markers", marker = marker3d) %>%
-  layout(title = "e66: lateral_disp = 3", showlegend = F, scene = scene)
-```

@@ -1,8 +1,9 @@
 # Copyright (c) 2020-2022 Nuno Fachada
 # Distributed under the MIT License (http://opensource.org/licenses/MIT)
 
-library(ggplot2)   # For plotting
-library(patchwork) # For combining plots
+library(ggplot2)   # For plotting in 2D
+library(patchwork) # For combining 2D plots
+library(rgl)       # For plotting in 3D
 
 # Function for plotting a series of related 2D examples
 plot_examples_2d <- function(..., pmargin = 0.1) {
@@ -31,6 +32,42 @@ plot_examples_2d <- function(..., pmargin = 0.1) {
         coord_fixed(xlim = c(xmin, xmax), ylim = c(ymin, ymax))
     })
   wrap_plots(plts)
+}
+
+# Function for plotting a series of related 3D examples
+plot_examples_3d <- function(..., pmargin = 0.1) {
+  ets <- list(...)
+  xmax <- max(sapply(ets, function(et) max(et$e$points[, 1])))
+  xmin <- min(sapply(ets, function(et) min(et$e$points[, 1])))
+  ymax <- max(sapply(ets, function(et) max(et$e$points[, 2])))
+  ymin <- min(sapply(ets, function(et) min(et$e$points[, 2])))
+  zmax <- max(sapply(ets, function(et) max(et$e$points[, 3])))
+  zmin <- min(sapply(ets, function(et) min(et$e$points[, 3])))
+  xd <- pmargin * abs(xmax - xmin)
+  yd <- pmargin * abs(ymax - ymin)
+  zd <- pmargin * abs(zmax - zmin)
+  xmax <- xmax + xd
+  xmin <- xmin - xd
+  ymax <- ymax + yd
+  ymin <- ymin - yd
+  zmax <- zmax + zd
+  zmin <- zmin - zd
+
+  mfrow3d(1, 3, sharedMouse = T)
+
+  plts <- lapply(
+    ets,
+    function(et) {
+      e <- et$e
+      t <- et$t
+      plot3d(e$points, type = "s", size = 1.5,
+             col = factor(e$point_clusters), aspect = T,
+             xlab = "x", ylab = "y", zlab = "z", main = t,
+             xlim = c(xmin, xmax), ylim = c(ymin, ymax), zlim = c(zmin, zmax))
+    }
+  )
+
+  highlevel(integer()) # To trigger display as rglwidget
 }
 
 # Function for plotting the 1D clusters, showing density
