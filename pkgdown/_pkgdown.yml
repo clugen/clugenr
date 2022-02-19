@@ -2,6 +2,3 @@ url: ~
 template:
   bootstrap: 5
   bootswatch: sandstone
-
-figures:
-  fig.width: 9.5
