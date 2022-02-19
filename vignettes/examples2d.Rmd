@@ -10,7 +10,10 @@ vignette: >
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>"
+  comment = "#>",
+  out.width = "100%",
+  fig.asp = 0.5,
+  dpi = 200
 )
 ```
 
@@ -44,7 +47,7 @@ plot_examples <- function(...) {
     function(et) {
       e <- et$e
       t <- et$t
-      ggplot(data.frame(e$points), aes(x = X1, y = X2)) +
+      ggplot(NULL, aes(x = e$points[, 1], y = e$points[, 2])) +
       geom_point(shape = 21, colour = "black", stroke = 0.1,
                  aes(fill = factor(e$point_clusters))) +
       xlab(NULL) + ylab(NULL) + ggtitle(t) +
