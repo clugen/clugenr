@@ -189,3 +189,68 @@ plot_examples_3d(list(e = e55, t = "e55: default"),
                  list(e = e56, t = "e56: cluster_offset = [20, -20, 20]"),
                  list(e = e57, t = "e57: custom clucenters function"))
 ```
+
+## Lateral dispersion and placement of point projections on the line
+
+```{r}
+seed <- 456
+```
+
+### Normal projection placement (default): `proj_dist_fn = "norm"`
+
+```{r}
+set.seed(seed)
+e58 <- clugen(3, 4, 1000, c(1, 0, 0), pi / 2, c(20, 20, 20), 13, 2, 0.0)
+set.seed(seed)
+e59 <- clugen(3, 4, 1000, c(1, 0, 0), pi / 2, c(20, 20, 20), 13, 2, 1.0)
+set.seed(seed)
+e60 <- clugen(3, 4, 1000, c(1, 0, 0), pi / 2, c(20, 20, 20), 13, 2, 3.0)
+```
+
+```{r}
+plot_examples_3d(list(e = e58, t = "e58: lateral_disp = 0"),
+                 list(e = e59, t = "e59: lateral_disp = 1"),
+                 list(e = e60, t = "e60: lateral_disp = 3"))
+```
+
+### Uniform projection placement: `proj_dist_fn = "unif"`
+
+```{r}
+set.seed(seed)
+e61 <- clugen(3, 4, 1000, c(1, 0, 0), pi / 2, c(20, 20, 20), 13, 2, 0.0,
+              proj_dist_fn = "unif")
+set.seed(seed)
+e62 <- clugen(3, 4, 1000, c(1, 0, 0), pi / 2, c(20, 20, 20), 13, 2, 1.0,
+              proj_dist_fn = "unif")
+set.seed(seed)
+e63 <- clugen(3, 4, 1000, c(1, 0, 0), pi / 2, c(20, 20, 20), 13, 2, 3.0,
+              proj_dist_fn = "unif")
+```
+
+```{r}
+plot_examples_3d(list(e = e61, t = "e61: lateral_disp = 0"),
+                 list(e = e62, t = "e62: lateral_disp = 1"),
+                 list(e = e63, t = "e63: lateral_disp = 3"))
+```
+
+### Custom projection placement using the Beta distribution
+
+```{r}
+# Custom proj_dist_fn: point projections placed using the Beta distribution
+proj_beta <- function(len, n) len * rbeta(n, 0.1, 0.1) - len / 2
+```
+
+```{r}
+set.seed(seed)
+e64 <- clugen(3, 4, 1000, c(1, 0, 0), pi / 2, c(20, 20, 20), 13, 2, 0.0, proj_dist_fn = proj_beta)
+set.seed(seed)
+e65 <- clugen(3, 4, 1000, c(1, 0, 0), pi / 2, c(20, 20, 20), 13, 2, 1.0, proj_dist_fn = proj_beta)
+set.seed(seed)
+e66 <- clugen(3, 4, 1000, c(1, 0, 0), pi / 2, c(20, 20, 20), 13, 2, 3.0, proj_dist_fn = proj_beta)
+```
+
+```{r}
+plot_examples_3d(list(e = e64, t = "e64: lateral_disp = 0"),
+                 list(e = e65, t = "e65: lateral_disp = 1"),
+                 list(e = e66, t = "e66: lateral_disp = 3"))
+```
