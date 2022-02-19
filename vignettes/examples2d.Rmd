@@ -29,8 +29,7 @@ library(patchwork) # For combining plots
 RNGversion("3.6.0") 
 
 # Function for plotting a series of related examples
-plot_examples <- function(...) {
-  pmargin <- 0.1
+plot_examples_2d <- function(..., pmargin = 0.1) {
   ets <- list(...)
   xmax <- max(sapply(ets, function(et) max(et$e$points[, 1])))
   xmin <- min(sapply(ets, function(et) min(et$e$points[, 1])))
@@ -75,7 +74,7 @@ e02 <- clugen(2, 4, 200, c(1, 1), 0, c(10, 10), 10, 1.5, 0.5)
 set.seed(seed)
 e03 <- clugen(2, 4, 200, c(0, 1), 0, c(10, 10), 10, 1.5, 0.5)
 
-plot_examples(list(e = e01, t = "e01: direction = [1, 0]"),
+plot_examples_2d(list(e = e01, t = "e01: direction = [1, 0]"),
               list(e = e02, t = "e02: direction = [1, 1]"),
               list(e = e03, t = "e03: direction = [0, 1]"))
 ```
@@ -98,7 +97,7 @@ set.seed(seed)
 e06 <- clugen(2, 6, 500, c(1, 0), 0, c(10, 10), 10, 1.5, 0.5,
               angle_deltas_fn = angdel_90_fn)
 
-plot_examples(list(e = e04, t = "e04: angle_disp = 0"),
+plot_examples_2d(list(e = e04, t = "e04: angle_disp = 0"),
               list(e = e05, t = "e05: angle_disp = π/8"),
               list(e = e06, t = "e06: custom angle_deltas function"))
 ```
@@ -122,7 +121,7 @@ set.seed(seed)
 e09 <- clugen(2, 5, 800, c(1, 0), pi / 10, c(10, 10), 30, 0, 0.5,
               point_dist_fn = "n")
 
-plot_examples(list(e = e07, t = "e07: llength = 0"),
+plot_examples_2d(list(e = e07, t = "e07: llength = 0"),
               list(e = e08, t = "e08: llength = 10"),
               list(e = e09, t = "e09: llength = 30"))
 ```
@@ -147,7 +146,7 @@ set.seed(seed)
 e12 <- clugen(2, 5, 800, c(1, 0), pi / 10, c(10, 10), 10,  0.1, 0.5,
               llengths_fn = llen_grow_fn, point_dist_fn = "n")
 
-plot_examples(list(e = e10, t = "e10: llength_disp = 0.0"),
+plot_examples_2d(list(e = e10, t = "e10: llength_disp = 0.0"),
               list(e = e11, t = "e11: llength_disp = 5.0"),
               list(e = e12, t = "e12: custom llengths function"))
 ```
@@ -168,7 +167,7 @@ e14 <- clugen(2, 8, 1000, c(1, 1), pi / 4, c(30, 10), 15, 2, 4)
 set.seed(seed)
 e15 <- clugen(2, 8, 1000, c(1, 1), pi / 4, c(10, 30), 15, 2, 4)
 
-plot_examples(list(e = e13, t = "e13: cluster_sep = [10, 10]"),
+plot_examples_2d(list(e = e13, t = "e13: cluster_sep = [10, 10]"),
               list(e = e14, t = "e14: cluster_sep = [30, 10]"),
               list(e = e15, t = "e15: cluster_sep = [10, 30]"))
 ```
@@ -195,7 +194,7 @@ set.seed(seed)
 e18 <- clugen(2, 8, 1000, c(1, 1), pi / 4, c(10, 10), 10, 2, 2.5, 
               cluster_offset = c(-50, -50), clucenters_fn = centers_diag)
 
-plot_examples(list(e = e16, t = "e16: default"),
+plot_examples_2d(list(e = e16, t = "e16: default"),
               list(e = e17, t = "e17: cluster_offset = [20, -20]"),
               list(e = e18, t = "e18: custom clucenters function"))
 ```
@@ -216,7 +215,7 @@ e20 <- clugen(2, 4, 1000, c(1, 0), pi / 2, c(20, 20), 13, 2, 1.0)
 set.seed(seed)
 e21 <- clugen(2, 4, 1000, c(1, 0), pi / 2, c(20, 20), 13, 2, 3.0)
 
-plot_examples(list(e = e19, t = "e19: lateral_disp = 0"),
+plot_examples_2d(list(e = e19, t = "e19: lateral_disp = 0"),
               list(e = e20, t = "e20: lateral_disp = 1"),
               list(e = e21, t = "e21: lateral_disp = 3"))
 ```
@@ -234,7 +233,7 @@ set.seed(seed)
 e24 <- clugen(2, 4, 1000, c(1, 0), pi / 2, c(20, 20), 13, 2, 3.0,
               proj_dist_fn = "unif")
 
-plot_examples(list(e = e22, t = "e22: lateral_disp = 0"),
+plot_examples_2d(list(e = e22, t = "e22: lateral_disp = 0"),
               list(e = e23, t = "e23: lateral_disp = 1"),
               list(e = e24, t = "e24: lateral_disp = 3"))
 ```
@@ -257,7 +256,7 @@ set.seed(seed)
 e27 <- clugen(2, 4, 1000, c(1, 0), pi / 2, c(20, 20), 13, 2, 3.0,
               proj_dist_fn = proj_beta)
 
-plot_examples(list(e = e25, t = "e25: lateral_disp = 0"),
+plot_examples_2d(list(e = e25, t = "e25: lateral_disp = 0"),
               list(e = e26, t = "e26: lateral_disp = 1"),
               list(e = e27, t = "e27: lateral_disp = 3"))
 ```
@@ -283,7 +282,7 @@ set.seed(seed)
 e30 <- clugen(2, 5, 1500, c(1, 0), pi / 4, c(20, 20), 14, 2, 2.0,
               proj_dist_fn = proj_beta)
 
-plot_examples(list(e = e28, t = "e28: proj_dist_fn = 'norm' (default)"),
+plot_examples_2d(list(e = e28, t = "e28: proj_dist_fn = 'norm' (default)"),
               list(e = e29, t = "e29: proj_dist_fn = 'unif'"),
               list(e = e30, t = "e30: custom proj_dist_fn (Beta dist.)"))
 ```
@@ -301,7 +300,7 @@ set.seed(seed)
 e33 <- clugen(2, 5, 1500, c(1, 0), pi / 4, c(20, 20), 14, 2, 2.0,
               point_dist_fn = "n", proj_dist_fn = proj_beta)
 
-plot_examples(list(e = e31, t = "e31: proj_dist_fn = 'norm' (default)"),
+plot_examples_2d(list(e = e31, t = "e31: proj_dist_fn = 'norm' (default)"),
               list(e = e32, t = "e32: proj_dist_fn = 'unif'"),
               list(e = e33, t = "e33: custom proj_dist_fn (Beta dist.)"))
 ```
@@ -327,7 +326,7 @@ set.seed(seed)
 e36 <- clugen(2, 5, 1500, c(1, 0), pi / 4, c(20, 20), 14, 2, 2.0,
               point_dist_fn = clupoints_n_1_exp, proj_dist_fn = proj_beta)
 
-plot_examples(list(e = e34, t = "e34: proj_dist_fn = 'norm' (default)"),
+plot_examples_2d(list(e = e34, t = "e34: proj_dist_fn = 'norm' (default)"),
               list(e = e35, t = "e35: proj_dist_fn = 'unif'"),
               list(e = e36, t = "e36: custom proj_dist_fn (Beta dist.)"))
 ```
@@ -365,7 +364,7 @@ e39 <- clugen(2, 4, 1500, c(1, 1), pi, c(20, 20), 0, 0, 5,
              clucenters_fn = centers_fixed, clusizes_fn = clusizes_equal,
              point_dist_fn = "n")
 
-plot_examples(list(e = e37, t = "e37: normal dist. (default)"),
+plot_examples_2d(list(e = e37, t = "e37: normal dist. (default)"),
               list(e = e38, t = "e38: unif. dist. (custom)"),
               list(e = e39, t = "e39: equal size (custom)"))
 ```
