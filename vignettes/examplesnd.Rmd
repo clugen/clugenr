@@ -51,7 +51,7 @@ plot_examples_1d <- function(..., pmargin = 0.1, ymax = 0.6) {
       ggplot() +
         geom_density(mapping = aes(x = e$points,
                                    colour = factor(e$point_clusters),
-                                   fill = factor(e79$point_clusters)),
+                                   fill = factor(e$point_clusters)),
                      alpha = 0.3) +
         geom_point(mapping = aes(x = e$points,
                                  y = -0.02,
@@ -89,3 +89,67 @@ plot_examples_1d(list(e = e79, t = "e79: proj_dist_fn='norm'"),
                  ymax = 0.575)
 ```
 
+#### 5D example with default optional arguments
+
+```{r}
+# Function for plotting the nD clusters
+plot_examples_nd <- function(e, title, pstroke = 0.05, psize = 0.75) {
+
+  # All possible combinations
+  idxs <- expand.grid(1:nd, 1:nd)
+
+  plts <- apply(idxs,
+                1,
+                function(x) {
+                  if (x[1] == x[2]) {
+                    grid::textGrob(paste0("x", x[1]))
+                  }
+                  else {
+                    ggplot(NULL,
+                           aes(x = e$points[, x[1]],
+                               y = e$points[, x[2]],
+                               colour = factor(e$point_clusters))) +
+                      geom_point(shape = 21,
+                                 colour = "black",
+                                 stroke = pstroke,
+                                 size = psize,
+                                 aes(fill = factor(e$point_clusters))) +
+                      xlab(NULL) + ylab(NULL) +
+                      theme(legend.position = "none",
+                            axis.ticks.x = element_blank(),
+                            axis.text.x = element_blank(),
+                            axis.ticks.y = element_blank(),
+                            axis.text.y = element_blank()) +
+                      coord_fixed()
+                  }
+                },
+                simplify = F)
+  wrap_plots(plts) + plot_annotation(title = title)
+}
+
+nd <- 5
+seed <- 321
+```
+
+```{r, fig.asp = 1}
+set.seed(seed)
+e82 <- clugen(nd, 6, 1500, c(1, 1, 0.5, 0, 0), pi / 16, rep.int(30, nd), 30, 4, 3)
+
+plot_examples_nd(e82, "e82: 5D with optional parameters set to defaults")
+```
+
+#### 5D example with `proj_dist_fn = "unif"` and `point_dist_fn = "n"`
+
+```{r}
+nd <- 5
+seed <- 123
+```
+
+```{r, fig.asp = 1}
+set.seed(seed)
+e83 <- clugen(nd, 6, 1500, c(0.1, 0.3, 0.5, 0.3, 0.1), pi / 12, rep.int(30, nd),
+              35, 5, 3.5,
+              proj_dist_fn = "unif", point_dist_fn = "n")
+
+plot_examples_nd(e83, "e83: 5D with proj_dist_fn='unif' and point_dist_fn='n'")
+```
