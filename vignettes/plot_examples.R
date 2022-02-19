@@ -35,8 +35,10 @@ plot_examples_2d <- function(..., pmargin = 0.1) {
 }
 
 # Function for plotting a series of related 3D examples
-plot_examples_3d <- function(..., pmargin = 0.1) {
+plot_examples_3d <- function(..., pmargin = 0.1, ncols = 3) {
+
   ets <- list(...)
+
   xmax <- max(sapply(ets, function(et) max(et$e$points[, 1])))
   xmin <- min(sapply(ets, function(et) min(et$e$points[, 1])))
   ymax <- max(sapply(ets, function(et) max(et$e$points[, 2])))
@@ -53,7 +55,13 @@ plot_examples_3d <- function(..., pmargin = 0.1) {
   zmax <- zmax + zd
   zmin <- zmin - zd
 
-  mfrow3d(1, 3, sharedMouse = T)
+  if (length(ets) %% ncols != 0) {
+    stop("Number of examples must be a multiple of `ncols`")
+  }
+
+  nrows <- length(ets) %/% ncols
+
+  mfrow3d(nrows, ncols, sharedMouse = T)
 
   plts <- lapply(
     ets,
