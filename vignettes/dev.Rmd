@@ -14,4 +14,69 @@ knitr::opts_chunk$set(
 )
 ```
 
-TO DO
+```{r setup, include=FALSE}
+# Keep examples reproducible in newer R versions and set seed
+RNGversion("3.6.0") 
+set.seed(12345)
+```
+
+Clone the package, `cd` into to the package's folder and start R:
+
+```plaintext
+$ git clone https://github.com/clugen/clugenr.git
+$ cd clugenr
+```
+
+Developing `clugenr` requires [devtools], thus make sure it's installed before
+continuing. Open an R prompt at the `clugenr` folder and install `clugenr`'s
+development dependencies:
+
+```R
+devtools::install_dev_deps()
+```
+
+The package can be tested as follows:
+
+```R
+devtools::test()
+```
+
+The following instruction updates the documentation, then builds and checks the
+package locally:
+
+```R
+devtools::check()
+```
+
+Create or update the generated documentation in `man/`, file collation and
+`NAMESPACE`:
+
+```R
+devtools::document()
+```
+
+Build `glugenr`'s website (requires [pkgdown]):
+
+```R
+pkgdown::build_site()
+# Can also be done with devtools::build_site()
+# In either case add option `preview = F` to avoid opening the browser
+```
+
+Install the package locally with:
+
+```R
+devtools::install()
+```
+
+Check that it works:
+
+```{r, out.width = "100%", dpi = 200}
+library(clugenr)
+x <- clugen(2, 5, 800, c(-1, 1), 0.6, c(4, 6), 5, 0.4, 0.5)
+plot(x$points, xlab = "x", ylab = "y", asp = 1, pch = 19, col = factor(x$point_clusters))
+
+```
+
+[devtools]: https://devtools.r-lib.org/
+[pkgdown]: https://pkgdown.r-lib.org/

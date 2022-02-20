@@ -53,39 +53,6 @@ r <- clugen(3, 5, 1000, c(2,3,4), 0.5, c(15,13,14), 7, 1, 2, cluster_offset =  c
 plot3d(r$points[,1], r$points[,2], r$points[,3], pch=19, col=factor(r$point_clusters))
 ```
 
-
-## Development
-
-Test the package:
-
-```r
-devtools::test()
-```
-
-Check the package:
-
-```r
-devtools::check()
-```
-
-Build the internal docs:
-
-```r
-devtools::document()
-```
-
-Install locally (e.g. after clone):
-
-```r
-devtools::install()
-```
-
-Build the documentation website (requires [pkgdown]):
-
-```r
-pkgdown::build_site()
-```
-
 ## License
 
 [MIT License](LICENSE)
