@@ -20,6 +20,8 @@ RNGversion("3.6.0")
 set.seed(12345)
 ```
 
+## Setup `clugenr` development
+
 Clone the package, `cd` into to the package's folder and start R:
 
 ```plaintext
@@ -78,5 +80,16 @@ plot(x$points, col = x$point_clusters, xlab = "x", ylab = "y", asp = 1)
 
 ```
 
+## Code style
+
+To contribute to `clugenr`, follow the [tidyverse style guide]. Some highlights
+include, but are not limited to:
+
+* File encoding: UTF-8
+* Indentation: 2 spaces (no tabs)
+* Line size limit: 80 chars
+* Newlines: Unix style, i.e. LF or `\n`
+
 [devtools]: https://devtools.r-lib.org/
 [pkgdown]: https://pkgdown.r-lib.org/
+[tidyverse style guide]: https://style.tidyverse.org/index.html
