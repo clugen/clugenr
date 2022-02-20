@@ -2,3 +2,29 @@ url: ~
 template:
   bootstrap: 5
   bootswatch: sandstone
+footer:
+  structure:
+    left:
+    right: built_with
+navbar:
+  structure:
+    left:  [intro, theory, examples, api, dev, news]
+  components:
+    theory:
+     text: Theory
+     href: articles/theory.html
+    examples:
+     text: Examples
+     menu:
+     - text: Examples in 2D
+       href: articles/examples2d.html
+     - text: Examples in 3D
+       href: articles/examples3d.html
+     - text: Examples in other dimensions
+       href: articles/examplesnd.html
+    api:
+     text: API
+     href: reference/index.html
+    dev:
+     text: Dev
+     href: articles/dev.html

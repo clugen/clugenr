@@ -24,6 +24,8 @@ Suggests:
 RdMacros:
     mathjaxr
 License: MIT + file LICENSE
+URL: https://github.com/clugen/clugenr
+BugReports: https://github.com/clugen/clugenr/issues
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
