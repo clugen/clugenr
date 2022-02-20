@@ -28,7 +28,7 @@ plot_examples_2d <- function(..., pmargin = 0.1) {
                    aes(fill = factor(e$point_clusters))) +
         xlab(NULL) + ylab(NULL) + ggtitle(t) +
         theme(legend.position = "none",
-              plot.title = element_text(size = rel(0.9))) +
+              plot.title = element_text(size = rel(0.75))) +
         coord_fixed(xlim = c(xmin, xmax), ylim = c(ymin, ymax))
     })
   wrap_plots(plts)
@@ -106,7 +106,7 @@ plot_examples_1d <- function(..., pmargin = 0.1, ymax = 0.6) {
         ggtitle(t) + xlab(NULL) + ylab(NULL) +
         xlim(xmin, xmax) + ylim(-0.025, ymax) +
         theme(legend.position = "none",
-              plot.title = element_text(size = rel(0.9)),
+              plot.title = element_text(size = rel(0.75)),
               axis.ticks.y = element_blank(),
               axis.text.y = element_blank()
         )
@@ -146,5 +146,7 @@ plot_examples_nd <- function(e, title, pstroke = 0.05, psize = 0.75) {
                   }
                 },
                 simplify = F)
-  wrap_plots(plts) + plot_annotation(title = title)
+  wrap_plots(plts) + plot_annotation(
+    title = title,
+    theme = theme(plot.title = element_text(size = rel(0.8))))
 }
