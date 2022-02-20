@@ -22,7 +22,6 @@ example must be preceded with:
 
 ```{r setup, message=FALSE, warning=FALSE}
 library(clugenr)    # The clugenr library
-library(plotly)     # Required for plotting
 options(rgl.useNULL = TRUE)  # Create RGL plots in systems without displays (CI)
 library(rgl)
 setupKnitr(autoprint = TRUE) # Render RGL plots directly on generated page
