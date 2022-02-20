@@ -40,17 +40,17 @@ help("clugenr")
 
 ```R
 library(clugenr)
-r <- clugen(2, 5, 1000, c(2,3), 0.6, c(4,6), 3, 0.1, 0.5, cluster_offset =  c(1,3), point_dist_fn = "n")
-plot(r$points[,1], r$points[,2], pch=19, col=factor(r$point_clusters))
+x <- clugen(2, 5, 1000, c(1, -0.5), 0.5, c(4, 6), 6, 0.2, 0.5)
+plot(x$points, col = x$point_clusters, xlab = "x", ylab = "y", asp = 1)
 ```
 
 3D example:
 
 ```R
 library(clugenr)
-library(rgl) # For plots
-r <- clugen(3, 5, 1000, c(2,3,4), 0.5, c(15,13,14), 7, 1, 2, cluster_offset =  c(1,3,3), point_dist_fn = "n")
-plot3d(r$points[,1], r$points[,2], r$points[,3], pch=19, col=factor(r$point_clusters))
+library(rgl) # For 3D plots
+x <- clugen(3, 5, 1000, c(1, 0.5, -0.7), 0.5, c(15, 10, 20), 7, 1, 2)
+plot3d(x$points, col = x$point_clusters, xlab = "x", ylab = "y", zlab = "z", aspect = T)
 ```
 
 ## License

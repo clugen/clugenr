@@ -74,7 +74,7 @@ Check that it works:
 ```{r, out.width = "100%", dpi = 200}
 library(clugenr)
 x <- clugen(2, 5, 800, c(-1, 1), 0.6, c(4, 6), 5, 0.4, 0.5)
-plot(x$points, xlab = "x", ylab = "y", asp = 1, pch = 19, col = factor(x$point_clusters))
+plot(x$points, col = x$point_clusters, xlab = "x", ylab = "y", asp = 1)
 
 ```
 

@@ -73,7 +73,7 @@ for (i in seq.int(1, nrow(targs))) {
         expect_equal(length(r$cluster_lengths), nclu)
 
         # Check point cluster indexes
-        expect_equal(unique(r$point_clusters), 1:nclu)
+        expect_equal(unique(as.numeric(r$point_clusters)), 1:nclu)
 
         # Check total points
         expect_equal(sum(r$cluster_sizes), tpts)
@@ -200,9 +200,9 @@ for (i in seq.int(1, nrow(targs))) {
 
       # Check point cluster indexes
       if (!ae) {
-        expect_equal(unique(r$point_clusters), 1:nclu)
+        expect_equal(unique(as.numeric(r$point_clusters)), 1:nclu)
       } else {
-        expect_true(all(r$point_clusters <= nclu))
+        expect_true(all(as.numeric(r$point_clusters) <= nclu))
       }
 
       # Check total points

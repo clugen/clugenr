@@ -17,8 +17,8 @@ knitr::opts_chunk$set(
 )
 ```
 
-This vignette contains a number of examples on how to use `clugenr` in 3D. Each
-example must be preceded with:
+This vignette contains a number of examples on how to use `clugenr` in 3D.
+Examples require the following setup code:
 
 ```{r setup, message=FALSE, warning=FALSE}
 library(clugenr)    # The clugenr library
@@ -26,12 +26,17 @@ options(rgl.useNULL = TRUE)  # Create RGL plots in systems without displays (CI)
 library(rgl)
 setupKnitr(autoprint = TRUE) # Render RGL plots directly on generated page
 
-# Load functions for plotting examples
+# Load helper functions for plotting examples
 source("plot_examples.R", local = knitr::knit_global())
 
 # Keep examples reproducible in newer R versions 
 RNGversion("3.6.0") 
 ```
+
+The
+[`plot_examples.R`](https://github.com/clugen/clugenr/blob/master/vignettes/plot_examples.R)
+containing the helper functions for plotting these examples is available
+[here](https://github.com/clugen/clugenr/blob/master/vignettes/plot_examples.R).
 
 ## Manipulating the direction of cluster-supporting lines
 
