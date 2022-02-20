@@ -23,7 +23,13 @@ if (requireNamespace("lintr", quietly = TRUE)) {
 
     if (!is.null(find_package("."))) {
       expect_lint_free(linters = with_defaults(
-        cyclocomp_linter = cyclocomp_linter(complexity_limit = 36)))
+        # The clugen() function has a large cyclomatic complexity
+        # so let's increase this a bit
+        cyclocomp_linter = cyclocomp_linter(complexity_limit = 36),
+        # The official line length for this package is 80, but lets
+        # give it some margin; also, Windows complains about the 80
+        # limit due to not recognizing some UTF-8 characters.
+        line_length_linter = line_length_linter(88)))
     }
   })
 }
