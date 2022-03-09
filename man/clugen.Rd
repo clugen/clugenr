@@ -21,7 +21,8 @@ clugen(
   clusizes_fn = clusizes,
   clucenters_fn = clucenters,
   llengths_fn = llengths,
-  angle_deltas_fn = angle_deltas
+  angle_deltas_fn = angle_deltas,
+  seed = NA
 )
 }
 \arguments{
@@ -111,6 +112,9 @@ uses the wrapped normal distribution (\mjeqn{\mu=0}{μ=0},
 \mjeqn{\left[-\pi/2,\pi/2\right]}{[-π/2,π/2]}. This parameter allows the
 user to specify a custom function for this purpose, which must follow
 \link{angle_deltas} signature.}
+
+\item{seed}{An integer used to initialize the PRNG, allowing for reproducible
+results. If specified, \code{seed} is simply passed to \link{set.seed}.}
 }
 \value{
 A named list with the following elements:

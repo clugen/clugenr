@@ -86,6 +86,8 @@
 #' \mjeqn{\left\[-\pi/2,\pi/2\right\]}{\[-π/2,π/2\]}. This parameter allows the
 #' user to specify a custom function for this purpose, which must follow
 #' [angle_deltas] signature.
+#' @param seed An integer used to initialize the PRNG, allowing for reproducible
+#' results. If specified, `seed` is simply passed to [set.seed].
 #' @return A named list with the following elements:
 #' - `points`: A `num_points` x `num_dims` matrix with the generated points for
 #'   all clusters.
@@ -120,7 +122,7 @@ clugen <- function(num_dims, num_clusters, num_points, direction, angle_disp,
   cluster_sep, llength, llength_disp, lateral_disp,
   allow_empty = FALSE, cluster_offset = NA, proj_dist_fn = "norm",
   point_dist_fn = "n-1", clusizes_fn = clusizes, clucenters_fn = clucenters,
-  llengths_fn = llengths, angle_deltas_fn = angle_deltas) {
+  llengths_fn = llengths, angle_deltas_fn = angle_deltas, seed = NA) {
 
   # ############### #
   # Validate inputs #
@@ -214,6 +216,11 @@ clugen <- function(num_dims, num_clusters, num_points, direction, angle_disp,
   } else {
     stop("point_dist_fn has to be either \"n-1\", \"n\" or a user-defined ",
          "function")
+  }
+
+  # If seed was given, set it
+  if (!is.na(seed)) {
+    set.seed(seed)
   }
 
   # ############################ #
