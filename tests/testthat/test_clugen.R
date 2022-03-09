@@ -148,9 +148,6 @@ for (i in seq.int(1, nrow(targs))) {
   llen_fn <- targs[i, "llen_fn"][[1]]
   lang_fn <- targs[i, "lang_fn"][[1]]
 
-  # Set seed
-  set.seed(seed)
-
   # Create combination of seed-depending parameters (line directions + clu seps)
   tsargs <- expand.grid(direc = asplit(get_vecs(ndirs, nd), 1),
                         clusep = asplit(get_clu_seps(nd), 1))
@@ -185,7 +182,8 @@ for (i in seq.int(1, nrow(targs))) {
                                  clusizes_fn = csz_fn,
                                  clucenters_fn = cctr_fn,
                                  llengths_fn = llen_fn,
-                                 angle_deltas_fn = lang_fn),
+                                 angle_deltas_fn = lang_fn,
+                                 seed = seed),
                      regexp = NA)
 
       # Check dimensions of result variables
@@ -228,9 +226,6 @@ for (i in seq.int(1, nrow(targs))) {
 
 for (seed in seeds) {
 
-  # Set seed
-  set.seed(seed)
-
   # Valid parameters
   nd <- 3
   nclu <- 5
@@ -262,7 +257,8 @@ for (seed in seeds) {
                                clusizes_fn = csizes_fn,
                                clucenters_fn = ccenters_fn,
                                llengths_fn = llengths_fn,
-                               angle_deltas_fn = langles_fn),
+                               angle_deltas_fn = langles_fn,
+                               seed = seed),
                    regexp = NA)
 
     # Test passes with zero points since allow_empty is set to true
@@ -275,7 +271,8 @@ for (seed in seeds) {
                                clusizes_fn = csizes_fn,
                                clucenters_fn = ccenters_fn,
                                llengths_fn = llengths_fn,
-                               angle_deltas_fn = langles_fn),
+                               angle_deltas_fn = langles_fn,
+                               seed = seed),
                    regexp = NA)
 
     # Invalid number of dimensions
@@ -288,7 +285,8 @@ for (seed in seeds) {
                              clusizes_fn = csizes_fn,
                              clucenters_fn = ccenters_fn,
                              llengths_fn = llengths_fn,
-                             angle_deltas_fn = langles_fn),
+                             angle_deltas_fn = langles_fn,
+                             seed = seed),
                  fixed = TRUE,
                  "Number of dimensions, `num_dims`, must be > 0")
 
@@ -302,7 +300,8 @@ for (seed in seeds) {
                              clusizes_fn = csizes_fn,
                              clucenters_fn = ccenters_fn,
                              llengths_fn = llengths_fn,
-                             angle_deltas_fn = langles_fn),
+                             angle_deltas_fn = langles_fn,
+                             seed = seed),
                  fixed = TRUE,
                  "Number of clusters, `num_clust`, must be > 0")
 
@@ -316,7 +315,8 @@ for (seed in seeds) {
                              clusizes_fn = csizes_fn,
                              clucenters_fn = ccenters_fn,
                              llengths_fn = llengths_fn,
-                             angle_deltas_fn = langles_fn),
+                             angle_deltas_fn = langles_fn,
+                             seed = seed),
                  fixed = TRUE,
                  "`direction` must have magnitude > 0")
 
@@ -331,7 +331,8 @@ for (seed in seeds) {
                              clusizes_fn = csizes_fn,
                              clucenters_fn = ccenters_fn,
                              llengths_fn = llengths_fn,
-                             angle_deltas_fn = langles_fn),
+                             angle_deltas_fn = langles_fn,
+                             seed = seed),
                  fixed = TRUE,
                  paste0("Length of `direction` must be equal to `num_dims` (",
                         length(bad_dir), " != ", nd, ")"))
@@ -347,7 +348,8 @@ for (seed in seeds) {
                              clusizes_fn = csizes_fn,
                              clucenters_fn = ccenters_fn,
                              llengths_fn = llengths_fn,
-                             angle_deltas_fn = langles_fn),
+                             angle_deltas_fn = langles_fn,
+                             seed = seed),
                  fixed = TRUE,
                  paste0("Length of `cluster_offset` must be equal to ",
                         "`num_dims` (", length(bad_cluoff), " != ", nd, ")"))
@@ -362,7 +364,8 @@ for (seed in seeds) {
                              clusizes_fn = csizes_fn,
                              clucenters_fn = ccenters_fn,
                              llengths_fn = llengths_fn,
-                             angle_deltas_fn = langles_fn),
+                             angle_deltas_fn = langles_fn,
+                             seed = seed),
                  fixed = TRUE,
                  paste0("`proj_dist_fn` has to be either \"norm\", \"unif\" or",
                         " user-defined function"))
@@ -377,7 +380,8 @@ for (seed in seeds) {
                              clusizes_fn = csizes_fn,
                              clucenters_fn = ccenters_fn,
                              llengths_fn = llengths_fn,
-                             angle_deltas_fn = langles_fn),
+                             angle_deltas_fn = langles_fn,
+                             seed = seed),
                  "argument")
 
     # Unknown point_dist_fn given as string
@@ -390,7 +394,8 @@ for (seed in seeds) {
                              clusizes_fn = csizes_fn,
                              clucenters_fn = ccenters_fn,
                              llengths_fn = llengths_fn,
-                             angle_deltas_fn = langles_fn),
+                             angle_deltas_fn = langles_fn,
+                             seed = seed),
                  fixed = TRUE,
                  paste0("point_dist_fn has to be either \"n-1\", \"n\" or ",
                         "a user-defined function"))
@@ -405,7 +410,8 @@ for (seed in seeds) {
                              clusizes_fn = csizes_fn,
                              clucenters_fn = ccenters_fn,
                              llengths_fn = llengths_fn,
-                             angle_deltas_fn = langles_fn),
+                             angle_deltas_fn = langles_fn,
+                             seed = seed),
                  "argument")
 
   })
