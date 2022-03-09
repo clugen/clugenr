@@ -45,12 +45,9 @@ seed <- 123
 ```
 
 ```{r}
-set.seed(seed)
-e01 <- clugen(2, 4, 200, c(1, 0), 0, c(10, 10), 10, 1.5, 0.5)
-set.seed(seed)
-e02 <- clugen(2, 4, 200, c(1, 1), 0, c(10, 10), 10, 1.5, 0.5)
-set.seed(seed)
-e03 <- clugen(2, 4, 200, c(0, 1), 0, c(10, 10), 10, 1.5, 0.5)
+e01 <- clugen(2, 4, 200, c(1, 0), 0, c(10, 10), 10, 1.5, 0.5, seed = seed)
+e02 <- clugen(2, 4, 200, c(1, 1), 0, c(10, 10), 10, 1.5, 0.5, seed = seed)
+e03 <- clugen(2, 4, 200, c(0, 1), 0, c(10, 10), 10, 1.5, 0.5, seed = seed)
 ```
 
 ```{r}
@@ -71,12 +68,9 @@ angdel_90_fn <- function(nclu, astd) sample(c(0, pi / 2), nclu, replace = T)
 ```
 
 ```{r}
-set.seed(seed)
-e04 <- clugen(2, 6, 500, c(1, 0), 0, c(10, 10), 10, 1.5, 0.5)
-set.seed(seed)
-e05 <- clugen(2, 6, 500, c(1, 0), pi / 8, c(10, 10), 10, 1.5, 0.5)
-set.seed(seed)
-e06 <- clugen(2, 6, 500, c(1, 0), 0, c(10, 10), 10, 1.5, 0.5,
+e04 <- clugen(2, 6, 500, c(1, 0), 0, c(10, 10), 10, 1.5, 0.5, seed = seed)
+e05 <- clugen(2, 6, 500, c(1, 0), pi / 8, c(10, 10), 10, 1.5, 0.5, seed = seed)
+e06 <- clugen(2, 6, 500, c(1, 0), 0, c(10, 10), 10, 1.5, 0.5, seed = seed,
               angle_deltas_fn = angdel_90_fn)
 ```
 
@@ -95,14 +89,11 @@ seed <- 321
 ```
 
 ```{r}
-set.seed(seed)
-e07 <- clugen(2, 5, 800, c(1, 0), pi / 10, c(10, 10), 0, 0, 0.5,
+e07 <- clugen(2, 5, 800, c(1, 0), pi / 10, c(10, 10), 0, 0, 0.5, seed = seed,
               point_dist_fn = "n")
-set.seed(seed)
-e08 <- clugen(2, 5, 800, c(1, 0), pi / 10, c(10, 10), 10, 0, 0.5,
+e08 <- clugen(2, 5, 800, c(1, 0), pi / 10, c(10, 10), 10, 0, 0.5, seed = seed,
               point_dist_fn = "n")
-set.seed(seed)
-e09 <- clugen(2, 5, 800, c(1, 0), pi / 10, c(10, 10), 30, 0, 0.5,
+e09 <- clugen(2, 5, 800, c(1, 0), pi / 10, c(10, 10), 30, 0, 0.5, seed = seed,
               point_dist_fn = "n")
 ```
 
@@ -124,15 +115,12 @@ llen_grow_fn <- function(nclu, llen, llenstd) llen * 0:(nclu - 1) + rnorm(nclu, 
 ```
 
 ```{r}
-set.seed(seed)
 e10 <- clugen(2, 5, 800, c(1, 0), pi / 10, c(10, 10), 15,  0.0, 0.5,
-              point_dist_fn = "n")
-set.seed(seed)
+              seed = seed, point_dist_fn = "n")
 e11 <- clugen(2, 5, 800, c(1, 0), pi / 10, c(10, 10), 15, 10.0, 0.5,
-              point_dist_fn = "n")
-set.seed(seed)
+              seed = seed, point_dist_fn = "n")
 e12 <- clugen(2, 5, 800, c(1, 0), pi / 10, c(10, 10), 10,  0.1, 0.5,
-              llengths_fn = llen_grow_fn, point_dist_fn = "n")
+              seed = seed, llengths_fn = llen_grow_fn, point_dist_fn = "n")
 ```
 
 ```{r}
@@ -150,12 +138,9 @@ seed <- 222
 ```
 
 ```{r}
-set.seed(seed)
-e13 <- clugen(2, 8, 1000, c(1, 1), pi / 4, c(10, 10), 15, 2, 4)
-set.seed(seed)
-e14 <- clugen(2, 8, 1000, c(1, 1), pi / 4, c(30, 10), 15, 2, 4)
-set.seed(seed)
-e15 <- clugen(2, 8, 1000, c(1, 1), pi / 4, c(10, 30), 15, 2, 4)
+e13 <- clugen(2, 8, 1000, c(1, 1), pi / 4, c(10, 10), 15, 2, 4, seed = seed)
+e14 <- clugen(2, 8, 1000, c(1, 1), pi / 4, c(30, 10), 15, 2, 4, seed = seed)
+e15 <- clugen(2, 8, 1000, c(1, 1), pi / 4, c(10, 30), 15, 2, 4, seed = seed)
 ```
 
 ```{r}
@@ -179,13 +164,10 @@ centers_diag <- function(nclu, csep, coff) {
 ```
 
 ```{r}
-set.seed(seed)
-e16 <- clugen(2, 8, 1000, c(1, 1), pi / 4, c(10, 10), 10, 2, 2.5)
-set.seed(seed)
-e17 <- clugen(2, 8, 1000, c(1, 1), pi / 4, c(10, 10), 10, 2, 2.5,
+e16 <- clugen(2, 8, 1000, c(1, 1), pi / 4, c(10, 10), 10, 2, 2.5, seed = seed)
+e17 <- clugen(2, 8, 1000, c(1, 1), pi / 4, c(10, 10), 10, 2, 2.5, seed = seed,
               cluster_offset = c(20, -20))
-set.seed(seed)
-e18 <- clugen(2, 8, 1000, c(1, 1), pi / 4, c(10, 10), 10, 2, 2.5, 
+e18 <- clugen(2, 8, 1000, c(1, 1), pi / 4, c(10, 10), 10, 2, 2.5, seed = seed, 
               cluster_offset = c(-50, -50), clucenters_fn = centers_diag)
 ```
 
@@ -204,12 +186,9 @@ seed <- 234
 ### Normal projection placement (default): `proj_dist_fn = "norm"`
 
 ```{r}
-set.seed(seed)
-e19 <- clugen(2, 4, 1000, c(1, 0), pi / 2, c(20, 20), 13, 2, 0.0)
-set.seed(seed)
-e20 <- clugen(2, 4, 1000, c(1, 0), pi / 2, c(20, 20), 13, 2, 1.0)
-set.seed(seed)
-e21 <- clugen(2, 4, 1000, c(1, 0), pi / 2, c(20, 20), 13, 2, 3.0)
+e19 <- clugen(2, 4, 1000, c(1, 0), pi / 2, c(20, 20), 13, 2, 0.0, seed = seed)
+e20 <- clugen(2, 4, 1000, c(1, 0), pi / 2, c(20, 20), 13, 2, 1.0, seed = seed)
+e21 <- clugen(2, 4, 1000, c(1, 0), pi / 2, c(20, 20), 13, 2, 3.0, seed = seed)
 ```
 
 ```{r}
@@ -221,14 +200,11 @@ plot_examples_2d(list(e = e19, t = "e19: lateral_disp = 0"),
 ### Uniform projection placement: `proj_dist_fn = "unif"`
 
 ```{r}
-set.seed(seed)
-e22 <- clugen(2, 4, 1000, c(1, 0), pi / 2, c(20, 20), 13, 2, 0.0,
+e22 <- clugen(2, 4, 1000, c(1, 0), pi / 2, c(20, 20), 13, 2, 0.0, seed = seed,
               proj_dist_fn = "unif")
-set.seed(seed)
-e23 <- clugen(2, 4, 1000, c(1, 0), pi / 2, c(20, 20), 13, 2, 1.0,
+e23 <- clugen(2, 4, 1000, c(1, 0), pi / 2, c(20, 20), 13, 2, 1.0, seed = seed,
               proj_dist_fn = "unif")
-set.seed(seed)
-e24 <- clugen(2, 4, 1000, c(1, 0), pi / 2, c(20, 20), 13, 2, 3.0,
+e24 <- clugen(2, 4, 1000, c(1, 0), pi / 2, c(20, 20), 13, 2, 3.0, seed = seed,
               proj_dist_fn = "unif")
 ```
 
@@ -246,14 +222,11 @@ proj_beta <- function(len, n) len * rbeta(n, 0.1, 0.1) - len / 2
 ```
 
 ```{r}
-set.seed(seed)
-e25 <- clugen(2, 4, 1000, c(1, 0), pi / 2, c(20, 20), 13, 2, 0.0,
+e25 <- clugen(2, 4, 1000, c(1, 0), pi / 2, c(20, 20), 13, 2, 0.0, seed = seed,
               proj_dist_fn = proj_beta)
-set.seed(seed)
-e26 <- clugen(2, 4, 1000, c(1, 0), pi / 2, c(20, 20), 13, 2, 1.0,
+e26 <- clugen(2, 4, 1000, c(1, 0), pi / 2, c(20, 20), 13, 2, 1.0, seed = seed,
               proj_dist_fn = proj_beta)
-set.seed(seed)
-e27 <- clugen(2, 4, 1000, c(1, 0), pi / 2, c(20, 20), 13, 2, 3.0,
+e27 <- clugen(2, 4, 1000, c(1, 0), pi / 2, c(20, 20), 13, 2, 3.0, seed = seed,
               proj_dist_fn = proj_beta)
 ```
 
@@ -277,13 +250,10 @@ proj_beta <- function(len, n) len * rbeta(n, 0.1, 0.1) - len / 2
 ### Points on hyperplane orthogonal to cluster-supporting line (default): `point_dist_fn = "n-1"`
 
 ```{r}
-set.seed(seed)
-e28 <- clugen(2, 5, 1500, c(1, 0), pi / 4, c(20, 20), 14, 2, 2.0)
-set.seed(seed)
-e29 <- clugen(2, 5, 1500, c(1, 0), pi / 4, c(20, 20), 14, 2, 2.0,
+e28 <- clugen(2, 5, 1500, c(1, 0), pi / 4, c(20, 20), 14, 2, 2.0, seed = seed)
+e29 <- clugen(2, 5, 1500, c(1, 0), pi / 4, c(20, 20), 14, 2, 2.0, seed = seed,
               proj_dist_fn = "unif")
-set.seed(seed)
-e30 <- clugen(2, 5, 1500, c(1, 0), pi / 4, c(20, 20), 14, 2, 2.0,
+e30 <- clugen(2, 5, 1500, c(1, 0), pi / 4, c(20, 20), 14, 2, 2.0, seed = seed,
               proj_dist_fn = proj_beta)
 ```
 
@@ -296,14 +266,11 @@ plot_examples_2d(list(e = e28, t = "e28: proj_dist_fn = 'norm' (default)"),
 ### Points around projection on cluster-supporting line: `point_dist_fn = "n"`
 
 ```{r}
-set.seed(seed)
-e31 <- clugen(2, 5, 1500, c(1, 0), pi / 4, c(20, 20), 14, 2, 2.0,
+e31 <- clugen(2, 5, 1500, c(1, 0), pi / 4, c(20, 20), 14, 2, 2.0, seed = seed,
               point_dist_fn = "n")
-set.seed(seed)
-e32 <- clugen(2, 5, 1500, c(1, 0), pi / 4, c(20, 20), 14, 2, 2.0,
+e32 <- clugen(2, 5, 1500, c(1, 0), pi / 4, c(20, 20), 14, 2, 2.0, seed = seed,
               point_dist_fn = "n", proj_dist_fn = "unif")
-set.seed(seed)
-e33 <- clugen(2, 5, 1500, c(1, 0), pi / 4, c(20, 20), 14, 2, 2.0,
+e33 <- clugen(2, 5, 1500, c(1, 0), pi / 4, c(20, 20), 14, 2, 2.0, seed = seed,
               point_dist_fn = "n", proj_dist_fn = proj_beta)
 ```
 
@@ -324,14 +291,11 @@ clupoints_n_1_exp <- function(projs, lat_std, len, clu_dir, clu_ctr) {
 ```
 
 ```{r}
-set.seed(seed)
-e34 <- clugen(2, 5, 1500, c(1, 0), pi / 4, c(20, 20), 14, 2, 2.0,
+e34 <- clugen(2, 5, 1500, c(1, 0), pi / 4, c(20, 20), 14, 2, 2.0, seed = seed,
               point_dist_fn = clupoints_n_1_exp)
-set.seed(seed)
-e35 <- clugen(2, 5, 1500, c(1, 0), pi / 4, c(20, 20), 14, 2, 2.0,
+e35 <- clugen(2, 5, 1500, c(1, 0), pi / 4, c(20, 20), 14, 2, 2.0, seed = seed,
               point_dist_fn = clupoints_n_1_exp, proj_dist_fn = "unif")
-set.seed(seed)
-e36 <- clugen(2, 5, 1500, c(1, 0), pi / 4, c(20, 20), 14, 2, 2.0,
+e36 <- clugen(2, 5, 1500, c(1, 0), pi / 4, c(20, 20), 14, 2, 2.0, seed = seed,
               point_dist_fn = clupoints_n_1_exp, proj_dist_fn = proj_beta)
 ```
 
@@ -364,15 +328,12 @@ clusizes_equal <- function(nclu, npts, ae) npts %/% nclu * rep.int(1, nclu)
 ```
 
 ```{r}
-set.seed(seed)
-e37 <- clugen(2, 4, 1500, c(1, 1), pi, c(20, 20), 0, 0, 5, 
+e37 <- clugen(2, 4, 1500, c(1, 1), pi, c(20, 20), 0, 0, 5, seed = seed, 
               clucenters_fn = centers_fixed, point_dist_fn = "n")
-set.seed(seed)
-e38 <- clugen(2, 4, 1500, c(1, 1), pi, c(20, 20), 0, 0, 5,
+e38 <- clugen(2, 4, 1500, c(1, 1), pi, c(20, 20), 0, 0, 5, seed = seed,
               clucenters_fn = centers_fixed, clusizes_fn = clusizes_unif,
               point_dist_fn = "n")
-set.seed(seed)
-e39 <- clugen(2, 4, 1500, c(1, 1), pi, c(20, 20), 0, 0, 5,
+e39 <- clugen(2, 4, 1500, c(1, 1), pi, c(20, 20), 0, 0, 5, seed = seed,
               clucenters_fn = centers_fixed, clusizes_fn = clusizes_equal,
               point_dist_fn = "n")
 ```
