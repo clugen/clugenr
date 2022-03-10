@@ -144,8 +144,7 @@ plot_examples_nd <- function(e, title, pstroke = 0.05, psize = 0.75) {
                             axis.text.y = element_blank()) +
                       coord_fixed()
                   }
-                },
-                simplify = F)
+                })
   wrap_plots(plts) + plot_annotation(
     title = title,
     theme = theme(plot.title = element_text(size = rel(0.8))))
