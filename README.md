@@ -41,7 +41,7 @@ help("clugenr")
 ```R
 library(clugenr)
 x <- clugen(2, 5, 1000, c(1, -0.5), 0.5, c(4, 6), 6, 0.2, 0.5)
-plot(x$points, col = x$point_clusters, xlab = "x", ylab = "y", asp = 1)
+plot(x$points, col = x$clusters, xlab = "x", ylab = "y", asp = 1)
 ```
 
 ![](man/figures/example2d.svg)
@@ -52,7 +52,7 @@ plot(x$points, col = x$point_clusters, xlab = "x", ylab = "y", asp = 1)
 library(clugenr)
 library(rgl) # For 3D plots
 x <- clugen(3, 5, 2000, c(1, 0.5, -0.7), 0.5, c(15, 10, 20), 15, 3, 10)
-plot3d(x$points, col = x$point_clusters, xlab = "x", ylab = "y", zlab = "z", aspect = T)
+plot3d(x$points, col = x$clusters, xlab = "x", ylab = "y", zlab = "z", aspect = T)
 ```
 
 ![](man/figures/example3d.svg)

@@ -64,26 +64,26 @@ for (i in seq.int(1, nrow(targs))) {
 
         # Check dimensions of result variables
         expect_equal(dim(r$points), c(tpts, nd))
-        expect_equal(length(r$point_clusters), tpts)
-        expect_equal(dim(r$point_projections), c(tpts, nd))
-        expect_equal(length(r$cluster_sizes), nclu)
-        expect_equal(dim(r$cluster_centers), c(nclu, nd))
-        expect_equal(dim(r$cluster_directions), c(nclu, nd))
-        expect_equal(length(r$cluster_angles), nclu)
-        expect_equal(length(r$cluster_lengths), nclu)
+        expect_equal(length(r$clusters), tpts)
+        expect_equal(dim(r$projections), c(tpts, nd))
+        expect_equal(length(r$sizes), nclu)
+        expect_equal(dim(r$centers), c(nclu, nd))
+        expect_equal(dim(r$directions), c(nclu, nd))
+        expect_equal(length(r$angles), nclu)
+        expect_equal(length(r$lengths), nclu)
 
         # Check point cluster indexes
-        expect_equal(unique(as.numeric(r$point_clusters)), 1:nclu)
+        expect_equal(unique(as.numeric(r$clusters)), 1:nclu)
 
         # Check total points
-        expect_equal(sum(r$cluster_sizes), tpts)
+        expect_equal(sum(r$sizes), tpts)
 
         # Check that cluster directions have the correct angles with the main
         # direction
         if (nd > 1) {
           for (i in 1:nclu) {
-            expect_equal(angle_btw(direc, r$cluster_directions[i, ]),
-                         abs(r$cluster_angles[i]))
+            expect_equal(angle_btw(direc, r$directions[i, ]),
+                         abs(r$angles[i]))
           }
         }
 
@@ -188,23 +188,23 @@ for (i in seq.int(1, nrow(targs))) {
 
       # Check dimensions of result variables
       expect_equal(dim(r$points), c(tpts, nd))
-      expect_equal(length(r$point_clusters), tpts)
-      expect_equal(dim(r$point_projections), c(tpts, nd))
-      expect_equal(length(r$cluster_sizes), nclu)
-      expect_equal(dim(r$cluster_centers), c(nclu, nd))
-      expect_equal(dim(r$cluster_directions), c(nclu, nd))
-      expect_equal(length(r$cluster_angles), nclu)
-      expect_equal(length(r$cluster_lengths), nclu)
+      expect_equal(length(r$clusters), tpts)
+      expect_equal(dim(r$projections), c(tpts, nd))
+      expect_equal(length(r$sizes), nclu)
+      expect_equal(dim(r$centers), c(nclu, nd))
+      expect_equal(dim(r$directions), c(nclu, nd))
+      expect_equal(length(r$angles), nclu)
+      expect_equal(length(r$lengths), nclu)
 
       # Check point cluster indexes
       if (!ae) {
-        expect_equal(unique(as.numeric(r$point_clusters)), 1:nclu)
+        expect_equal(unique(as.numeric(r$clusters)), 1:nclu)
       } else {
-        expect_true(all(as.numeric(r$point_clusters) <= nclu))
+        expect_true(all(as.numeric(r$clusters) <= nclu))
       }
 
       # Check total points
-      expect_equal(sum(r$cluster_sizes), tpts)
+      expect_equal(sum(r$sizes), tpts)
       # This might not be the case if the specified clusize_fn does not obey
       # the total number of points
 
@@ -212,8 +212,8 @@ for (i in seq.int(1, nrow(targs))) {
       # direction
       if (nd > 1) {
         for (i in 1:nclu) {
-          expect_equal(angle_btw(direc, r$cluster_directions[i, ]),
-                       abs(r$cluster_angles[i]))
+          expect_equal(angle_btw(direc, r$directions[i, ]),
+                       abs(r$angles[i]))
         }
       }
     })

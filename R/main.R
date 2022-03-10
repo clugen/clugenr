@@ -91,31 +91,30 @@
 #' @return A named list with the following elements:
 #' - `points`: A `num_points` x `num_dims` matrix with the generated points for
 #'   all clusters.
-#' - `point_clusters`: A `num_points` factor vector indicating which cluster
+#' - `clusters`: A `num_points` factor vector indicating which cluster
 #'    each point in `points` belongs to.
-#' - `point_projections`: A `num_points` x `num_dims` matrix with the point
+#' - `projections`: A `num_points` x `num_dims` matrix with the point
 #'   projections on the cluster-supporting lines.
-#' - `cluster_sizes`: A `num_clusters` x 1 vector with the number of points in
+#' - `sizes`: A `num_clusters` x 1 vector with the number of points in
 #'   each cluster.
-#' - `cluster_centers`: A `num_clusters` x `num_dims` matrix with the
+#' - `centers`: A `num_clusters` x `num_dims` matrix with the
 #'   coordinates of the cluster centers.
-#' - `cluster_directions`: A `num_clusters` x `num_dims` matrix with the
+#' - `directions`: A `num_clusters` x `num_dims` matrix with the
 #'   direction of each cluster-supporting line.
-#' - `cluster_angles`: A `num_clusters` x 1 vector with the angles between the
+#' - `angles`: A `num_clusters` x 1 vector with the angles between the
 #'   cluster-supporting lines and the main direction.
-#' - `cluster_lengths`: A `num_clusters` x 1 vector with the lengths of the
+#' - `lengths`: A `num_clusters` x 1 vector with the lengths of the
 #'   cluster-supporting lines.
 #'
 #' @export
 #' @examples
 #' # 2D example
 #' x <- clugen(2, 5, 1000, c(1, 3), 0.5, c(10, 10), 8, 1.5, 2)
-#' graphics::plot(x$points, col = x$point_clusters,
-#'                xlab = "x", ylab = "y", asp = 1)
+#' graphics::plot(x$points, col = x$clusters, xlab = "x", ylab = "y", asp = 1)
 #' \dontrun{
 #' # 3D examples, requires rgl library for plotting
 #' x <- clugen(3, 5, 1000, c(2, 3, 4), 0.5, c(15, 13, 14), 7, 1, 2)
-#' rgl::plot3d(x$points, col = x$point_clusters,
+#' rgl::plot3d(x$points, col = x$clusters,
 #'             xlab = "x", ylab = "y", zlab = "z", aspect = T)
 #' }
 clugen <- function(num_dims, num_clusters, num_points, direction, angle_disp,
@@ -309,11 +308,11 @@ clugen <- function(num_dims, num_clusters, num_points, direction, angle_disp,
 
   # Return result
   list(points = points,
-       point_clusters = as.factor(point_clusters),
-       point_projections = point_projections,
-       cluster_sizes = cluster_sizes,
-       cluster_centers = cluster_centers,
-       cluster_directions = cluster_directions,
-       cluster_angles = cluster_angles,
-       cluster_lengths = cluster_lengths)
+       clusters = as.factor(point_clusters),
+       projections = point_projections,
+       sizes = cluster_sizes,
+       centers = cluster_centers,
+       directions = cluster_directions,
+       angles = cluster_angles,
+       lengths = cluster_lengths)
 }

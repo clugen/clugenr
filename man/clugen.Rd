@@ -121,19 +121,19 @@ A named list with the following elements:
 \itemize{
 \item \code{points}: A \code{num_points} x \code{num_dims} matrix with the generated points for
 all clusters.
-\item \code{point_clusters}: A \code{num_points} factor vector indicating which cluster
+\item \code{clusters}: A \code{num_points} factor vector indicating which cluster
 each point in \code{points} belongs to.
-\item \code{point_projections}: A \code{num_points} x \code{num_dims} matrix with the point
+\item \code{projections}: A \code{num_points} x \code{num_dims} matrix with the point
 projections on the cluster-supporting lines.
-\item \code{cluster_sizes}: A \code{num_clusters} x 1 vector with the number of points in
+\item \code{sizes}: A \code{num_clusters} x 1 vector with the number of points in
 each cluster.
-\item \code{cluster_centers}: A \code{num_clusters} x \code{num_dims} matrix with the
+\item \code{centers}: A \code{num_clusters} x \code{num_dims} matrix with the
 coordinates of the cluster centers.
-\item \code{cluster_directions}: A \code{num_clusters} x \code{num_dims} matrix with the
+\item \code{directions}: A \code{num_clusters} x \code{num_dims} matrix with the
 direction of each cluster-supporting line.
-\item \code{cluster_angles}: A \code{num_clusters} x 1 vector with the angles between the
+\item \code{angles}: A \code{num_clusters} x 1 vector with the angles between the
 cluster-supporting lines and the main direction.
-\item \code{cluster_lengths}: A \code{num_clusters} x 1 vector with the lengths of the
+\item \code{lengths}: A \code{num_clusters} x 1 vector with the lengths of the
 cluster-supporting lines.
 }
 }
@@ -158,12 +158,11 @@ This function is stochastic. For reproducibility set a PRNG seed with
 \examples{
 # 2D example
 x <- clugen(2, 5, 1000, c(1, 3), 0.5, c(10, 10), 8, 1.5, 2)
-graphics::plot(x$points, col = x$point_clusters,
-               xlab = "x", ylab = "y", asp = 1)
+graphics::plot(x$points, col = x$clusters, xlab = "x", ylab = "y", asp = 1)
 \dontrun{
 # 3D examples, requires rgl library for plotting
 x <- clugen(3, 5, 1000, c(2, 3, 4), 0.5, c(15, 13, 14), 7, 1, 2)
-rgl::plot3d(x$points, col = x$point_clusters,
+rgl::plot3d(x$points, col = x$clusters,
             xlab = "x", ylab = "y", zlab = "z", aspect = T)
 }
 }

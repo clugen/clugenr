@@ -25,7 +25,7 @@ plot_examples_2d <- function(..., pmargin = 0.1) {
       t <- et$t
       ggplot(NULL, aes(x = e$points[, 1], y = e$points[, 2])) +
         geom_point(shape = 21, colour = "black", stroke = 0.1,
-                   aes(fill = e$point_clusters)) +
+                   aes(fill = e$clusters)) +
         xlab(NULL) + ylab(NULL) + ggtitle(t) +
         theme(legend.position = "none",
               plot.title = element_text(size = rel(0.75))) +
@@ -69,7 +69,7 @@ plot_examples_3d <- function(..., pmargin = 0.1, ncols = 3) {
       e <- et$e
       t <- et$t
       plot3d(e$points, type = "s", size = 1.5,
-             col = e$point_clusters, aspect = T,
+             col = e$clusters, aspect = T,
              xlab = "x", ylab = "y", zlab = "z", main = t,
              xlim = c(xmin, xmax), ylim = c(ymin, ymax), zlim = c(zmin, zmax))
     }
@@ -93,12 +93,12 @@ plot_examples_1d <- function(..., pmargin = 0.1, ymax = 0.6) {
       t <- et$t
       ggplot() +
         geom_density(mapping = aes(x = e$points,
-                                   colour = e$point_clusters,
-                                   fill = e$point_clusters),
+                                   colour = e$clusters,
+                                   fill = e$clusters),
                      alpha = 0.3) +
         geom_point(mapping = aes(x = e$points,
                                  y = -0.02,
-                                 fill = e$point_clusters),
+                                 fill = e$clusters),
                    shape = 21,
                    colour = "black",
                    stroke = 0.1,
@@ -133,12 +133,12 @@ plot_examples_nd <- function(e, title, pstroke = 0.05, psize = 0.75) {
                     ggplot(NULL,
                            aes(x = e$points[, x[1]],
                                y = e$points[, x[2]],
-                               colour = e$point_clusters)) +
+                               colour = e$clusters)) +
                       geom_point(shape = 21,
                                  colour = "black",
                                  stroke = pstroke,
                                  size = psize,
-                                 aes(fill = e$point_clusters)) +
+                                 aes(fill = e$clusters)) +
                       xlab(NULL) + ylab(NULL) +
                       theme(legend.position = "none",
                             axis.ticks.x = element_blank(),
