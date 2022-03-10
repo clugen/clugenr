@@ -57,7 +57,8 @@ Create or update the generated documentation in `man/`, file collation and
 devtools::document()
 ```
 
-Build `glugenr`'s website (requires [pkgdown]):
+Build `clugenr`'s website (requires [pkgdown], [ggplot2], [patchwork] and
+[rgl]):
 
 ```R
 pkgdown::build_site()
@@ -92,4 +93,7 @@ include, but are not limited to:
 
 [devtools]: https://devtools.r-lib.org/
 [pkgdown]: https://pkgdown.r-lib.org/
+[ggplot2]: https://ggplot2.tidyverse.org/
+[patchwork]: https://patchwork.data-imaginist.com/index.html
+[rgl]: https://dmurdoch.github.io/rgl/
 [tidyverse style guide]: https://style.tidyverse.org/index.html
