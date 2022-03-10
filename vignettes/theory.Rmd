@@ -46,7 +46,7 @@ Figure 1 provides a stylized overview of the algorithm's steps.
 
 ![**Figure 1** - Stylized overview of the *clugen* algorithm. Background tiles
 are 10 units wide and tall, when
-applicable.](https://raw.githubusercontent.com/clugen/.github/main/images/algorithm.svg)
+applicable.](https://raw.githubusercontent.com/clugen/.github/main/images/algorithm.png)
 
 The example in Figure 1 was generated with the following parameters, the exact
 meaning of each will be discussed shortly:
@@ -166,7 +166,7 @@ this is not a requirement of the *clugen* algorithm, i.e., user-defined  $c_s()$
 implementations can consider $p$ a hint rather than an obligation.
 
 ![**Figure 2** - Possible cluster sizes with various definitions of $c_s()$ for
-$c=4$ and $p=5000$.](https://raw.githubusercontent.com/clugen/.github/main/images/clusizes.svg)
+$c=4$ and $p=5000$.](https://raw.githubusercontent.com/clugen/.github/main/images/clusizes.png)
 
 #### 3. Determine cluster centers
 
@@ -201,7 +201,7 @@ distribution (the default, implemented by the `clucenters()` function, Figure
 ![**Figure 3** - The output of *clugen* for two different implementations of the
 $c_c()$ function for finding cluster centers: a) the default, using the uniform
 distribution; b) hand-picked centers. All parameters are the same as in Figure 1,
-except for $p$, which is set to 5000.](https://raw.githubusercontent.com/clugen/.github/main/images/clucenters.svg)
+except for $p$, which is set to 5000.](https://raw.githubusercontent.com/clugen/.github/main/images/clucenters.png)
 
 #### 4. Determine lengths of cluster-supporting lines
 
@@ -236,7 +236,7 @@ with $\lambda=l$; c) using the uniform distribution in the interval
 $\left\lbrack 0, 2l\right\rbrack$; and, d) hand-picked lengths, more specifically
 $\mathbf{\ell}=\begin{bmatrix}2 & 8 & 16 & 32\end{bmatrix}^T$. Cluster centers,
 as well as parameters $l$ and $l_\sigma$, are the same as for the example
-shown in Figure 1.](https://raw.githubusercontent.com/clugen/.github/main/images/llengths.svg)
+shown in Figure 1.](https://raw.githubusercontent.com/clugen/.github/main/images/llengths.png)
 
 #### 5. Determine angles between $\mathbf{d}$ and cluster-supporting lines
 
@@ -275,7 +275,7 @@ were obtained using the wrapped normal distribution; and, d) hand-picked angle
 differences, more specifically
 $\mathbf{\Theta_\Delta}=\begin{bmatrix}0 & \frac{\pi}{2} & 0 & \frac{\pi}{2}\end{bmatrix}^T$.
 Cluster centers, as well as the angle dispersion $\theta_\sigma$, are the same
-as for the example shown in Figure 1.](https://raw.githubusercontent.com/clugen/.github/main/images/angle_deltas.svg)
+as for the example shown in Figure 1.](https://raw.githubusercontent.com/clugen/.github/main/images/angle_deltas.png)
 
 #### 6. For each cluster $i$:
 
@@ -356,7 +356,7 @@ line center distances are obtained from a custom user function implementing the
 Laplace distribution; and, d) in which a custom user function returns center
 distances drawn from the Rayleigh distribution. All parameters are set as in Figure
 1, except for $p_\text{proj}()$ in the case of Figures 6b-6d, and $p$, which
-is set to 5000.](https://raw.githubusercontent.com/clugen/.github/main/images/proj_dist_fn.svg)
+is set to 5000.](https://raw.githubusercontent.com/clugen/.github/main/images/proj_dist_fn.png)
 
 ##### 6.3. Determine coordinates of point projections on the cluster-supporting line
 
@@ -414,7 +414,7 @@ Figure 7 highlights the differences between these two approaches in 2D, where a
 hyperplane is simply a line.
 
 ![**Figure 7** - Example of how the final cluster points are obtained in 2D when
-using the built-in implementations for $p_\text{final}()$.](https://raw.githubusercontent.com/clugen/.github/main/images/point_dist_ex.svg)
+using the built-in implementations for $p_\text{final}()$.](https://raw.githubusercontent.com/clugen/.github/main/images/point_dist_ex.png)
 
 In general, points can be placed using a `"n-1"` or `"n"` strategy using any
 distribution. Figure 8 displays several examples for various implementations of
@@ -431,4 +431,4 @@ Figure 1, except for $p$, which is set to 5000.
 
 ![**Figure 8** - Examples of various implementations of $p_\text{final}()$.
 Figures a and b shown the effect of the built-in implementations, while Figures
-c-f display results obtained using custom user functions.](https://raw.githubusercontent.com/clugen/.github/main/images/point_dist_fn.svg)
+c-f display results obtained using custom user functions.](https://raw.githubusercontent.com/clugen/.github/main/images/point_dist_fn.png)
