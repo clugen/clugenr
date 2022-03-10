@@ -117,6 +117,9 @@ plot_examples_1d <- function(..., pmargin = 0.1, ymax = 0.6) {
 # Function for plotting the nD clusters
 plot_examples_nd <- function(e, title, pstroke = 0.05, psize = 0.75) {
 
+  # How many dimensions?
+  nd <- ncol(e$points)
+
   # All possible combinations
   idxs <- expand.grid(1:nd, 1:nd)
 
