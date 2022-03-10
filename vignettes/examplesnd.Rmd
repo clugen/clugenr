@@ -5,6 +5,7 @@ vignette: >
   %\VignetteIndexEntry{Examples in other dimensions}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
+  %\VignetteDepends{ggplot2,patchwork}
 ---
 
 ```{r, include = FALSE}
