@@ -91,7 +91,7 @@ clupoints_n_1_template <- function(projs, lat_disp, clu_dir, dist_fn) {
   num_dims <- length(clu_dir)
 
   # Number of points in this cluster
-  clu_num_points <- dim(projs)[1]
+  clu_num_points <- nrow(projs)
 
   # Get distances from points to their projections on the line
   points_dist <- dist_fn(clu_num_points, lat_disp)

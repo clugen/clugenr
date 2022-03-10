@@ -173,7 +173,7 @@ clupoints_n <- function(projs, lat_disp, line_len, clu_dir, clu_ctr) {
   num_dims <- length(clu_dir)
 
   # Number of points in this cluster
-  clu_num_points <- dim(projs)[1]
+  clu_num_points <- nrow(projs)
 
   # Get random displacement vectors for each point projection
   displ <- matrix(stats::rnorm(clu_num_points * num_dims, sd = lat_disp),
