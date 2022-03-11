@@ -5,10 +5,19 @@ library(ggplot2)   # For plotting in 2D
 library(patchwork) # For combining 2D plots
 
 # Function for plotting the nD clusters
-plot_examples_nd <- function(e, title, pstroke = 0.05, psize = 0.75) {
+plot_examples_nd <- function(e, title, pstroke = 0.05, psize = 0.75,
+                             pmargin = 0.1) {
 
   # How many dimensions?
   nd <- ncol(e$points)
+
+  xmaxs <- apply(e$points, 2, max)
+  xmins <- apply(e$points, 2, min)
+  xcenters <- (xmaxs + xmins) / 2
+  sidespan <- (1 + pmargin) * max(abs(xmaxs - xmins)) / 2
+
+  xmaxs <- xcenters + sidespan
+  xmins <- xcenters - sidespan
 
   # All possible combinations
   idxs <- expand.grid(1:nd, 1:nd)
@@ -35,9 +44,11 @@ plot_examples_nd <- function(e, title, pstroke = 0.05, psize = 0.75) {
                             axis.text.x = element_blank(),
                             axis.ticks.y = element_blank(),
                             axis.text.y = element_blank()) +
-                      coord_fixed()
+                      coord_fixed(xlim = c(xmins[x[1]], xmaxs[x[1]]),
+                                  ylim = c(xmins[x[2]], xmaxs[x[2]]))
                   }
                 })
+
   wrap_plots(plts) + plot_annotation(
     title = title,
     theme = theme(plot.title = element_text(size = rel(0.8))))
