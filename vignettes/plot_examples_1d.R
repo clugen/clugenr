@@ -6,12 +6,20 @@ library(patchwork) # For combining 2D plots
 
 # Function for plotting the 1D clusters, showing density
 plot_examples_1d <- function(..., pmargin = 0.1, ymax = 0.6) {
+
+  # Place examples in a list
   ets <- list(...)
+
+  # Get maximum and minimum points in each dimension for all examples
   xmax <- max(sapply(ets, function(et) max(et$e$points)))
   xmin <- min(sapply(ets, function(et) min(et$e$points)))
+
+  # Determine plot margins beyond maximum and minimum points
   xd <- pmargin * abs(xmax - xmin)
   xmax <- xmax + xd
   xmin <- xmin - xd
+
+  # Create plots
   plts <- lapply(
     ets,
     function(et) {
@@ -37,5 +45,7 @@ plot_examples_1d <- function(..., pmargin = 0.1, ymax = 0.6) {
               axis.text.y = element_blank()
         )
     })
+
+  # Combine plots as subplots
   wrap_plots(plts)
 }

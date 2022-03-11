@@ -11,17 +11,24 @@ plot_examples_nd <- function(e, title, pstroke = 0.05, psize = 0.75,
   # How many dimensions?
   nd <- ncol(e$points)
 
+  # Get maximum and minimum points in each dimension
   xmaxs <- apply(e$points, 2, max)
   xmins <- apply(e$points, 2, min)
+
+  # Determine plots centers in each dimension
   xcenters <- (xmaxs + xmins) / 2
+
+  # Determine plot span in all dimensions
   sidespan <- (1 + pmargin) * max(abs(xmaxs - xmins)) / 2
 
+  # Determine final plots limits in all dimensions
   xmaxs <- xcenters + sidespan
   xmins <- xcenters - sidespan
 
   # All possible combinations
   idxs <- expand.grid(1:nd, 1:nd)
 
+  # Create plots
   plts <- apply(idxs,
                 1,
                 function(x) {
@@ -49,6 +56,7 @@ plot_examples_nd <- function(e, title, pstroke = 0.05, psize = 0.75,
                   }
                 })
 
+  # Combine plots as subplots
   wrap_plots(plts) + plot_annotation(
     title = title,
     theme = theme(plot.title = element_text(size = rel(0.8))))
