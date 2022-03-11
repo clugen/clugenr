@@ -14,15 +14,20 @@ plot_examples_3d <- function(..., pmargin = 0.1, ncols = 3) {
   ymin <- min(sapply(ets, function(et) min(et$e$points[, 2])))
   zmax <- max(sapply(ets, function(et) max(et$e$points[, 3])))
   zmin <- min(sapply(ets, function(et) min(et$e$points[, 3])))
-  xd <- pmargin * abs(xmax - xmin)
-  yd <- pmargin * abs(ymax - ymin)
-  zd <- pmargin * abs(zmax - zmin)
-  xmax <- xmax + xd
-  xmin <- xmin - xd
-  ymax <- ymax + yd
-  ymin <- ymin - yd
-  zmax <- zmax + zd
-  zmin <- zmin - zd
+
+  xcenter <- (xmax + xmin) / 2
+  ycenter <- (ymax + ymin) / 2
+  zcenter <- (zmax + zmin) / 2
+  sidespan <- (1 + pmargin) * max(abs(xmax - xmin),
+                                  abs(ymax - ymin),
+                                  abs(zmax - zmin)) / 2
+
+  xmax <- xcenter + sidespan
+  xmin <- xcenter - sidespan
+  ymax <- ycenter + sidespan
+  ymin <- ycenter - sidespan
+  zmax <- zcenter + sidespan
+  zmin <- zcenter - sidespan
 
   if (length(ets) %% ncols != 0) {
     stop("Number of examples must be a multiple of `ncols`")
