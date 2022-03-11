@@ -28,16 +28,14 @@ library(rgl)
 setupKnitr(autoprint = TRUE) # Render RGL plots directly on generated page
 
 # Load helper functions for plotting examples
-source("plot_examples.R", local = knitr::knit_global())
+source("plot_examples_3d.R", local = knitr::knit_global())
 
 # Keep examples reproducible in newer R versions 
 RNGversion("3.6.0") 
 ```
 
-The
-[`plot_examples.R`](https://github.com/clugen/clugenr/blob/master/vignettes/plot_examples.R)
-containing the helper functions for plotting these examples is available
-[here](https://github.com/clugen/clugenr/blob/master/vignettes/plot_examples.R).
+The 3D examples were plotted with the `plot_examples_3d()` function available
+[here](https://github.com/clugen/clugenr/blob/master/vignettes/plot_examples_3d.R).
 
 ## Manipulating the direction of cluster-supporting lines
 
