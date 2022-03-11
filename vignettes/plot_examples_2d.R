@@ -6,17 +6,23 @@ library(patchwork) # For combining 2D plots
 
 # Function for plotting a series of related 2D examples
 plot_examples_2d <- function(..., pmargin = 0.1) {
+
   ets <- list(...)
+
   xmax <- max(sapply(ets, function(et) max(et$e$points[, 1])))
   xmin <- min(sapply(ets, function(et) min(et$e$points[, 1])))
   ymax <- max(sapply(ets, function(et) max(et$e$points[, 2])))
   ymin <- min(sapply(ets, function(et) min(et$e$points[, 2])))
-  xd <- pmargin * abs(xmax - xmin)
-  yd <- pmargin * abs(ymax - ymin)
-  xmax <- xmax + xd
-  xmin <- xmin - xd
-  ymax <- ymax + yd
-  ymin <- ymin - yd
+
+  xcenter <- (xmax + xmin) / 2
+  ycenter <- (ymax + ymin) / 2
+  sidespan <- (1 + pmargin) * max(abs(xmax - xmin), abs(ymax - ymin)) / 2
+
+  xmax <- xcenter + sidespan
+  xmin <- xcenter - sidespan
+  ymax <- ycenter + sidespan
+  ymin <- ycenter - sidespan
+
   plts <- lapply(
     ets,
     function(et) {
@@ -30,5 +36,6 @@ plot_examples_2d <- function(..., pmargin = 0.1) {
               plot.title = element_text(size = rel(0.75))) +
         coord_fixed(xlim = c(xmin, xmax), ylim = c(ymin, ymax))
     })
+
   wrap_plots(plts)
 }
