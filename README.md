@@ -2,27 +2,25 @@
 
 ## Summary
 
-`clugenr` is an [R] package for generating multidimensional clusters. Each
+**clugenr** is an [R] package for generating multidimensional clusters. Each
 cluster is supported by a line segment, the position, orientation and length of
 which guide where the respective points are placed.
 
 ## How to install
 
-Install the development version from GitHub with the following command (requires
-the [devtools] package):
-
-```R
-devtools::install_github("clugen/clugenr")
-```
-
-<!--
 A stable version of the package is available on [CRAN] and can be installed with
 the following instruction:
 
 ```R
 install.packages("clugenr")
 ```
--->
+
+Alternatively, install the development version from GitHub with the following
+command (requires the [devtools] package):
+
+```R
+devtools::install_github("clugen/clugenr")
+```
 
 ## Documentation
 
@@ -34,9 +32,9 @@ built-in help system. After installation, to access the man pages, invoke the
 help("clugenr")
 ```
 
-## Examples
+The complete online documentation is available [here](https://clugen.github.io/clugenr).
 
-### 2D
+## Quick start
 
 ```R
 library(clugenr)
@@ -45,8 +43,6 @@ plot(x$points, col = x$clusters, xlab = "x", ylab = "y", asp = 1)
 ```
 
 ![](man/figures/example2d.png)
-
-### 3D
 
 ```R
 library(clugenr)
@@ -64,4 +60,3 @@ plot3d(x$points, col = x$clusters, xlab = "x", ylab = "y", zlab = "z", aspect = 
 [R]: https://www.r-project.org/
 [devtools]: https://cran.r-project.org/package=devtools
 [CRAN]: https://cran.r-project.org/
-[pkgdown]: https://pkgdown.r-lib.org/
