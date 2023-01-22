@@ -1,4 +1,4 @@
-# Copyright (c) 2020-2022 Nuno Fachada
+# Copyright (c) 2020-2023 Nuno Fachada
 # Distributed under the MIT License (http://opensource.org/licenses/MIT)
 
 # How many vectors to test?
@@ -22,7 +22,7 @@ for (i in seq.int(1, nrow(targs))) {
 
   # Create combination of seed-depending parameters (line directions + centers)
   tsargs <- expand.grid(u = asplit(get_unitvecs(nvec, nd), 1),
-                        a = get_angles(nang))
+                        a = c(get_angles(nang), pi / 2))
 
   # Loop through line directions and line centers
   for (j in seq.int(1, nrow(tsargs))) {
@@ -50,6 +50,13 @@ for (i in seq.int(1, nrow(targs))) {
       # Check that vectors u and r have an angle of a between them
       if (nd > 1 && abs(a) < pi / 2) {
         expect_equal(angle_btw(u, r), abs(a))
+      }
+
+      # Check corner case where angle == pi / 2 and vector length > 1
+      if (nd > 1 && a == pi / 2) {
+        v <- stats::runif(1, 2, 100) * u
+        expect_warning(r <- rand_vector_at_angle(v, a), regexp = NA)
+        expect_equal(angle_btw(v, r), pi / 2)
       }
     })
   }
