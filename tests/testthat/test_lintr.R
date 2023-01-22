@@ -2,16 +2,16 @@
 # Distributed under the MIT License (http://opensource.org/licenses/MIT)
 
 test_that("Package linting", {
-  expect_lint_free(
+  lintr::expect_lint_free(
     path = "../..",
-    linters = linters_with_defaults(
+    linters = lintr::linters_with_defaults(
       # The clugen() function has a large cyclomatic complexity
       # so let's increase this a bit
-      cyclocomp_linter = cyclocomp_linter(complexity_limit = 36),
+      cyclocomp_linter = lintr::cyclocomp_linter(complexity_limit = 36),
       # The official line length for this package is 80, but lets
       # give it some margin; also, Windows complains about the 80
       # limit due to not recognizing some UTF-8 characters.
-      line_length_linter = line_length_linter(88)
+      line_length_linter = lintr::line_length_linter(88)
     )
   )
 })
