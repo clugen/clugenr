@@ -13,8 +13,8 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
   out.width = "100%",
-  fig.asp=0.4,
-  fig.width=8
+  fig.asp = 0.4,
+  fig.width = 8
 )
 ```
 
@@ -30,8 +30,8 @@ setupKnitr(autoprint = TRUE) # Render RGL plots directly on generated page
 # Load helper functions for plotting examples
 source("plot_examples_3d.R", local = knitr::knit_global())
 
-# Keep examples reproducible in newer R versions 
-RNGversion("3.6.0") 
+# Keep examples reproducible in newer R versions
+RNGversion("3.6.0")
 ```
 
 The 3D examples were plotted with the `plot_examples_3d()` function available
@@ -65,7 +65,7 @@ seed <- 123
 
 ```{r}
 # Custom angle_deltas function: arbitrarily rotate some clusters by 90 degrees
-angdel_90 <- function(nclu, astd) sample(c(0, pi / 2), nclu, replace = T)
+angdel_90 <- function(nclu, astd) sample(c(0, pi / 2), nclu, replace = TRUE)
 ```
 
 ```{r}
@@ -109,7 +109,9 @@ plot_examples_3d(list(e = e46, t = "e46: llength = 0"),
 
 ```{r}
 # Custom llengths function: line lengths tend to grow for each new cluster
-llen_grow <- function(nclu, llen, llenstd) llen * (0:(nclu - 1) + rnorm(nclu, sd = llenstd))
+llen_grow <- function(nclu, llen, llenstd) {
+  llen * (0:(nclu - 1) + rnorm(nclu, sd = llenstd))
+}
 ```
 
 ```{r}
@@ -156,7 +158,8 @@ seed <- 321
 ```{r}
 # Custom clucenters function: places clusters in a diagonal
 centers_diag <- function(nclu, csep, coff) {
-  matrix(1, nrow = nclu, ncol = length(csep)) * (1:nclu * max(csep)) + rep(coff, each = nclu)
+  matrix(1, nrow = nclu, ncol = length(csep)) * (1:nclu * max(csep))
+  + rep(coff, each = nclu)
 }
 ```
 
@@ -313,12 +316,12 @@ seed <- 87
 centers_fixed <- function(nclu, csep, coff) {
   matrix(c(-csep[1], -csep[2], -csep[3], csep[1], -csep[2], -csep[3],
            -csep[1], csep[2], csep[3], csep[1], csep[2], csep[3]),
-         nrow = nclu, byrow = T)
+         nrow = nclu, byrow = TRUE)
 }
 
 # Custom clusizes_fn (e77): cluster sizes determined via the uniform distribution,
 # no correction for total points
-clusizes_unif <- function(nclu, npts, ae) sample(2 * npts / nclu, nclu, replace = T)
+clusizes_unif <- function(nclu, npts, ae) sample(2 * npts / nclu, nclu, replace = TRUE)
 
 # Custom clusizes_fn (e78): clusters all have the same size, no correction for
 # total points

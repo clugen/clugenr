@@ -28,8 +28,8 @@ library(clugenr)
 # Load functions for plotting examples
 source("plot_examples_2d.R", local = knitr::knit_global())
 
-# Keep examples reproducible in newer R versions 
-RNGversion("3.6.0") 
+# Keep examples reproducible in newer R versions
+RNGversion("3.6.0")
 ```
 
 The 2D examples were plotted with the `plot_examples_2d()` function available
@@ -63,7 +63,7 @@ seed <- 123
 
 ```{r}
 # Custom angle_deltas function: arbitrarily rotate some clusters by 90 degrees
-angdel_90_fn <- function(nclu, astd) sample(c(0, pi / 2), nclu, replace = T)
+angdel_90_fn <- function(nclu, astd) sample(c(0, pi / 2), nclu, replace = TRUE)
 ```
 
 ```{r}
@@ -110,7 +110,9 @@ seed <- 765
 
 ```{r}
 # Custom llengths function: line lengths grow for each new cluster
-llen_grow_fn <- function(nclu, llen, llenstd) llen * 0:(nclu - 1) + rnorm(nclu, sd = llenstd)
+llen_grow_fn <- function(nclu, llen, llenstd) {
+  llen * 0:(nclu - 1) + rnorm(nclu, sd = llenstd)
+}
 ```
 
 ```{r}
@@ -166,7 +168,7 @@ centers_diag <- function(nclu, csep, coff) {
 e16 <- clugen(2, 8, 1000, c(1, 1), pi / 4, c(10, 10), 10, 2, 2.5, seed = seed)
 e17 <- clugen(2, 8, 1000, c(1, 1), pi / 4, c(10, 10), 10, 2, 2.5, seed = seed,
               cluster_offset = c(20, -20))
-e18 <- clugen(2, 8, 1000, c(1, 1), pi / 4, c(10, 10), 10, 2, 2.5, seed = seed, 
+e18 <- clugen(2, 8, 1000, c(1, 1), pi / 4, c(10, 10), 10, 2, 2.5, seed = seed,
               cluster_offset = c(-50, -50), clucenters_fn = centers_diag)
 ```
 
@@ -314,12 +316,12 @@ seed <- 87
 # Custom clucenters_fn (all): yields fixed positions for the clusters
 centers_fixed <- function(nclu, csep, coff) {
   matrix(c(-csep[1], -csep[2], csep[1], -csep[2], -csep[1], csep[2], csep[1], csep[2]),
-         nrow = nclu, byrow = T)
+         nrow = nclu, byrow = TRUE)
 }
 
 # Custom clusizes_fn (e38): cluster sizes determined via the uniform distribution,
 # no correction for total points
-clusizes_unif <- function(nclu, npts, ae) sample(2 * npts / nclu, nclu, replace = T)
+clusizes_unif <- function(nclu, npts, ae) sample(2 * npts / nclu, nclu, replace = TRUE)
 
 # Custom clusizes_fn (e39): clusters all have the same size, no correction for
 # total points
@@ -327,7 +329,7 @@ clusizes_equal <- function(nclu, npts, ae) npts %/% nclu * rep.int(1, nclu)
 ```
 
 ```{r}
-e37 <- clugen(2, 4, 1500, c(1, 1), pi, c(20, 20), 0, 0, 5, seed = seed, 
+e37 <- clugen(2, 4, 1500, c(1, 1), pi, c(20, 20), 0, 0, 5, seed = seed,
               clucenters_fn = centers_fixed, point_dist_fn = "n")
 e38 <- clugen(2, 4, 1500, c(1, 1), pi, c(20, 20), 0, 0, 5, seed = seed,
               clucenters_fn = centers_fixed, clusizes_fn = clusizes_unif,

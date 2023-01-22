@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 
 ```{r setup, include=FALSE}
 # Keep examples reproducible in newer R versions and set seed
-RNGversion("3.6.0") 
+RNGversion("3.6.0")
 set.seed(12345)
 ```
 

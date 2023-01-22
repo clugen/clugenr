@@ -1,4 +1,4 @@
-# Copyright (c) 2020-2022 Nuno Fachada
+# Copyright (c) 2020-2023 Nuno Fachada
 # Distributed under the MIT License (http://opensource.org/licenses/MIT)
 
 # Number of line directions to test
@@ -52,9 +52,9 @@ for (i in seq.int(1, nrow(targs))) {
       proj <- points_on_line(ctr, direc, proj_dist_fn2ctr)
 
       # Very simple dist_fn, always puts points at a distance of dist_pt
-      dist_fn <- function(clu_num_points, ldisp) sample(c(-dist_pt, dist_pt),
-                                                        clu_num_points,
-                                                        replace = TRUE)
+      dist_fn <- function(clu_num_points, ldisp) {
+        sample(c(-dist_pt, dist_pt), clu_num_points, replace = TRUE)
+      }
 
       # Check that the clupoints_n_1_template function runs without warnings
       expect_warning(

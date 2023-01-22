@@ -1,4 +1,4 @@
-# Copyright (c) 2020-2022 Nuno Fachada
+# Copyright (c) 2020-2023 Nuno Fachada
 # Distributed under the MIT License (http://opensource.org/licenses/MIT)
 
 library(ggplot2)   # For plotting in 2D
@@ -34,8 +34,7 @@ plot_examples_nd <- function(e, title, pstroke = 0.05, psize = 0.75,
                 function(x) {
                   if (x[1] == x[2]) {
                     grid::textGrob(paste0("x", x[1]))
-                  }
-                  else {
+                  } else {
                     ggplot(NULL,
                            aes(x = e$points[, x[2]],
                                y = e$points[, x[1]],

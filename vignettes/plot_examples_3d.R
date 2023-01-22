@@ -1,4 +1,4 @@
-# Copyright (c) 2020-2022 Nuno Fachada
+# Copyright (c) 2020-2023 Nuno Fachada
 # Distributed under the MIT License (http://opensource.org/licenses/MIT)
 
 library(rgl)       # For plotting in 3D
@@ -43,16 +43,16 @@ plot_examples_3d <- function(..., pmargin = 0.1, ncols = 3) {
   nrows <- length(ets) %/% ncols
 
   # Combine plots as subplots with shared mouse and perspective
-  mfrow3d(nrows, ncols, sharedMouse = T)
+  mfrow3d(nrows, ncols, sharedMouse = TRUE)
 
   # Create plots
-  plts <- lapply(
+  lapply(
     ets,
     function(et) {
       e <- et$e
       t <- et$t
       plot3d(e$points, type = "s", size = 1.5,
-             col = e$clusters, aspect = T,
+             col = e$clusters, aspect = TRUE,
              xlab = "x", ylab = "y", zlab = "z", main = t,
              xlim = c(xmin, xmax), ylim = c(ymin, ymax), zlim = c(zmin, zmax))
     }

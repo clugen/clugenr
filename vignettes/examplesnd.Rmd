@@ -29,8 +29,8 @@ library(clugenr)
 source("plot_examples_1d.R", local = knitr::knit_global())
 source("plot_examples_nd.R", local = knitr::knit_global())
 
-# Keep examples reproducible in newer R versions 
-RNGversion("3.6.0") 
+# Keep examples reproducible in newer R versions
+RNGversion("3.6.0")
 ```
 
 ## Basic 1D example with density plot
