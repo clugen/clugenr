@@ -158,8 +158,8 @@ seed <- 321
 ```{r}
 # Custom clucenters function: places clusters in a diagonal
 centers_diag <- function(nclu, csep, coff) {
-  matrix(1, nrow = nclu, ncol = length(csep)) * (1:nclu * max(csep))
-  + rep(coff, each = nclu)
+  matrix(1, nrow = nclu, ncol = length(csep)) * (1:nclu * max(csep)) + 
+    rep(coff, each = nclu)
 }
 ```
 
