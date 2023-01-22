@@ -159,7 +159,7 @@ clugen <- function(num_dims, num_clusters, num_points, direction, angle_disp,
   # Check that cluster_sep has num_dims dimensions
   if (length(cluster_sep) != num_dims) {
     stop("Length of `cluster_sep` must be equal to `num_dims` (",
-      length(cluster_sep), " !=  ", num_dims, ")")
+      length(cluster_sep), " != ", num_dims, ")")
   }
 
   # If given, cluster_offset must have the correct number of dimensions,
