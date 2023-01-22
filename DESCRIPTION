@@ -7,9 +7,10 @@ Authors@R:
            role = c("aut", "cre"),
            email = "faken@fakenmc.com",
            comment = c(ORCID = "0000-0002-8487-5837"))
-Description: An algorithm for generating multidimensional clusters. Each
-    cluster is supported by a line segment, the position, orientation and length
-    of which guide where the respective points are placed.
+Description: An R implementation of the clugen algorithm for generating
+    multidimensional clusters. Each cluster is supported by a line segment, the
+    position, orientation and length of which guide where the respective points
+    are placed.
 Depends:
     R (>= 3.6.0)
 Imports:
