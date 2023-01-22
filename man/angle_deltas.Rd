@@ -14,17 +14,17 @@ angle_deltas(num_clusters, angle_disp)
 \value{
 Angles between the average cluster direction and the
 cluster-supporting lines, given in radians in the interval
-\mjeqn{\left[-\pi/2,\pi/2\right]}{[-π/2,π/2]}
+\mjeqn{\left\[-\pi/2,\pi/2\right\]}{\[-π/2,π/2\]}
 }
 \description{
 \loadmathjax
 Determine the angles between the average cluster direction and the
 cluster-supporting lines. These angles are obtained from a wrapped normal
-distribution (\mjeqn{\mu=0}{μ=0}, \mjeqn{\sigma=}{σ=}\code{angle_disp}) with
-support in the interval \mjeqn{\left[-\pi/2,\pi/2\right]}{[-π/2,π/2]}.
+distribution (\mjeqn{\mu=0}{μ=0}, \mjeqn{\sigma=}{σ=}`angle_disp`) with
+support in the interval \mjeqn{\left\[-\pi/2,\pi/2\right\]}{\[-π/2,π/2\]}.
 Note this is different from the standard wrapped normal distribution, the
 support of which is given by the interval
-\mjeqn{\left[-\pi,\pi\right]}{[-π,π]}.
+\mjeqn{\left\[-\pi,\pi\right\]}{\[-π,π\]}.
 }
 \note{
 This function is stochastic. For reproducibility set a PRNG seed with

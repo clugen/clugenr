@@ -26,7 +26,7 @@ Generated points (\mjeqn{p \times n}{p x n} matrix).
 \loadmathjax
 Each point is placed on a hyperplane orthogonal to that line and centered at
 the point's projection, using the normal distribution (\mjeqn{\mu=0}{μ=0},
-\mjeqn{\sigma=}{σ=}\code{lat_disp}).
+\mjeqn{\sigma=}{σ=}`lat_disp`).
 }
 \details{
 This function's main intended use is by the main \link{clugen} function,

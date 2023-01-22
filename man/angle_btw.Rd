@@ -16,7 +16,9 @@ Angle between \code{v1} and \code{v2} in radians.
 }
 \description{
 \loadmathjax
-Typically, the angle between two vectors \code{v1} and \code{v2} can be obtained with:\if{html}{\out{<div class="sourceCode R">}}\preformatted{acos((v1 \%*\% v2) / (norm(v1, "2") * norm(v2, "2")))
+Typically, the angle between two vectors \code{v1} and \code{v2} can be obtained with:
+
+\if{html}{\out{<div class="sourceCode R">}}\preformatted{acos((v1 \%*\% v2) / (norm(v1, "2") * norm(v2, "2")))
 }\if{html}{\out{</div>}}
 
 However, this approach is numerically unstable. The version provided here is
