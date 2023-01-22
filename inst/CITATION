@@ -1,0 +1,14 @@
+citHeader("To cite clugenr in publications use:")
+
+citEntry(entry = "Article",
+         title = paste("Generating Multidimensional Clusters With Support Lines"),
+         author = personList(as.person("Nuno Fachada"),
+                             as.person("Diogo de Andrade")),
+         journal      = "Under review",
+         year         = "2023",
+
+  textVersion  =
+  paste("N. Fachada, D. de Andrade (2023).",
+        "Generating Multidimensional Clusters With Support Lines",
+        "Under review")
+)
