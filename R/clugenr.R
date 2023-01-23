@@ -13,5 +13,7 @@
 #'
 #' @docType package
 #' @name clugenr
+# Suppress R CMD check note
+#' @importFrom mathjaxr preview_rd
 NULL
 #> NULL
