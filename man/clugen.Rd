@@ -56,8 +56,8 @@ from their projection on the cluster-supporting line.}
 cluster-supporting lines, with three possible values:
 \itemize{
 \item \code{"norm"} (default): Distribute point projections along lines using a normal
-distribution (\mjeqn{\mu=}{μ=}_line_center_,
-\mjeqn{\sigma=}{σ=}`llength/6`).
+distribution (\mjeqn{\mu=}{μ=} \emph{line_center},
+\mjeqn{\sigma=}{σ=} \code{llength/6} ).
 \item \code{"unif"}: Distribute points uniformly along the line.
 \item User-defined function, which accepts two parameters, line length (\code{double})
 and number of points (\code{integer}), and returns a vector containing the

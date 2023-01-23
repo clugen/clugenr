@@ -1,4 +1,4 @@
-# Copyright (c) 2020-2022 Nuno Fachada
+# Copyright (c) 2020-2023 Nuno Fachada
 # Distributed under the MIT License (http://opensource.org/licenses/MIT)
 
 #' Generate multidimensional clusters
@@ -38,8 +38,8 @@
 #' @param proj_dist_fn Distribution of point projections along
 #' cluster-supporting lines, with three possible values:
 #' - `"norm"` (default): Distribute point projections along lines using a normal
-#'   distribution (\mjeqn{\mu=}{μ=}_line_center_,
-#'   \mjeqn{\sigma=}{σ=}`llength/6`).
+#'   distribution (\mjeqn{\mu=}{μ=} _line_center_,
+#'   \mjeqn{\sigma=}{σ=} `llength/6` ).
 #' - `"unif"`: Distribute points uniformly along the line.
 #' - User-defined function, which accepts two parameters, line length (`double`)
 #'   and number of points (`integer`), and returns a vector containing the

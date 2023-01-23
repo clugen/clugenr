@@ -19,7 +19,7 @@ Lengths of cluster-supporting lines (vector of size \code{num_clusters}).
 \description{
 \loadmathjax
 Line lengths are determined using the folded normal distribution
-(\mjeqn{\mu=}{μ=}`llength\verb{, \mjeqn{\sigma=}{σ=}`llength_disp}).
+(\mjeqn{\mu=}{μ=} \code{llength}, \mjeqn{\sigma=}{σ=} \code{llength_disp} ).
 }
 \note{
 This function is stochastic. For reproducibility set a PRNG seed with

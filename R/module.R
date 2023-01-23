@@ -1,4 +1,4 @@
-# Copyright (c) 2020-2022 Nuno Fachada
+# Copyright (c) 2020-2023 Nuno Fachada
 # Distributed under the MIT License (http://opensource.org/licenses/MIT)
 
 #' Get angles between average cluster direction and cluster-supporting lines
@@ -7,11 +7,11 @@
 #' \loadmathjax
 #' Determine the angles between the average cluster direction and the
 #' cluster-supporting lines. These angles are obtained from a wrapped normal
-#' distribution (\mjeqn{\mu=0}{μ=0}, \mjeqn{\sigma=}{σ=}`angle_disp`) with
-#' support in the interval \mjeqn{\left\[-\pi/2,\pi/2\right\]}{\[-π/2,π/2\]}.
+#' distribution (\mjeqn{\mu=0}{μ=0}, \mjeqn{\sigma=}{σ=} `angle_disp` ) with
+#' support in the interval \mjeqn{\left[-\pi/2,\pi/2\right]}{[-π/2, π/2]}.
 #' Note this is different from the standard wrapped normal distribution, the
 #' support of which is given by the interval
-#' \mjeqn{\left\[-\pi,\pi\right\]}{\[-π,π\]}.
+#' \mjeqn{\left[-\pi,\pi\right]}{[-π, π]}.
 #'
 #' @note This function is stochastic. For reproducibility set a PRNG seed with
 #' [set.seed].
@@ -20,7 +20,7 @@
 #' @param angle_disp Angle dispersion, in radians.
 #' @return Angles between the average cluster direction and the
 #' cluster-supporting lines, given in radians in the interval
-#' \mjeqn{\left\[-\pi/2,\pi/2\right\]}{\[-π/2,π/2\]}
+#' \mjeqn{\left[-\pi/2,\pi/2\right]}{[-π/2, π/2]}
 #'
 #' @export
 #'
@@ -249,7 +249,7 @@ clusizes <- function(num_clusters, num_points, allow_empty) {
 #' @description
 #' \loadmathjax
 #' Line lengths are determined using the folded normal distribution
-#' (\mjeqn{\mu=}{μ=}`llength`, \mjeqn{\sigma=}{σ=}`llength_disp`).
+#' (\mjeqn{\mu=}{μ=} `llength`, \mjeqn{\sigma=}{σ=} `llength_disp` ).
 #'
 #' @note This function is stochastic. For reproducibility set a PRNG seed with
 #' [set.seed].
