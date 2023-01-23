@@ -14,4 +14,4 @@ There are currently no downstream dependencies for this package.
 
 ## Other
 
-* This is a new release.
+* This is a new package.
