@@ -36,8 +36,8 @@ plot_examples_nd <- function(e, title, pstroke = 0.05, psize = 0.75,
                     grid::textGrob(paste0("x", x[1]))
                   } else {
                     ggplot(NULL,
-                           aes(x = e$points[, x[2]],
-                               y = e$points[, x[1]],
+                           aes(x = e$points[, x[1]],
+                               y = e$points[, x[2]],
                                colour = e$clusters)) +
                       geom_point(shape = 21,
                                  colour = "black",
@@ -50,8 +50,8 @@ plot_examples_nd <- function(e, title, pstroke = 0.05, psize = 0.75,
                             axis.text.x = element_blank(),
                             axis.ticks.y = element_blank(),
                             axis.text.y = element_blank()) +
-                      coord_fixed(xlim = c(xmins[x[2]], xmaxs[x[2]]),
-                                  ylim = c(xmins[x[1]], xmaxs[x[1]]))
+                      coord_fixed(xlim = c(xmins[x[1]], xmaxs[x[1]]),
+                                  ylim = c(xmins[x[2]], xmaxs[x[2]]))
                   }
                 })
 
