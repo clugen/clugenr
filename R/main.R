@@ -5,8 +5,8 @@
 #'
 #' @description
 #' \loadmathjax
-#' This is the main function of the CluGen package, and possibly the only
-#' function most users will need.
+#' This is the main function of **clugenr**, and possibly the only function most
+#' users will need.
 #'
 #' @details
 #' If a custom function was given in the `clusizes_fn` parameter, it is
@@ -51,18 +51,18 @@
 #' - `"n-1"` (default): Final points are placed on a hyperplane orthogonal to
 #'   the cluster-supporting line, centered at each point's projection, using the
 #'   normal distribution (\mjeqn{\mu=0}{μ=0},
-#'   \mjeqn{\sigma=}{σ=}`lateral_disp`). This is done by the [clupoints_n_1]
+#'   \mjeqn{\sigma=}{σ=} `lateral_disp` ). This is done by the [clupoints_n_1]
 #'   function.
 #' - `"n"`: Final points are placed around their projection on the
 #'   cluster-supporting line using the normal distribution (\mjeqn{\mu=0}{μ=0},
-#'   \mjeqn{\sigma=}{σ=}`lateral_disp`). This is done by the [clupoints_n]
+#'   \mjeqn{\sigma=}{σ=} `lateral_disp` ). This is done by the [clupoints_n]
 #'   function.
 #' - User-defined function: The user can specify a custom point placement
 #'   strategy by passing a function with the same signature as [clupoints_n_1]
 #'   and [clupoints_n].
 #' @param clusizes_fn Distribution of cluster sizes. By default, cluster sizes
 #' are determined by the [clusizes] function, which uses the normal distribution
-#' (\mjeqn{\mu=}{μ=}`num_points`/`num_clusters`, \mjeqn{\sigma=\mu/3}{σ=μ/3}),
+#' (\mjeqn{\mu=}{μ=} `num_points`/`num_clusters`, \mjeqn{\sigma=\mu/3}{σ=μ/3}),
 #' and assures that the final cluster sizes add up to `num_points`. This
 #' parameter allows the user to specify a custom function for this purpose,
 #' which must follow [clusizes] signature. Note that custom functions are not
@@ -75,15 +75,16 @@
 #' follow [clucenters] signature.
 #' @param llengths_fn Distribution of line lengths. By default, the lengths of
 #' cluster-supporting lines are determined by the [llengths] function, which
-#' uses the folded normal distribution (\mjeqn{\mu=}{μ=}`llength`,
-#' \mjeqn{\sigma=}{σ=}`llength_disp`). This parameter allows the user to specify
-#' a custom function for this purpose, which must follow [llengths] signature.
+#' uses the folded normal distribution (\mjeqn{\mu=}{μ=} `llength`,
+#' \mjeqn{\sigma=}{σ=} `llength_disp` ). This parameter allows the user to
+#' specify a custom function for this purpose, which must follow [llengths]
+#' signature.
 #' @param angle_deltas_fn Distribution of line angle differences with respect to
 #' `direction`. By default, the angles between `direction` and the direction of
 #' cluster-supporting lines are determined by the [angle_deltas] function, which
 #' uses the wrapped normal distribution (\mjeqn{\mu=0}{μ=0},
-#' \mjeqn{\sigma=}{σ=}`angle_disp`) with support in the interval
-#' \mjeqn{\left\[-\pi/2,\pi/2\right\]}{\[-π/2,π/2\]}. This parameter allows the
+#' \mjeqn{\sigma=}{σ=} `angle_disp` ) with support in the interval
+#' \mjeqn{\left[-\pi/2,\pi/2\right]}{[-π/2, π/2]}. This parameter allows the
 #' user to specify a custom function for this purpose, which must follow
 #' [angle_deltas] signature.
 #' @param seed An integer used to initialize the PRNG, allowing for reproducible

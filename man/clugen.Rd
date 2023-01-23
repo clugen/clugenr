@@ -72,11 +72,11 @@ projections on the cluster-supporting lines, with three possible values:
 \item \code{"n-1"} (default): Final points are placed on a hyperplane orthogonal to
 the cluster-supporting line, centered at each point's projection, using the
 normal distribution (\mjeqn{\mu=0}{μ=0},
-\mjeqn{\sigma=}{σ=}`lateral_disp`). This is done by the \link{clupoints_n_1}
+\mjeqn{\sigma=}{σ=} \code{lateral_disp} ). This is done by the \link{clupoints_n_1}
 function.
 \item \code{"n"}: Final points are placed around their projection on the
 cluster-supporting line using the normal distribution (\mjeqn{\mu=0}{μ=0},
-\mjeqn{\sigma=}{σ=}`lateral_disp`). This is done by the \link{clupoints_n}
+\mjeqn{\sigma=}{σ=} \code{lateral_disp} ). This is done by the \link{clupoints_n}
 function.
 \item User-defined function: The user can specify a custom point placement
 strategy by passing a function with the same signature as \link{clupoints_n_1}
@@ -85,7 +85,11 @@ and \link{clupoints_n}.
 
 \item{clusizes_fn}{Distribution of cluster sizes. By default, cluster sizes
 are determined by the \link{clusizes} function, which uses the normal distribution
-(\mjeqn{\mu=}{μ=}`num_points\code{/}num_clusters\verb{, \mjeqn{\sigma=\mu/3}{σ=μ/3}), and assures that the final cluster sizes add up to }num_points\verb{. This parameter allows the user to specify a custom function for this purpose, which must follow [clusizes] signature. Note that custom functions are not required to strictly obey the }num_points` parameter.}
+(\mjeqn{\mu=}{μ=} \code{num_points}/\code{num_clusters}, \mjeqn{\sigma=\mu/3}{σ=μ/3}),
+and assures that the final cluster sizes add up to \code{num_points}. This
+parameter allows the user to specify a custom function for this purpose,
+which must follow \link{clusizes} signature. Note that custom functions are not
+required to strictly obey the \code{num_points} parameter.}
 
 \item{clucenters_fn}{Distribution of cluster centers. By default, cluster
 centers are determined by the \link{clucenters} function, which uses the uniform
@@ -96,15 +100,17 @@ follow \link{clucenters} signature.}
 
 \item{llengths_fn}{Distribution of line lengths. By default, the lengths of
 cluster-supporting lines are determined by the \link{llengths} function, which
-uses the folded normal distribution (\mjeqn{\mu=}{μ=}`llength\verb{, \mjeqn{\sigma=}{σ=}`llength_disp}). This parameter allows the user to specify
-a custom function for this purpose, which must follow \link{llengths} signature.}
+uses the folded normal distribution (\mjeqn{\mu=}{μ=} \code{llength},
+\mjeqn{\sigma=}{σ=} \code{llength_disp} ). This parameter allows the user to
+specify a custom function for this purpose, which must follow \link{llengths}
+signature.}
 
 \item{angle_deltas_fn}{Distribution of line angle differences with respect to
 \code{direction}. By default, the angles between \code{direction} and the direction of
 cluster-supporting lines are determined by the \link{angle_deltas} function, which
 uses the wrapped normal distribution (\mjeqn{\mu=0}{μ=0},
-\mjeqn{\sigma=}{σ=}`angle_disp`) with support in the interval
-\mjeqn{\left\[-\pi/2,\pi/2\right\]}{\[-π/2,π/2\]}. This parameter allows the
+\mjeqn{\sigma=}{σ=} \code{angle_disp} ) with support in the interval
+\mjeqn{\left[-\pi/2,\pi/2\right]}{[-π/2, π/2]}. This parameter allows the
 user to specify a custom function for this purpose, which must follow
 \link{angle_deltas} signature.}
 
@@ -134,8 +140,8 @@ cluster-supporting lines.
 }
 \description{
 \loadmathjax
-This is the main function of the CluGen package, and possibly the only
-function most users will need.
+This is the main function of \strong{clugenr}, and possibly the only function most
+users will need.
 }
 \details{
 If a custom function was given in the \code{clusizes_fn} parameter, it is

@@ -96,7 +96,7 @@ clucenters <- function(num_clusters, clu_sep, clu_offset) {
 #' \loadmathjax
 #' Each point is placed on a hyperplane orthogonal to that line and centered at
 #' the point's projection, using the normal distribution (\mjeqn{\mu=0}{μ=0},
-#' \mjeqn{\sigma=}{σ=}`lat_disp`).
+#' \mjeqn{\sigma=}{σ=} `lat_disp` ).
 #'
 #' @details
 #' This function's main intended use is by the main [clugen] function,
@@ -139,7 +139,7 @@ clupoints_n_1 <- function(projs, lat_disp, line_len, clu_dir, clu_ctr) {
 #' @description
 #' \loadmathjax
 #' Each point is placed around its projection using the normal distribution
-#' (\mjeqn{\mu=0}{μ=0}, \mjeqn{\sigma=}{σ=}`lat_disp`).
+#' (\mjeqn{\mu=0}{μ=0}, \mjeqn{\sigma=}{σ=} `lat_disp` ).
 #'
 #' @details
 #' This function's main intended use is by the main [clugen] function,
@@ -188,7 +188,7 @@ clupoints_n <- function(projs, lat_disp, line_len, clu_dir, clu_ctr) {
 #' @description
 #' \loadmathjax
 #' Cluster sizes are determined using the normal distribution
-#' (\mjeqn{\mu=}{μ=}`num_points`\mjseqn{/}`num_clusters`,
+#' (\mjeqn{\mu=}{μ=} `num_points` \mjseqn{/} `num_clusters`,
 #' \mjeqn{\sigma=\mu/3}{σ=μ/3}), and then assuring that the final cluster sizes
 #' add up to `num_points` via the [fix_num_points] function.
 #'

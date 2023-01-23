@@ -19,7 +19,9 @@ Number of points in each cluster (vector of length \code{num_clusters}).
 \description{
 \loadmathjax
 Cluster sizes are determined using the normal distribution
-(\mjeqn{\mu=}{μ=}`num_points\verb{\mjseqn{/}}num_clusters\verb{, \mjeqn{\sigma=\mu/3}{σ=μ/3}), and then assuring that the final cluster sizes add up to }num_points` via the \link{fix_num_points} function.
+(\mjeqn{\mu=}{μ=} \code{num_points} \mjseqn{/} \code{num_clusters},
+\mjeqn{\sigma=\mu/3}{σ=μ/3}), and then assuring that the final cluster sizes
+add up to \code{num_points} via the \link{fix_num_points} function.
 }
 \note{
 This function is stochastic. For reproducibility set a PRNG seed with
