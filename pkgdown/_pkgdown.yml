@@ -8,7 +8,7 @@ footer:
     right: built_with
 navbar:
   structure:
-    left:  [intro, theory, examples, api, dev, news]
+    left:  [intro, theory, examples, reference, dev, news]
   components:
     theory:
      text: Theory
@@ -22,8 +22,8 @@ navbar:
        href: articles/examples3d.html
      - text: Examples in other dimensions
        href: articles/examplesnd.html
-    api:
-     text: API
+    reference:
+     text: Reference
      href: reference/index.html
     dev:
      text: Dev
