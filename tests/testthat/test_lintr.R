@@ -6,7 +6,7 @@ test_that("Package linting", {
   skip_on_cran()
   skip_on_covr()
   lintr::expect_lint_free(
-    path = "../..",
+    path = getwd(),
     linters = lintr::linters_with_defaults(
       # The clugen() function has a large cyclomatic complexity
       # so let's increase this a bit
