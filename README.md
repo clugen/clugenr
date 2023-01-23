@@ -1,5 +1,5 @@
 [![Checks](https://github.com/clugen/clugenr/actions/workflows/check.yml/badge.svg)](https://github.com/clugen/clugenr/actions/workflows/check.yml)
-[![codecov](https://codecov.io/gh/clugen/clugenr/branch/main/graph/badge.svg?token=3MWG03OYS5)](https://codecov.io/gh/clugen/clugenr)
+[![codecov](https://codecov.io/gh/clugen/clugenr/branch/main/graph/badge.svg?token=3MWG03OYS5)](https://app.codecov.io/gh/clugen/clugenr)
 [![docs](https://img.shields.io/badge/docs-latest-blue.svg)](https://clugen.github.io/clugenr/)
 [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/clugenr)](https://CRAN.R-project.org/package=clugenr)
 ![Downloads](https://cranlogs.r-pkg.org/badges/grand-total/clugenr)
@@ -40,7 +40,7 @@ built-in help system. After installation, to access the man pages, invoke the
 help("clugenr")
 ```
 
-The complete online documentation is available [here](https://clugen.github.io/clugenr).
+The complete online documentation is available [here](https://clugen.github.io/clugenr/).
 
 ## Quick start
 
