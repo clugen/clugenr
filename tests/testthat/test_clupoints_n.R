@@ -1,11 +1,5 @@
-# Copyright (c) 2020-2022 Nuno Fachada
+# Copyright (c) 2020-2023 Nuno Fachada
 # Distributed under the MIT License (http://opensource.org/licenses/MIT)
-
-# Number of line directions to test
-ndirs <- 2
-
-# Number of line centers to test
-ncts <- 2
 
 # Create parameter combinations to test
 targs <- expand.grid(seed = seeds, nd = num_dims, len = llengths_mus,

@@ -1,15 +1,9 @@
-# Copyright (c) 2020-2022 Nuno Fachada
+# Copyright (c) 2020-2023 Nuno Fachada
 # Distributed under the MIT License (http://opensource.org/licenses/MIT)
-
-# Number of line directions to test
-ndirs <- 1
-
-# Number of line centers to test
-ncts <- 1
 
 # Create parameter combinations to test
 targs <- expand.grid(seed = seeds, nd = num_dims, len = llengths_mus,
-                     tpts = num_points[num_points < 1000], lat_std = lat_stds)
+                     tpts = num_points, lat_std = lat_stds)
 
 # Loop through all parameter combinations
 for (i in seq.int(1, nrow(targs))) {

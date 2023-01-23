@@ -2,6 +2,9 @@
 # Distributed under the MIT License (http://opensource.org/licenses/MIT)
 
 test_that("Package linting", {
+  skip_if(is_test_mode("cran"))
+  skip_on_cran()
+  skip_on_covr()
   lintr::expect_lint_free(
     path = "../..",
     linters = lintr::linters_with_defaults(

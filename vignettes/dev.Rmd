@@ -43,11 +43,32 @@ The package can be tested as follows:
 devtools::test()
 ```
 
+There are four levels of testing, by increasing thoroughness (and slowness):
+`cran`, `ci`, `normal` and `full`. The first two run by default on CRAN and CI
+environments, respectively. The third one, `normal`, is the default mode when
+running the tests locally, and may take some time (10-20 minutes). The last one,
+`full` is more thorough and can take a few hours. It's possible to define the
+tests thoroughness by setting the `CLUGENR_TEST_MODE` environment variable. For
+example, to simulate how tests would run in CRAN as follows:
+
+```R
+Sys.setenv(CLUGENR_TEST_MODE = "cran")
+devtools::test()
+Sys.unsetenv("CLUGENR_TEST_MODE")
+```
+
 The following instruction updates the documentation, then builds and checks the
 package locally:
 
 ```R
 devtools::check()
+```
+
+It's also possible to define the environment in which to run the tests when
+performing the check:
+
+```R
+devtools::check(env_vars=c(CLUGENR_TEST_MODE="ci"))
 ```
 
 Create or update the generated documentation in `man/`, file collation and

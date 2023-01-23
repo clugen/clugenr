@@ -1,8 +1,5 @@
-# Copyright (c) 2020-2022 Nuno Fachada
+# Copyright (c) 2020-2023 Nuno Fachada
 # Distributed under the MIT License (http://opensource.org/licenses/MIT)
-
-# How many vectors to test?
-nvec <- 5
 
 # Create parameter combinations to test
 targs <- expand.grid(seed = seeds, nd = num_dims)

@@ -1,20 +1,18 @@
-# Copyright (c) 2020-2022 Nuno Fachada
+# Copyright (c) 2020-2023 Nuno Fachada
 # Distributed under the MIT License (http://opensource.org/licenses/MIT)
-
-# Number of line directions to test
-ndirs <- 1
 
 # ################################## #
 # Test clugen() mandatory parameters #
 # ################################## #
 
 # Create parameter combinations to test
-targs <- expand.grid(seed = seeds, nd = num_dims[1:(length(num_dims) - 1)],
-                     nclu = num_clusters[1:(length(num_clusters) - 1)],
-                     tpts = num_points[1:(length(num_points) - 1)],
-                     astd = angles_stds[1:(length(angles_stds) - 3)],
-                     len = llengths_mus, len_std = llengths_sigmas,
-                     lat_std = lat_stds[1:(length(lat_stds) - 1)])
+targs <- expand.grid(seed = seeds, nd = num_dims,
+                     nclu = num_clusters,
+                     tpts = num_points,
+                     astd = angles_stds,
+                     len = llengths_mus,
+                     len_std = llengths_sigmas,
+                     lat_std = lat_stds)
 
 # Loop through all parameter combinations
 for (i in seq.int(1, nrow(targs))) {
@@ -127,13 +125,25 @@ llen_unif_10_20 <- function(nclu, l, lsd) stats::runif(nclu, min = 10, max = 20)
 lang_same <- function(nclu, astd) vector(mode = "double", length = nclu)
 
 # Create parameter combinations to test
-targs <- expand.grid(seed = seeds, nd = c(2, 7), ae = allow_empties,
-                     prjdist_fn = c("norm", "unif", prjdist_equi),
-                     ptdist_fn = c("n-1", "n", ptdist_projs_plus_1),
-                     csz_fn = c(clusizes, csz_equi),
-                     cctr_fn = c(clucenters, cctr_on_a_line),
-                     llen_fn = c(llengths, llen_unif_10_20),
-                     lang_fn = c(angle_deltas, lang_same))
+if (testthat:::on_cran() || is_test_mode("cran")) {
+  # Light tests, for CRAN
+  targs <- expand.grid(seed = seeds, nd = 2, ae = TRUE,
+                       prjdist_fn = list("norm", "unif"),
+                       ptdist_fn = list("n-1", "n"),
+                       csz_fn = list(clusizes),
+                       cctr_fn = list(clucenters),
+                       llen_fn = list(llengths),
+                       lang_fn = list(angle_deltas))
+} else {
+  # Other testing modes will be more thorough
+  targs <- expand.grid(seed = seeds, nd = c(2, 7), ae = allow_empties,
+                       prjdist_fn = list("norm", "unif", prjdist_equi),
+                       ptdist_fn = list("n-1", "n", ptdist_projs_plus_1),
+                       csz_fn = list(clusizes, csz_equi),
+                       cctr_fn = list(clucenters, cctr_on_a_line),
+                       llen_fn = list(llengths, llen_unif_10_20),
+                       lang_fn = list(angle_deltas, lang_same))
+}
 
 # Loop through all parameter combinations
 for (i in seq.int(1, nrow(targs))) {
@@ -287,8 +297,8 @@ for (seed in seeds) {
                              llengths_fn = llengths_fn,
                              angle_deltas_fn = langles_fn,
                              seed = seed),
-                 fixed = TRUE,
-                 "Number of dimensions, `num_dims`, must be > 0")
+                 regexp = "Number of dimensions, `num_dims`, must be > 0",
+                 fixed = TRUE)
 
     # Invalid number of clusters
     expect_error(r <- clugen(nd, 0, tpts, direc, astd, clusep,
@@ -302,8 +312,8 @@ for (seed in seeds) {
                              llengths_fn = llengths_fn,
                              angle_deltas_fn = langles_fn,
                              seed = seed),
-                 fixed = TRUE,
-                 "Number of clusters, `num_clust`, must be > 0")
+                 regexp = "Number of clusters, `num_clust`, must be > 0",
+                 fixed = TRUE)
 
     # Direction needs to have magnitude > 0
     expect_error(r <- clugen(nd, nclu, tpts, c(0, 0, 0), astd, clusep,
@@ -317,8 +327,8 @@ for (seed in seeds) {
                              llengths_fn = llengths_fn,
                              angle_deltas_fn = langles_fn,
                              seed = seed),
-                 fixed = TRUE,
-                 "`direction` must have magnitude > 0")
+                 regexp = "`direction` must have magnitude > 0",
+                 fixed = TRUE)
 
     # Direction needs to have nd dims
     bad_dir <- c(1, 1)
@@ -333,9 +343,10 @@ for (seed in seeds) {
                              llengths_fn = llengths_fn,
                              angle_deltas_fn = langles_fn,
                              seed = seed),
-                 fixed = TRUE,
-                 paste0("Length of `direction` must be equal to `num_dims` (",
-                        length(bad_dir), " != ", nd, ")"))
+                 regexp = paste0(
+                   "Length of `direction` must be equal to `num_dims` (",
+                   length(bad_dir), " != ", nd, ")"),
+                 fixed = TRUE)
 
     # cluster_sep needs to have nd dims
     bad_clusep <- c(10, 10)
@@ -351,8 +362,9 @@ for (seed in seeds) {
                              llengths_fn = llengths_fn,
                              angle_deltas_fn = langles_fn,
                              seed = seed),
-                 regexp = paste0("Length of `cluster_sep` must be equal to `num_dims` (",
-                        length(bad_clusep), " != ", nd, ")"),
+                 regexp = paste0(
+                   "Length of `cluster_sep` must be equal to `num_dims` (",
+                   length(bad_clusep), " != ", nd, ")"),
                  fixed = TRUE)
 
     # cluster_offset needs to have nd dims
@@ -368,9 +380,10 @@ for (seed in seeds) {
                              llengths_fn = llengths_fn,
                              angle_deltas_fn = langles_fn,
                              seed = seed),
-                 fixed = TRUE,
-                 paste0("Length of `cluster_offset` must be equal to ",
-                        "`num_dims` (", length(bad_cluoff), " != ", nd, ")"))
+                 regexp = paste0("Length of `cluster_offset` must be equal to ",
+                                 "`num_dims` (",
+                                 length(bad_cluoff), " != ", nd, ")"),
+                 fixed = TRUE)
 
     # Unknown proj_dist_fn given as string
     expect_error(r <- clugen(nd, nclu, tpts, direc, astd, clusep,
@@ -384,9 +397,10 @@ for (seed in seeds) {
                              llengths_fn = llengths_fn,
                              angle_deltas_fn = langles_fn,
                              seed = seed),
-                 fixed = TRUE,
-                 paste0("`proj_dist_fn` has to be either \"norm\", \"unif\" or",
-                        " user-defined function"))
+                 regexp = paste0(
+                   "`proj_dist_fn` has to be either \"norm\", \"unif\" or",
+                   " user-defined function"),
+                 fixed = TRUE)
 
     # Invalid proj_dist_fn given as function
     expect_error(r <- clugen(nd, nclu, tpts, direc, astd, clusep,
@@ -414,9 +428,9 @@ for (seed in seeds) {
                              llengths_fn = llengths_fn,
                              angle_deltas_fn = langles_fn,
                              seed = seed),
-                 fixed = TRUE,
-                 paste0("point_dist_fn has to be either \"n-1\", \"n\" or ",
-                        "a user-defined function"))
+                 regexp = paste0("point_dist_fn has to be either \"n-1\",",
+                                 " \"n\" or a user-defined function"),
+                 fixed = TRUE)
 
     # Invalid point_dist_fn given as function
     expect_error(r <- clugen(nd, nclu, tpts, direc, astd, clusep,
@@ -430,7 +444,7 @@ for (seed in seeds) {
                              llengths_fn = llengths_fn,
                              angle_deltas_fn = langles_fn,
                              seed = seed),
-                 "argument")
+                 regexp = "argument")
 
   })
 }
