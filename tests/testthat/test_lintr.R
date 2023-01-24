@@ -6,7 +6,7 @@ test_that("Package linting", {
   skip_on_cran()
   skip_on_covr()
   pkgpath <- if (testthat:::on_ci()) {
-    Sys.getenv("GITHUB_WORKSPACE")
+    file.path(Sys.getenv("GITHUB_WORKSPACE"), "R")
   } else {
     getwd()
   }
