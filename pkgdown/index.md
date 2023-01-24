@@ -48,7 +48,7 @@ plot3d(x$points, col = x$clusters, xlab = "x", ylab = "y", zlab = "z", aspect = 
 * [Theory: the _clugen_ algorithm in detail](articles/theory.html)
 * Detailed usage examples: [2D](articles/examples2d.html),
   [3D](articles/examples3d.html), [other dimensions](articles/examplesnd.html)
-* [API](reference/index.html)
+* [Function reference](reference/index.html)
 * [Developing this package](articles/dev.html)
 
 [devtools]: https://cran.r-project.org/package=devtools
