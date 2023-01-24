@@ -68,7 +68,9 @@ It's also possible to define the environment in which to run the tests when
 performing the check:
 
 ```R
-devtools::check(env_vars=c(CLUGENR_TEST_MODE="ci"))
+Sys.setenv(CLUGENR_TEST_MODE = "ci")
+devtools::check()
+Sys.unsetenv("CLUGENR_TEST_MODE")
 ```
 
 Create or update the generated documentation in `man/`, file collation and
