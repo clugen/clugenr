@@ -112,11 +112,11 @@
 #' # 2D example
 #' x <- clugen(2, 5, 1000, c(1, 3), 0.5, c(10, 10), 8, 1.5, 2)
 #' graphics::plot(x$points, col = x$clusters, xlab = "x", ylab = "y", asp = 1)
-#' \dontrun{
+#' \donttest{
 #' # 3D examples, requires rgl library for plotting
 #' x <- clugen(3, 5, 1000, c(2, 3, 4), 0.5, c(15, 13, 14), 7, 1, 2)
 #' rgl::plot3d(x$points, col = x$clusters,
-#'             xlab = "x", ylab = "y", zlab = "z", aspect = T)
+#'             xlab = "x", ylab = "y", zlab = "z", aspect = TRUE)
 #' }
 clugen <- function(num_dims, num_clusters, num_points, direction, angle_disp,
   cluster_sep, llength, llength_disp, lateral_disp,
