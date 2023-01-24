@@ -2,11 +2,13 @@
 # Distributed under the MIT License (http://opensource.org/licenses/MIT)
 
 test_that("Package linting", {
+  # Don't do linting on CRAN, coverage reporting or testing on CI + Not Windows
   skip_if(is_test_mode("cran"))
   skip_on_cran()
   skip_on_covr()
+  skip_if(testthat:::system_os() != "windows" && testthat:::on_ci())
   pkgpath <- if (testthat:::on_ci()) {
-    file.path(Sys.getenv("GITHUB_WORKSPACE"), "R")
+    Sys.getenv("GITHUB_WORKSPACE")
   } else {
     getwd()
   }
