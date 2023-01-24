@@ -1,5 +1,5 @@
 Package: clugenr
-Title: Multidimensional Cluster Generation in R
+Title: Multidimensional Cluster Generation Using Support Lines
 Version: 0.1.0
 Authors@R: 
     person(given = "Nuno",
@@ -7,10 +7,11 @@ Authors@R:
            role = c("aut", "cre", "cph"),
            email = "faken@fakenmc.com",
            comment = c(ORCID = "0000-0002-8487-5837"))
-Description: An R implementation of the clugen algorithm for generating
+Description: An implementation of the clugen algorithm for generating
     multidimensional clusters. Each cluster is supported by a line segment, the
     position, orientation and length of which guide where the respective points
-    are placed.
+    are placed. This package is described in Fachada & de Andrade (2023),
+    "Generating Multidimensional Clusters With Support Lines", under review.
 Depends:
     R (>= 3.6.0)
 Imports:
