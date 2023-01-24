@@ -9,3 +9,5 @@ NEWS.md
 ^pkgdown$
 ^cran-comments\.md$
 ^CRAN-SUBMISSION$
+^doc$
+^Meta$

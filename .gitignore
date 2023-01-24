@@ -45,3 +45,5 @@ docs/
 po/*~
 docs
 inst/doc
+/doc/
+/Meta/
