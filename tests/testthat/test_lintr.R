@@ -5,8 +5,13 @@ test_that("Package linting", {
   skip_if(is_test_mode("cran"))
   skip_on_cran()
   skip_on_covr()
+  pkgpath <- if (testthat:::on_ci()) {
+    Sys.getenv("GITHUB_WORKSPACE")
+  } else {
+    getwd()
+  }
   lintr::expect_lint_free(
-    path = getwd(),
+    path = pkgpath,
     linters = lintr::linters_with_defaults(
       # The clugen() function has a large cyclomatic complexity
       # so let's increase this a bit
