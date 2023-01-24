@@ -35,7 +35,7 @@ RNGversion("3.6.0")
 ```
 
 The 3D examples were plotted with the `plot_examples_3d()` function available
-[here](https://github.com/clugen/clugenr/blob/master/vignettes/plot_examples_3d.R).
+[here](https://github.com/clugen/clugenr/blob/main/vignettes/plot_examples_3d.R).
 
 ## Manipulating the direction of cluster-supporting lines
 

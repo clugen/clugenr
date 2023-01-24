@@ -36,7 +36,7 @@ RNGversion("3.6.0")
 ## Basic 1D example with density plot
 
 The 1D examples were plotted with the `plot_examples_1d()` function available
-[here](https://github.com/clugen/clugenr/blob/master/vignettes/plot_examples_1d.R).
+[here](https://github.com/clugen/clugenr/blob/main/vignettes/plot_examples_1d.R).
 
 ```{r}
 seed <- 222
@@ -64,7 +64,7 @@ plot_examples_1d(list(e = e79, t = "e79: proj_dist_fn='norm'"),
 ## 5D example with default optional arguments
 
 The 5D examples were plotted with the `plot_examples_nd()` function available
-[here](https://github.com/clugen/clugenr/blob/master/vignettes/plot_examples_nd.R).
+[here](https://github.com/clugen/clugenr/blob/main/vignettes/plot_examples_nd.R).
 
 ```{r}
 nd <- 5
