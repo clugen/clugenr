@@ -63,11 +63,11 @@ plot3d(x$points, col = x$clusters, xlab = "x", ylab = "y", zlab = "z", aspect = 
 
 ## See also
 
-* [pyclugen](https://github.com/clugen/pyclugen), a Python implementation of
+* [pyclugen](https://github.com/clugen/pyclugen/), a Python implementation of
   the *clugen* algorithm.
-* [CluGen.jl](https://github.com/clugen/CluGen.jl), an Julia implementation of
+* [CluGen.jl](https://github.com/clugen/CluGen.jl/), an Julia implementation of
   the *clugen* algorithm.
-* [MOCluGen](https://github.com/clugen/MOCluGen), a MATLAB/Octave implementation
+* [MOCluGen](https://github.com/clugen/MOCluGen/), a MATLAB/Octave implementation
   of the *clugen* algorithm.
 
 ## Reference
