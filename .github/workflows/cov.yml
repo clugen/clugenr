@@ -1,10 +1,12 @@
+name: test-coverage
+
 on:
   push:
     branches: [main]
+    paths: [ 'R/**', 'tests/**' ]
   pull_request:
     branches: [main]
-
-name: test-coverage
+    paths: [ 'R/**', 'tests/**' ]
 
 jobs:
   test-coverage:

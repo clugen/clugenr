@@ -1,10 +1,12 @@
+name: R-CMD-check
+
 on:
   push:
     branches: [main]
+    paths: [ 'R/**', 'tests/**' ]
   pull_request:
     branches: [main]
-
-name: R-CMD-check
+    paths: [ 'R/**', 'tests/**' ]
 
 jobs:
   R-CMD-check:
