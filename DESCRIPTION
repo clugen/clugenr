@@ -10,8 +10,8 @@ Authors@R:
 Description: An implementation of the clugen algorithm for generating
     multidimensional clusters. Each cluster is supported by a line segment, the
     position, orientation and length of which guide where the respective points
-    are placed. This package is described in Fachada & de Andrade (2023),
-    "Generating Multidimensional Clusters With Support Lines", under review.
+    are placed. This package is described in Fachada & de Andrade (2023)
+    <doi:10.48550/arXiv.2301.10327>.
 Depends:
     R (>= 3.6.0)
 Imports:
