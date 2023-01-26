@@ -5,7 +5,7 @@ citEntry(entry = "Article",
          author = personList(as.person("Nuno Fachada"),
                              as.person("Diogo de Andrade")),
          journal      = "arXiv",
-         year         = "2023"
+         year         = "2023",
          doi = "10.48550/arXiv.2301.10327",
 
   textVersion  =
