@@ -131,9 +131,7 @@ checks the package locally:</p>
 <p>It’s also possible to define the environment in which to run the
 tests when performing the check:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html" class="external-link">Sys.setenv</a></span><span class="op">(</span>CLUGENR_TEST_MODE <span class="op">=</span> <span class="st">"ci"</span><span class="op">)</span></span>
-<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/check.html" class="external-link">check</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html" class="external-link">Sys.unsetenv</a></span><span class="op">(</span><span class="st">"CLUGENR_TEST_MODE"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/check.html" class="external-link">check</a></span><span class="op">(</span>env_vars<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>CLUGENR_TEST_MODE<span class="op">=</span><span class="st">"ci"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>Create or update the generated documentation in <code>man/</code>,
 file collation and <code>NAMESPACE</code>:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
