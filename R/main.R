@@ -273,7 +273,7 @@ clugen <- function(num_dims, num_clusters, num_points, direction, angle_disp,
 
   # Determine normalized cluster directions
   cluster_directions <- matrix(mapply(rand_vector_at_angle,
-                                      as.list(as.data.frame(t(direction))),
+                                      asplit(direction, 1),
                                       cluster_angles),
                                nrow = num_clusters,
                                byrow = TRUE)
