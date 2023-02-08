@@ -245,7 +245,9 @@ clugen <- function(num_dims, num_clusters, num_points, direction, angle_disp,
   # ############################ #
 
   # Normalize main direction(s)
-  direction <- t(apply(direction, 1, function(x) x / norm(x, "2")))
+  direction <- matrix(apply(direction, 1, function(x) x / norm(x, "2")),
+                      ncol = num_dims,
+                      byrow = TRUE)
 
   # If only one main direction was given, expand it for all clusters
   if (dim(direction)[1] == 1) {
