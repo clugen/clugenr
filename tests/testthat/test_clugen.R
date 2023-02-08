@@ -230,6 +230,42 @@ for (i in seq.int(1, nrow(targs))) {
   }
 }
 
+# ##################### #
+# Reproducibility tests #
+# ##################### #
+
+# Valid parameters
+nd <- 2
+nclu <- 4
+tpts <- 300
+direc <- c(1, 1)
+astd <- pi / 64
+clusep <- c(7, 6.5)
+len_mu <- 4.1
+len_std <- 0.5
+lat_std <- 0.2
+
+for (seed in seeds) {
+
+  test_that(paste0("clugen reproducibility: seed=", seed), {
+
+    # Get results for run 1 with current seed
+    expect_warning(r1 <- clugen(nd, nclu, tpts, direc, astd, clusep,
+                                len_mu, len_std, lat_std,
+                                seed = seed),
+                   regexp = NA)
+
+    # Get results for run 2 with current seed
+    expect_warning(r2 <- clugen(nd, nclu, tpts, direc, astd, clusep,
+                                len_mu, len_std, lat_std,
+                                seed = seed),
+                   regexp = NA)
+
+    # Check that results are exactly the same
+    expect_equal(r1, r2)
+  })
+}
+
 # ######################## #
 # Test clugen() exceptions #
 # ######################## #
