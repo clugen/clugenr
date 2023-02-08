@@ -130,7 +130,9 @@ rand_unit_vector <- function(num_dims) {
 #' arad <- acos((u %*% v) / norm(u,"2") * norm(v, "2")) # Get angle in radians
 #' arad * 180 / pi # Convert to degrees, should be close to 45 degrees
 rand_vector_at_angle <- function(u, angle) {
-  if (isTRUE(all.equal(abs(angle), pi / 2)) && length(u) > 1) {
+  if (angle == 0) {
+    v <- u
+  } else if (isTRUE(all.equal(abs(angle), pi / 2)) && length(u) > 1) {
     v <- rand_ortho_vector(u)
   } else if ((abs(angle) < pi / 2) && length(u) > 1) {
     v <- u + rand_ortho_vector(u) * tan(angle)
