@@ -380,8 +380,8 @@ for (seed in seeds) {
                              angle_deltas_fn = langles_fn,
                              seed = seed),
                  regexp = paste0(
-                   "Length of `direction` must be equal to `num_dims` (",
-                   length(bad_dir), " != ", nd, ")"),
+                   "Length of directions in `direction` must be equal to ",
+                   "`num_dims` (", length(bad_dir), " != ", nd, ")"),
                  fixed = TRUE)
 
     # cluster_sep needs to have nd dims
