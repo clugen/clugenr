@@ -31,7 +31,9 @@ for (i in seq.int(1, nrow(targs))) {
   set.seed(seed)
 
   # Create combination of seed-depending parameters (line directions + clu seps)
-  tsargs <- expand.grid(direc = asplit(get_vecs(ndirs, nd), 1),
+  tsargs <- expand.grid(direc = append(asplit(get_vecs(ndirs, nd), 1),
+                                       list(matrix(rnorm(nclu * nd),
+                                                   ncol = nd))),
                         clusep = asplit(get_clu_seps(nd), 1))
 
   # Loop through line directions and line centers
@@ -79,8 +81,18 @@ for (i in seq.int(1, nrow(targs))) {
         # Check that cluster directions have the correct angles with the main
         # direction
         if (nd > 1) {
+          # In case direction is just a vector, repeat it num_cluster times
+          # into a matrix...
+          if (is.vector(direc) ||
+              (is.array(direc) && length(dim(direc)) == 1)) {
+            direc <- matrix(direc,
+                            nrow = nclu,
+                            ncol = length(direc),
+                            byrow = TRUE)
+          }
+          # ...so we can check each cluster direction separately
           for (i in 1:nclu) {
-            expect_equal(angle_btw(direc, r$directions[i, ]),
+            expect_equal(angle_btw(direc[i, ], r$directions[i, ]),
                          abs(r$angles[i]))
           }
         }
