@@ -3,10 +3,10 @@ name: R-CMD-check
 on:
   push:
     branches: [main]
-    paths: [ 'R/**', 'tests/**' ]
+    paths: [ 'R/**', 'tests/**', '.github/workflows/check.yml' ]
   pull_request:
     branches: [main]
-    paths: [ 'R/**', 'tests/**' ]
+    paths: [ 'R/**', 'tests/**', '.github/workflows/check.yml' ]
 
 jobs:
   R-CMD-check:
