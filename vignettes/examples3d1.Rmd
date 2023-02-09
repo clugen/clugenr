@@ -1,0 +1,178 @@
+---
+title: "Examples in 3D: part I"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Examples in 3D: part I}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteDepends{rgl}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  out.width = "100%",
+  fig.asp = 0.4,
+  fig.width = 8
+)
+```
+
+This vignette contains part I of a set of examples on how to use `clugenr` in
+3D. Examples require the following setup code:
+
+```{r setup, message=FALSE, warning=FALSE}
+library(clugenr)    # The clugenr library
+options(rgl.useNULL = TRUE)  # Create RGL plots in systems without displays (CI)
+library(rgl)
+setupKnitr(autoprint = TRUE) # Render RGL plots directly on generated page
+
+# Load helper functions for plotting examples
+source("plot_examples_3d.R", local = knitr::knit_global())
+
+# Keep examples reproducible in newer R versions
+RNGversion("3.6.0")
+```
+
+The 3D examples were plotted with the `plot_examples_3d()` function available
+[here](https://github.com/clugen/clugenr/blob/main/vignettes/plot_examples_3d.R).
+
+## Manipulating the direction of cluster-supporting lines
+
+### Using the `direction` parameter
+
+```{r}
+seed <- 123
+```
+
+```{r}
+e40 <- clugen(3, 4, 500, c(1, 0, 0), 0, c(10, 10, 10), 15, 1.5, 0.5, seed = seed)
+e41 <- clugen(3, 4, 500, c(1, 1, 1), 0, c(10, 10, 10), 15, 1.5, 0.5, seed = seed)
+e42 <- clugen(3, 4, 500, c(0, 0, 1), 0, c(10, 10, 10), 15, 1.5, 0.5, seed = seed)
+```
+
+```{r}
+plot_examples_3d(list(e = e40, t = "e40: direction = [1, 0, 0]"),
+                 list(e = e41, t = "e41: direction = [1, 1, 1]"),
+                 list(e = e42, t = "e42: direction = [0, 0, 1]"))
+```
+
+### Changing the `angle_disp` parameter and using a custom `angle_deltas_fn` function
+
+```{r}
+seed <- 123
+```
+
+```{r}
+# Custom angle_deltas function: arbitrarily rotate some clusters by 90 degrees
+angdel_90 <- function(nclu, astd) sample(c(0, pi / 2), nclu, replace = TRUE)
+```
+
+```{r}
+e43 <- clugen(3, 6, 1000, c(1, 0, 0), 0, c(10, 10, 10), 15, 1.5, 0.5, seed = seed)
+e44 <- clugen(3, 6, 1000, c(1, 0, 0), pi / 8, c(10, 10, 10), 15, 1.5, 0.5, seed = seed)
+e45 <- clugen(3, 6, 1000, c(1, 0, 0), 0, c(10, 10, 10), 15, 1.5, 0.5, seed = seed,
+              angle_deltas_fn = angdel_90)
+```
+
+```{r}
+plot_examples_3d(list(e = e43, t = "e43: angle_disp = 0"),
+                 list(e = e44, t = "e44: angle_disp = π / 8"),
+                 list(e = e45, t = "e45: custom angle_deltas function"))
+```
+
+
+## Manipulating the length of cluster-supporting lines
+
+```{r}
+seed <- 123
+```
+
+### Using the `llength` parameter
+
+```{r}
+e46 <- clugen(3, 5, 800, c(1, 0, 0), pi / 10, c(10, 10, 10), 0, 0, 0.5,
+              seed = seed, point_dist_fn = "n")
+e47 <- clugen(3, 5, 800, c(1, 0, 0), pi / 10, c(10, 10, 10), 10, 0, 0.5,
+              seed = seed, point_dist_fn = "n")
+e48 <- clugen(3, 5, 800, c(1, 0, 0), pi / 10, c(10, 10, 10), 30, 0, 0.5,
+              seed = seed, point_dist_fn = "n")
+```
+
+```{r}
+plot_examples_3d(list(e = e46, t = "e46: llength = 0"),
+                 list(e = e47, t = "e47: llength = 10"),
+                 list(e = e48, t = "e48: llength = 30"))
+```
+
+### Changing the `llength_disp` parameter and using a custom `llengths_fn` function
+
+```{r}
+# Custom llengths function: line lengths tend to grow for each new cluster
+llen_grow <- function(nclu, llen, llenstd) {
+  llen * (0:(nclu - 1) + rnorm(nclu, sd = llenstd))
+}
+```
+
+```{r}
+e49 <- clugen(3, 5, 800, c(1, 0, 0), pi / 10, c(10, 10, 10), 15,  0.0, 0.5,
+              seed = seed, point_dist_fn = "n")
+e50 <- clugen(3, 5, 800, c(1, 0, 0), pi / 10, c(10, 10, 10), 15, 10.0, 0.5,
+              seed = seed, point_dist_fn = "n")
+e51 <- clugen(3, 5, 800, c(1, 0, 0), pi / 10, c(10, 10, 10), 10,  0.1, 0.5,
+              seed = seed, point_dist_fn = "n", llengths_fn = llen_grow)
+```
+
+```{r}
+plot_examples_3d(list(e = e49, t = "e49: llength_disp = 0.0"),
+                 list(e = e50, t = "e50: llength_disp = 10.0"),
+                 list(e = e51, t = "e51: custom llengths function"))
+```
+
+## Manipulating relative cluster positions
+
+### Using the `cluster_sep` parameter
+
+```{r}
+seed <- 321
+```
+
+```{r}
+e52 <- clugen(3, 8, 1000, c(1, 1, 1), pi / 4, c(30, 10, 10), 25, 4, 3, seed = seed)
+e53 <- clugen(3, 8, 1000, c(1, 1, 1), pi / 4, c(10, 30, 10), 25, 4, 3, seed = seed)
+e54 <- clugen(3, 8, 1000, c(1, 1, 1), pi / 4, c(10, 10, 30), 25, 4, 3, seed = seed)
+```
+
+```{r}
+plot_examples_3d(list(e = e52, t = "e52: cluster_sep = [30, 10, 10]"),
+                 list(e = e53, t = "e53: cluster_sep = [10, 30, 10]"),
+                 list(e = e54, t = "e54: cluster_sep = [10, 10, 30]"))
+```
+
+### Changing the `cluster_offset` parameter and using a custom `clucenters_fn` function
+
+```{r}
+seed <- 321
+```
+
+```{r}
+# Custom clucenters function: places clusters in a diagonal
+centers_diag <- function(nclu, csep, coff) {
+  matrix(1, nrow = nclu, ncol = length(csep)) * (1:nclu * max(csep)) +
+    rep(coff, each = nclu)
+}
+```
+
+```{r}
+e55 <- clugen(3, 8, 1000, c(1, 1, 1), pi / 4, c(10, 10, 10), 12, 3, 2.5, seed = seed)
+e56 <- clugen(3, 8, 1000, c(1, 1, 1), pi / 4, c(10, 10, 10), 12, 3, 2.5, seed = seed,
+              cluster_offset = c(20, -20, 20))
+e57 <- clugen(3, 8, 1000, c(1, 1, 1), pi / 4, c(10, 10, 10), 12, 3, 2.5, seed = seed,
+              cluster_offset = c(-50, -50, -50), clucenters_fn = centers_diag)
+```
+
+```{r}
+plot_examples_3d(list(e = e55, t = "e55: default"),
+                 list(e = e56, t = "e56: cluster_offset = [20, -20, 20]"),
+                 list(e = e57, t = "e57: custom clucenters function"))
+```

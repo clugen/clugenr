@@ -11,20 +11,22 @@ navbar:
     left:  [intro, theory, examples, reference, dev, news]
   components:
     theory:
-     text: Theory
+     text: "Theory"
      href: articles/theory.html
     examples:
-     text: Examples
+     text: "Examples"
      menu:
-     - text: Examples in 2D
+     - text: "Examples in 2D"
        href: articles/examples2d.html
-     - text: Examples in 3D
-       href: articles/examples3d.html
-     - text: Examples in other dimensions
+     - text: "Examples in 3D: part I"
+       href: articles/examples3d1.html
+     - text: "Examples in 3D: part II"
+       href: articles/examples3d2.html
+     - text: "Examples in other dimensions"
        href: articles/examplesnd.html
     reference:
-     text: Reference
+     text: "Reference"
      href: reference/index.html
     dev:
-     text: Dev
+     text: "Dev"
      href: articles/dev.html
