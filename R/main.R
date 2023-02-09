@@ -152,7 +152,7 @@ clugen <- function(num_dims, num_clusters, num_points, direction, angle_disp,
   } else {
     # The `direction` array must be a vector or a matrix, so if we get here
     # it means we have invalid arguments
-    stop("`direction` must be a vector or a matrix but is ", class(direction))
+    stop("`direction` must be a vector (1D array) or a matrix (2D array)")
   }
 
   # Check that `direction` has num_dims dimensions
