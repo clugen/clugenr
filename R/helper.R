@@ -28,27 +28,13 @@
 #' angle_btw(c(1.0, 1.0, 1.0, 1.0), c(1.0, 0.0, 0.0, 0.0)) * 180 / pi
 angle_btw <- function(v1, v2) {
 
-  signbit <- function(x) {
-    x < 0
-  }
-
   u1 <- v1 / norm(v1, "2")
   u2 <- v2 / norm(v2, "2")
 
   y <- u1 - u2
   x <- u1 + u2
 
-  a0 <- 2 * atan(norm(y, "2") / norm(x, "2"))
-
-  if (!(signbit(a0) || signbit(pi - a0))) {
-    a <- a0
-  } else if (signbit(a0)) {
-    a <- 0.0
-  } else {
-    a <- pi
-  }
-
-  a
+  2 * atan(norm(y, "2") / norm(x, "2"))
 }
 
 #' Create points from their projections on a cluster-supporting line
