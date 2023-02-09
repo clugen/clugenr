@@ -32,8 +32,9 @@ clugen(
 
 \item{num_points}{Total number of points to generate.}
 
-\item{direction}{Average direction of the cluster-supporting lines (vector of
-length \code{num_dims}).}
+\item{direction}{Average direction of the cluster-supporting lines. Can be
+a vector of length \code{num_dims} (same direction for all clusters) or a
+matrix of size \code{num_clusters} x \code{num_dims} (one direction per cluster).}
 
 \item{angle_disp}{Angle dispersion of cluster-supporting lines (radians).}
 
@@ -106,13 +107,13 @@ specify a custom function for this purpose, which must follow \link{llengths}
 signature.}
 
 \item{angle_deltas_fn}{Distribution of line angle differences with respect to
-\code{direction}. By default, the angles between \code{direction} and the direction of
-cluster-supporting lines are determined by the \link{angle_deltas} function, which
-uses the wrapped normal distribution (\mjeqn{\mu=0}{μ=0},
-\mjeqn{\sigma=}{σ=} \code{angle_disp} ) with support in the interval
-\mjeqn{\left[-\pi/2,\pi/2\right]}{[-π/2, π/2]}. This parameter allows the
-user to specify a custom function for this purpose, which must follow
-\link{angle_deltas} signature.}
+\code{direction}. By default, the angles between the main \code{direction} of each
+cluster and the final directions of their cluster-supporting lines are
+determined by the \link{angle_deltas} function, which uses the wrapped normal
+distribution (\mjeqn{\mu=0}{μ=0}, \mjeqn{\sigma=}{σ=} \code{angle_disp} ) with
+support in the interval \mjeqn{\left[-\pi/2,\pi/2\right]}{[-π/2, π/2]}. This
+parameter allows the user to specify a custom function for this purpose,
+which must follow \link{angle_deltas} signature.}
 
 \item{seed}{An integer used to initialize the PRNG, allowing for reproducible
 results. If specified, \code{seed} is simply passed to \link{set.seed}.}
@@ -130,7 +131,7 @@ projections on the cluster-supporting lines.
 each cluster.
 \item \code{centers}: A \code{num_clusters} x \code{num_dims} matrix with the
 coordinates of the cluster centers.
-\item \code{directions}: A \code{num_clusters} x \code{num_dims} matrix with the
+\item \code{directions}: A \code{num_clusters} x \code{num_dims} matrix with the final
 direction of each cluster-supporting line.
 \item \code{angles}: A \code{num_clusters} x 1 vector with the angles between the
 cluster-supporting lines and the main direction.

@@ -24,8 +24,8 @@
 #' @param num_clusters Number of clusters to generate.
 #' @param num_points Total number of points to generate.
 #' @param direction Average direction of the cluster-supporting lines. Can be
-#' given as the same vector for all clusters (vector of length `num_dims`) or as
-#' a direction per cluster matrix (`num_clusters` x `num_dims`).
+#' a vector of length `num_dims` (same direction for all clusters) or a
+#' matrix of size `num_clusters` x `num_dims` (one direction per cluster).
 #' @param angle_disp Angle dispersion of cluster-supporting lines (radians).
 #' @param cluster_sep Average cluster separation in each dimension (vector of
 #' length `num_dims`).
