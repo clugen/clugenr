@@ -46,15 +46,15 @@ seed <- 123
 ```
 
 ```{r}
-e40 <- clugen(3, 4, 500, c(1, 0, 0), 0, c(10, 10, 10), 15, 1.5, 0.5, seed = seed)
-e41 <- clugen(3, 4, 500, c(1, 1, 1), 0, c(10, 10, 10), 15, 1.5, 0.5, seed = seed)
-e42 <- clugen(3, 4, 500, c(0, 0, 1), 0, c(10, 10, 10), 15, 1.5, 0.5, seed = seed)
+e040 <- clugen(3, 4, 500, c(1, 0, 0), 0, c(10, 10, 10), 15, 1.5, 0.5, seed = seed)
+e041 <- clugen(3, 4, 500, c(1, 1, 1), 0, c(10, 10, 10), 15, 1.5, 0.5, seed = seed)
+e042 <- clugen(3, 4, 500, c(0, 0, 1), 0, c(10, 10, 10), 15, 1.5, 0.5, seed = seed)
 ```
 
 ```{r}
-plot_examples_3d(list(e = e40, t = "e40: direction = [1, 0, 0]"),
-                 list(e = e41, t = "e41: direction = [1, 1, 1]"),
-                 list(e = e42, t = "e42: direction = [0, 0, 1]"))
+plot_examples_3d(list(e = e040, t = "e040: direction = [1, 0, 0]"),
+                 list(e = e041, t = "e041: direction = [1, 1, 1]"),
+                 list(e = e042, t = "e042: direction = [0, 0, 1]"))
 ```
 
 ### Changing the `angle_disp` parameter and using a custom `angle_deltas_fn` function
@@ -69,16 +69,16 @@ angdel_90 <- function(nclu, astd) sample(c(0, pi / 2), nclu, replace = TRUE)
 ```
 
 ```{r}
-e43 <- clugen(3, 6, 1000, c(1, 0, 0), 0, c(10, 10, 10), 15, 1.5, 0.5, seed = seed)
-e44 <- clugen(3, 6, 1000, c(1, 0, 0), pi / 8, c(10, 10, 10), 15, 1.5, 0.5, seed = seed)
-e45 <- clugen(3, 6, 1000, c(1, 0, 0), 0, c(10, 10, 10), 15, 1.5, 0.5, seed = seed,
+e043 <- clugen(3, 6, 1000, c(1, 0, 0), 0, c(10, 10, 10), 15, 1.5, 0.5, seed = seed)
+e044 <- clugen(3, 6, 1000, c(1, 0, 0), pi / 8, c(10, 10, 10), 15, 1.5, 0.5, seed = seed)
+e045 <- clugen(3, 6, 1000, c(1, 0, 0), 0, c(10, 10, 10), 15, 1.5, 0.5, seed = seed,
               angle_deltas_fn = angdel_90)
 ```
 
 ```{r}
-plot_examples_3d(list(e = e43, t = "e43: angle_disp = 0"),
-                 list(e = e44, t = "e44: angle_disp = π / 8"),
-                 list(e = e45, t = "e45: custom angle_deltas function"))
+plot_examples_3d(list(e = e043, t = "e043: angle_disp = 0"),
+                 list(e = e044, t = "e044: angle_disp = π / 8"),
+                 list(e = e045, t = "e045: custom angle_deltas function"))
 ```
 
 
@@ -91,18 +91,18 @@ seed <- 123
 ### Using the `llength` parameter
 
 ```{r}
-e46 <- clugen(3, 5, 800, c(1, 0, 0), pi / 10, c(10, 10, 10), 0, 0, 0.5,
+e046 <- clugen(3, 5, 800, c(1, 0, 0), pi / 10, c(10, 10, 10), 0, 0, 0.5,
               seed = seed, point_dist_fn = "n")
-e47 <- clugen(3, 5, 800, c(1, 0, 0), pi / 10, c(10, 10, 10), 10, 0, 0.5,
+e047 <- clugen(3, 5, 800, c(1, 0, 0), pi / 10, c(10, 10, 10), 10, 0, 0.5,
               seed = seed, point_dist_fn = "n")
-e48 <- clugen(3, 5, 800, c(1, 0, 0), pi / 10, c(10, 10, 10), 30, 0, 0.5,
+e048 <- clugen(3, 5, 800, c(1, 0, 0), pi / 10, c(10, 10, 10), 30, 0, 0.5,
               seed = seed, point_dist_fn = "n")
 ```
 
 ```{r}
-plot_examples_3d(list(e = e46, t = "e46: llength = 0"),
-                 list(e = e47, t = "e47: llength = 10"),
-                 list(e = e48, t = "e48: llength = 30"))
+plot_examples_3d(list(e = e046, t = "e046: llength = 0"),
+                 list(e = e047, t = "e047: llength = 10"),
+                 list(e = e048, t = "e048: llength = 30"))
 ```
 
 ### Changing the `llength_disp` parameter and using a custom `llengths_fn` function
@@ -115,18 +115,18 @@ llen_grow <- function(nclu, llen, llenstd) {
 ```
 
 ```{r}
-e49 <- clugen(3, 5, 800, c(1, 0, 0), pi / 10, c(10, 10, 10), 15,  0.0, 0.5,
+e049 <- clugen(3, 5, 800, c(1, 0, 0), pi / 10, c(10, 10, 10), 15,  0.0, 0.5,
               seed = seed, point_dist_fn = "n")
-e50 <- clugen(3, 5, 800, c(1, 0, 0), pi / 10, c(10, 10, 10), 15, 10.0, 0.5,
+e050 <- clugen(3, 5, 800, c(1, 0, 0), pi / 10, c(10, 10, 10), 15, 10.0, 0.5,
               seed = seed, point_dist_fn = "n")
-e51 <- clugen(3, 5, 800, c(1, 0, 0), pi / 10, c(10, 10, 10), 10,  0.1, 0.5,
+e051 <- clugen(3, 5, 800, c(1, 0, 0), pi / 10, c(10, 10, 10), 10,  0.1, 0.5,
               seed = seed, point_dist_fn = "n", llengths_fn = llen_grow)
 ```
 
 ```{r}
-plot_examples_3d(list(e = e49, t = "e49: llength_disp = 0.0"),
-                 list(e = e50, t = "e50: llength_disp = 10.0"),
-                 list(e = e51, t = "e51: custom llengths function"))
+plot_examples_3d(list(e = e049, t = "e049: llength_disp = 0.0"),
+                 list(e = e050, t = "e050: llength_disp = 10.0"),
+                 list(e = e051, t = "e051: custom llengths function"))
 ```
 
 ## Manipulating relative cluster positions
@@ -138,15 +138,15 @@ seed <- 321
 ```
 
 ```{r}
-e52 <- clugen(3, 8, 1000, c(1, 1, 1), pi / 4, c(30, 10, 10), 25, 4, 3, seed = seed)
-e53 <- clugen(3, 8, 1000, c(1, 1, 1), pi / 4, c(10, 30, 10), 25, 4, 3, seed = seed)
-e54 <- clugen(3, 8, 1000, c(1, 1, 1), pi / 4, c(10, 10, 30), 25, 4, 3, seed = seed)
+e052 <- clugen(3, 8, 1000, c(1, 1, 1), pi / 4, c(30, 10, 10), 25, 4, 3, seed = seed)
+e053 <- clugen(3, 8, 1000, c(1, 1, 1), pi / 4, c(10, 30, 10), 25, 4, 3, seed = seed)
+e054 <- clugen(3, 8, 1000, c(1, 1, 1), pi / 4, c(10, 10, 30), 25, 4, 3, seed = seed)
 ```
 
 ```{r}
-plot_examples_3d(list(e = e52, t = "e52: cluster_sep = [30, 10, 10]"),
-                 list(e = e53, t = "e53: cluster_sep = [10, 30, 10]"),
-                 list(e = e54, t = "e54: cluster_sep = [10, 10, 30]"))
+plot_examples_3d(list(e = e052, t = "e052: cluster_sep = [30, 10, 10]"),
+                 list(e = e053, t = "e053: cluster_sep = [10, 30, 10]"),
+                 list(e = e054, t = "e054: cluster_sep = [10, 10, 30]"))
 ```
 
 ### Changing the `cluster_offset` parameter and using a custom `clucenters_fn` function
@@ -164,15 +164,16 @@ centers_diag <- function(nclu, csep, coff) {
 ```
 
 ```{r}
-e55 <- clugen(3, 8, 1000, c(1, 1, 1), pi / 4, c(10, 10, 10), 12, 3, 2.5, seed = seed)
-e56 <- clugen(3, 8, 1000, c(1, 1, 1), pi / 4, c(10, 10, 10), 12, 3, 2.5, seed = seed,
+e055 <- clugen(3, 8, 1000, c(1, 1, 1), pi / 4, c(10, 10, 10), 12, 3, 2.5, seed = seed)
+e056 <- clugen(3, 8, 1000, c(1, 1, 1), pi / 4, c(10, 10, 10), 12, 3, 2.5, seed = seed,
               cluster_offset = c(20, -20, 20))
-e57 <- clugen(3, 8, 1000, c(1, 1, 1), pi / 4, c(10, 10, 10), 12, 3, 2.5, seed = seed,
+e057 <- clugen(3, 8, 1000, c(1, 1, 1), pi / 4, c(10, 10, 10), 12, 3, 2.5, seed = seed,
               cluster_offset = c(-50, -50, -50), clucenters_fn = centers_diag)
 ```
 
 ```{r}
-plot_examples_3d(list(e = e55, t = "e55: default"),
-                 list(e = e56, t = "e56: cluster_offset = [20, -20, 20]"),
-                 list(e = e57, t = "e57: custom clucenters function"))
+plot_examples_3d(list(e = e055, t = "e055: default"),
+                 list(e = e056, t = "e056: cluster_offset = [20, -20, 20]"),
+                 list(e = e057, t = "e057: custom clucenters function"))
 ```
+

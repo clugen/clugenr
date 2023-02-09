@@ -46,32 +46,32 @@ seed <- 456
 ### Normal projection placement (default): `proj_dist_fn = "norm"`
 
 ```{r}
-e58 <- clugen(3, 4, 1000, c(1, 0, 0), pi / 2, c(20, 20, 20), 13, 2, 0.0, seed = seed)
-e59 <- clugen(3, 4, 1000, c(1, 0, 0), pi / 2, c(20, 20, 20), 13, 2, 1.0, seed = seed)
-e60 <- clugen(3, 4, 1000, c(1, 0, 0), pi / 2, c(20, 20, 20), 13, 2, 3.0, seed = seed)
+e058 <- clugen(3, 4, 1000, c(1, 0, 0), pi / 2, c(20, 20, 20), 13, 2, 0.0, seed = seed)
+e059 <- clugen(3, 4, 1000, c(1, 0, 0), pi / 2, c(20, 20, 20), 13, 2, 1.0, seed = seed)
+e060 <- clugen(3, 4, 1000, c(1, 0, 0), pi / 2, c(20, 20, 20), 13, 2, 3.0, seed = seed)
 ```
 
 ```{r}
-plot_examples_3d(list(e = e58, t = "e58: lateral_disp = 0"),
-                 list(e = e59, t = "e59: lateral_disp = 1"),
-                 list(e = e60, t = "e60: lateral_disp = 3"))
+plot_examples_3d(list(e = e058, t = "e058: lateral_disp = 0"),
+                 list(e = e059, t = "e059: lateral_disp = 1"),
+                 list(e = e060, t = "e060: lateral_disp = 3"))
 ```
 
 ### Uniform projection placement: `proj_dist_fn = "unif"`
 
 ```{r}
-e61 <- clugen(3, 4, 1000, c(1, 0, 0), pi / 2, c(20, 20, 20), 13, 2, 0.0, seed = seed,
+e061 <- clugen(3, 4, 1000, c(1, 0, 0), pi / 2, c(20, 20, 20), 13, 2, 0.0, seed = seed,
               proj_dist_fn = "unif")
-e62 <- clugen(3, 4, 1000, c(1, 0, 0), pi / 2, c(20, 20, 20), 13, 2, 1.0, seed = seed,
+e062 <- clugen(3, 4, 1000, c(1, 0, 0), pi / 2, c(20, 20, 20), 13, 2, 1.0, seed = seed,
               proj_dist_fn = "unif")
-e63 <- clugen(3, 4, 1000, c(1, 0, 0), pi / 2, c(20, 20, 20), 13, 2, 3.0, seed = seed,
+e063 <- clugen(3, 4, 1000, c(1, 0, 0), pi / 2, c(20, 20, 20), 13, 2, 3.0, seed = seed,
               proj_dist_fn = "unif")
 ```
 
 ```{r}
-plot_examples_3d(list(e = e61, t = "e61: lateral_disp = 0"),
-                 list(e = e62, t = "e62: lateral_disp = 1"),
-                 list(e = e63, t = "e63: lateral_disp = 3"))
+plot_examples_3d(list(e = e061, t = "e061: lateral_disp = 0"),
+                 list(e = e062, t = "e062: lateral_disp = 1"),
+                 list(e = e063, t = "e063: lateral_disp = 3"))
 ```
 
 ### Custom projection placement using the Beta distribution
@@ -82,18 +82,18 @@ proj_beta <- function(len, n) len * rbeta(n, 0.1, 0.1) - len / 2
 ```
 
 ```{r}
-e64 <- clugen(3, 4, 1000, c(1, 0, 0), pi / 2, c(20, 20, 20), 13, 2, 0.0, seed = seed,
+e064 <- clugen(3, 4, 1000, c(1, 0, 0), pi / 2, c(20, 20, 20), 13, 2, 0.0, seed = seed,
               proj_dist_fn = proj_beta)
-e65 <- clugen(3, 4, 1000, c(1, 0, 0), pi / 2, c(20, 20, 20), 13, 2, 1.0, seed = seed,
+e065 <- clugen(3, 4, 1000, c(1, 0, 0), pi / 2, c(20, 20, 20), 13, 2, 1.0, seed = seed,
               proj_dist_fn = proj_beta)
-e66 <- clugen(3, 4, 1000, c(1, 0, 0), pi / 2, c(20, 20, 20), 13, 2, 3.0, seed = seed,
+e066 <- clugen(3, 4, 1000, c(1, 0, 0), pi / 2, c(20, 20, 20), 13, 2, 3.0, seed = seed,
               proj_dist_fn = proj_beta)
 ```
 
 ```{r}
-plot_examples_3d(list(e = e64, t = "e64: lateral_disp = 0"),
-                 list(e = e65, t = "e65: lateral_disp = 1"),
-                 list(e = e66, t = "e66: lateral_disp = 3"))
+plot_examples_3d(list(e = e064, t = "e064: lateral_disp = 0"),
+                 list(e = e065, t = "e065: lateral_disp = 1"),
+                 list(e = e066, t = "e066: lateral_disp = 3"))
 ```
 
 ## Controlling final point positions from their projections on the cluster-supporting line
@@ -110,34 +110,34 @@ proj_beta <- function(len, n) len * rbeta(n, 0.1, 0.1) - len / 2
 ### Points on hyperplane orthogonal to cluster-supporting line (default): `point_dist_fn = "n-1"`
 
 ```{r}
-e67 <- clugen(3, 5, 1500, c(1, 0, 0), pi / 3, c(20, 20, 20), 22, 3, 2, seed = seed)
-e68 <- clugen(3, 5, 1500, c(1, 0, 0), pi / 3, c(20, 20, 20), 22, 3, 2, seed = seed,
+e067 <- clugen(3, 5, 1500, c(1, 0, 0), pi / 3, c(20, 20, 20), 22, 3, 2, seed = seed)
+e068 <- clugen(3, 5, 1500, c(1, 0, 0), pi / 3, c(20, 20, 20), 22, 3, 2, seed = seed,
              proj_dist_fn = "unif")
-e69 <- clugen(3, 5, 1500, c(1, 0, 0), pi / 3, c(20, 20, 20), 22, 3, 2, seed = seed,
+e069 <- clugen(3, 5, 1500, c(1, 0, 0), pi / 3, c(20, 20, 20), 22, 3, 2, seed = seed,
              proj_dist_fn = proj_beta)
 ```
 
 ```{r}
-plot_examples_3d(list(e = e67, t = "e67: proj_dist_fn = 'norm' (default)"),
-                 list(e = e68, t = "e68: proj_dist_fn = 'unif'"),
-                 list(e = e69, t = "e69: custom proj_dist_fn (Beta dist.)"))
+plot_examples_3d(list(e = e067, t = "e067: proj_dist_fn = 'norm' (default)"),
+                 list(e = e068, t = "e068: proj_dist_fn = 'unif'"),
+                 list(e = e069, t = "e069: custom proj_dist_fn (Beta dist.)"))
 ```
 
 ### Points around projection on cluster-supporting line: `point_dist_fn = "n"`
 
 ```{r}
-e70 <- clugen(3, 5, 1500, c(1, 0, 0), pi / 3, c(20, 20, 20), 22, 3, 2, seed = seed,
+e070 <- clugen(3, 5, 1500, c(1, 0, 0), pi / 3, c(20, 20, 20), 22, 3, 2, seed = seed,
               point_dist_fn = "n")
-e71 <- clugen(3, 5, 1500, c(1, 0, 0), pi / 3, c(20, 20, 20), 22, 3, 2, seed = seed,
+e071 <- clugen(3, 5, 1500, c(1, 0, 0), pi / 3, c(20, 20, 20), 22, 3, 2, seed = seed,
               point_dist_fn = "n", proj_dist_fn = "unif")
-e72 <- clugen(3, 5, 1500, c(1, 0, 0), pi / 3, c(20, 20, 20), 22, 3, 2, seed = seed,
+e072 <- clugen(3, 5, 1500, c(1, 0, 0), pi / 3, c(20, 20, 20), 22, 3, 2, seed = seed,
               point_dist_fn = "n", proj_dist_fn = proj_beta)
 ```
 
 ```{r}
-plot_examples_3d(list(e = e70, t = "e70: proj_dist_fn = 'norm' (default)"),
-                 list(e = e71, t = "e71: proj_dist_fn = 'unif'"),
-                 list(e = e72, t = "e72: custom proj_dist_fn (Beta dist.)"))
+plot_examples_3d(list(e = e070, t = "e070: proj_dist_fn = 'norm' (default)"),
+                 list(e = e071, t = "e071: proj_dist_fn = 'unif'"),
+                 list(e = e072, t = "e072: custom proj_dist_fn (Beta dist.)"))
 ```
 
 ### Custom point placement using the exponential distribution
@@ -151,18 +151,18 @@ clupoints_n_1_exp <- function(projs, lat_std, len, clu_dir, clu_ctr) {
 ```
 
 ```{r}
-e73 <- clugen(3, 5, 1500, c(1, 0, 0), pi / 3, c(20, 20, 20), 22, 3, 2, seed = seed,
+e073 <- clugen(3, 5, 1500, c(1, 0, 0), pi / 3, c(20, 20, 20), 22, 3, 2, seed = seed,
               point_dist_fn = clupoints_n_1_exp)
-e74 <- clugen(3, 5, 1500, c(1, 0, 0), pi / 3, c(20, 20, 20), 22, 3, 2, seed = seed,
+e074 <- clugen(3, 5, 1500, c(1, 0, 0), pi / 3, c(20, 20, 20), 22, 3, 2, seed = seed,
               point_dist_fn = clupoints_n_1_exp, proj_dist_fn = "unif")
-e75 <- clugen(3, 5, 1500, c(1, 0, 0), pi / 3, c(20, 20, 20), 22, 3, 2, seed = seed,
+e075 <- clugen(3, 5, 1500, c(1, 0, 0), pi / 3, c(20, 20, 20), 22, 3, 2, seed = seed,
               point_dist_fn = clupoints_n_1_exp, proj_dist_fn = proj_beta)
 ```
 
 ```{r}
-plot_examples_3d(list(e = e73, t = "e73: proj_dist_fn = 'norm' (default)"),
-                 list(e = e74, t = "e74: proj_dist_fn = 'unif'"),
-                 list(e = e75, t = "e75: custom proj_dist_fn (Beta dist.)"))
+plot_examples_3d(list(e = e073, t = "e073: proj_dist_fn = 'norm' (default)"),
+                 list(e = e074, t = "e074: proj_dist_fn = 'unif'"),
+                 list(e = e075, t = "e075: custom proj_dist_fn (Beta dist.)"))
 ```
 
 ### Manipulating cluster sizes
@@ -179,29 +179,30 @@ centers_fixed <- function(nclu, csep, coff) {
          nrow = nclu, byrow = TRUE)
 }
 
-# Custom clusizes_fn (e77): cluster sizes determined via the uniform distribution,
+# Custom clusizes_fn (e077): cluster sizes determined via the uniform distribution,
 # no correction for total points
 clusizes_unif <- function(nclu, npts, ae) sample(2 * npts / nclu, nclu, replace = TRUE)
 
-# Custom clusizes_fn (e78): clusters all have the same size, no correction for
+# Custom clusizes_fn (e078): clusters all have the same size, no correction for
 # total points
 clusizes_equal <- function(nclu, npts, ae) npts %/% nclu * rep.int(1, nclu)
 ```
 
 ```{r}
-e76 <- clugen(3, 4, 1500, c(1, 1, 1), pi, c(20, 20, 20), 0, 0, 5, seed = seed,
+e076 <- clugen(3, 4, 1500, c(1, 1, 1), pi, c(20, 20, 20), 0, 0, 5, seed = seed,
               point_dist_fn = "n",
               clucenters_fn = centers_fixed)
-e77 <- clugen(3, 4, 1500, c(1, 1, 1), pi, c(20, 20, 20), 0, 0, 5, seed = seed,
+e077 <- clugen(3, 4, 1500, c(1, 1, 1), pi, c(20, 20, 20), 0, 0, 5, seed = seed,
               clusizes_fn = clusizes_unif, point_dist_fn = "n",
               clucenters_fn = centers_fixed)
-e78 <- clugen(3, 4, 1500, c(1, 1, 1), pi, c(20, 20, 20), 0, 0, 5, seed = seed,
+e078 <- clugen(3, 4, 1500, c(1, 1, 1), pi, c(20, 20, 20), 0, 0, 5, seed = seed,
               clusizes_fn = clusizes_equal, point_dist_fn = "n",
               clucenters_fn = centers_fixed)
 ```
 
 ```{r}
-plot_examples_3d(list(e = e76, t = "e76: normal dist. (default)"),
-                 list(e = e77, t = "e77: unif. dist. (custom)"),
-                 list(e = e78, t = "e78: equal size (custom)"))
+plot_examples_3d(list(e = e076, t = "e076: normal dist. (default)"),
+                 list(e = e077, t = "e077: unif. dist. (custom)"),
+                 list(e = e078, t = "e078: equal size (custom)"))
 ```
+
