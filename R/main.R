@@ -322,10 +322,6 @@ clugen <- function(num_dims, num_clusters, num_points, direction, angle_disp,
                             ptproj_dist_fn_center)
     point_projections[idx_start:idx_end, ] <- proj
 
-    # If we only have one point in this cluster, convert proj to matrix,
-    # which is the format expected by pt_from_proj_fn
-    if (is.vector(proj)) dim(proj) <- c(1, num_dims)
-
     # Determine points from their projections on the line
     points[idx_start:idx_end, ] <- pt_from_proj_fn(proj,
                                                    lateral_disp,
