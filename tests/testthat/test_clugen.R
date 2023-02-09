@@ -396,6 +396,26 @@ for (seed in seeds) {
                    "`num_dims` (", length(bad_dir), " != ", nd, ")"),
                  fixed = TRUE)
 
+    # Specific direction for each cluster requires one direction per cluster
+    expect_error(r <- clugen(nd, nclu, tpts,
+                             # but we're passing one extra direction
+                             matrix(rnorm(nd * (nclu + 1)), ncol = nd),
+                             astd, clusep,
+                             len_mu, len_std, lat_std,
+                             allow_empty = ae,
+                             cluster_offset = clu_off,
+                             proj_dist_fn = prj_dist,
+                             point_dist_fn = pt_dist,
+                             clusizes_fn = csizes_fn,
+                             clucenters_fn = ccenters_fn,
+                             llengths_fn = llengths_fn,
+                             angle_deltas_fn = langles_fn,
+                             seed = seed),
+                 regexp = paste0("Number of rows in `direction` must be the ",
+                                 "same as the number of clusters (",
+                                 nclu + 1, " != ", nclu, ")"),
+                 fixed = TRUE)
+
     # Direction needs to be a 1D array (vector) or 2D array (matrix)
     expect_error(r <- clugen(nd, nclu, tpts,
                                # but we're passing a 3D array
