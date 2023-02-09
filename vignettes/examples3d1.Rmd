@@ -81,6 +81,33 @@ plot_examples_3d(list(e = e043, t = "e043: angle_disp = 0"),
                  list(e = e045, t = "e045: custom angle_deltas function"))
 ```
 
+### Specifying a main `direction` for each cluster and changing `angle_disp`
+
+```{r}
+seed <- 123
+```
+
+```{r}
+# Define a main direction for each cluster
+dirs <- matrix(c(1, 1, 1,
+                 0, 0, 1,
+                 1, 0, 0,
+                 0, 1, 0,
+                 -1, 1, 1),
+               nrow = 5, byrow=TRUE)
+```
+
+```{r}
+e046 <- clugen(3, 5, 1000, dirs, 0, rep.int(0, 3), 20, 0, 0.25, seed = seed)
+e047 <- clugen(3, 5, 1000, dirs, pi / 12, rep.int(0, 3), 20, 0, 0.25, seed = seed)
+e048 <- clugen(3, 5, 1000, dirs, pi / 4, rep.int(0, 3), 20, 0, 0.25, seed = seed)
+```
+
+```{r}
+plot_examples_3d(list(e = e046, t = "e046: angle_disp = 0"),
+                 list(e = e047, t = "e047: angle_disp = π / 12"),
+                 list(e = e048, t = "e048: angle_disp = π / 4"))
+```
 
 ## Manipulating the length of cluster-supporting lines
 
