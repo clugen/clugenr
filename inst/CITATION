@@ -1,16 +1,9 @@
 citHeader("To cite clugenr in publications use:")
 
-citEntry(entry = "Article",
-         title = paste("Generating Multidimensional Clusters With Support Lines"),
-         author = personList(as.person("Nuno Fachada"),
-                             as.person("Diogo de Andrade")),
-         journal      = "arXiv",
-         year         = "2023",
-         doi = "10.48550/arXiv.2301.10327",
-
-  textVersion  =
-  paste("N. Fachada, D. de Andrade (2023).",
-        "Generating Multidimensional Clusters With Support Lines.",
-        "arXiv",
-        "URL https://doi.org/10.48550/arXiv.2301.10327.")
-)
+bibentry(bibtype = "Article",
+         title = "Generating Multidimensional Clusters With Support Lines",
+         author = c(as.person("Nuno Fachada"),
+                    as.person("Diogo de Andrade")),
+         journal = "arXiv",
+         year = "2023",
+         doi = "10.48550/arXiv.2301.10327")
