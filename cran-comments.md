@@ -14,4 +14,5 @@
 
 ## Other
 
+* Fix CITATION file issues.
 * 100% test coverage.
