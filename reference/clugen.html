@@ -16,7 +16,7 @@ users will need."><meta property="og:image" content="/logo.png"><!-- mathjax -->
     
     <a class="navbar-brand me-2" href="../index.html">clugenr</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -31,7 +31,8 @@ users will need."><meta property="og:image" content="/logo.png"><!-- mathjax -->
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-examples">Examples</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-examples">
     <a class="dropdown-item" href="../articles/examples2d.html">Examples in 2D</a>
-    <a class="dropdown-item" href="../articles/examples3d.html">Examples in 3D</a>
+    <a class="dropdown-item" href="../articles/examples3d1.html">Examples in 3D: part I</a>
+    <a class="dropdown-item" href="../articles/examples3d2.html">Examples in 3D: part II</a>
     <a class="dropdown-item" href="../articles/examplesnd.html">Examples in other dimensions</a>
   </div>
 </li>
@@ -111,8 +112,9 @@ users will need.</p>
 
 
 <dt>direction</dt>
-<dd><p>Average direction of the cluster-supporting lines (vector of
-length <code>num_dims</code>).</p></dd>
+<dd><p>Average direction of the cluster-supporting lines. Can be
+a vector of length <code>num_dims</code> (same direction for all clusters) or a
+matrix of size <code>num_clusters</code> x <code>num_dims</code> (one direction per cluster).</p></dd>
 
 
 <dt>angle_disp</dt>
@@ -207,13 +209,13 @@ signature.</p></dd>
 
 <dt>angle_deltas_fn</dt>
 <dd><p>Distribution of line angle differences with respect to
-<code>direction</code>. By default, the angles between <code>direction</code> and the direction of
-cluster-supporting lines are determined by the <a href="angle_deltas.html">angle_deltas</a> function, which
-uses the wrapped normal distribution (<em></em>\(\mu=0\),
-<em></em>\(\sigma=\) <code>angle_disp</code> ) with support in the interval
-<em></em>\(\left[-\pi/2,\pi/2\right]\). This parameter allows the
-user to specify a custom function for this purpose, which must follow
-<a href="angle_deltas.html">angle_deltas</a> signature.</p></dd>
+<code>direction</code>. By default, the angles between the main <code>direction</code> of each
+cluster and the final directions of their cluster-supporting lines are
+determined by the <a href="angle_deltas.html">angle_deltas</a> function, which uses the wrapped normal
+distribution (<em></em>\(\mu=0\), <em></em>\(\sigma=\) <code>angle_disp</code> ) with
+support in the interval <em></em>\(\left[-\pi/2,\pi/2\right]\). This
+parameter allows the user to specify a custom function for this purpose,
+which must follow <a href="angle_deltas.html">angle_deltas</a> signature.</p></dd>
 
 
 <dt>seed</dt>
@@ -235,7 +237,7 @@ projections on the cluster-supporting lines.</p></li>
 each cluster.</p></li>
 <li><p><code>centers</code>: A <code>num_clusters</code> x <code>num_dims</code> matrix with the
 coordinates of the cluster centers.</p></li>
-<li><p><code>directions</code>: A <code>num_clusters</code> x <code>num_dims</code> matrix with the
+<li><p><code>directions</code>: A <code>num_clusters</code> x <code>num_dims</code> matrix with the final
 direction of each cluster-supporting line.</p></li>
 <li><p><code>angles</code>: A <code>num_clusters</code> x 1 vector with the angles between the
 cluster-supporting lines and the main direction.</p></li>
