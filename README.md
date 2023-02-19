@@ -9,7 +9,7 @@
 
 ## Summary
 
-**clugenr** is an [R] implementation of the *clugen* algorithm generating
+**clugenr** is an [R] implementation of the *clugen* algorithm for generating
 multidimensional clusters. Each cluster is supported by a line segment, the
 position, orientation and length of which guide where the respective points are
 placed.
