@@ -642,5 +642,70 @@ for (seed in seeds) {
                              seed = seed),
                  regexp = "argument")
 
+    # Invalid direct clusizes
+    expect_error(r <- clugen(nd, nclu, tpts, direc, astd, clusep,
+                             len_mu, len_std, lat_std,
+                             allow_empty = ae,
+                             cluster_offset = clu_off,
+                             proj_dist_fn = prj_dist,
+                             point_dist_fn = pt_dist,
+                             clusizes_fn = sample(1:(tpts * nclu), nclu + 1),
+                             clucenters_fn = ccenters_fn,
+                             llengths_fn = llengths_fn,
+                             angle_deltas_fn = langles_fn,
+                             seed = seed),
+                 regexp = paste0("`clusizes_fn` has to be either a function or",
+                                 " a `num_clusters`-sized vector"),
+                 fixed = TRUE)
+
+    # Invalid direct clucenters
+    expect_error(r <- clugen(nd, nclu, tpts, direc, astd, clusep,
+                             len_mu, len_std, lat_std,
+                             allow_empty = ae,
+                             cluster_offset = clu_off,
+                             proj_dist_fn = prj_dist,
+                             point_dist_fn = pt_dist,
+                             clusizes_fn = csizes_fn,
+                             clucenters_fn = matrix(rnorm(nd * (nclu + 1)),
+                                                    nrow = nclu + 1),
+                             llengths_fn = llengths_fn,
+                             angle_deltas_fn = langles_fn,
+                             seed = seed),
+                 regexp = paste0("clucenters_fn has to be either a function or",
+                                 " a matrix of size `num_clusters` x `num_dims`"),
+                 fixed = TRUE)
+
+    # Invalid direct llengths
+    expect_error(r <- clugen(nd, nclu, tpts, direc, astd, clusep,
+                             len_mu, len_std, lat_std,
+                             allow_empty = ae,
+                             cluster_offset = clu_off,
+                             proj_dist_fn = prj_dist,
+                             point_dist_fn = pt_dist,
+                             clusizes_fn = csizes_fn,
+                             clucenters_fn = ccenters_fn,
+                             llengths_fn = runif(nclu + 1),
+                             angle_deltas_fn = langles_fn,
+                             seed = seed),
+                 regexp = paste0("`llengths_fn` has to be either a function or",
+                                 " a `num_clusters`-sized vector"),
+                 fixed = TRUE)
+
+    # Invalid direct langles
+    expect_error(r <- clugen(nd, nclu, tpts, direc, astd, clusep,
+                             len_mu, len_std, lat_std,
+                             allow_empty = ae,
+                             cluster_offset = clu_off,
+                             proj_dist_fn = prj_dist,
+                             point_dist_fn = pt_dist,
+                             clusizes_fn = csizes_fn,
+                             clucenters_fn = ccenters_fn,
+                             llengths_fn = llengths_fn,
+                             angle_deltas_fn = runif(nclu + 1),
+                             seed = seed),
+                 regexp = paste0("`angle_deltas_fn` has to be either a function",
+                                 " or a `num_clusters`-sized vector"),
+                 fixed = TRUE)
+
   })
 }
