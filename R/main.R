@@ -67,19 +67,22 @@
 #' and assures that the final cluster sizes add up to `num_points`. This
 #' parameter allows the user to specify a custom function for this purpose,
 #' which must follow [clusizes] signature. Note that custom functions are not
-#' required to strictly obey the `num_points` parameter.
+#' required to strictly obey the `num_points` parameter. Alternatively, the user
+#' can specify a vector of cluster sizes directly.
 #' @param clucenters_fn Distribution of cluster centers. By default, cluster
 #' centers are determined by the [clucenters] function, which uses the uniform
 #' distribution, and takes into account the `num_clusters` and `cluster_sep`
 #' parameters for generating well-distributed cluster centers. This parameter
 #' allows the user to specify a custom function for this purpose, which must
-#' follow [clucenters] signature.
+#' follow [clucenters] signature. Alternatively, the user can specify a matrix
+#' of size `num_clusters` x `num_dims` with the exact cluster centers.
 #' @param llengths_fn Distribution of line lengths. By default, the lengths of
 #' cluster-supporting lines are determined by the [llengths] function, which
 #' uses the folded normal distribution (\mjeqn{\mu=}{μ=} `llength`,
 #' \mjeqn{\sigma=}{σ=} `llength_disp` ). This parameter allows the user to
 #' specify a custom function for this purpose, which must follow [llengths]
-#' signature.
+#' signature. Alternatively, the user can specify a vector of line lengths
+#' directly.
 #' @param angle_deltas_fn Distribution of line angle differences with respect to
 #' `direction`. By default, the angles between the main `direction` of each
 #' cluster and the final directions of their cluster-supporting lines are
@@ -87,7 +90,8 @@
 #' distribution (\mjeqn{\mu=0}{μ=0}, \mjeqn{\sigma=}{σ=} `angle_disp` ) with
 #' support in the interval \mjeqn{\left[-\pi/2,\pi/2\right]}{[-π/2, π/2]}. This
 #' parameter allows the user to specify a custom function for this purpose,
-#' which must follow [angle_deltas] signature.
+#' which must follow [angle_deltas] signature. Alternatively, the user can
+#' specify a vector of angle deltas directly.
 #' @param seed An integer used to initialize the PRNG, allowing for reproducible
 #' results. If specified, `seed` is simply passed to [set.seed].
 #' @return A named list with the following elements:
@@ -258,20 +262,51 @@ clugen <- function(num_dims, num_clusters, num_points, direction, angle_disp,
   }
 
   # Determine cluster sizes
-  cluster_sizes <- clusizes_fn(num_clusters, num_points, allow_empty)
+  cluster_sizes <- if (is.function(clusizes_fn)) {
+    clusizes_fn(num_clusters, num_points, allow_empty)
+  } else if (is.vector(clusizes_fn) && length(clusizes_fn) == num_clusters) {
+    clusizes_fn
+  } else {
+    stop("`clusizes_fn` has to be either a function or a ",
+         "`num_clusters`-sized vector")
+  }
 
   # Custom clusizes_fn's are not required to obey num_points, so we update
   # it here just in case it's different from what the user specified
   num_points <- sum(cluster_sizes)
 
   # Determine cluster centers
-  cluster_centers <- clucenters_fn(num_clusters, cluster_sep, cluster_offset)
+  cluster_centers <- if (is.function(clucenters_fn))
+  {
+    clucenters_fn(num_clusters, cluster_sep, cluster_offset)
+  } else if (is.matrix(clucenters_fn) &&
+             all(dim(clucenters_fn) == c(num_clusters, num_dims))) {
+    clucenters_fn
+  } else {
+    stop("clucenters_fn has to be either a function or a matrix of size ",
+         "`num_clusters` x `num_dims`")
+  }
 
   # Determine length of lines supporting clusters
-  cluster_lengths <- llengths_fn(num_clusters, llength, llength_disp)
+  cluster_lengths <- if (is.function(llengths_fn))
+  {
+    llengths_fn(num_clusters, llength, llength_disp)
+  } else if (is.vector(llengths_fn) && length(llengths_fn) == num_clusters) {
+    llengths_fn
+  } else {
+    stop("`llengths_fn` has to be either a function or a `num_clusters`-sized",
+         " vector")
+  }
 
   # Obtain angles between main direction and cluster-supporting lines
-  cluster_angles <- angle_deltas_fn(num_clusters, angle_disp)
+  cluster_angles <- if (is.function(angle_deltas_fn)) {
+    angle_deltas_fn(num_clusters, angle_disp)
+  } else if (is.vector(angle_deltas_fn) && length(angle_deltas_fn == num_clusters)) {
+    angle_deltas_fn
+  } else {
+    stop("`angle_deltas_fn` has to be either a function or a ",
+         "`num_clusters`-sized vector")
+  }
 
   # Determine normalized cluster directions
   cluster_directions <- matrix(mapply(rand_vector_at_angle,

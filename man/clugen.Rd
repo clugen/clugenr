@@ -90,21 +90,24 @@ are determined by the \link{clusizes} function, which uses the normal distributi
 and assures that the final cluster sizes add up to \code{num_points}. This
 parameter allows the user to specify a custom function for this purpose,
 which must follow \link{clusizes} signature. Note that custom functions are not
-required to strictly obey the \code{num_points} parameter.}
+required to strictly obey the \code{num_points} parameter. Alternatively, the user
+can specify a vector of cluster sizes directly.}
 
 \item{clucenters_fn}{Distribution of cluster centers. By default, cluster
 centers are determined by the \link{clucenters} function, which uses the uniform
 distribution, and takes into account the \code{num_clusters} and \code{cluster_sep}
 parameters for generating well-distributed cluster centers. This parameter
 allows the user to specify a custom function for this purpose, which must
-follow \link{clucenters} signature.}
+follow \link{clucenters} signature. Alternatively, the user can specify a matrix
+of size \code{num_clusters} x \code{num_dims} with the exact cluster centers.}
 
 \item{llengths_fn}{Distribution of line lengths. By default, the lengths of
 cluster-supporting lines are determined by the \link{llengths} function, which
 uses the folded normal distribution (\mjeqn{\mu=}{μ=} \code{llength},
 \mjeqn{\sigma=}{σ=} \code{llength_disp} ). This parameter allows the user to
 specify a custom function for this purpose, which must follow \link{llengths}
-signature.}
+signature. Alternatively, the user can specify a vector of line lengths
+directly.}
 
 \item{angle_deltas_fn}{Distribution of line angle differences with respect to
 \code{direction}. By default, the angles between the main \code{direction} of each
@@ -113,7 +116,8 @@ determined by the \link{angle_deltas} function, which uses the wrapped normal
 distribution (\mjeqn{\mu=0}{μ=0}, \mjeqn{\sigma=}{σ=} \code{angle_disp} ) with
 support in the interval \mjeqn{\left[-\pi/2,\pi/2\right]}{[-π/2, π/2]}. This
 parameter allows the user to specify a custom function for this purpose,
-which must follow \link{angle_deltas} signature.}
+which must follow \link{angle_deltas} signature. Alternatively, the user can
+specify a vector of angle deltas directly.}
 
 \item{seed}{An integer used to initialize the PRNG, allowing for reproducible
 results. If specified, \code{seed} is simply passed to \link{set.seed}.}
