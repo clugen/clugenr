@@ -276,8 +276,7 @@ clugen <- function(num_dims, num_clusters, num_points, direction, angle_disp,
   num_points <- sum(cluster_sizes)
 
   # Determine cluster centers
-  cluster_centers <- if (is.function(clucenters_fn))
-  {
+  cluster_centers <- if (is.function(clucenters_fn)) {
     clucenters_fn(num_clusters, cluster_sep, cluster_offset)
   } else if (is.matrix(clucenters_fn) &&
              all(dim(clucenters_fn) == c(num_clusters, num_dims))) {
@@ -288,8 +287,7 @@ clugen <- function(num_dims, num_clusters, num_points, direction, angle_disp,
   }
 
   # Determine length of lines supporting clusters
-  cluster_lengths <- if (is.function(llengths_fn))
-  {
+  cluster_lengths <- if (is.function(llengths_fn)) {
     llengths_fn(num_clusters, llength, llength_disp)
   } else if (is.vector(llengths_fn) && length(llengths_fn) == num_clusters) {
     llengths_fn
