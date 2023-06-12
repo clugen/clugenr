@@ -299,7 +299,7 @@ clugen <- function(num_dims, num_clusters, num_points, direction, angle_disp,
   # Obtain angles between main direction and cluster-supporting lines
   cluster_angles <- if (is.function(angle_deltas_fn)) {
     angle_deltas_fn(num_clusters, angle_disp)
-  } else if (is.vector(angle_deltas_fn) && length(angle_deltas_fn == num_clusters)) {
+  } else if (is.vector(angle_deltas_fn) && length(angle_deltas_fn) == num_clusters) {
     angle_deltas_fn
   } else {
     stop("`angle_deltas_fn` has to be either a function or a ",
