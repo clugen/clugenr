@@ -1,5 +1,10 @@
 # clugenr (development version)
 
+# clugenr 0.3.0
+
+* Allow direct specification of cluster sizes, cluster centers, line lengths,
+  and angle deltas, instead of going through a function.
+
 # clugenr 0.2.0
 
 * Allow specification of a different main direction per cluster.

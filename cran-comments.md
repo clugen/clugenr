@@ -4,7 +4,7 @@
 
 ## Test environments
 
-* Ubuntu 22.04.1 (R: devel, release, oldrel-1, 3.6.0)
+* Ubuntu 22.04.2 (R: devel, release, oldrel-1, 3.6.0)
 * Windows 11 (R: release)
 * macOS 12 (R: release)
 
@@ -14,5 +14,5 @@
 
 ## Other
 
-* Fix CITATION file issues.
-* 100% test coverage.
+* Allow direct specification of cluster sizes, cluster centers, line lengths,
+  and angle deltas, instead of going through a function.
