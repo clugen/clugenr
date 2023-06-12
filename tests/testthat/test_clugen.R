@@ -256,6 +256,102 @@ for (i in seq.int(1, nrow(targs))) {
   }
 }
 
+# ######################################## #
+# Test clugen() optional direct parameters #
+# ######################################## #
+
+# Valid arguments
+astd <- pi / 333
+len_mu <- 6
+len_std <- 1.1
+lat_std <- 1.6
+
+# Create parameter combinations to test
+if (testthat:::on_cran() || is_test_mode("cran")) {
+  # Light tests, for CRAN
+  targs <- expand.grid(seed = seeds, nd = 2, nclu = 6)
+} else {
+  # Other testing modes will be more thorough
+  targs <- expand.grid(seed = seeds, nd = c(1, 5), nclu = c(1, 6))
+}
+
+# Loop through all parameter combinations
+for (i in seq.int(1, nrow(targs))) {
+
+  # Get current parameters
+  seed <- targs[i, "seed"]
+  nd <- targs[i, "nd"]
+  nclu <- targs[i, "nclu"]
+
+  # Set seed
+  set.seed(seed)
+
+  # Create combination of seed-depending parameters
+  direc <- rnorm(nd)
+  clusep <- 100 * rnorm(nd)
+  csz_direct <- sample(1:100, nclu, replace = TRUE)
+  cctr_direct <- matrix(100 * rnorm(nd * nclu), nrow = nclu)
+  llen_direct <- runif(nclu, min = 0, max = 100)
+  lang_direct <- runif(nclu, min = -pi / 2, max = pi / 2)
+  tpts <- sum(csz_direct)
+
+  # Determine test name for current parameter set
+  test_desc <- paste0("clugen optional params (direct): ",
+                      "seed = ", seed, ", nd=", nd, ", nclu=", nclu,
+                      ", direc=[", paste(direc, collapse = ", "),
+                      ", clusep=[", paste(clusep, collapse = ", "),
+                      ", csz_direct=[", paste(csz_direct, collapse = ", "),
+                      ", cctr_direct=[", paste(cctr_direct, collapse = ", "),
+                      ", llen_direct=[", paste(llen_direct, collapse = ", "),
+                      ", lang_direct=[", paste(lang_direct, collapse = ", "))
+
+  # Perform tests for current parameter set
+  test_that(test_desc, {
+
+    # ...in which case it runs without problem
+    expect_warning(r <- clugen(nd, nclu, tpts, direc, astd,
+                               clusep, len_mu, len_std, lat_std,
+                               allow_empty = ae,
+                               clusizes_fn = csz_direct,
+                               clucenters_fn = cctr_direct,
+                               llengths_fn = llen_direct,
+                               angle_deltas_fn = lang_direct,
+                               seed = seed),
+                   regexp = NA)
+
+    # Check dimensions of result variables
+    expect_equal(dim(r$points), c(tpts, nd))
+    expect_equal(length(r$clusters), tpts)
+    expect_equal(dim(r$projections), c(tpts, nd))
+    expect_equal(length(r$sizes), nclu)
+    expect_equal(dim(r$centers), c(nclu, nd))
+    expect_equal(dim(r$directions), c(nclu, nd))
+    expect_equal(length(r$angles), nclu)
+    expect_equal(length(r$lengths), nclu)
+
+    # Check point cluster indexes
+    if (!ae) {
+      expect_equal(unique(as.numeric(r$clusters)), 1:nclu)
+    } else {
+      expect_true(all(as.numeric(r$clusters) <= nclu))
+    }
+
+    # Check total points
+    expect_equal(sum(r$sizes), tpts)
+    # This might not be the case if the specified clusize_fn does not obey
+    # the total number of points
+
+    # Check that cluster directions have the correct angles with the main
+    # direction
+    if (nd > 1) {
+      for (i in 1:nclu) {
+        expect_equal(angle_btw(direc, r$directions[i, ]),
+                     abs(r$angles[i]))
+      }
+    }
+  })
+}
+
 # ##################### #
 # Reproducibility tests #
 # ##################### #
