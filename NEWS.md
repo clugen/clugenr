@@ -1,3 +1,5 @@
+# clugenr (development version)
+
 # clugenr 0.3.0
 
 * Allow direct specification of cluster sizes, cluster centers, line lengths,
