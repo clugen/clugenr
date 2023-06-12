@@ -44,10 +44,10 @@ for (i in seq.int(1, nrow(targs))) {
     clusep <- tsargs[j, "clusep"][[1]]
 
     # Determine test name for current parameter set
-    test_desc <- paste0("clugen mandatory params: nd=", nd,
-                        ", nclu=", nclu, ", tpts=", tpts,
-                        ", astd=", astd, ", len=", len, ", len_std=", len_std,
-                        ", lat_std=", lat_std,
+    test_desc <- paste0("clugen mandatory params: ",
+                        "seed=", seed, ", nd=", nd, ", nclu=", nclu,
+                        ", tpts=", tpts, ", astd=", astd, ", len=", len,
+                        ", len_std=", len_std, ", lat_std=", lat_std,
                         ", direc=[", paste(direc, collapse = ", "),
                         "], clusep=[", paste(clusep, collapse = ", "), "]")
 
@@ -162,6 +162,7 @@ for (i in seq.int(1, nrow(targs))) {
 
   # Get current parameters
   seed <- targs[i, "seed"]
+  nd <- targs[i, "nd"]
   ae <- targs[i, "ae"]
   prjdist_fn <- targs[i, "prjdist_fn"][[1]]
   ptdist_fn <- targs[i, "ptdist_fn"][[1]]
@@ -169,6 +170,9 @@ for (i in seq.int(1, nrow(targs))) {
   cctr_fn <- targs[i, "cctr_fn"][[1]]
   llen_fn <- targs[i, "llen_fn"][[1]]
   lang_fn <- targs[i, "lang_fn"][[1]]
+
+  # Set seed
+  set.seed(seed)
 
   # Create combination of seed-depending parameters (line directions + clu seps)
   tsargs <- expand.grid(direc = asplit(get_vecs(ndirs, nd), 1),
@@ -182,14 +186,24 @@ for (i in seq.int(1, nrow(targs))) {
     clusep <- tsargs[j, "clusep"][[1]]
 
     # Determine test name for current parameter set
-    test_desc <- paste0("clugen optional params: ae=", ae,
-                        ", nclu=", nclu, ", tpts=", tpts,
+    test_desc <- paste0("clugen optional params: ",
+                        "seed = ", seed, ", nd=", nd, ", nclu=", nclu,
+                        ", tpts=", tpts, "ae=", ae,
                         ", ptdist_fn='",
                         format(prjdist_fn)[length(format(prjdist_fn))],
                         "', ptoff_fn='",
                         format(ptdist_fn)[length(format(ptdist_fn))],
                         "', czn_fn='",
                         format(csz_fn)[length(format(csz_fn))],
+                        "'",
+                        "', cctr_fn='",
+                        format(cctr_fn)[length(format(cctr_fn))],
+                        "'",
+                        "', llen_fn='",
+                        format(llen_fn)[length(format(llen_fn))],
+                        "'",
+                        "', lang_fn='",
+                        format(lang_fn)[length(format(lang_fn))],
                         "'")
 
     # Perform tests for current parameter set
