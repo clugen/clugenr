@@ -3,7 +3,7 @@
 [![docs](https://img.shields.io/badge/docs-latest-blue.svg)](https://clugen.github.io/clugenr/)
 [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/clugenr)](https://CRAN.R-project.org/package=clugenr)
 ![Downloads](https://cranlogs.r-pkg.org/badges/grand-total/clugenr)
-[![MIT](https://img.shields.io/badge/license-MIT-yellowgreen.svg)](https://tldrlegal.com/license/mit-license)
+[![MIT](https://img.shields.io/badge/license-MIT-yellowgreen.svg)](https://www.tldrlegal.com/license/mit-license)
 
 # clugenr <img src="man/figures/logo.png" align="right" />
 
