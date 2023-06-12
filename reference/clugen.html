@@ -16,7 +16,7 @@ users will need."><meta property="og:image" content="/logo.png"><!-- mathjax -->
     
     <a class="navbar-brand me-2" href="../index.html">clugenr</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -186,7 +186,8 @@ are determined by the <a href="clusizes.html">clusizes</a> function, which uses 
 and assures that the final cluster sizes add up to <code>num_points</code>. This
 parameter allows the user to specify a custom function for this purpose,
 which must follow <a href="clusizes.html">clusizes</a> signature. Note that custom functions are not
-required to strictly obey the <code>num_points</code> parameter.</p></dd>
+required to strictly obey the <code>num_points</code> parameter. Alternatively, the user
+can specify a vector of cluster sizes directly.</p></dd>
 
 
 <dt>clucenters_fn</dt>
@@ -195,7 +196,8 @@ centers are determined by the <a href="clucenters.html">clucenters</a> function,
 distribution, and takes into account the <code>num_clusters</code> and <code>cluster_sep</code>
 parameters for generating well-distributed cluster centers. This parameter
 allows the user to specify a custom function for this purpose, which must
-follow <a href="clucenters.html">clucenters</a> signature.</p></dd>
+follow <a href="clucenters.html">clucenters</a> signature. Alternatively, the user can specify a matrix
+of size <code>num_clusters</code> x <code>num_dims</code> with the exact cluster centers.</p></dd>
 
 
 <dt>llengths_fn</dt>
@@ -204,7 +206,8 @@ cluster-supporting lines are determined by the <a href="llengths.html">llengths<
 uses the folded normal distribution (<em></em>\(\mu=\) <code>llength</code>,
 <em></em>\(\sigma=\) <code>llength_disp</code> ). This parameter allows the user to
 specify a custom function for this purpose, which must follow <a href="llengths.html">llengths</a>
-signature.</p></dd>
+signature. Alternatively, the user can specify a vector of line lengths
+directly.</p></dd>
 
 
 <dt>angle_deltas_fn</dt>
@@ -215,7 +218,8 @@ determined by the <a href="angle_deltas.html">angle_deltas</a> function, which u
 distribution (<em></em>\(\mu=0\), <em></em>\(\sigma=\) <code>angle_disp</code> ) with
 support in the interval <em></em>\(\left[-\pi/2,\pi/2\right]\). This
 parameter allows the user to specify a custom function for this purpose,
-which must follow <a href="angle_deltas.html">angle_deltas</a> signature.</p></dd>
+which must follow <a href="angle_deltas.html">angle_deltas</a> signature. Alternatively, the user can
+specify a vector of angle deltas directly.</p></dd>
 
 
 <dt>seed</dt>
