@@ -375,6 +375,14 @@ clugen <- function(num_dims, num_clusters, num_points, direction, angle_disp,
        lengths = cluster_lengths)
 }
 
+tprom <- list("logical"=1,
+              "integer"=2,
+              "double"=3,
+              "complex"=4,
+              "character"=5,
+              "raw"=6,
+              "list"=7)
+
 clumerge <- function(...,
                      fields= c("points", "clusters"),
                      clusters_field="clusters") {
@@ -425,17 +433,25 @@ clumerge <- function(...,
 
       # Get/check info about the field value type
       field_cols <- if (is.vector(value)) 1 else dim(value)[2]
+      field_type <- typeof(value)
+
       if (!(field %in% names(fields_info))) {
 
         # If it's the first time this field appears, just get the info
-        fields_info[[field]] <- field_cols
+        fields_info[[field]] <- list(type=field_type, ncol=field_cols)
 
-      } else if (field_cols != fields_info[[field]]) {
+      } else {
 
-        # If this field already appeared in previous data items, check that the
-        # number of columns is the same than that of previous data items
-        stop(paste0("Dimension mismatch in field `", field, "`"))
+        if (field_cols != fields_info[[field]]$ncol) {
 
+          # If this field already appeared in previous data items, check that the
+          # number of columns is the same than that of previous data items
+          stop(paste0("Dimension mismatch in field `", field, "`"))
+        }
+
+        if (tprom[[field_type]] > fields_info[[field]]$type) {
+          fields_info[[field]]$type <- tprom[[field_type]]
+        }
       }
     }
 
@@ -443,24 +459,44 @@ clumerge <- function(...,
     numel <- numel + numel_i
   }
 
+  # Initialize output dictionary fields with room for all items
+  for (field in names(fields_info)) {
+    output[[field]] <- vector(mode = fields_info[[field]]$type,
+                              length = numel * fields_info[[field]]$ncol)
+
+    if (fields_info[[field]]$ncol == 1) {
+      dim(output[[field]]) <- c(numel, fields_info[[field]]$ncol)
+    }
+  }
+
+  # Copy items from input data to output dictionary, field-wise
+  copied <- 0
+  last_cluster <- 0
+
+
   cat("\n")
   cat("Number of datasets:", length(list(...)), "\n")
   cat("Number of elements:", numel, "\n")
 
   for (field in names(fields_info)) {
-    cat("Cols for `", field, "`: ", fields_info[[field]], "\n")
+    cat("Cols for `", field, "`: ", fields_info[[field]]$ncol, "\n")
+    cat("Type for `", field, "`: ", fields_info[[field]]$type, "\n")
   }
 
+  output
 }
 
 clumerge(list(points=c(2,4,6,7), clusters=c(1,1,1,2)))
 
 m1 <- matrix(c(2,3,4,5,6,7), ncol=2)
+mode(m1) <- "complex"
 c1 <- c(1,1,2)
+mode(c1) <- "integer"
 ds1 <- list(points=m1, clusters=c1)
 
 m2 <- matrix(c(2,3,4,5,6,7,10,-1,-1,2), ncol=2)
 c2 <- c(1,1,1,1,3)
+mode(c2) <- "integer"
 ds2 <- list(points=m2, clusters=c2)
 
 clumerge(ds1, ds2) # Should work
@@ -468,7 +504,9 @@ clumerge(ds1, ds2) # Should work
 m3 = c(1,2,3)
 c3 = c(1,1,1)
 ds3 = list(points=m3, clusters=c3)
-clumerge(ds1,ds3) # Should not work
+clumerge(ds1,ds3) # Should not work: Dimension mismatch in field `points`
+
+
 
 
 
