@@ -401,8 +401,11 @@ clumerge <- function(...,
     fields <- union(fields, clusters_field)
   }
 
+  # Place variable input into list form
+  data <- list(...)
+
   # Cycle through data items
-  for (dt in list(...)) {
+  for (dt in data) {
 
     # Number of elements in the current item
     numel_i <- NA
@@ -472,6 +475,36 @@ clumerge <- function(...,
   # Copy items from input data to output dictionary, field-wise
   copied <- 0
   last_cluster <- 0
+
+  # Create merged output
+  for (dt in data) {
+
+    # How many elements to copy for the current data item?
+    tocopy <- if (is.vector(dt[[1]])) 1 else dim(dt[[1]])[1]
+
+    # Cycle through each field and its information
+    for (field in fields_info) {
+
+      # Copy elements (MAYBE MAKE THIS A MATRIX THEN RECONVERT TO VECTOR)
+      output[[field]][(copied + 1):(copied + tocopy), :] =
+        if ifield.first == clusters_field
+
+      # If this is a clusters field, update the cluster IDs
+      old_clusters = unique(getindex(dt, clusters_field))
+      new_clusters = (last_cluster + 1):(last_cluster + length(old_clusters))
+      mapping = Dict(zip(old_clusters, new_clusters))
+      last_cluster = new_clusters[end]
+      [mapping[val] for val in getindex(dt, clusters_field)]
+
+      else
+        # Otherwise just copy the elements
+        getindex(dt, ifield.first)
+      end
+    }
+
+    # Update how many were copied so far
+    copied += tocopy
+  }
 
 
   cat("\n")
