@@ -120,10 +120,11 @@
 #' # 3D example
 #' x <- clugen(3, 5, 1000, c(2, 3, 4), 0.5, c(15, 13, 14), 7, 1, 2)
 clugen <- function(num_dims, num_clusters, num_points, direction, angle_disp,
-  cluster_sep, llength, llength_disp, lateral_disp,
-  allow_empty = FALSE, cluster_offset = NA, proj_dist_fn = "norm",
-  point_dist_fn = "n-1", clusizes_fn = clusizes, clucenters_fn = clucenters,
-  llengths_fn = llengths, angle_deltas_fn = angle_deltas, seed = NA) {
+                   cluster_sep, llength, llength_disp, lateral_disp,
+                   allow_empty = FALSE, cluster_offset = NA, proj_dist_fn = "norm",
+                   point_dist_fn = "n-1", clusizes_fn = clusizes,
+                   clucenters_fn = clucenters, llengths_fn = llengths,
+                   angle_deltas_fn = angle_deltas, seed = NA) {
 
   # ############### #
   # Validate inputs #
@@ -373,3 +374,103 @@ clugen <- function(num_dims, num_clusters, num_points, direction, angle_disp,
        angles = cluster_angles,
        lengths = cluster_lengths)
 }
+
+clumerge <- function(...,
+                     fields= c("points", "clusters"),
+                     clusters_field="clusters") {
+
+  # Number of elements in each array the merged dataset
+  numel <- 0
+
+  # Contains information about each field
+  fields_info <- list()
+
+  # Merged dataset to output, initially empty
+  output <- list()
+
+  # If a clusters field is given, add it
+  if (!is.na(clusters_field)) {
+    fields <- union(fields, clusters_field)
+  }
+
+  # Cycle through data items
+  for (dt in list(...)) {
+
+    # Number of elements in the current item
+    numel_i <- NA
+
+    # Cycle through fields for the current item
+    for (field in fields) {
+
+      if (!(field %in% names(dt))) {
+        stop(paste0("Data item does not contain required field `", field, "`"))
+      }
+
+      # Get the field value
+      value <- dt[[field]]
+
+      # Number of elements in field value
+      numel_tmp <- if (is.vector(value)) length(value) else dim(value)[1]
+
+      # Check the number of elements in the field value
+      if (is.na(numel_i)) {
+        # First field: get number of elements in value (must be the same
+        # for the remaining field values)
+        numel_i <- numel_tmp
+      } else if (numel_tmp != numel_i) {
+        # Fields values after the first must have the same number of elements
+        stop(paste0("Data item contains fields with different sizes (",
+                    numel_tmp, " != ", numel_i, ")"))
+      }
+
+      # Get/check info about the field value type
+      field_cols <- if (is.vector(value)) 1 else dim(value)[2]
+      if (!(field %in% names(fields_info))) {
+
+        # If it's the first time this field appears, just get the info
+        fields_info[[field]] <- field_cols
+
+      } else if (field_cols != fields_info[[field]]) {
+
+        # If this field already appeared in previous data items, check that the
+        # number of columns is the same than that of previous data items
+        stop(paste0("Dimension mismatch in field `", field, "`"))
+
+      }
+    }
+
+    # Update total number of elements
+    numel <- numel + numel_i
+  }
+
+  cat("\n")
+  cat("Number of datasets:", length(list(...)), "\n")
+  cat("Number of elements:", numel, "\n")
+
+  for (field in names(fields_info)) {
+    cat("Cols for `", field, "`: ", fields_info[[field]], "\n")
+  }
+
+}
+
+clumerge(list(points=c(2,4,6,7), clusters=c(1,1,1,2)))
+
+m1 <- matrix(c(2,3,4,5,6,7), ncol=2)
+c1 <- c(1,1,2)
+ds1 <- list(points=m1, clusters=c1)
+
+m2 <- matrix(c(2,3,4,5,6,7,10,-1,-1,2), ncol=2)
+c2 <- c(1,1,1,1,3)
+ds2 <- list(points=m2, clusters=c2)
+
+clumerge(ds1, ds2) # Should work
+
+m3 = c(1,2,3)
+c3 = c(1,1,1)
+ds3 = list(points=m3, clusters=c3)
+clumerge(ds1,ds3) # Should not work
+
+
+
+
+
