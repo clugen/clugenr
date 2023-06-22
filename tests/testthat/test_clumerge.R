@@ -9,7 +9,7 @@
 targs <- expand.grid(seed = seeds, nd = num_dims,
                      ds_cg_n = 1:2,
                      ds_ot_n = 0:2,
-                     no_clusters_field = c(FALSE))
+                     no_clusters_field = c(FALSE, TRUE))
 
 # Loop through all parameter combinations
 for (i in seq.int(1, nrow(targs))) {
