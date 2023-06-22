@@ -377,13 +377,13 @@ clugen <- function(num_dims, num_clusters, num_points, direction, angle_disp,
 
 #' Generality of types, by increasing order
 #' @keywords internal
-tprom <- list("logical"=1,
-              "integer"=2,
-              "double"=3,
-              "complex"=4,
-              "character"=5,
-              "raw"=6,
-              "list"=7)
+tprom <- list("logical" = 1,
+              "integer" = 2,
+              "double" = 3,
+              "complex" = 4,
+              "character" = 5,
+              "raw" = 6,
+              "list" = 7)
 
 #' Returns the actual dimensions of the input
 #'
@@ -438,8 +438,8 @@ gdim <- function(a) {
 #' b <- clugen(2, 3, 250, c(-1, 3), 0.5, c(13, 14), 7, 1, 2)
 #' ab <- clumerge(a, b)
 clumerge <- function(...,
-                     fields= c("points", "clusters"),
-                     clusters_field="clusters") {
+                     fields = c("points", "clusters"),
+                     clusters_field = "clusters") {
 
   # Number of elements in each array the merged dataset
   numel <- 0
@@ -496,9 +496,9 @@ clumerge <- function(...,
       if (!(field %in% names(fields_info))) {
 
         # If it's the first time this field appears, just get the info
-        fields_info[[field]] <- list(type=field_type,
-                                     ncol=field_cols,
-                                     fact=field_fact)
+        fields_info[[field]] <- list(type = field_type,
+                                     ncol = field_cols,
+                                     fact = field_fact)
 
         # If it's the clusters field, it needs to have no dimensionality
         if (!is.na(clusters_field) && field == clusters_field && !is.null(dim(value))) {
@@ -570,7 +570,7 @@ clumerge <- function(...,
             dt[[field]]
           }
       } else {
-        output[[field]][(copied + 1):(copied + tocopy),] <- dt[[field]]
+        output[[field]][(copied + 1):(copied + tocopy), ] <- dt[[field]]
       }
     }
 
@@ -588,4 +588,3 @@ clumerge <- function(...,
 
   output
 }
-

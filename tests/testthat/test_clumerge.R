@@ -38,7 +38,7 @@ for (i in seq.int(1, nrow(targs))) {
   test_that(test_desc, {
 
     datasets <- list()
-    tclu <-0
+    tclu <- 0
     tpts <- 0
 
     # Create data sets with clugen()
@@ -87,4 +87,3 @@ for (i in seq.int(1, nrow(targs))) {
     expect_warning(mds <- do.call(clumerge, args), regexp = NA)
   })
 }
-

@@ -35,7 +35,7 @@ if (testthat:::on_cran() || is_test_mode("cran")) {
   # clumerge() specific
   t_ds_cg_n <- 1
   t_ds_ot_n <- 1
-  t_no_clusters_field = FALSE
+  t_no_clusters_field <- FALSE
 
 } else if (testthat:::on_ci() || is_test_mode("ci")) {
   # Test setup for CI environments
@@ -67,7 +67,7 @@ if (testthat:::on_cran() || is_test_mode("cran")) {
   # clumerge() specific
   t_ds_cg_n <- 0:2
   t_ds_ot_n <- 0:1
-  t_no_clusters_field = c(FALSE, TRUE)
+  t_no_clusters_field <- c(FALSE, TRUE)
 
 } else if (!is_test_mode("full")) {
   # Test setup for local tests
@@ -99,7 +99,7 @@ if (testthat:::on_cran() || is_test_mode("cran")) {
   # clumerge() specific
   t_ds_cg_n <- 0:3
   t_ds_ot_n <- 0:2
-  t_no_clusters_field = c(FALSE, TRUE)
+  t_no_clusters_field <- c(FALSE, TRUE)
 
 } else {
   # Heavy-duty tests if the env variable CLUGENR_TEST_FULL is set to "true"
@@ -132,5 +132,5 @@ if (testthat:::on_cran() || is_test_mode("cran")) {
   # clumerge() specific
   t_ds_cg_n <- 0:4
   t_ds_ot_n <- 0:3
-  t_no_clusters_field = c(FALSE, TRUE)
+  t_no_clusters_field <- c(FALSE, TRUE)
 }
