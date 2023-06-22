@@ -2,23 +2,48 @@
 % Please edit documentation in R/main.R
 \name{clumerge}
 \alias{clumerge}
-\title{Merge clusters.}
+\title{Merges the fields (specified in \code{fields}) of two or more data sets}
 \usage{
 clumerge(..., fields = c("points", "clusters"), clusters_field = "clusters")
 }
 \arguments{
-\item{...}{Data.}
+\item{...}{One or more cluster data sets (in the form of lists) whose
+\code{fields} are to be merged.}
 
-\item{fields}{Fields.}
+\item{fields}{Fields to be merged, which must exist in the data sets given in
+\code{...}.}
 
-\item{cluster_field}{Yep.}
+\item{cluster_field}{Field containing the integer cluster labels. If
+specified, cluster assignments in individual datasets will be updated in the
+merged dataset so that clusters are considered separate.}
 }
 \value{
-The merged data.
+A list whose fields consist of the merged fields in the original
+data sets.
 }
 \description{
-To do.
+Merges the fields (specified in \code{fields}) of two or more data sets (passed as
+lists). The fields to be merged need to have the same number of columns. The
+corresponding merged field will contain the rows of the fields to be merged,
+and will have a common "supertype".
 }
 \details{
-To do.
+The \code{clusters_field} parameter specifies a field containing integers that
+identify the cluster to which the respective points belongs to. If
+\code{clusters_field} is specified (by default it's specified as \code{"clusters"}),
+cluster assignments in individual datasets will be updated in the merged
+dataset so that clusters are considered separate. This parameter can be set
+to \code{NA}, in which case no field will be considered as a special cluster
+assignments field.
+
+This function can be used to merge data sets generated with the \link{clugen}
+function, by default merging the \code{points} and \code{clusters} fields in those data
+sets. It also works with arbitrary data by specifying alternative fields in
+the \code{fields} parameter. It can be used, for example, to merge third-party
+data with \link{clugen}-generated data.
+}
+\examples{
+a <- clugen(2, 5, 100, c(1, 3), 0.5, c(10, 10), 8, 1.5, 2)
+b <- clugen(2, 3, 250, c(-1, 3), 0.5, c(13, 14), 7, 1, 2)
+ab <- clumerge(a, b)
 }

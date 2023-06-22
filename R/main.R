@@ -375,6 +375,8 @@ clugen <- function(num_dims, num_clusters, num_points, direction, angle_disp,
        lengths = cluster_lengths)
 }
 
+#' Generality of types, by increasing order
+#' @keywords internal
 tprom <- list("logical"=1,
               "integer"=2,
               "double"=3,
@@ -383,6 +385,12 @@ tprom <- list("logical"=1,
               "raw"=6,
               "list"=7)
 
+#' Returns the actual dimensions of the input
+#'
+#' Gets the dimensions of the input `a`, returning `c(length(a), 1)` if
+#' `dim(a) == NULL`.
+#'
+#' @keywords internal
 gdim <- function(a) {
   d <- dim(a)
   if (is.null(d)) {
@@ -391,20 +399,44 @@ gdim <- function(a) {
   d
 }
 
-#' Merge clusters.
+#' Merges the fields (specified in `fields`) of two or more data sets
 #'
 #' @description
-#' To do.
+#' Merges the fields (specified in `fields`) of two or more data sets (passed as
+#' lists). The fields to be merged need to have the same number of columns. The
+#' corresponding merged field will contain the rows of the fields to be merged,
+#' and will have a common "supertype".
 #'
 #' @details
-#' To do.
+#' The `clusters_field` parameter specifies a field containing integers that
+#' identify the cluster to which the respective points belongs to. If
+#' `clusters_field` is specified (by default it's specified as `"clusters"`),
+#' cluster assignments in individual datasets will be updated in the merged
+#' dataset so that clusters are considered separate. This parameter can be set
+#' to `NA`, in which case no field will be considered as a special cluster
+#' assignments field.
 #'
-#' @param ... Data.
-#' @param fields Fields.
-#' @param cluster_field Yep.
-#' @return The merged data.
+#' This function can be used to merge data sets generated with the [clugen]
+#' function, by default merging the `points` and `clusters` fields in those data
+#' sets. It also works with arbitrary data by specifying alternative fields in
+#' the `fields` parameter. It can be used, for example, to merge third-party
+#' data with [clugen]-generated data.
+#'
+#' @param ... One or more cluster data sets (in the form of lists) whose
+#' `fields` are to be merged.
+#' @param fields Fields to be merged, which must exist in the data sets given in
+#' `...`.
+#' @param cluster_field Field containing the integer cluster labels. If
+#' specified, cluster assignments in individual datasets will be updated in the
+#' merged dataset so that clusters are considered separate.
+#' @return A list whose fields consist of the merged fields in the original
+#' data sets.
 #'
 #' @export
+#' @examples
+#' a <- clugen(2, 5, 100, c(1, 3), 0.5, c(10, 10), 8, 1.5, 2)
+#' b <- clugen(2, 3, 250, c(-1, 3), 0.5, c(13, 14), 7, 1, 2)
+#' ab <- clumerge(a, b)
 clumerge <- function(...,
                      fields= c("points", "clusters"),
                      clusters_field="clusters") {
