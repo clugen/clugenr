@@ -551,7 +551,7 @@ clumerge <- function(...,
   for (dt in data) {
 
     # How many elements to copy for the current data item?
-    tocopy <- gdim(dt[[1]])[1]
+    tocopy <- gdim(dt[[fields[1]]])[1]
 
     # Cycle through each field and its information
     for (field in names(fields_info)) {
