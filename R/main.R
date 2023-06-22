@@ -391,6 +391,20 @@ gdim <- function(a) {
   d
 }
 
+#' Merge clusters.
+#'
+#' @description
+#' To do.
+#'
+#' @details
+#' To do.
+#'
+#' @param ... Data.
+#' @param fields Fields.
+#' @param cluster_field Yep.
+#' @return The merged data.
+#'
+#' @export
 clumerge <- function(...,
                      fields= c("points", "clusters"),
                      clusters_field="clusters") {
