@@ -42,7 +42,7 @@ for (i in seq.int(1, nrow(targs))) {
     tpts <- 0
 
     # Create data sets with clugen()
-    for (i in ds_cg_n) {
+    for (i in 1:ds_cg_n) {
 
       # clugen() should run without warnings
       expect_warning(ds <- clugen(nd,
@@ -66,7 +66,7 @@ for (i in seq.int(1, nrow(targs))) {
     }
 
     # Create non-clugen() data sets
-    for (i in ds_ot_n) {
+    for (i in 1:ds_ot_n) {
       npts <- sample(1:100, 1)
       nclu <- sample(1:min(3, npts), 1)
       ds <- list(points = matrix(rnorm(npts * nd), ncol = nd),
