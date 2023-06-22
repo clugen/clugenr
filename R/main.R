@@ -454,15 +454,24 @@ clumerge <- function(...,
                                      ncol=field_cols,
                                      fact=field_fact)
 
-      } else {
+        # If it's the clusters field, it needs to have no dimensionality
+        if (field == clusters_field && !is.null(dim(value))) {
+          stop(paste0("Clusters field `",
+                      clusters_field,
+                      "` has more than one dimension"))
+        }
 
-        # If this field already appeared in previous data items, check that the
-        # number of columns is the same than that of previous data items, as
-        # well if it was a factor, this field must be one too
+      } else {
+        # If this field already appeared in previous data items...
+
+        # ...check that the number of columns is the same than that of previous
+        # data items
         if (field_cols != fields_info[[field]]$ncol) {
           stop(paste0("Dimension mismatch in field `", field, "`"))
         }
 
+        # ...check if previous items were factors, this item must be too (or
+        # vice-versa)
         if (field_fact != fields_info[[field]]$fact) {
           stop(paste0("Factor mismatch in field `", field, "`"))
         }
@@ -483,9 +492,9 @@ clumerge <- function(...,
     output[[field]] <- vector(mode = fields_info[[field]]$type,
                               length = numel * fields_info[[field]]$ncol)
 
-    # if (fields_info[[field]]$ncol != 1) {
-    #   dim(output[[field]]) <- c(numel, fields_info[[field]]$ncol)
-    # }
+    if (fields_info[[field]]$ncol > 1) {
+      dim(output[[field]]) <- c(numel, fields_info[[field]]$ncol)
+    }
   }
 
   # Copy items from input data to output dictionary, field-wise
@@ -503,21 +512,20 @@ clumerge <- function(...,
 
       ncol <- fields_info[[field]]$ncol
       # Copy elements
-      output[[field]][(copied * ncol + 1):((copied + tocopy) * ncol)] <- dt[[field]]
-      #
-      #   if (ifield.first == clusters_field) {
-      #
-      #       # If this is a clusters field, update the cluster IDs
-      #       old_clusters = unique(getindex(dt, clusters_field))
-      #       new_clusters = (last_cluster + 1):(last_cluster + length(old_clusters))
-      #       mapping = Dict(zip(old_clusters, new_clusters))
-      #       last_cluster = new_clusters[end]
-      #       [mapping[val] for val in getindex(dt, clusters_field)]
-      #
-      #   } else {
-      #       # Otherwise just copy the elements
-      #       getindex(dt, ifield.first)
-      #   }
+      if (ncol == 1) {
+        output[[field]][(copied + 1):(copied + tocopy)] <-
+          if (field == clusters_field) {
+            # If this is a clusters field, update the cluster IDs
+            old_clusters <- unique(dt[[clusters_field]])
+            new_clusters <- (last_cluster + 1):(last_cluster + length(old_clusters))
+            new_clusters[match(dt[[field]], old_clusters)]
+          } else {
+            # Otherwise just copy the elements
+            dt[[field]]
+          }
+      } else {
+        output[[field]][(copied + 1):(copied + tocopy),] <- dt[[field]]
+      }
     }
 
     # Update how many were copied so far
@@ -530,46 +538,8 @@ clumerge <- function(...,
     if (fi$fact) {
       output[[field]] <- factor(output[[field]])
     }
-    if (fi$ncol > 1) {
-      dim(output[[field]]) <- c(length(output[[field]]) / fi$ncol, fi$ncol)
-    }
-  }
-
-  cat("\n")
-  cat("Number of datasets:", length(list(...)), "\n")
-  cat("Number of elements:", numel, "\n")
-
-  for (field in names(fields_info)) {
-    cat("Cols for `", field, "`: ", fields_info[[field]]$ncol, "\n")
-    cat("Type for `", field, "`: ", fields_info[[field]]$type, "\n")
   }
 
   output
 }
-
-clumerge(list(points=c(2,4,6,7), clusters=c(1,1,1,2)))
-
-m1 <- matrix(c(2,3,4,5,6,7), ncol=2)
-#mode(m1) <- "complex"
-c1 <- c(1,1,2)
-#mode(c1) <- "integer"
-ds1 <- list(points=m1, clusters=c1)
-
-m2 <- matrix(c(2,3,4,5,6,7,10,-1,-1,2), ncol=2)
-c2 <- c(1,1,1,1,3)
-#mode(c2) <- "integer"
-ds2 <- list(points=m2, clusters=c2)
-
-clumerge(ds1, ds2) # Should work
-
-m3 = c(1,2,3)
-c3 = c(1,1,1)
-ds3 = list(points=m3, clusters=c3)
-clumerge(ds1,ds3) # Should not work: Dimension mismatch in field `points`
-
-
-
-
-
-
 
