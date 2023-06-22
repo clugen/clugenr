@@ -455,7 +455,7 @@ clumerge <- function(...,
                                      fact=field_fact)
 
         # If it's the clusters field, it needs to have no dimensionality
-        if (field == clusters_field && !is.null(dim(value))) {
+        if (!is.na(clusters_field) && field == clusters_field && !is.null(dim(value))) {
           stop(paste0("Clusters field `",
                       clusters_field,
                       "` has more than one dimension"))
@@ -514,7 +514,7 @@ clumerge <- function(...,
       # Copy elements
       if (ncol == 1) {
         output[[field]][(copied + 1):(copied + tocopy)] <-
-          if (field == clusters_field) {
+          if (!is.na(clusters_field) && field == clusters_field) {
             # If this is a clusters field, update the cluster IDs
             old_clusters <- unique(dt[[clusters_field]])
             new_clusters <- (last_cluster + 1):(last_cluster + length(old_clusters))
