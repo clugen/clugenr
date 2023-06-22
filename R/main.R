@@ -383,6 +383,14 @@ tprom <- list("logical"=1,
               "raw"=6,
               "list"=7)
 
+gdim <- function(a) {
+  d <- dim(a)
+  if (is.null(d)) {
+    d <- c(length(a), 1)
+  }
+  d
+}
+
 clumerge <- function(...,
                      fields= c("points", "clusters"),
                      clusters_field="clusters") {
@@ -421,7 +429,7 @@ clumerge <- function(...,
       value <- dt[[field]]
 
       # Number of elements in field value
-      numel_tmp <- if (is.vector(value)) length(value) else dim(value)[1]
+      numel_tmp <- gdim(value)[1]
 
       # Check the number of elements in the field value
       if (is.na(numel_i)) {
@@ -435,23 +443,31 @@ clumerge <- function(...,
       }
 
       # Get/check info about the field value type
-      field_cols <- if (is.vector(value)) 1 else dim(value)[2]
+      field_cols <- gdim(value)[2]
       field_type <- typeof(value)
+      field_fact <- is.factor(value)
 
       if (!(field %in% names(fields_info))) {
 
         # If it's the first time this field appears, just get the info
-        fields_info[[field]] <- list(type=field_type, ncol=field_cols)
+        fields_info[[field]] <- list(type=field_type,
+                                     ncol=field_cols,
+                                     fact=field_fact)
 
       } else {
 
+        # If this field already appeared in previous data items, check that the
+        # number of columns is the same than that of previous data items, as
+        # well if it was a factor, this field must be one too
         if (field_cols != fields_info[[field]]$ncol) {
-
-          # If this field already appeared in previous data items, check that the
-          # number of columns is the same than that of previous data items
           stop(paste0("Dimension mismatch in field `", field, "`"))
         }
 
+        if (field_fact != fields_info[[field]]$fact) {
+          stop(paste0("Factor mismatch in field `", field, "`"))
+        }
+
+        # Determine most broad type between values
         if (tprom[[field_type]] > fields_info[[field]]$type) {
           fields_info[[field]]$type <- tprom[[field_type]]
         }
@@ -467,9 +483,9 @@ clumerge <- function(...,
     output[[field]] <- vector(mode = fields_info[[field]]$type,
                               length = numel * fields_info[[field]]$ncol)
 
-    if (fields_info[[field]]$ncol == 1) {
-      dim(output[[field]]) <- c(numel, fields_info[[field]]$ncol)
-    }
+    # if (fields_info[[field]]$ncol != 1) {
+    #   dim(output[[field]]) <- c(numel, fields_info[[field]]$ncol)
+    # }
   }
 
   # Copy items from input data to output dictionary, field-wise
@@ -480,32 +496,44 @@ clumerge <- function(...,
   for (dt in data) {
 
     # How many elements to copy for the current data item?
-    tocopy <- if (is.vector(dt[[1]])) 1 else dim(dt[[1]])[1]
+    tocopy <- gdim(dt[[1]])[1]
 
     # Cycle through each field and its information
-    for (field in fields_info) {
+    for (field in names(fields_info)) {
 
-      # Copy elements (MAYBE MAKE THIS A MATRIX THEN RECONVERT TO VECTOR)
-      output[[field]][(copied + 1):(copied + tocopy), :] =
-        if ifield.first == clusters_field
-
-      # If this is a clusters field, update the cluster IDs
-      old_clusters = unique(getindex(dt, clusters_field))
-      new_clusters = (last_cluster + 1):(last_cluster + length(old_clusters))
-      mapping = Dict(zip(old_clusters, new_clusters))
-      last_cluster = new_clusters[end]
-      [mapping[val] for val in getindex(dt, clusters_field)]
-
-      else
-        # Otherwise just copy the elements
-        getindex(dt, ifield.first)
-      end
+      ncol <- fields_info[[field]]$ncol
+      # Copy elements
+      output[[field]][(copied * ncol + 1):((copied + tocopy) * ncol)] <- dt[[field]]
+      #
+      #   if (ifield.first == clusters_field) {
+      #
+      #       # If this is a clusters field, update the cluster IDs
+      #       old_clusters = unique(getindex(dt, clusters_field))
+      #       new_clusters = (last_cluster + 1):(last_cluster + length(old_clusters))
+      #       mapping = Dict(zip(old_clusters, new_clusters))
+      #       last_cluster = new_clusters[end]
+      #       [mapping[val] for val in getindex(dt, clusters_field)]
+      #
+      #   } else {
+      #       # Otherwise just copy the elements
+      #       getindex(dt, ifield.first)
+      #   }
     }
 
     # Update how many were copied so far
-    copied += tocopy
+    copied <- copied + tocopy
   }
 
+  # Reshape and set factor according to original data
+  for (field in names(fields_info)) {
+    fi <- fields_info[[field]]
+    if (fi$fact) {
+      output[[field]] <- factor(output[[field]])
+    }
+    if (fi$ncol > 1) {
+      dim(output[[field]]) <- c(length(output[[field]]) / fi$ncol, fi$ncol)
+    }
+  }
 
   cat("\n")
   cat("Number of datasets:", length(list(...)), "\n")
@@ -522,14 +550,14 @@ clumerge <- function(...,
 clumerge(list(points=c(2,4,6,7), clusters=c(1,1,1,2)))
 
 m1 <- matrix(c(2,3,4,5,6,7), ncol=2)
-mode(m1) <- "complex"
+#mode(m1) <- "complex"
 c1 <- c(1,1,2)
-mode(c1) <- "integer"
+#mode(c1) <- "integer"
 ds1 <- list(points=m1, clusters=c1)
 
 m2 <- matrix(c(2,3,4,5,6,7,10,-1,-1,2), ncol=2)
 c2 <- c(1,1,1,1,3)
-mode(c2) <- "integer"
+#mode(c2) <- "integer"
 ds2 <- list(points=m2, clusters=c2)
 
 clumerge(ds1, ds2) # Should work
