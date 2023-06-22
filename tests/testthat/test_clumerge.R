@@ -7,9 +7,9 @@
 
 # Create parameter combinations to test
 targs <- expand.grid(seed = seeds, nd = num_dims,
-                     ds_cg_n = 1:2,
-                     ds_ot_n = 0:2,
-                     no_clusters_field = c(FALSE, TRUE))
+                     ds_cg_n = t_ds_cg_n,
+                     ds_ot_n = t_ds_ot_n,
+                     no_clusters_field = t_no_clusters_field)
 
 # Loop through all parameter combinations
 for (i in seq.int(1, nrow(targs))) {

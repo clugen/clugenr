@@ -32,6 +32,11 @@ if (testthat:::on_cran() || is_test_mode("cran")) {
   # How many angles to test?
   nang <- 1
 
+  # clumerge() specific
+  t_ds_cg_n <- 1
+  t_ds_ot_n <- 1
+  t_no_clusters_field = FALSE
+
 } else if (testthat:::on_ci() || is_test_mode("ci")) {
   # Test setup for CI environments
   cat("Testing on CI\n")
@@ -58,6 +63,11 @@ if (testthat:::on_cran() || is_test_mode("cran")) {
 
   # How many angles to test?
   nang <- 2
+
+  # clumerge() specific
+  t_ds_cg_n <- 0:2
+  t_ds_ot_n <- 0:1
+  t_no_clusters_field = c(FALSE, TRUE)
 
 } else if (!is_test_mode("full")) {
   # Test setup for local tests
@@ -86,6 +96,11 @@ if (testthat:::on_cran() || is_test_mode("cran")) {
   # How many angles to test?
   nang <- 4
 
+  # clumerge() specific
+  t_ds_cg_n <- 0:3
+  t_ds_ot_n <- 0:2
+  t_no_clusters_field = c(FALSE, TRUE)
+
 } else {
   # Heavy-duty tests if the env variable CLUGENR_TEST_FULL is set to "true"
   # Can take a long time
@@ -113,4 +128,9 @@ if (testthat:::on_cran() || is_test_mode("cran")) {
 
   # How many angles to test?
   nang <- 5
+
+  # clumerge() specific
+  t_ds_cg_n <- 0:4
+  t_ds_ot_n <- 0:3
+  t_no_clusters_field = c(FALSE, TRUE)
 }
