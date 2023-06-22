@@ -564,6 +564,7 @@ clumerge <- function(...,
             # If this is a clusters field, update the cluster IDs
             old_clusters <- unique(dt[[clusters_field]])
             new_clusters <- (last_cluster + 1):(last_cluster + length(old_clusters))
+            last_cluster <- new_clusters[length(new_clusters)]
             new_clusters[match(dt[[field]], old_clusters)]
           } else {
             # Otherwise just copy the elements
@@ -578,7 +579,7 @@ clumerge <- function(...,
     copied <- copied + tocopy
   }
 
-  # Reshape and set factor according to original data
+  # Set factor according to original data
   for (field in names(fields_info)) {
     fi <- fields_info[[field]]
     if (fi$fact) {
