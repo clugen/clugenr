@@ -85,5 +85,11 @@ for (i in seq.int(1, nrow(targs))) {
     # Check that clumerge() is able to merge data sets without warnings
     args <- c(datasets, clusters_field = clufield)
     expect_warning(mds <- do.call(clumerge, args), regexp = NA)
+
+    # Check that the number of points and clusters is correct
+    expect_equal(gdim(mds$points), c(tpts, nd))
+    expect_equal(max(as.vector(mds$clusters, mode = "integer")), tclu)
+    expect_equal(typeof(mds$clusters), "integer")
+    expect_true(is.factor(mds$clusters))
   })
 }
