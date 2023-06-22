@@ -13,7 +13,7 @@ clumerge(..., fields = c("points", "clusters"), clusters_field = "clusters")
 \item{fields}{Fields to be merged, which must exist in the data sets given in
 \code{...}.}
 
-\item{cluster_field}{Field containing the integer cluster labels. If
+\item{clusters_field}{Field containing the integer cluster labels. If
 specified, cluster assignments in individual datasets will be updated in the
 merged dataset so that clusters are considered separate.}
 }

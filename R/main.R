@@ -426,7 +426,7 @@ gdim <- function(a) {
 #' `fields` are to be merged.
 #' @param fields Fields to be merged, which must exist in the data sets given in
 #' `...`.
-#' @param cluster_field Field containing the integer cluster labels. If
+#' @param clusters_field Field containing the integer cluster labels. If
 #' specified, cluster assignments in individual datasets will be updated in the
 #' merged dataset so that clusters are considered separate.
 #' @return A list whose fields consist of the merged fields in the original
