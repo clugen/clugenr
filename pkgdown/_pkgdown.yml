@@ -24,6 +24,8 @@ navbar:
        href: articles/examples3d2.html
      - text: "Examples in other dimensions"
        href: articles/examplesnd.html
+     - text: "Merging and hierarchical cluster examples"
+       href: articles/examplesmrg.html
     reference:
      text: "Reference"
      href: reference/index.html
