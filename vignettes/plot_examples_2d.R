@@ -36,11 +36,11 @@ plot_examples_2d <- function(..., pmargin = 0.1) {
       e <- et$e
       t <- et$t
       ggplot(NULL, aes(x = e$points[, 1], y = e$points[, 2])) +
-        geom_point(shape = 21, colour = "black", stroke = 0.1,
+        geom_point(shape = 21, colour = "white", stroke = 0.1, alpha = 0.8,
                    aes(fill = e$clusters)) +
         xlab(NULL) + ylab(NULL) + ggtitle(t) +
         theme(legend.position = "none",
-              plot.title = element_text(size = rel(0.75))) +
+              plot.title = element_text(size = rel(0.7))) +
         coord_fixed(xlim = c(xmin, xmax), ylim = c(ymin, ymax))
     })
 

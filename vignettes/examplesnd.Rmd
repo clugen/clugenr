@@ -58,7 +58,7 @@ plot_examples_1d(list(e = e085, t = "e085: proj_dist_fn='norm'"),
                  list(e = e086, t = "e086: proj_dist_fn='unif'"),
                  list(e = e087, t = "e087: custom proj_dist_fn (Weibull)"),
                  pmargin = 0.07,
-                 ymax = 0.575)
+                 ymax = 0.725)
 ```
 
 ## 5D example with default optional arguments

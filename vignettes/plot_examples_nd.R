@@ -6,7 +6,7 @@ library(patchwork) # For combining 2D plots
 
 # Function for plotting the nD clusters
 plot_examples_nd <- function(e, title, pstroke = 0.05, psize = 0.75,
-                             pmargin = 0.1) {
+                             pmargin = 0.01) {
 
   # How many dimensions?
   nd <- ncol(e$points)
@@ -40,7 +40,8 @@ plot_examples_nd <- function(e, title, pstroke = 0.05, psize = 0.75,
                                y = e$points[, x[2]],
                                colour = e$clusters)) +
                       geom_point(shape = 21,
-                                 colour = "black",
+                                 colour = "white",
+                                 alpha = 0.8,
                                  stroke = pstroke,
                                  size = psize,
                                  aes(fill = e$clusters)) +
