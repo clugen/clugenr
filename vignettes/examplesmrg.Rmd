@@ -70,3 +70,20 @@ plot_examples_2d(list(e = e090, t = "e090: data set 1"),
                  list(e = e093, t = "e093: merged data sets"),
                  palette = "set2")
 ```
+
+## Adding noise to a `clugen()`-generated data set
+
+```{r}
+set.seed(333)
+
+e094 = list(points = matrix(120 * runif(2 * 500) - 60, ncol = 2),
+            clusters = factor(rep(10L, 500)))    # Assign noise to cluster 10
+e095 = clumerge(e094, e092, clusters_field = NA) # and keep 10 when merging
+```
+
+```{r}
+plot_examples_2d(list(e = e092, t = "e092: original merged data sets"),
+                 list(e = e094, t = "e094: random uniform noise"),
+                 list(e = e095, t = "e095: data sets with noise"),
+                 palette = "husl9", pmargin = -0.1)
+```
