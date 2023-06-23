@@ -7,14 +7,14 @@ library(patchwork) # For combining 2D plots
 # Possible alternative color scales if we want consistency between subplots with
 # different number of clusters
 color_scales = list(
-  seaborn = c("#1F77B4","#FF7F0E","#2CA02C","#D62728","#9467BD",
-              "#8C564B","#E377C2","#7F7F7F","#BCBD22","#17BECF"),
-  set2 = c("#66C2A5","#FC8D62","#8DA0CB","#E78AC3",
-           "#A6D854","#FFD92F","#E5C494","#B3B3B3"),
-  pastel = c("#A1C9F4","#FFB482","#8DE5A1","#FF9F9B","#D0BBFF",
-             "#DEBB9B","#FAB0E4","#CFCFCF","#FFFEA3","#B9F2F0"),
-  husl9 = c("#F67088","#D58C31","#A39F31","#4FB031","#34AE90",
-            "#36AAB5","#3BA3EC","#BA82F4","#F563D3"))
+  seaborn = c("#1F77B4", "#FF7F0E", "#2CA02C", "#D62728", "#9467BD",
+              "#8C564B", "#E377C2", "#7F7F7F", "#BCBD22", "#17BECF"),
+  set2 = c("#66C2A5", "#FC8D62", "#8DA0CB", "#E78AC3", "#A6D854",
+           "#FFD92F", "#E5C494", "#B3B3B3", "#A1C9F4", "#4FB031"),
+  pastel = c("#A1C9F4", "#FFB482", "#8DE5A1", "#FF9F9B", "#D0BBFF",
+             "#DEBB9B", "#FAB0E4", "#CFCFCF", "#FFFEA3", "#B9F2F0"),
+  husl9 = c("#F67088", "#D58C31", "#A39F31", "#4FB031", "#34AE90",
+            "#36AAB5", "#3BA3EC", "#BA82F4", "#F563D3", "#FF7F0E"))
 
 # Function for plotting a series of related 2D examples
 plot_examples_2d <- function(..., pmargin = 0.1, palette = NULL) {
