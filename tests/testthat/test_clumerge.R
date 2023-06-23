@@ -223,5 +223,37 @@ for (seed in seeds) {
                  regexp = "Dimension mismatch in field `points`",
                  fixed = TRUE)
 
+    # `clusters_field` has more than one dimension
+    nd <- 2
+    npts <- sample(10:100, 1)
+    ds <- list(points = matrix(rnorm(npts * nd), ncol = nd),
+               clusters = matrix(sample(1:5, npts * nd, replace = TRUE),
+                                 ncol = nd))
+    expect_error(clumerge(ds),
+                 regexp = "Clusters field `clusters` has more than one dimension",
+                 fixed = TRUE)
+
+    # Factor mismatch
+    nd <- 5
+    npts1 <- sample(10:100, 1)
+    npts2 <- sample(10:100, 1)
+    ds1 <- list(points = matrix(rnorm(npts1 * nd), ncol = nd),
+                clusters = sample(1:5, npts1, replace = TRUE))
+    ds2 <- list(points = matrix(rnorm(npts2 * nd), ncol = nd),
+                clusters = factor(sample(1:5, npts2, replace = TRUE)))
+    expect_error(clumerge(ds1, ds2),
+                 regexp = "Factor mismatch in field `clusters`",
+                 fixed = TRUE)
+
+    # Confirm that type promotion happens and does not cause problems
+    nd <- 3
+    npts <- sample(10:100, 1)
+    ds1 <- list(points = matrix(rnorm(npts * nd), ncol = nd),
+                clusters = as.vector(sample(1:5, npts, replace = TRUE),
+                                     mode = "double"))
+    ds2 <- list(points = matrix(rnorm(npts * nd), ncol = nd),
+                clusters = sample(1:5, npts, replace = TRUE))
+    expect_warning(mds <- clumerge(ds1, ds2, clusters_field = NA), regexp = NA)
+    expect_type(mds$clusters, "double")
   })
 }
