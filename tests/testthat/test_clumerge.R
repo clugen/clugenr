@@ -172,3 +172,35 @@ for (i in seq.int(1, nrow(targs))) {
     expect_equal(clugenr:::gdim(mds$lengths), c(tclu_i, 1))
   })
 }
+
+# ################################################### #
+# Test that clumerge() raises the expected exceptions #
+# ################################################### #
+
+for (seed in seeds) {
+
+  # Set seed
+  set.seed(seed)
+
+  test_that(paste0("clumerge exceptions: seed=", seed), {
+
+    # Data item does not contain required field `unknown`
+    nd <- 3
+    npts <- sample(10:100, 1)
+    ds = list(points = matrix(rnorm(npts * nd), ncol = nd),
+              clusters = sample(1:5, npts, replace = TRUE))
+    expect_error(clumerge(ds, fields = c("clusters", "unknown")),
+                 regexp = "Data item does not contain required field `unknown`",
+                 fixed = TRUE)
+
+    # "`clusters_field` must contain integer types
+    nd <- 4
+    npts <- sample(10:100, 1)
+    ds = list(points = matrix(rnorm(npts * nd), ncol = nd),
+              clusters = rep(1, npts))
+    expect_error(clumerge(ds),
+                 regexp = "`clusters` must contain integer types",
+                 fixed = TRUE)
+
+  })
+}
