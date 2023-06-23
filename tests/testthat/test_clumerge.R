@@ -187,7 +187,7 @@ for (seed in seeds) {
     # Data item does not contain required field `unknown`
     nd <- 3
     npts <- sample(10:100, 1)
-    ds = list(points = matrix(rnorm(npts * nd), ncol = nd),
+    ds <- list(points = matrix(rnorm(npts * nd), ncol = nd),
               clusters = sample(1:5, npts, replace = TRUE))
     expect_error(clumerge(ds, fields = c("clusters", "unknown")),
                  regexp = "Data item does not contain required field `unknown`",
@@ -196,10 +196,31 @@ for (seed in seeds) {
     # "`clusters_field` must contain integer types
     nd <- 4
     npts <- sample(10:100, 1)
-    ds = list(points = matrix(rnorm(npts * nd), ncol = nd),
+    ds <- list(points = matrix(rnorm(npts * nd), ncol = nd),
               clusters = rep(1, npts))
     expect_error(clumerge(ds),
                  regexp = "`clusters` must contain integer types",
+                 fixed = TRUE)
+
+    # Data item contains fields with different sizes (npts != npts / 2)
+    nd <- 2
+    npts <- sample(10:100, 1)
+    ds <- list(points = matrix(rnorm(npts * nd), ncol = nd),
+               clusters = sample(1:5, npts %/% 2, replace = TRUE))
+    expect_error(clumerge(ds),
+                 regexp = paste0("Data item contains fields with different",
+                                 " sizes \\([0-9]+ != [0-9]+\\)"))
+
+    # Dimension mismatch in field `points`
+    nd1 <- 2
+    nd2 <- 3
+    npts <- sample(10:100, 1)
+    ds1 <- list(points = matrix(rnorm(npts * nd1), ncol = nd1),
+                clusters = sample(1:5, npts, replace = TRUE))
+    ds2 <- list(points = matrix(rnorm(npts * nd2), ncol = nd2),
+                clusters = sample(1:5, npts, replace = TRUE))
+    expect_error(clumerge(ds1, ds2),
+                 regexp = "Dimension mismatch in field `points`",
                  fixed = TRUE)
 
   })
