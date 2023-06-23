@@ -501,10 +501,15 @@ clumerge <- function(...,
                                      fact = field_fact)
 
         # If it's the clusters field, it needs to have no dimensionality
-        if (!is.na(clusters_field) && field == clusters_field && !is.null(dim(value))) {
-          stop(paste0("Clusters field `",
-                      clusters_field,
-                      "` has more than one dimension"))
+        if (!is.na(clusters_field) && field == clusters_field) {
+          if (!is.null(dim(value))) {
+            stop(paste0("Clusters field `",
+                        clusters_field,
+                        "` has more than one dimension"))
+          }
+          if (typeof(value) != "integer") {
+            stop(paste0("`", clusters_field, "` must contain integer types"))
+          }
         }
 
       } else {
