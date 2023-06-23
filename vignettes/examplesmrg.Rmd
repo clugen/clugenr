@@ -56,3 +56,17 @@ plot_examples_2d(list(e = e090, t = "e090: data set 1"),
                  list(e = e092, t = "e092: merged data sets"))
 ```
 
+In the previous example, clusters from individual data sets remain as separate
+clusters in the merged data set. It's also possible to maintain the original
+cluster labels by setting the `clusters_field` parameter to `NA`:
+
+```{r}
+e093 <- clumerge(e090, e091, clusters_field = NA)
+```
+
+```{r}
+plot_examples_2d(list(e = e090, t = "e090: data set 1"),
+                 list(e = e091, t = "e091: data set 2"),
+                 list(e = e093, t = "e093: merged data sets"),
+                 palette = "set2")
+```
