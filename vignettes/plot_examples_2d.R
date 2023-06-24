@@ -21,7 +21,10 @@ color_scales = list(
             "9" = "#F563D3", "10" = "#FF7F0E"))
 
 # Function for plotting a series of related 2D examples
-plot_examples_2d <- function(..., pmargin = 0.1, palette = NULL) {
+plot_examples_2d <- function(...,
+                             pmargin = 0.1,
+                             clusters_field = "clusters",
+                             palette = NULL) {
 
   # Place examples in a list
   ets <- list(...)
@@ -60,7 +63,7 @@ plot_examples_2d <- function(..., pmargin = 0.1, palette = NULL) {
       t <- et$t
       ggplot(NULL, aes(x = e$points[, 1], y = e$points[, 2])) +
         geom_point(shape = 21, colour = "white", stroke = 0.1, alpha = 0.8,
-                   aes(fill = e$clusters)) +
+                   aes(fill = e[[clusters_field]])) +
         colscale +
         xlab(NULL) + ylab(NULL) + ggtitle(t) +
         theme(legend.position = "none",
