@@ -573,7 +573,8 @@ clumerge <- function(...,
             new_clusters[match(dt[[field]], old_clusters)]
           } else {
             # Otherwise just copy the elements
-            dt[[field]]
+            as.numeric(levels(dt[[field]]))[dt[[field]]]
+
           }
       } else {
         output[[field]][(copied + 1):(copied + tocopy), ] <- dt[[field]]
