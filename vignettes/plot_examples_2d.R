@@ -19,15 +19,17 @@ color_scales = list(
 # Function for plotting a series of related 2D examples
 plot_examples_2d <- function(..., pmargin = 0.1, palette = NULL) {
 
+  # Place examples in a list
+  ets <- list(...)
+
   # Was a specific palette specified?
   colscale <- if (is.null(palette)) {
     NULL
   } else {
     scale_fill_manual(values = color_scales[[palette]])
+    # Gather all levels and apply them to the input data
+    all_lvls <- unlist(lapply(ets, function(et) unique(et$e$clusters)))
   }
-
-  # Place examples in a list
-  ets <- list(...)
 
   # Get maximum and minimum points in each dimension for all examples
   xmax <- max(sapply(ets, function(et) max(et$e$points[, 1])))
@@ -53,6 +55,7 @@ plot_examples_2d <- function(..., pmargin = 0.1, palette = NULL) {
     ets,
     function(et) {
       e <- et$e
+      levels(e$clusters) <- all_lvls
       t <- et$t
       ggplot(NULL, aes(x = e$points[, 1], y = e$points[, 2])) +
         geom_point(shape = 21, colour = "white", stroke = 0.1, alpha = 0.8,
