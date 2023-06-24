@@ -77,7 +77,7 @@ plot_examples_2d(list(e = e090, t = "e090: data set 1"),
 set.seed(333)
 
 e094 = list(points = matrix(120 * runif(2 * 500) - 60, ncol = 2),
-            clusters = factor(rep(10L, 500)))    # Assign noise to cluster 10
+            clusters = factor(rep(9L, 500)))    # Assign noise to cluster 9
 e095 = clumerge(e094, e092, clusters_field = NA) # and keep 10 when merging
 ```
 
@@ -85,7 +85,7 @@ e095 = clumerge(e094, e092, clusters_field = NA) # and keep 10 when merging
 plot_examples_2d(list(e = e092, t = "e092: original merged data sets"),
                  list(e = e094, t = "e094: random uniform noise"),
                  list(e = e095, t = "e095: data sets with noise"),
-                 palette = "husl9", pmargin = -0.1)
+                 palette = "set2", pmargin = -0.1)
 ```
 
 ## Merging with data not generated with `clugen()`
@@ -94,9 +94,11 @@ plot_examples_2d(list(e = e092, t = "e092: original merged data sets"),
 set.seed(888)
 spc <- prcomp(swiss)
 e096 <- list(points = spc$x[, 1:2], clusters = factor(rep(4L, dim(spc$x)[1])))
-e097 <- clugen(2, 3, 50, c(-0.2, 1), 0., c(0, 0), 45, 5, 1,
+e097 <- clugen(2, 3, 50, c(-0.3, 1), 0., c(0, 0), 0, 0, 3,
                proj_dist_fn = "unif", clusizes_fn = c(20, 6, 25),
-               clucenters_fn = matrix(c(-55, -5, 0, -20, 40, 0), byrow = TRUE, ncol = 2))
+               clucenters_fn = matrix(c(-58, -5, 10, -40, 38, 0), byrow = TRUE, ncol = 2),
+               angle_deltas_fn = c(0.02, -0.03, 0.1),
+               llengths_fn = c(55, 100, 60))
 e098 <- clumerge(e096, e097, clusters_field = NA)
 ```
 
