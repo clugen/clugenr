@@ -90,6 +90,12 @@ plot_examples_2d(list(e = e092, t = "e092: original merged data sets"),
 
 ## Merging with data not generated with `clugen()`
 
+Data generated with [clugen] can be merged with other data sets, for example as
+a way of augmenting them. In this example we perform [PCA][stats::prcomp] to
+the [datasets::swiss] dataset to reduce its 6 variables to 2. As there are only
+47 observations in this dataset, we'll use [clugen] to generate very similar
+clusters and then use [clumerge] to create an augmented dataset:
+
 ```{r}
 set.seed(888)
 spc <- prcomp(swiss)
@@ -108,3 +114,24 @@ plot_examples_2d(list(e = e096, t = "e096: swiss PCA"),
                  list(e = e098, t = "e098: merged"),
                  palette = "husl9")
 ```
+
+We can also hierarchize clusters from different sources:
+
+
+```{r}
+e099 <- append(e096, list(hclusters = factor(rep(1L, dim(spc$x)[1]))))
+e100 <- append(e097, list(hclusters = factor(rep(2L, dim(e097$clusters)[1]))))
+e101 <- clumerge(e099, e100, fields = "points", clusters_field = "hclusters")
+```
+
+```{r}
+plot_examples_2d(list(e = e099, t = "e099: swiss PCA 1 cluster"),
+                 list(e = e100, t = "e100: clugen 1 cluster"),
+                 list(e = e101, t = "e101: merged 2 clusters"),
+                 clusters_field = "hclusters",
+                 palette = "husl9")
+```
+
+Note that this example is for illustration purposes only. Augmenting a dataset
+this way is probably not a statistically sound approach for most problems.
+
