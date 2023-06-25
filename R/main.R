@@ -571,10 +571,12 @@ clumerge <- function(...,
             new_clusters <- (last_cluster + 1):(last_cluster + length(old_clusters))
             last_cluster <- new_clusters[length(new_clusters)]
             new_clusters[match(dt[[field]], old_clusters)]
+          } else if (fields_info[[field]]$fact) {
+            # If not, are they factors?
+            as.numeric(levels(dt[[field]]))[dt[[field]]]
           } else {
             # Otherwise just copy the elements
-            as.numeric(levels(dt[[field]]))[dt[[field]]]
-
+            dt[[field]]
           }
       } else {
         output[[field]][(copied + 1):(copied + tocopy), ] <- dt[[field]]
