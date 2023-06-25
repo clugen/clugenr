@@ -14,5 +14,4 @@
 
 ## Other
 
-* Allow direct specification of cluster sizes, cluster centers, line lengths,
-  and angle deltas, instead of going through a function.
+* Add the `clumerge()` function for merging arbitrary cluster data.
