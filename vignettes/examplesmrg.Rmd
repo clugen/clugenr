@@ -77,8 +77,8 @@ plot_examples_2d(list(e = e090, t = "e090: data set 1"),
 set.seed(333)
 
 e094 = list(points = matrix(120 * runif(2 * 500) - 60, ncol = 2),
-            clusters = factor(rep(9L, 500)))    # Assign noise to cluster 9
-e095 = clumerge(e094, e092, clusters_field = NA) # and keep 10 when merging
+            clusters = factor(rep(9L, 500)))     # Assign noise to cluster 9
+e095 = clumerge(e094, e092, clusters_field = NA) # and keep it 9 when merging
 ```
 
 ```{r}
@@ -110,17 +110,16 @@ e098 <- clumerge(e096, e097, clusters_field = NA)
 
 ```{r}
 plot_examples_2d(list(e = e096, t = "e096: swiss PCA"),
-                 list(e = e097, t = "e097: clugen"),
+                 list(e = e097, t = "e097: clugen-generated"),
                  list(e = e098, t = "e098: merged"),
-                 palette = "husl9")
+                 palette = "seaborn")
 ```
 
 We can also hierarchize clusters from different sources:
 
-
 ```{r}
 e099 <- append(e096, list(hclusters = factor(rep(1L, dim(spc$x)[1]))))
-e100 <- append(e097, list(hclusters = factor(rep(2L, dim(e097$clusters)[1]))))
+e100 <- append(e097, list(hclusters = factor(rep(2L, length(e097$clusters)))))
 e101 <- clumerge(e099, e100, fields = "points", clusters_field = "hclusters")
 ```
 
@@ -129,7 +128,7 @@ plot_examples_2d(list(e = e099, t = "e099: swiss PCA 1 cluster"),
                  list(e = e100, t = "e100: clugen 1 cluster"),
                  list(e = e101, t = "e101: merged 2 clusters"),
                  clusters_field = "hclusters",
-                 palette = "husl9")
+                 palette = "seaborn")
 ```
 
 Note that this example is for illustration purposes only. Augmenting a dataset
