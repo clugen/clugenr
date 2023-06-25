@@ -90,11 +90,11 @@ plot_examples_2d(list(e = e092, t = "e092: original merged data sets"),
 
 ## Merging with data not generated with `clugen()`
 
-Data generated with [clugen] can be merged with other data sets, for example as
-a way of augmenting them. In this example we perform [PCA][stats::prcomp] to
-the [datasets::swiss] dataset to reduce its 6 variables to 2. As there are only
-47 observations in this dataset, we'll use [clugen] to generate very similar
-clusters and then use [clumerge] to create an augmented dataset:
+Data generated with `clugen()` can be merged with other data sets, for example as
+a way of augmenting them. In this example we perform `stats::prcomp()` to
+the `datasets::swiss` dataset to reduce its 6 variables to 2. As there are only
+47 observations in this dataset, we'll use `clugen()` to generate very similar
+clusters and then use `clumerge()` to create an augmented dataset:
 
 ```{r}
 set.seed(888)
@@ -124,13 +124,33 @@ e101 <- clumerge(e099, e100, fields = "points", clusters_field = "hclusters")
 ```
 
 ```{r}
-plot_examples_2d(list(e = e099, t = "e099: swiss PCA 1 cluster"),
-                 list(e = e100, t = "e100: clugen 1 cluster"),
-                 list(e = e101, t = "e101: merged 2 clusters"),
+plot_examples_2d(list(e = e099, t = "e099: swiss PCA (1 cluster)"),
+                 list(e = e100, t = "e100: clugen-generated (1 cluster)"),
+                 list(e = e101, t = "e101: merged (2 clusters)"),
                  clusters_field = "hclusters",
                  palette = "seaborn")
 ```
 
-Note that this example is for illustration purposes only. Augmenting a dataset
-this way is probably not a statistically sound approach for most problems.
+Note that augmenting a dataset this way is probably not a statistically sound
+approach for most problems. In any case, if we perform clustering on the merged
+dataset and assume there are 3 clusters, results are interesting:
 
+```{r}
+# For display purposes, assign all points in merged data to a single cluster
+e102 <- list(points = e101$points, hclusters = factor(rep(1L, length(e101$hclusters))))
+
+# Perform hierachical clustering with Manhattan distance, complete linkage and
+# assuming 3 clusters
+clusts <- cutree(hclust(dist(e101$points, method = "manhattan")), 3)
+
+# Create data set with merged points and new cluster labels
+e103 <- list(points = e101$points, hclusters = factor(clusts))
+```
+
+```{r}
+plot_examples_2d(list(e = e101, t = "e101: merged (2 clusters)"),
+                 list(e = e102, t = "e102: merged (1 cluster)"),
+                 list(e = e103, t = "e103: after clustering (3 clusters)"),
+                 clusters_field = "hclusters",
+                 palette = "seaborn")
+```
