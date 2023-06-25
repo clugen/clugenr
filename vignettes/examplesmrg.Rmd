@@ -46,7 +46,7 @@ seed2 <- 5555
 e090 <- clugen(2, 5, 1000, c(1, 1), pi / 12, c(20, 20), 14, 1.2, 1.5, seed = seed1,
                proj_dist_fn = "unif", point_dist_fn = "n")
 e091 <- clugen(2, 3, 1500, c(1, 0), 0.05, c(20, 20), 0, 0, 4, seed = seed2,
-               point_dist_fn = "n", cluster_offset =c(20, 0))
+               point_dist_fn = "n", cluster_offset = c(20, 0))
 e092 <- clumerge(e090, e091)
 ```
 
@@ -76,9 +76,9 @@ plot_examples_2d(list(e = e090, t = "e090: data set 1"),
 ```{r}
 set.seed(333)
 
-e094 = list(points = matrix(120 * runif(2 * 500) - 60, ncol = 2),
+e094 <- list(points = matrix(120 * runif(2 * 500) - 60, ncol = 2),
             clusters = factor(rep(9L, 500)))     # Assign noise to cluster 9
-e095 = clumerge(e094, e092, clusters_field = NA) # and keep it 9 when merging
+e095 <- clumerge(e094, e092, clusters_field = NA) # and keep it 9 when merging
 ```
 
 ```{r}
@@ -102,7 +102,8 @@ spc <- prcomp(swiss)
 e096 <- list(points = spc$x[, 1:2], clusters = factor(rep(4L, dim(spc$x)[1])))
 e097 <- clugen(2, 3, 50, c(-0.3, 1), 0., c(0, 0), 0, 0, 3,
                proj_dist_fn = "unif", clusizes_fn = c(20, 6, 25),
-               clucenters_fn = matrix(c(-58, -5, 10, -40, 38, 0), byrow = TRUE, ncol = 2),
+               clucenters_fn = matrix(c(-58, -5, 10, -40, 38, 0),
+                                      byrow = TRUE, ncol = 2),
                angle_deltas_fn = c(0.02, -0.03, 0.1),
                llengths_fn = c(55, 100, 60))
 e098 <- clumerge(e096, e097, clusters_field = NA)

@@ -6,7 +6,7 @@ library(patchwork) # For combining 2D plots
 
 # Possible alternative color scales if we want consistency between subplots with
 # different number of clusters
-color_scales = list(
+color_scales <- list(
   seaborn = c("1" = "#1F77B4", "2" = "#FF7F0E", "3" = "#2CA02C", "4" = "#D62728",
               "5" = "#9467BD", "6" = "#8C564B", "7" = "#E377C2", "8" = "#7F7F7F",
               "9" = "#BCBD22", "10" = "#17BECF"),
