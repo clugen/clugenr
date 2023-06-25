@@ -1,4 +1,6 @@
-# clugenr (development version)
+# clugenr 0.4.0
+
+* Add the `clumerge()` function for merging arbitrary cluster data.
 
 # clugenr 0.3.0
 
