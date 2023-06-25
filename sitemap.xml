@@ -19,6 +19,9 @@
     <loc>/articles/examples3d2.html</loc>
   </url>
   <url>
+    <loc>/articles/examplesmrg.html</loc>
+  </url>
+  <url>
     <loc>/articles/examplesnd.html</loc>
   </url>
   <url>
@@ -52,6 +55,9 @@
     <loc>/reference/clugenr.html</loc>
   </url>
   <url>
+    <loc>/reference/clumerge.html</loc>
+  </url>
+  <url>
     <loc>/reference/clupoints_n.html</loc>
   </url>
   <url>
@@ -70,6 +76,9 @@
     <loc>/reference/fix_num_points.html</loc>
   </url>
   <url>
+    <loc>/reference/gdim.html</loc>
+  </url>
+  <url>
     <loc>/reference/index.html</loc>
   </url>
   <url>
@@ -86,5 +95,8 @@
   </url>
   <url>
     <loc>/reference/rand_vector_at_angle.html</loc>
+  </url>
+  <url>
+    <loc>/reference/tprom.html</loc>
   </url>
 </urlset>
