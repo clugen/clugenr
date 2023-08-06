@@ -4,7 +4,7 @@
 
 ## Test environments
 
-* Ubuntu 22.04.2 (R: devel, release, oldrel-1, 3.6.0)
+* Ubuntu 22.04.3 (R: devel, release, oldrel-1, 3.6.0)
 * Windows 11 (R: release)
 * macOS 12 (R: release)
 
@@ -14,4 +14,4 @@
 
 ## Other
 
-* Add the `clumerge()` function for merging arbitrary cluster data.
+* Update reference to final peer-reviewed published article.
