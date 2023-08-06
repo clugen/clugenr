@@ -1,9 +1,12 @@
 citHeader("To cite clugenr in publications use:")
 
 bibentry(bibtype = "Article",
-         title = "Generating Multidimensional Clusters With Support Lines",
+         title = "Generating multidimensional clusters with support lines",
          author = c(as.person("Nuno Fachada"),
                     as.person("Diogo de Andrade")),
-         journal = "arXiv",
+         journal = "Knowledge-Based Systems",
+         volume = "277",
+         pages = "110836",
          year = "2023",
-         doi = "10.48550/arXiv.2301.10327")
+         publisher = "Elsevier",
+         doi = "10.1016/j.knosys.2023.110836")
