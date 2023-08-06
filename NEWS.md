@@ -1,4 +1,6 @@
-# clugenr (development version)
+# clugenr 1.0.0
+
+* Update reference to final peer-reviewed published article.
 
 # clugenr 0.4.0
 
