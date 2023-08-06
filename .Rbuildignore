@@ -1,9 +1,9 @@
 ^clugenr\.Rproj$
 ^\.Rproj\.user$
-^LICENSE\.md$
-cran-comments.md
-NEWS.md
-.github
+^LICENSE$
+^cran-comments\.md$
+^NEWS\.md$
+^\.github$
 ^_pkgdown\.yml$
 ^docs$
 ^pkgdown$
@@ -11,3 +11,4 @@ NEWS.md
 ^CRAN-SUBMISSION$
 ^doc$
 ^Meta$
+^CITATION\.cff$
