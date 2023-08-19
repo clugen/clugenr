@@ -1,6 +1,6 @@
 Package: clugenr
 Title: Multidimensional Cluster Generation Using Support Lines
-Version: 1.0.0.9000
+Version: 1.0.1
 Authors@R: 
     person(given = "Nuno",
            family = "Fachada",
