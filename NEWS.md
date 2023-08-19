@@ -1,4 +1,6 @@
-# clugenr (development version)
+# clugenr 1.0.1
+
+* Fix packaging/documentation issue due to changes in roxygen2.
 
 # clugenr 1.0.0
 
