@@ -141,8 +141,8 @@ clugen <- function(num_dims, num_clusters, num_points, direction, angle_disp,
   }
 
   # Is direction a vector or a matrix?
-  if (is.vector(direction) ||
-      (is.array(direction) && length(dim(direction)) == 1)) {
+  if (is.vector(direction)
+      || (is.array(direction) && length(dim(direction)) == 1)) {
     # If a main direction vector was given, transpose it, so we can treat it
     # like a matrix later
     direction <- matrix(direction, ncol = length(direction))
@@ -182,7 +182,7 @@ clugen <- function(num_dims, num_clusters, num_points, direction, angle_disp,
   # Check that cluster_sep has num_dims dimensions
   if (length(cluster_sep) != num_dims) {
     stop("Length of `cluster_sep` must be equal to `num_dims` (",
-      length(cluster_sep), " != ", num_dims, ")")
+         length(cluster_sep), " != ", num_dims, ")")
   }
 
   # If given, cluster_offset must have the correct number of dimensions,
@@ -191,7 +191,7 @@ clugen <- function(num_dims, num_clusters, num_points, direction, angle_disp,
     cluster_offset <- vector(mode = "integer", length = num_dims)
   } else if (length(cluster_offset) != num_dims) {
     stop("Length of `cluster_offset` must be equal to `num_dims` (",
-      length(cluster_offset), " != ", num_dims, ")")
+         length(cluster_offset), " != ", num_dims, ")")
   }
 
   # Check that proj_dist_fn specifies a valid way for projecting points along
@@ -279,8 +279,8 @@ clugen <- function(num_dims, num_clusters, num_points, direction, angle_disp,
   # Determine cluster centers
   cluster_centers <- if (is.function(clucenters_fn)) {
     clucenters_fn(num_clusters, cluster_sep, cluster_offset)
-  } else if (is.matrix(clucenters_fn) &&
-             all(dim(clucenters_fn) == c(num_clusters, num_dims))) {
+  } else if (is.matrix(clucenters_fn)
+             && all(dim(clucenters_fn) == c(num_clusters, num_dims))) {
     clucenters_fn
   } else {
     stop("clucenters_fn has to be either a function or a matrix of size ",

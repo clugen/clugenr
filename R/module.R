@@ -209,39 +209,39 @@ clupoints_n <- function(projs, lat_disp, line_len, clu_dir, clu_ctr) {
 #' sum(sizes)
 clusizes <- function(num_clusters, num_points, allow_empty) {
 
-    # Determine number of points in each cluster using the normal distribution
+  # Determine number of points in each cluster using the normal distribution
 
-    # Consider the mean an equal division of points between clusters
-    mean <- num_points / num_clusters
-    # The standard deviation is such that the interval [0, 2 * mean] will
-    # contain ≈99.7% of cluster sizes
-    std <- mean / 3
+  # Consider the mean an equal division of points between clusters
+  mean <- num_points / num_clusters
+  # The standard deviation is such that the interval [0, 2 * mean] will
+  # contain ≈99.7% of cluster sizes
+  std <- mean / 3
 
-    # Determine points with the normal distribution
-    clu_num_points <- stats::rnorm(num_clusters, mean = mean, sd = std)
+  # Determine points with the normal distribution
+  clu_num_points <- stats::rnorm(num_clusters, mean = mean, sd = std)
 
-    # Set negative values to zero
-    clu_num_points <- sapply(clu_num_points, function(x) if (x > 0) x else 0)
+  # Set negative values to zero
+  clu_num_points <- sapply(clu_num_points, function(x) if (x > 0) x else 0)
 
-    # Fix imbalances, so that num_points is respected
-    if (sum(clu_num_points) > 0) { # Be careful not to divide by zero
-      clu_num_points <- num_points / sum(clu_num_points) * clu_num_points
-    }
+  # Fix imbalances, so that num_points is respected
+  if (sum(clu_num_points) > 0) { # Be careful not to divide by zero
+    clu_num_points <- num_points / sum(clu_num_points) * clu_num_points
+  }
 
-    # Round the real values to integers since a cluster sizes is represented by
-    # an integer
-    clu_num_points <- as.integer(round(clu_num_points))
+  # Round the real values to integers since a cluster sizes is represented by
+  # an integer
+  clu_num_points <- as.integer(round(clu_num_points))
 
-    # Make sure total points is respected, which may not be the case at this
-    # time due to rounding
-    clu_num_points <- fix_num_points(clu_num_points, num_points)
+  # Make sure total points is respected, which may not be the case at this
+  # time due to rounding
+  clu_num_points <- fix_num_points(clu_num_points, num_points)
 
-    # If empty clusters are not allowed, make sure there aren't any
-    if (!allow_empty) {
-      clu_num_points <- fix_empty(clu_num_points, allow_empty)
-    }
+  # If empty clusters are not allowed, make sure there aren't any
+  if (!allow_empty) {
+    clu_num_points <- fix_empty(clu_num_points, allow_empty)
+  }
 
-    clu_num_points
+  clu_num_points
 }
 
 #' Determine length of cluster-supporting lines

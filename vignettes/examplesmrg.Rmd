@@ -77,7 +77,7 @@ plot_examples_2d(list(e = e090, t = "e090: data set 1"),
 set.seed(333)
 
 e094 <- list(points = matrix(120 * runif(2 * 500) - 60, ncol = 2),
-            clusters = factor(rep(9L, 500)))     # Assign noise to cluster 9
+             clusters = factor(rep(9L, 500)))     # Assign noise to cluster 9
 e095 <- clumerge(e094, e092, clusters_field = NA) # and keep it 9 when merging
 ```
 

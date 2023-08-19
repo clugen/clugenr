@@ -188,7 +188,7 @@ for (seed in seeds) {
     nd <- 3
     npts <- sample(10:100, 1)
     ds <- list(points = matrix(rnorm(npts * nd), ncol = nd),
-              clusters = sample(1:5, npts, replace = TRUE))
+               clusters = sample(1:5, npts, replace = TRUE))
     expect_error(clumerge(ds, fields = c("clusters", "unknown")),
                  regexp = "Data item does not contain required field `unknown`",
                  fixed = TRUE)
@@ -197,7 +197,7 @@ for (seed in seeds) {
     nd <- 4
     npts <- sample(10:100, 1)
     ds <- list(points = matrix(rnorm(npts * nd), ncol = nd),
-              clusters = rep(1, npts))
+               clusters = rep(1, npts))
     expect_error(clumerge(ds),
                  regexp = "`clusters` must contain integer types",
                  fixed = TRUE)

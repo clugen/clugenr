@@ -51,9 +51,11 @@ for (i in seq.int(1, nrow(targs))) {
       }
 
       # Check that the clupoints_n_1_template function runs without warnings
-      expect_warning(
-        pts <- clupoints_n_1_template(proj, lat_std, direc, dist_fn),
-        regexp = NA)
+      expect_warning(pts <- clupoints_n_1_template(proj,
+                                                   lat_std,
+                                                   direc,
+                                                   dist_fn),
+                     regexp = NA)
 
       # Check that number of points is the same as the number of projections
       expect_equal(dim(pts), dim(proj))

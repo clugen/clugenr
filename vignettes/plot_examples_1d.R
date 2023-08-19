@@ -20,31 +20,29 @@ plot_examples_1d <- function(..., pmargin = 0.1, ymax = 0.6) {
   xmin <- xmin - xd
 
   # Create plots
-  plts <- lapply(
-    ets,
-    function(et) {
-      e <- et$e
-      t <- et$t
-      ggplot() +
-        geom_density(mapping = aes(x = e$points,
-                                   colour = e$clusters,
-                                   fill = e$clusters),
-                     alpha = 0.3) +
-        geom_point(mapping = aes(x = e$points,
-                                 y = -0.02,
-                                 fill = e$clusters),
-                   shape = 21,
-                   colour = "black",
-                   stroke = 0.1,
-                   alpha = 0.2) +
-        ggtitle(t) + xlab(NULL) + ylab(NULL) +
-        xlim(xmin, xmax) + ylim(-0.025, ymax) +
-        theme(legend.position = "none",
-              plot.title = element_text(size = rel(0.75)),
-              axis.ticks.y = element_blank(),
-              axis.text.y = element_blank()
-        )
-    })
+  plts <- lapply(ets,
+                 function(et) {
+                   e <- et$e
+                   t <- et$t
+                   ggplot() +
+                     geom_density(mapping = aes(x = e$points,
+                                                colour = e$clusters,
+                                                fill = e$clusters),
+                                  alpha = 0.3) +
+                     geom_point(mapping = aes(x = e$points,
+                                              y = -0.02,
+                                              fill = e$clusters),
+                                shape = 21,
+                                colour = "black",
+                                stroke = 0.1,
+                                alpha = 0.2) +
+                     ggtitle(t) + xlab(NULL) + ylab(NULL) +
+                     xlim(xmin, xmax) + ylim(-0.025, ymax) +
+                     theme(legend.position = "none",
+                           plot.title = element_text(size = rel(0.75)),
+                           axis.ticks.y = element_blank(),
+                           axis.text.y = element_blank())
+                 })
 
   # Combine plots as subplots
   wrap_plots(plts)

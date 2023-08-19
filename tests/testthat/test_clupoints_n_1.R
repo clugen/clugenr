@@ -43,9 +43,8 @@ for (i in seq.int(1, nrow(targs))) {
       proj <- points_on_line(ctr, direc, proj_dist_fn2ctr)
 
       # Check that the clupoints_n_1 function runs without warnings
-      expect_warning(
-        pts <- clupoints_n_1(proj, lat_std, len, direc, ctr),
-        regexp = NA)
+      expect_warning(pts <- clupoints_n_1(proj, lat_std, len, direc, ctr),
+                     regexp = NA)
 
       # Check that number of points is the same as the number of projections
       expect_equal(dim(pts), dim(proj))

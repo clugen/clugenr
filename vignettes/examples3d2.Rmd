@@ -145,8 +145,8 @@ plot_examples_3d(list(e = e076, t = "e076: proj_dist_fn = 'norm' (default)"),
 ```{r}
 # Custom point_dist_fn: final points placed using the Exponential distribution
 clupoints_n_1_exp <- function(projs, lat_std, len, clu_dir, clu_ctr) {
-    dist_exp <- function(npts, lstd) lstd * rexp(npts, rate = 2 / lstd)
-    clupoints_n_1_template(projs, lat_std, clu_dir, dist_exp)
+  dist_exp <- function(npts, lstd) lstd * rexp(npts, rate = 2 / lstd)
+  clupoints_n_1_template(projs, lat_std, clu_dir, dist_exp)
 }
 ```
 

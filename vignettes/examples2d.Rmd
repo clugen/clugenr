@@ -277,8 +277,8 @@ e033 <- clugen(2, 5, 1500, c(1, 0), pi / 4, c(20, 20), 14, 2, 2.0, seed = seed,
 
 ```{r}
 plot_examples_2d(list(e = e031, t = "e031: proj_dist_fn = 'norm' (default)"),
-              list(e = e032, t = "e032: proj_dist_fn = 'unif'"),
-              list(e = e033, t = "e033: custom proj_dist_fn (Beta dist.)"))
+                 list(e = e032, t = "e032: proj_dist_fn = 'unif'"),
+                 list(e = e033, t = "e033: custom proj_dist_fn (Beta dist.)"))
 ```
 
 ### Custom point placement using the exponential distribution
@@ -286,8 +286,8 @@ plot_examples_2d(list(e = e031, t = "e031: proj_dist_fn = 'norm' (default)"),
 ```{r}
 # Custom point_dist_fn: final points placed using the Exponential distribution
 clupoints_n_1_exp <- function(projs, lat_std, len, clu_dir, clu_ctr) {
-    dist_exp <- function(npts, lstd) lstd * rexp(npts, rate = 2 / lstd)
-    clupoints_n_1_template(projs, lat_std, clu_dir, dist_exp)
+  dist_exp <- function(npts, lstd) lstd * rexp(npts, rate = 2 / lstd)
+  clupoints_n_1_template(projs, lat_std, clu_dir, dist_exp)
 }
 ```
 

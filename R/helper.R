@@ -136,8 +136,8 @@ fix_empty <- function(clu_num_points, allow_empty = FALSE) {
     empty_clusts <- which(clu_num_points == 0)
 
     # If there are empty clusters and enough points for all clusters...
-    if (length(empty_clusts) > 0 &&
-        sum(clu_num_points) >= length(clu_num_points)) {
+    if (length(empty_clusts) > 0
+        && sum(clu_num_points) >= length(clu_num_points)) {
 
       # Go through the empty clusters...
       for (i0 in empty_clusts) {

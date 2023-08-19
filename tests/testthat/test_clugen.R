@@ -83,8 +83,8 @@ for (i in seq.int(1, nrow(targs))) {
         if (nd > 1) {
           # In case direction is just a vector, repeat it num_cluster times
           # into a matrix...
-          if (is.vector(direc) ||
-              (is.array(direc) && length(dim(direc)) == 1)) {
+          if (is.vector(direc)
+              || (is.array(direc) && length(dim(direc)) == 1)) {
             direc <- matrix(direc,
                             nrow = nclu,
                             ncol = length(direc),
@@ -501,9 +501,9 @@ for (seed in seeds) {
                              llengths_fn = llengths_fn,
                              angle_deltas_fn = langles_fn,
                              seed = seed),
-                 regexp = paste0(
-                   "Length of directions in `direction` must be equal to ",
-                   "`num_dims` (", length(bad_dir), " != ", nd, ")"),
+                 regexp = paste0("Length of directions in `direction` must be ",
+                                 "equal to `num_dims` (",
+                                 length(bad_dir), " != ", nd, ")"),
                  fixed = TRUE)
 
     # Specific direction for each cluster requires one direction per cluster
@@ -528,21 +528,21 @@ for (seed in seeds) {
 
     # Direction needs to be a 1D array (vector) or 2D array (matrix)
     expect_error(r <- clugen(nd, nclu, tpts,
-                               # but we're passing a 3D array
-                               array(rnorm(nd * nclu * 2), c(nd, nclu, 2)),
-                               astd, clusep, len_mu, len_std, lat_std,
-                               allow_empty = ae,
-                               cluster_offset = clu_off,
-                               proj_dist_fn = prj_dist,
-                               point_dist_fn = pt_dist,
-                               clusizes_fn = csizes_fn,
-                               clucenters_fn = ccenters_fn,
-                               llengths_fn = llengths_fn,
-                               angle_deltas_fn = langles_fn,
-                               seed = seed),
-                   regexp = paste0("`direction` must be a vector (1D array) ",
-                                   "or a matrix (2D array)"),
-                   fixed = TRUE)
+                             # but we're passing a 3D array
+                             array(rnorm(nd * nclu * 2), c(nd, nclu, 2)),
+                             astd, clusep, len_mu, len_std, lat_std,
+                             allow_empty = ae,
+                             cluster_offset = clu_off,
+                             proj_dist_fn = prj_dist,
+                             point_dist_fn = pt_dist,
+                             clusizes_fn = csizes_fn,
+                             clucenters_fn = ccenters_fn,
+                             llengths_fn = llengths_fn,
+                             angle_deltas_fn = langles_fn,
+                             seed = seed),
+                 regexp = paste0("`direction` must be a vector (1D array) ",
+                                 "or a matrix (2D array)"),
+                 fixed = TRUE)
 
     # cluster_sep needs to have nd dims
     bad_clusep <- c(10, 10)
@@ -558,9 +558,9 @@ for (seed in seeds) {
                              llengths_fn = llengths_fn,
                              angle_deltas_fn = langles_fn,
                              seed = seed),
-                 regexp = paste0(
-                   "Length of `cluster_sep` must be equal to `num_dims` (",
-                   length(bad_clusep), " != ", nd, ")"),
+                 regexp = paste0("Length of `cluster_sep` must be equal to ",
+                                 "`num_dims` (",
+                                 length(bad_clusep), " != ", nd, ")"),
                  fixed = TRUE)
 
     # cluster_offset needs to have nd dims
@@ -593,9 +593,8 @@ for (seed in seeds) {
                              llengths_fn = llengths_fn,
                              angle_deltas_fn = langles_fn,
                              seed = seed),
-                 regexp = paste0(
-                   "`proj_dist_fn` has to be either \"norm\", \"unif\" or",
-                   " user-defined function"),
+                 regexp = paste0("`proj_dist_fn` has to be either \"norm\", ",
+                                 "\"unif\" or user-defined function"),
                  fixed = TRUE)
 
     # Invalid proj_dist_fn given as function
