@@ -14,4 +14,4 @@
 
 ## Other
 
-* Update reference to final peer-reviewed published article.
+* Fix packaging/documentation issue due to changes in roxygen2.
