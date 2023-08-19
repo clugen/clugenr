@@ -15,3 +15,4 @@
 ## Other
 
 * Fix packaging/documentation issue due to changes in roxygen2.
+* Fix indentation issues.

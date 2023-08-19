@@ -1,6 +1,7 @@
 # clugenr 1.0.1
 
 * Fix packaging/documentation issue due to changes in roxygen2.
+* Fix indentation issues.
 
 # clugenr 1.0.0
 
