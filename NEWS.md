@@ -1,4 +1,7 @@
-# clugenr (development version)
+# clugenr 1.0.2
+
+* Allow Theory vignette to "fail gracefully" if remote images are not available.
+* Update versions of used GitHub actions.
 
 # clugenr 1.0.1
 
