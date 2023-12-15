@@ -14,5 +14,5 @@
 
 ## Other
 
-* Fix packaging/documentation issue due to changes in roxygen2.
-* Fix indentation issues.
+* Allow Theory vignette to "fail gracefully" if remote images are not available.
+* Update versions of used GitHub actions.
