@@ -17,6 +17,7 @@ Depends:
 Imports:
     mathjaxr
 Suggests:
+    crul,
     devtools,
     ggplot2,
     knitr,

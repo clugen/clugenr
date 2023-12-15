@@ -44,9 +44,11 @@ works as follows ($^*$ means the algorithm step is stochastic):
 
 Figure 1 provides a stylized overview of the algorithm's steps.
 
+```{asis, echo = crul::ok("https://raw.githubusercontent.com/clugen/.github/main/images/algorithm.png")}
 ![**Figure 1** - Stylized overview of the *clugen* algorithm. Background tiles
 are 10 units wide and tall, when
 applicable.](https://raw.githubusercontent.com/clugen/.github/main/images/algorithm.png)
+```
 
 The example in Figure 1 was generated with the following parameters, the exact
 meaning of each will be discussed shortly:
@@ -165,8 +167,10 @@ corrected. Thus, cluster sizes do not add up to $p$, highlighting the fact that
 this is not a requirement of the *clugen* algorithm, i.e., user-defined  $c_s()$
 implementations can consider $p$ a hint rather than an obligation.
 
+```{asis, echo = crul::ok("https://raw.githubusercontent.com/clugen/.github/main/images/clusizes.png")}
 ![**Figure 2** - Possible cluster sizes with various definitions of $c_s()$ for
 $c=4$ and $p=5000$.](https://raw.githubusercontent.com/clugen/.github/main/images/clusizes.png)
+```
 
 #### 3. Determine cluster centers
 
@@ -198,10 +202,12 @@ different implementations of the $c_c()$ function, namely using the uniform the
 distribution (the default, implemented by the `clucenters()` function, Figure
 3a), and direct specification of cluster centers (Figure 3b).
 
+```{asis, echo = crul::ok("https://raw.githubusercontent.com/clugen/.github/main/images/clucenters.png")}
 ![**Figure 3** - The output of *clugen* for two different implementations of the
 $c_c()$ function for finding cluster centers: a) the default, using the uniform
 distribution; b) hand-picked centers. All parameters are the same as in Figure 1,
 except for $p$, which is set to 5000.](https://raw.githubusercontent.com/clugen/.github/main/images/clucenters.png)
+```
 
 #### 4. Determine lengths of cluster-supporting lines
 
@@ -230,6 +236,7 @@ distribution with mean $\mu$ and variance $\sigma^2$.
 Figure 4 shows cluster-supporting line lengths obtained with different implementations
 of $l()$.
 
+```{asis, echo = crul::ok("https://raw.githubusercontent.com/clugen/.github/main/images/llengths.png")}
 ![**Figure 4** - Line lengths for different implementations of $l()$: a) the
 default, using the folded normal distribution; b) using the Poisson distribution,
 with $\lambda=l$; c) using the uniform distribution in the interval
@@ -237,6 +244,7 @@ $\left\lbrack 0, 2l\right\rbrack$; and, d) hand-picked lengths, more specificall
 $\pmb{\ell}=\begin{bmatrix}2 & 8 & 16 & 32\end{bmatrix}^T$. Cluster centers,
 as well as parameters $l$ and $l_\sigma$, are the same as for the example
 shown in Figure 1.](https://raw.githubusercontent.com/clugen/.github/main/images/llengths.png)
+```
 
 #### 5. Determine angles between $\mathbf{d}$ and cluster-supporting lines
 
@@ -269,6 +277,7 @@ dispersion of the cluster-supporting lines.
 Figure 5 shows the final direction of the cluster-supporting lines for two
 different implementations of $\theta_\Delta()$.
 
+```{asis, echo = crul::ok("https://raw.githubusercontent.com/clugen/.github/main/images/angle_deltas.png")}
 ![**Figure 5** - Final directions of the cluster supporting-lines for different
 implementations of $\theta_\Delta()$: a) the default, where angle differences
 were obtained using the wrapped normal distribution; and, d) hand-picked angle
@@ -276,6 +285,7 @@ differences, more specifically
 $\mathbf{\Theta_\Delta}=\begin{bmatrix}0 & \frac{\pi}{2} & 0 & \frac{\pi}{2}\end{bmatrix}^T$.
 Cluster centers, as well as the angle dispersion $\theta_\sigma$, are the same
 as for the example shown in Figure 1.](https://raw.githubusercontent.com/clugen/.github/main/images/angle_deltas.png)
+```
 
 #### 6. For each cluster $i$:
 
@@ -348,6 +358,7 @@ functions implementing the Laplace and Rayleigh distributions, respectively.
 All parameters are set as in Figure 1, except for $p_\text{proj}()$ in the case
 of Figures 6b-6d, and $p$, which is set to 5000.
 
+```{asis, echo = crul::ok("https://raw.githubusercontent.com/clugen/.github/main/images/proj_dist_fn.png")}
 ![**Figure 6** - Clusters generated for various implementations of $p_\text{proj}()$:
 a) the default, where line center distances are drawn for the normal distribution,
 specified using the in-built `"norm"` option; b) in which center distances are
@@ -357,6 +368,7 @@ Laplace distribution; and, d) in which a custom user function returns center
 distances drawn from the Rayleigh distribution. All parameters are set as in Figure
 1, except for $p_\text{proj}()$ in the case of Figures 6b-6d, and $p$, which
 is set to 5000.](https://raw.githubusercontent.com/clugen/.github/main/images/proj_dist_fn.png)
+```
 
 ##### 6.3. Determine coordinates of point projections on the cluster-supporting line
 
@@ -413,8 +425,10 @@ parameter. These work as follows:
 Figure 7 highlights the differences between these two approaches in 2D, where a
 hyperplane is simply a line.
 
+```{asis, echo = crul::ok("https://raw.githubusercontent.com/clugen/.github/main/images/point_dist_ex.png")}
 ![**Figure 7** - Example of how the final cluster points are obtained in 2D when
 using the built-in implementations for $p_\text{final}()$.](https://raw.githubusercontent.com/clugen/.github/main/images/point_dist_ex.png)
+```
 
 In general, points can be placed using a `"n-1"` or `"n"` strategy using any
 distribution. Figure 8 displays several examples for various implementations of
@@ -429,6 +443,8 @@ Figures 8e and 8f, with the latter also having the $p_\text{proj}()$ function
 set to `"unif"`. The remaining parameters (for all subfigures) are set as in
 Figure 1, except for $p$, which is set to 5000.
 
+```{asis, echo = crul::ok("https://raw.githubusercontent.com/clugen/.github/main/images/point_dist_fn.png")}
 ![**Figure 8** - Examples of various implementations of $p_\text{final}()$.
 Figures a and b shown the effect of the built-in implementations, while Figures
 c-f display results obtained using custom user functions.](https://raw.githubusercontent.com/clugen/.github/main/images/point_dist_fn.png)
+```
