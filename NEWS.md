@@ -1,3 +1,5 @@
+# clugenr (development version)
+
 # clugenr 1.0.2
 
 * Allow Theory vignette to "fail gracefully" if remote images are not available.
