@@ -1,6 +1,6 @@
 ---
 title: "Development"
-output: rmarkdown::html_vignette
+output: rmdformats::robobook
 vignette: >
   %\VignetteIndexEntry{Development}
   %\VignetteEngine{knitr::rmarkdown}

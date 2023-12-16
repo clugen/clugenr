@@ -1,6 +1,6 @@
 ---
 title: "Merging and hierarchical cluster examples"
-output: rmarkdown::html_vignette
+output: rmdformats::robobook
 vignette: >
   %\VignetteIndexEntry{Merging and hierarchical cluster examples}
   %\VignetteEngine{knitr::rmarkdown}

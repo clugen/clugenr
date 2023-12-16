@@ -1,6 +1,6 @@
 ---
 title: "Examples in 3D: part I"
-output: rmarkdown::html_vignette
+output: rmdformats::robobook
 vignette: >
   %\VignetteIndexEntry{Examples in 3D: part I}
   %\VignetteEngine{knitr::rmarkdown}

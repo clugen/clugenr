@@ -1,6 +1,6 @@
 ---
 title: "Examples in other dimensions"
-output: rmarkdown::html_vignette
+output: rmdformats::robobook
 vignette: >
   %\VignetteIndexEntry{Examples in other dimensions}
   %\VignetteEngine{knitr::rmarkdown}

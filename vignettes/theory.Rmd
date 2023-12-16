@@ -1,6 +1,6 @@
 ---
 title: "Theory"
-output: rmarkdown::html_vignette
+output: rmdformats::robobook
 vignette: >
   %\VignetteIndexEntry{Theory}
   %\VignetteEngine{knitr::rmarkdown}
