@@ -13,7 +13,7 @@ An implementation of the clugen algorithm for generating multidimensional cluste
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://github.com/clugen/clugenr}
+  \item \url{https://clugen.github.io/clugenr/}
   \item Report bugs at \url{https://github.com/clugen/clugenr/issues}
 }
 
