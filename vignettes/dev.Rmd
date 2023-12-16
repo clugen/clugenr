@@ -1,6 +1,9 @@
 ---
 title: "Development"
-output: rmdformats::robobook
+output:
+  prettydoc::html_pretty:
+    theme: tactile
+    highlight: vignette
 vignette: >
   %\VignetteIndexEntry{Development}
   %\VignetteEngine{knitr::rmarkdown}

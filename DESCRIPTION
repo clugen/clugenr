@@ -23,9 +23,9 @@ Suggests:
     knitr,
     lintr,
     patchwork,
+    prettydoc,
     rgl,
     rmarkdown,
-    rmdformats,
     roxygen2,
     testthat (>= 3.0.0)
 RdMacros:

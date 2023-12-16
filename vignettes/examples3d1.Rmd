@@ -1,6 +1,9 @@
 ---
 title: "Examples in 3D: part I"
-output: rmdformats::robobook
+output:
+  prettydoc::html_pretty:
+    theme: tactile
+    highlight: vignette
 vignette: >
   %\VignetteIndexEntry{Examples in 3D: part I}
   %\VignetteEngine{knitr::rmarkdown}
