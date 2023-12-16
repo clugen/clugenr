@@ -49,9 +49,9 @@ seed <- 123
 ```
 
 ```{r}
-e043 <- clugen(3, 4, 400, c(1, 0, 0), 0, c(10, 10, 10), 15, 1.5, 0.5, seed = seed)
-e044 <- clugen(3, 4, 400, c(1, 1, 1), 0, c(10, 10, 10), 15, 1.5, 0.5, seed = seed)
-e045 <- clugen(3, 4, 400, c(0, 0, 1), 0, c(10, 10, 10), 15, 1.5, 0.5, seed = seed)
+e043 <- clugen(3, 4, 300, c(1, 0, 0), 0, c(10, 10, 10), 15, 1.5, 0.5, seed = seed)
+e044 <- clugen(3, 4, 300, c(1, 1, 1), 0, c(10, 10, 10), 15, 1.5, 0.5, seed = seed)
+e045 <- clugen(3, 4, 300, c(0, 0, 1), 0, c(10, 10, 10), 15, 1.5, 0.5, seed = seed)
 ```
 
 ```{r}
@@ -72,9 +72,9 @@ angdel_90 <- function(nclu, astd) sample(c(0, pi / 2), nclu, replace = TRUE)
 ```
 
 ```{r}
-e046 <- clugen(3, 6, 700, c(1, 0, 0), 0, c(10, 10, 10), 15, 1.5, 0.5, seed = seed)
-e047 <- clugen(3, 6, 700, c(1, 0, 0), pi / 8, c(10, 10, 10), 15, 1.5, 0.5, seed = seed)
-e048 <- clugen(3, 6, 700, c(1, 0, 0), 0, c(10, 10, 10), 15, 1.5, 0.5, seed = seed,
+e046 <- clugen(3, 6, 300, c(1, 0, 0), 0, c(10, 10, 10), 15, 1.5, 0.5, seed = seed)
+e047 <- clugen(3, 6, 300, c(1, 0, 0), pi / 8, c(10, 10, 10), 15, 1.5, 0.5, seed = seed)
+e048 <- clugen(3, 6, 300, c(1, 0, 0), 0, c(10, 10, 10), 15, 1.5, 0.5, seed = seed,
                angle_deltas_fn = angdel_90)
 ```
 
@@ -101,9 +101,9 @@ dirs <- matrix(c(1, 1, 1,
 ```
 
 ```{r}
-e049 <- clugen(3, 5, 700, dirs, 0, rep.int(0, 3), 20, 0, 0.25, seed = seed)
-e050 <- clugen(3, 5, 700, dirs, pi / 12, rep.int(0, 3), 20, 0, 0.25, seed = seed)
-e051 <- clugen(3, 5, 700, dirs, pi / 4, rep.int(0, 3), 20, 0, 0.25, seed = seed)
+e049 <- clugen(3, 5, 400, dirs, 0, rep.int(0, 3), 20, 0, 0.25, seed = seed)
+e050 <- clugen(3, 5, 400, dirs, pi / 12, rep.int(0, 3), 20, 0, 0.25, seed = seed)
+e051 <- clugen(3, 5, 400, dirs, pi / 4, rep.int(0, 3), 20, 0, 0.25, seed = seed)
 ```
 
 ```{r}
@@ -121,11 +121,11 @@ seed <- 123
 ### Using the `llength` parameter
 
 ```{r}
-e052 <- clugen(3, 5, 600, c(1, 0, 0), pi / 10, c(10, 10, 10), 0, 0, 0.5,
+e052 <- clugen(3, 5, 300, c(1, 0, 0), pi / 10, c(10, 10, 10), 0, 0, 0.5,
                seed = seed, point_dist_fn = "n")
-e053 <- clugen(3, 5, 600, c(1, 0, 0), pi / 10, c(10, 10, 10), 10, 0, 0.5,
+e053 <- clugen(3, 5, 300, c(1, 0, 0), pi / 10, c(10, 10, 10), 10, 0, 0.5,
                seed = seed, point_dist_fn = "n")
-e054 <- clugen(3, 5, 600, c(1, 0, 0), pi / 10, c(10, 10, 10), 30, 0, 0.5,
+e054 <- clugen(3, 5, 300, c(1, 0, 0), pi / 10, c(10, 10, 10), 30, 0, 0.5,
                seed = seed, point_dist_fn = "n")
 ```
 
@@ -145,11 +145,11 @@ llen_grow <- function(nclu, llen, llenstd) {
 ```
 
 ```{r}
-e055 <- clugen(3, 5, 600, c(1, 0, 0), pi / 10, c(10, 10, 10), 15,  0.0, 0.5,
+e055 <- clugen(3, 5, 300, c(1, 0, 0), pi / 10, c(10, 10, 10), 15,  0.0, 0.5,
                seed = seed, point_dist_fn = "n")
-e056 <- clugen(3, 5, 600, c(1, 0, 0), pi / 10, c(10, 10, 10), 15, 10.0, 0.5,
+e056 <- clugen(3, 5, 300, c(1, 0, 0), pi / 10, c(10, 10, 10), 15, 10.0, 0.5,
                seed = seed, point_dist_fn = "n")
-e057 <- clugen(3, 5, 600, c(1, 0, 0), pi / 10, c(10, 10, 10), 10,  0.1, 0.5,
+e057 <- clugen(3, 5, 300, c(1, 0, 0), pi / 10, c(10, 10, 10), 10,  0.1, 0.5,
                seed = seed, point_dist_fn = "n", llengths_fn = llen_grow)
 ```
 
@@ -168,9 +168,9 @@ seed <- 321
 ```
 
 ```{r}
-e058 <- clugen(3, 8, 700, c(1, 1, 1), pi / 4, c(30, 10, 10), 25, 4, 3, seed = seed)
-e059 <- clugen(3, 8, 700, c(1, 1, 1), pi / 4, c(10, 30, 10), 25, 4, 3, seed = seed)
-e060 <- clugen(3, 8, 700, c(1, 1, 1), pi / 4, c(10, 10, 30), 25, 4, 3, seed = seed)
+e058 <- clugen(3, 8, 300, c(1, 1, 1), pi / 4, c(30, 10, 10), 25, 4, 3, seed = seed)
+e059 <- clugen(3, 8, 300, c(1, 1, 1), pi / 4, c(10, 30, 10), 25, 4, 3, seed = seed)
+e060 <- clugen(3, 8, 300, c(1, 1, 1), pi / 4, c(10, 10, 30), 25, 4, 3, seed = seed)
 ```
 
 ```{r}
@@ -194,10 +194,10 @@ centers_diag <- function(nclu, csep, coff) {
 ```
 
 ```{r}
-e061 <- clugen(3, 8, 700, c(1, 1, 1), pi / 4, c(10, 10, 10), 12, 3, 2.5, seed = seed)
-e062 <- clugen(3, 8, 700, c(1, 1, 1), pi / 4, c(10, 10, 10), 12, 3, 2.5, seed = seed,
+e061 <- clugen(3, 8, 300, c(1, 1, 1), pi / 4, c(10, 10, 10), 12, 3, 2.5, seed = seed)
+e062 <- clugen(3, 8, 300, c(1, 1, 1), pi / 4, c(10, 10, 10), 12, 3, 2.5, seed = seed,
                cluster_offset = c(20, -20, 20))
-e063 <- clugen(3, 8, 700, c(1, 1, 1), pi / 4, c(10, 10, 10), 12, 3, 2.5, seed = seed,
+e063 <- clugen(3, 8, 300, c(1, 1, 1), pi / 4, c(10, 10, 10), 12, 3, 2.5, seed = seed,
                cluster_offset = c(-50, -50, -50), clucenters_fn = centers_diag)
 ```
 
