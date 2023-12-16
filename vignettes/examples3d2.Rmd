@@ -208,6 +208,3 @@ plot_examples_3d(list(e = e082, t = "e082: normal dist. (default)"),
                  list(e = e083, t = "e083: unif. dist. (custom)"),
                  list(e = e084, t = "e084: equal size (custom)"))
 ```
-
-
-

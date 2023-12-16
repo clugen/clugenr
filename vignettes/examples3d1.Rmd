@@ -206,6 +206,3 @@ plot_examples_3d(list(e = e061, t = "e061: default"),
                  list(e = e062, t = "e062: cluster_offset = [20, -20, 20]"),
                  list(e = e063, t = "e063: custom clucenters function"))
 ```
-
-
-
