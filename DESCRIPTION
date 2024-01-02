@@ -31,7 +31,7 @@ Suggests:
 RdMacros:
     mathjaxr
 License: MIT + file LICENSE
-URL: https://clugen.github.io/clugenr/
+URL: https://clugen.github.io/clugenr/, https://github.com/clugen/clugenr
 BugReports: https://github.com/clugen/clugenr/issues
 Encoding: UTF-8
 LazyData: true
