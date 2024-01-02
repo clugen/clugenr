@@ -14,6 +14,7 @@ An implementation of the clugen algorithm for generating multidimensional cluste
 Useful links:
 \itemize{
   \item \url{https://clugen.github.io/clugenr/}
+  \item \url{https://github.com/clugen/clugenr}
   \item Report bugs at \url{https://github.com/clugen/clugenr/issues}
 }
 
