@@ -1,4 +1,8 @@
-# clugenr (development version)
+# clugenr 1.0.3
+
+* Improve presentation of HTML vignettes.
+* Reduce theory vignette to bare minimum, pointing towards the published paper
+  for a full description.
 
 # clugenr 1.0.2
 
