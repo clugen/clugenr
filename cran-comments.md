@@ -14,5 +14,6 @@
 
 ## Other
 
-* Allow Theory vignette to "fail gracefully" if remote images are not available.
-* Update versions of used GitHub actions.
+* Improve presentation of HTML vignettes.
+* Reduce theory vignette to bare minimum, pointing towards the published paper
+  for a full description.
