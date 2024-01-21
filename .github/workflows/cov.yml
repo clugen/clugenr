@@ -7,6 +7,7 @@ on:
   pull_request:
     branches: [main]
     paths: [ 'R/**', 'tests/**', '.github/workflows/cov.yml' ]
+  workflow_dispatch:
 
 jobs:
   test-coverage:
