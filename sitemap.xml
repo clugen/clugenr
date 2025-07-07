@@ -1,102 +1,36 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>/404.html</loc>
-  </url>
-  <url>
-    <loc>/LICENSE-text.html</loc>
-  </url>
-  <url>
-    <loc>/articles/dev.html</loc>
-  </url>
-  <url>
-    <loc>/articles/examples2d.html</loc>
-  </url>
-  <url>
-    <loc>/articles/examples3d1.html</loc>
-  </url>
-  <url>
-    <loc>/articles/examples3d2.html</loc>
-  </url>
-  <url>
-    <loc>/articles/examplesmrg.html</loc>
-  </url>
-  <url>
-    <loc>/articles/examplesnd.html</loc>
-  </url>
-  <url>
-    <loc>/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>/articles/theory.html</loc>
-  </url>
-  <url>
-    <loc>/authors.html</loc>
-  </url>
-  <url>
-    <loc>/index.html</loc>
-  </url>
-  <url>
-    <loc>/news/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/angle_btw.html</loc>
-  </url>
-  <url>
-    <loc>/reference/angle_deltas.html</loc>
-  </url>
-  <url>
-    <loc>/reference/clucenters.html</loc>
-  </url>
-  <url>
-    <loc>/reference/clugen.html</loc>
-  </url>
-  <url>
-    <loc>/reference/clugenr-package.html</loc>
-  </url>
-  <url>
-    <loc>/reference/clumerge.html</loc>
-  </url>
-  <url>
-    <loc>/reference/clupoints_n.html</loc>
-  </url>
-  <url>
-    <loc>/reference/clupoints_n_1.html</loc>
-  </url>
-  <url>
-    <loc>/reference/clupoints_n_1_template.html</loc>
-  </url>
-  <url>
-    <loc>/reference/clusizes.html</loc>
-  </url>
-  <url>
-    <loc>/reference/fix_empty.html</loc>
-  </url>
-  <url>
-    <loc>/reference/fix_num_points.html</loc>
-  </url>
-  <url>
-    <loc>/reference/gdim.html</loc>
-  </url>
-  <url>
-    <loc>/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/llengths.html</loc>
-  </url>
-  <url>
-    <loc>/reference/points_on_line.html</loc>
-  </url>
-  <url>
-    <loc>/reference/rand_ortho_vector.html</loc>
-  </url>
-  <url>
-    <loc>/reference/rand_unit_vector.html</loc>
-  </url>
-  <url>
-    <loc>/reference/rand_vector_at_angle.html</loc>
-  </url>
-  <url>
-    <loc>/reference/tprom.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>/404.html</loc></url>
+<url><loc>/LICENSE-text.html</loc></url>
+<url><loc>/articles/dev.html</loc></url>
+<url><loc>/articles/examples2d.html</loc></url>
+<url><loc>/articles/examples3d1.html</loc></url>
+<url><loc>/articles/examples3d2.html</loc></url>
+<url><loc>/articles/examplesmrg.html</loc></url>
+<url><loc>/articles/examplesnd.html</loc></url>
+<url><loc>/articles/index.html</loc></url>
+<url><loc>/articles/theory.html</loc></url>
+<url><loc>/authors.html</loc></url>
+<url><loc>/index.html</loc></url>
+<url><loc>/news/index.html</loc></url>
+<url><loc>/reference/angle_btw.html</loc></url>
+<url><loc>/reference/angle_deltas.html</loc></url>
+<url><loc>/reference/clucenters.html</loc></url>
+<url><loc>/reference/clugen.html</loc></url>
+<url><loc>/reference/clugenr-package.html</loc></url>
+<url><loc>/reference/clumerge.html</loc></url>
+<url><loc>/reference/clupoints_n.html</loc></url>
+<url><loc>/reference/clupoints_n_1.html</loc></url>
+<url><loc>/reference/clupoints_n_1_template.html</loc></url>
+<url><loc>/reference/clusizes.html</loc></url>
+<url><loc>/reference/fix_empty.html</loc></url>
+<url><loc>/reference/fix_num_points.html</loc></url>
+<url><loc>/reference/gdim.html</loc></url>
+<url><loc>/reference/index.html</loc></url>
+<url><loc>/reference/llengths.html</loc></url>
+<url><loc>/reference/points_on_line.html</loc></url>
+<url><loc>/reference/rand_ortho_vector.html</loc></url>
+<url><loc>/reference/rand_unit_vector.html</loc></url>
+<url><loc>/reference/rand_vector_at_angle.html</loc></url>
+<url><loc>/reference/tprom.html</loc></url>
 </urlset>
+
