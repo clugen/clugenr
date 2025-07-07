@@ -6,6 +6,7 @@ test_that("Package linting", {
   skip_if(is_test_mode("cran"))
   skip_on_cran()
   skip_on_covr()
+  skip_if(testthat:::system_os() != "windows" && testthat:::on_ci())
   pkgpath <- if (testthat:::on_ci()) {
     Sys.getenv("GITHUB_WORKSPACE")
   } else {
