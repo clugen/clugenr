@@ -69,7 +69,7 @@
       <img src="../logo.png" class="logo" alt=""><h1>Examples in 2D</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/clugen/clugenr/blob/v1.0.4/vignettes/examples2d.Rmd" class="external-link"><code>vignettes/examples2d.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/clugen/clugenr/blob/main/vignettes/examples2d.Rmd" class="external-link"><code>vignettes/examples2d.Rmd</code></a></small>
       <div class="d-none name"><code>examples2d.Rmd</code></div>
     </div>
 
@@ -80,7 +80,7 @@
 code:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Load the clugenr library</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://clugen.github.io/clugenr/" class="external-link">clugenr</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://clugen.github.io/clugenr/">clugenr</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Load functions for plotting examples</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/source.html" class="external-link">source</a></span><span class="op">(</span><span class="st">"plot_examples_2d.R"</span>, local <span class="op">=</span> <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/knit_global.html" class="external-link">knit_global</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
@@ -105,7 +105,7 @@ function available <a href="https://github.com/clugen/clugenr/blob/main/vignette
 <code class="sourceCode R"><span><span class="fu">plot_examples_2d</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>e <span class="op">=</span> <span class="va">e001</span>, t <span class="op">=</span> <span class="st">"e001: direction = [1, 0]"</span><span class="op">)</span>,</span>
 <span>                 <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>e <span class="op">=</span> <span class="va">e002</span>, t <span class="op">=</span> <span class="st">"e002: direction = [1, 1]"</span><span class="op">)</span>,</span>
 <span>                 <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>e <span class="op">=</span> <span class="va">e003</span>, t <span class="op">=</span> <span class="st">"e003: direction = [0, 1]"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="examples2d_files/figure-html/unnamed-chunk-4-1.png" width="100%"></p>
+<p><img src="examples2d_files/figure-html/unnamed-chunk-4-1.png" alt="Three 2D scatter plots of data generated as an example of using the direction parameter." width="100%"></p>
 </div>
 <div class="section level3">
 <h3 id="changing-the-angle_disp-parameter-and-using-a-custom-angle_deltas_fn-function">Changing the <code>angle_disp</code> parameter and using a custom
@@ -125,7 +125,7 @@ function available <a href="https://github.com/clugen/clugenr/blob/main/vignette
 <code class="sourceCode R"><span><span class="fu">plot_examples_2d</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>e <span class="op">=</span> <span class="va">e004</span>, t <span class="op">=</span> <span class="st">"e004: angle_disp = 0"</span><span class="op">)</span>,</span>
 <span>                 <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>e <span class="op">=</span> <span class="va">e005</span>, t <span class="op">=</span> <span class="st">"e005: angle_disp = π/8"</span><span class="op">)</span>,</span>
 <span>                 <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>e <span class="op">=</span> <span class="va">e006</span>, t <span class="op">=</span> <span class="st">"e006: custom angle_deltas function"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="examples2d_files/figure-html/unnamed-chunk-8-1.png" width="100%"></p>
+<p><img src="examples2d_files/figure-html/unnamed-chunk-8-1.png" alt="Three 2D scatter plots of data generated as an example of changing the angle_disp parameter and using a custom angle_deltas_fn function." width="100%"></p>
 </div>
 </div>
 <div class="section level2">
@@ -147,7 +147,7 @@ function available <a href="https://github.com/clugen/clugenr/blob/main/vignette
 <code class="sourceCode R"><span><span class="fu">plot_examples_2d</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>e <span class="op">=</span> <span class="va">e007</span>, t <span class="op">=</span> <span class="st">"e007: llength = 0"</span><span class="op">)</span>,</span>
 <span>                 <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>e <span class="op">=</span> <span class="va">e008</span>, t <span class="op">=</span> <span class="st">"e008: llength = 10"</span><span class="op">)</span>,</span>
 <span>                 <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>e <span class="op">=</span> <span class="va">e009</span>, t <span class="op">=</span> <span class="st">"e009: llength = 30"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="examples2d_files/figure-html/unnamed-chunk-11-1.png" width="100%"></p>
+<p><img src="examples2d_files/figure-html/unnamed-chunk-11-1.png" alt="Three 2D scatter plots of data generated as an example of using the llength parameter." width="100%"></p>
 </div>
 <div class="section level3">
 <h3 id="changing-the-llength_disp-parameter-and-using-a-custom-llengths_fn-function">Changing the <code>llength_disp</code> parameter and using a custom
@@ -171,7 +171,7 @@ function available <a href="https://github.com/clugen/clugenr/blob/main/vignette
 <code class="sourceCode R"><span><span class="fu">plot_examples_2d</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>e <span class="op">=</span> <span class="va">e010</span>, t <span class="op">=</span> <span class="st">"e010: llength_disp = 0.0"</span><span class="op">)</span>,</span>
 <span>                 <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>e <span class="op">=</span> <span class="va">e011</span>, t <span class="op">=</span> <span class="st">"e011: llength_disp = 5.0"</span><span class="op">)</span>,</span>
 <span>                 <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>e <span class="op">=</span> <span class="va">e012</span>, t <span class="op">=</span> <span class="st">"e012: custom llengths function"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="examples2d_files/figure-html/unnamed-chunk-15-1.png" width="100%"></p>
+<p><img src="examples2d_files/figure-html/unnamed-chunk-15-1.png" alt="Three 2D scatter plots of data generated as an example of changing the llength_disp parameter and using a custom llengths_fn function." width="100%"></p>
 </div>
 </div>
 <div class="section level2">
@@ -190,7 +190,7 @@ function available <a href="https://github.com/clugen/clugenr/blob/main/vignette
 <code class="sourceCode R"><span><span class="fu">plot_examples_2d</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>e <span class="op">=</span> <span class="va">e013</span>, t <span class="op">=</span> <span class="st">"e013: cluster_sep = [10, 10]"</span><span class="op">)</span>,</span>
 <span>                 <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>e <span class="op">=</span> <span class="va">e014</span>, t <span class="op">=</span> <span class="st">"e014: cluster_sep = [30, 10]"</span><span class="op">)</span>,</span>
 <span>                 <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>e <span class="op">=</span> <span class="va">e015</span>, t <span class="op">=</span> <span class="st">"e015: cluster_sep = [10, 30]"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="examples2d_files/figure-html/unnamed-chunk-18-1.png" width="100%"></p>
+<p><img src="examples2d_files/figure-html/unnamed-chunk-18-1.png" alt="Three 2D scatter plots of data generated as an example of using the cluster_sep parameter." width="100%"></p>
 </div>
 <div class="section level3">
 <h3 id="changing-the-cluster_offset-parameter-and-using-a-custom-clucenters_fn-function">Changing the <code>cluster_offset</code> parameter and using a
@@ -214,7 +214,7 @@ custom <code>clucenters_fn</code> function<a class="anchor" aria-label="anchor" 
 <code class="sourceCode R"><span><span class="fu">plot_examples_2d</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>e <span class="op">=</span> <span class="va">e016</span>, t <span class="op">=</span> <span class="st">"e016: default"</span><span class="op">)</span>,</span>
 <span>                 <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>e <span class="op">=</span> <span class="va">e017</span>, t <span class="op">=</span> <span class="st">"e017: cluster_offset = [20, -20]"</span><span class="op">)</span>,</span>
 <span>                 <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>e <span class="op">=</span> <span class="va">e018</span>, t <span class="op">=</span> <span class="st">"e018: custom clucenters function"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="examples2d_files/figure-html/unnamed-chunk-22-1.png" width="100%"></p>
+<p><img src="examples2d_files/figure-html/unnamed-chunk-22-1.png" alt="Three 2D scatter plots of data generated as an example of changing the cluster_offset parameter and using a custom clucenters_fn function." width="100%"></p>
 </div>
 </div>
 <div class="section level2">
@@ -235,7 +235,7 @@ line<a class="anchor" aria-label="anchor" href="#lateral-dispersion-and-placemen
 <code class="sourceCode R"><span><span class="fu">plot_examples_2d</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>e <span class="op">=</span> <span class="va">e019</span>, t <span class="op">=</span> <span class="st">"e019: lateral_disp = 0"</span><span class="op">)</span>,</span>
 <span>                 <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>e <span class="op">=</span> <span class="va">e020</span>, t <span class="op">=</span> <span class="st">"e020: lateral_disp = 1"</span><span class="op">)</span>,</span>
 <span>                 <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>e <span class="op">=</span> <span class="va">e021</span>, t <span class="op">=</span> <span class="st">"e021: lateral_disp = 3"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="examples2d_files/figure-html/unnamed-chunk-25-1.png" width="100%"></p>
+<p><img src="examples2d_files/figure-html/unnamed-chunk-25-1.png" alt="Three 2D scatter plots of data generated as an example of normal projection placement (the default)." width="100%"></p>
 </div>
 <div class="section level3">
 <h3 id="uniform-projection-placement-proj_dist_fn-unif">Uniform projection placement:
@@ -252,7 +252,7 @@ line<a class="anchor" aria-label="anchor" href="#lateral-dispersion-and-placemen
 <code class="sourceCode R"><span><span class="fu">plot_examples_2d</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>e <span class="op">=</span> <span class="va">e022</span>, t <span class="op">=</span> <span class="st">"e022: lateral_disp = 0"</span><span class="op">)</span>,</span>
 <span>                 <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>e <span class="op">=</span> <span class="va">e023</span>, t <span class="op">=</span> <span class="st">"e023: lateral_disp = 1"</span><span class="op">)</span>,</span>
 <span>                 <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>e <span class="op">=</span> <span class="va">e024</span>, t <span class="op">=</span> <span class="st">"e024: lateral_disp = 3"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="examples2d_files/figure-html/unnamed-chunk-27-1.png" width="100%"></p>
+<p><img src="examples2d_files/figure-html/unnamed-chunk-27-1.png" alt="Three 2D scatter plots of data generated as an example of uniform projection placement (the default)." width="100%"></p>
 </div>
 <div class="section level3">
 <h3 id="custom-projection-placement-using-the-beta-distribution">Custom projection placement using the Beta distribution<a class="anchor" aria-label="anchor" href="#custom-projection-placement-using-the-beta-distribution"></a>
@@ -271,7 +271,7 @@ line<a class="anchor" aria-label="anchor" href="#lateral-dispersion-and-placemen
 <code class="sourceCode R"><span><span class="fu">plot_examples_2d</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>e <span class="op">=</span> <span class="va">e025</span>, t <span class="op">=</span> <span class="st">"e025: lateral_disp = 0"</span><span class="op">)</span>,</span>
 <span>                 <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>e <span class="op">=</span> <span class="va">e026</span>, t <span class="op">=</span> <span class="st">"e026: lateral_disp = 1"</span><span class="op">)</span>,</span>
 <span>                 <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>e <span class="op">=</span> <span class="va">e027</span>, t <span class="op">=</span> <span class="st">"e027: lateral_disp = 3"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="examples2d_files/figure-html/unnamed-chunk-30-1.png" width="100%"></p>
+<p><img src="examples2d_files/figure-html/unnamed-chunk-30-1.png" alt="Three 2D scatter plots of data generated as an example of custom projection placement using the Beta distribution." width="100%"></p>
 </div>
 </div>
 <div class="section level2">
@@ -297,7 +297,7 @@ cluster-supporting line<a class="anchor" aria-label="anchor" href="#controlling-
 <code class="sourceCode R"><span><span class="fu">plot_examples_2d</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>e <span class="op">=</span> <span class="va">e028</span>, t <span class="op">=</span> <span class="st">"e028: proj_dist_fn = 'norm' (default)"</span><span class="op">)</span>,</span>
 <span>                 <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>e <span class="op">=</span> <span class="va">e029</span>, t <span class="op">=</span> <span class="st">"e029: proj_dist_fn = 'unif'"</span><span class="op">)</span>,</span>
 <span>                 <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>e <span class="op">=</span> <span class="va">e030</span>, t <span class="op">=</span> <span class="st">"e030: custom proj_dist_fn (Beta dist.)"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="examples2d_files/figure-html/unnamed-chunk-34-1.png" width="100%"></p>
+<p><img src="examples2d_files/figure-html/unnamed-chunk-34-1.png" alt="Three 2D scatter plots of data generated as an example of placing points on a hyperplane orthogonal to cluster-supporting line (the default)." width="100%"></p>
 </div>
 <div class="section level3">
 <h3 id="points-around-projection-on-cluster-supporting-line-point_dist_fn-n">Points around projection on cluster-supporting line:
@@ -314,7 +314,7 @@ cluster-supporting line<a class="anchor" aria-label="anchor" href="#controlling-
 <code class="sourceCode R"><span><span class="fu">plot_examples_2d</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>e <span class="op">=</span> <span class="va">e031</span>, t <span class="op">=</span> <span class="st">"e031: proj_dist_fn = 'norm' (default)"</span><span class="op">)</span>,</span>
 <span>                 <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>e <span class="op">=</span> <span class="va">e032</span>, t <span class="op">=</span> <span class="st">"e032: proj_dist_fn = 'unif'"</span><span class="op">)</span>,</span>
 <span>                 <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>e <span class="op">=</span> <span class="va">e033</span>, t <span class="op">=</span> <span class="st">"e033: custom proj_dist_fn (Beta dist.)"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="examples2d_files/figure-html/unnamed-chunk-36-1.png" width="100%"></p>
+<p><img src="examples2d_files/figure-html/unnamed-chunk-36-1.png" alt="Three 2D scatter plots of data generated as an example of placing points around their projection on the cluster-supporting line." width="100%"></p>
 </div>
 <div class="section level3">
 <h3 id="custom-point-placement-using-the-exponential-distribution">Custom point placement using the exponential distribution<a class="anchor" aria-label="anchor" href="#custom-point-placement-using-the-exponential-distribution"></a>
@@ -336,7 +336,7 @@ cluster-supporting line<a class="anchor" aria-label="anchor" href="#controlling-
 <code class="sourceCode R"><span><span class="fu">plot_examples_2d</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>e <span class="op">=</span> <span class="va">e034</span>, t <span class="op">=</span> <span class="st">"e034: proj_dist_fn = 'norm' (default)"</span><span class="op">)</span>,</span>
 <span>                 <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>e <span class="op">=</span> <span class="va">e035</span>, t <span class="op">=</span> <span class="st">"e035: proj_dist_fn = 'unif'"</span><span class="op">)</span>,</span>
 <span>                 <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>e <span class="op">=</span> <span class="va">e036</span>, t <span class="op">=</span> <span class="st">"e036: custom proj_dist_fn (Beta dist.)"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="examples2d_files/figure-html/unnamed-chunk-39-1.png" width="100%"></p>
+<p><img src="examples2d_files/figure-html/unnamed-chunk-39-1.png" alt="Three 2D scatter plots of data generated as an example of custom point placement by placing points using the exponential distribution." width="100%"></p>
 </div>
 </div>
 <div class="section level2">
@@ -371,7 +371,7 @@ cluster-supporting line<a class="anchor" aria-label="anchor" href="#controlling-
 <code class="sourceCode R"><span><span class="fu">plot_examples_2d</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>e <span class="op">=</span> <span class="va">e037</span>, t <span class="op">=</span> <span class="st">"e037: normal dist. (default)"</span><span class="op">)</span>,</span>
 <span>                 <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>e <span class="op">=</span> <span class="va">e038</span>, t <span class="op">=</span> <span class="st">"e038: unif. dist. (custom)"</span><span class="op">)</span>,</span>
 <span>                 <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>e <span class="op">=</span> <span class="va">e039</span>, t <span class="op">=</span> <span class="st">"e039: equal size (custom)"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="examples2d_files/figure-html/unnamed-chunk-43-1.png" width="100%"></p>
+<p><img src="examples2d_files/figure-html/unnamed-chunk-43-1.png" alt="Three 2D scatter plots of data generated as an example of manipulating cluster sizes." width="100%"></p>
 </div>
 <div class="section level2">
 <h2 id="direct-specification-of-optional-parameters">Direct specification of optional parameters<a class="anchor" aria-label="anchor" href="#direct-specification-of-optional-parameters"></a>
@@ -403,7 +403,7 @@ cluster-supporting line<a class="anchor" aria-label="anchor" href="#controlling-
 <code class="sourceCode R"><span><span class="fu">plot_examples_2d</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>e <span class="op">=</span> <span class="va">e040</span>, t <span class="op">=</span> <span class="st">"e040: direct params 1"</span><span class="op">)</span>,</span>
 <span>                 <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>e <span class="op">=</span> <span class="va">e041</span>, t <span class="op">=</span> <span class="st">"e041: direct params 2"</span><span class="op">)</span>,</span>
 <span>                 <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>e <span class="op">=</span> <span class="va">e042</span>, t <span class="op">=</span> <span class="st">"e042: direct params 3"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="examples2d_files/figure-html/unnamed-chunk-46-1.png" width="100%"></p>
+<p><img src="examples2d_files/figure-html/unnamed-chunk-46-1.png" alt="Three 2D scatter plots of data generated as an example of direct specification of optional parameters." width="100%"></p>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>

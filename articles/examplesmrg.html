@@ -69,7 +69,7 @@
       <img src="../logo.png" class="logo" alt=""><h1>Merging and hierarchical cluster examples</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/clugen/clugenr/blob/v1.0.4/vignettes/examplesmrg.Rmd" class="external-link"><code>vignettes/examplesmrg.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/clugen/clugenr/blob/main/vignettes/examplesmrg.Rmd" class="external-link"><code>vignettes/examplesmrg.Rmd</code></a></small>
       <div class="d-none name"><code>examplesmrg.Rmd</code></div>
     </div>
 
@@ -84,7 +84,7 @@ will focus on merging 2D data. Therefore, we’ll use the same
 code:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Load the clugenr library</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://clugen.github.io/clugenr/" class="external-link">clugenr</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://clugen.github.io/clugenr/">clugenr</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Load functions for plotting examples</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/source.html" class="external-link">source</a></span><span class="op">(</span><span class="st">"plot_examples_2d.R"</span>, local <span class="op">=</span> <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/knit_global.html" class="external-link">knit_global</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
@@ -107,7 +107,7 @@ code:</p>
 <code class="sourceCode R"><span><span class="fu">plot_examples_2d</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>e <span class="op">=</span> <span class="va">e090</span>, t <span class="op">=</span> <span class="st">"e090: data set 1"</span><span class="op">)</span>,</span>
 <span>                 <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>e <span class="op">=</span> <span class="va">e091</span>, t <span class="op">=</span> <span class="st">"e091: data set 2"</span><span class="op">)</span>,</span>
 <span>                 <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>e <span class="op">=</span> <span class="va">e092</span>, t <span class="op">=</span> <span class="st">"e092: merged data sets"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="examplesmrg_files/figure-html/unnamed-chunk-4-1.png" width="100%"></p>
+<p><img src="examplesmrg_files/figure-html/unnamed-chunk-4-1.png" alt="Three 2D scatter plots displaying the merge of two data sets generated with the clugen function." width="100%"></p>
 <p>In the previous example, clusters from individual data sets remain as
 separate clusters in the merged data set. It’s also possible to maintain
 the original cluster labels by setting the <code>clusters_field</code>
@@ -119,7 +119,7 @@ parameter to <code>NA</code>:</p>
 <span>                 <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>e <span class="op">=</span> <span class="va">e091</span>, t <span class="op">=</span> <span class="st">"e091: data set 2"</span><span class="op">)</span>,</span>
 <span>                 <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>e <span class="op">=</span> <span class="va">e093</span>, t <span class="op">=</span> <span class="st">"e093: merged data sets"</span><span class="op">)</span>,</span>
 <span>                 palette <span class="op">=</span> <span class="st">"set2"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="examplesmrg_files/figure-html/unnamed-chunk-6-1.png" width="100%"></p>
+<p><img src="examplesmrg_files/figure-html/unnamed-chunk-6-1.png" alt="Three 2D scatter plots displaying the merge of two data sets generated with the clugen function while maintaining the original cluster labels." width="100%"></p>
 </div>
 <div class="section level2">
 <h2 id="adding-noise-to-a-clugen-generated-data-set">Adding noise to a <code>clugen()</code>-generated data set<a class="anchor" aria-label="anchor" href="#adding-noise-to-a-clugen-generated-data-set"></a>
@@ -135,7 +135,7 @@ parameter to <code>NA</code>:</p>
 <span>                 <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>e <span class="op">=</span> <span class="va">e094</span>, t <span class="op">=</span> <span class="st">"e094: random uniform noise"</span><span class="op">)</span>,</span>
 <span>                 <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>e <span class="op">=</span> <span class="va">e095</span>, t <span class="op">=</span> <span class="st">"e095: data sets with noise"</span><span class="op">)</span>,</span>
 <span>                 palette <span class="op">=</span> <span class="st">"set2"</span>, pmargin <span class="op">=</span> <span class="op">-</span><span class="fl">0.1</span><span class="op">)</span></span></code></pre></div>
-<p><img src="examplesmrg_files/figure-html/unnamed-chunk-8-1.png" width="100%"></p>
+<p><img src="examplesmrg_files/figure-html/unnamed-chunk-8-1.png" alt="Three 2D scatter plots displaying the merge of data generated with the clugen function with random noise." width="100%"></p>
 </div>
 <div class="section level2">
 <h2 id="merging-with-data-not-generated-with-clugen">Merging with data not generated with <code>clugen()</code><a class="anchor" aria-label="anchor" href="#merging-with-data-not-generated-with-clugen"></a>
@@ -163,7 +163,7 @@ create an augmented dataset:</p>
 <span>                 <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>e <span class="op">=</span> <span class="va">e097</span>, t <span class="op">=</span> <span class="st">"e097: clugen-generated"</span><span class="op">)</span>,</span>
 <span>                 <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>e <span class="op">=</span> <span class="va">e098</span>, t <span class="op">=</span> <span class="st">"e098: merged"</span><span class="op">)</span>,</span>
 <span>                 palette <span class="op">=</span> <span class="st">"seaborn"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="examplesmrg_files/figure-html/unnamed-chunk-10-1.png" width="100%"></p>
+<p><img src="examplesmrg_files/figure-html/unnamed-chunk-10-1.png" alt="Three 2D scatter plots displaying the merge of an existing data set with data generated with the clugen function." width="100%"></p>
 <p>We can also hierarchize clusters from different sources:</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">e099</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/append.html" class="external-link">append</a></span><span class="op">(</span><span class="va">e096</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>hclusters <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">1L</span>, <span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">spc</span><span class="op">$</span><span class="va">x</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
@@ -175,7 +175,7 @@ create an augmented dataset:</p>
 <span>                 <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>e <span class="op">=</span> <span class="va">e101</span>, t <span class="op">=</span> <span class="st">"e101: merged (2 clusters)"</span><span class="op">)</span>,</span>
 <span>                 clusters_field <span class="op">=</span> <span class="st">"hclusters"</span>,</span>
 <span>                 palette <span class="op">=</span> <span class="st">"seaborn"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="examplesmrg_files/figure-html/unnamed-chunk-12-1.png" width="100%"></p>
+<p><img src="examplesmrg_files/figure-html/unnamed-chunk-12-1.png" alt="Three 2D scatter plots displaying the merge of an existing data set with data generated with the clugen function keeping each data set as a separate cluster." width="100%"></p>
 <p>Note that augmenting a dataset this way is probably not a
 statistically sound approach for most problems. In any case, if we
 perform clustering on the merged dataset and assume there are 3
@@ -196,7 +196,7 @@ clusters, results are interesting:</p>
 <span>                 <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>e <span class="op">=</span> <span class="va">e103</span>, t <span class="op">=</span> <span class="st">"e103: after clustering (3 clusters)"</span><span class="op">)</span>,</span>
 <span>                 clusters_field <span class="op">=</span> <span class="st">"hclusters"</span>,</span>
 <span>                 palette <span class="op">=</span> <span class="st">"seaborn"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="examplesmrg_files/figure-html/unnamed-chunk-14-1.png" width="100%"></p>
+<p><img src="examplesmrg_files/figure-html/unnamed-chunk-14-1.png" alt="Three 2D scatter plots displaying the possibility of data augmentation with the clumerge function." width="100%"></p>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>
