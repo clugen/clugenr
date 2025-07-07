@@ -54,6 +54,9 @@ e092 <- clumerge(e090, e091)
 ```
 
 ```{r}
+#| fig.alt: >
+#|   Three 2D scatter plots displaying the merge of two data sets generated
+#|   with the clugen function.
 plot_examples_2d(list(e = e090, t = "e090: data set 1"),
                  list(e = e091, t = "e091: data set 2"),
                  list(e = e092, t = "e092: merged data sets"))
@@ -68,6 +71,9 @@ e093 <- clumerge(e090, e091, clusters_field = NA)
 ```
 
 ```{r}
+#| fig.alt: >
+#|   Three 2D scatter plots displaying the merge of two data sets generated
+#|   with the clugen function while maintaining the original cluster labels.
 plot_examples_2d(list(e = e090, t = "e090: data set 1"),
                  list(e = e091, t = "e091: data set 2"),
                  list(e = e093, t = "e093: merged data sets"),
@@ -85,6 +91,9 @@ e095 <- clumerge(e094, e092, clusters_field = NA) # and keep it 9 when merging
 ```
 
 ```{r}
+#| fig.alt: >
+#|   Three 2D scatter plots displaying the merge of data generated with the
+#|   clugen function with random noise.
 plot_examples_2d(list(e = e092, t = "e092: original merged data sets"),
                  list(e = e094, t = "e094: random uniform noise"),
                  list(e = e095, t = "e095: data sets with noise"),
@@ -113,6 +122,9 @@ e098 <- clumerge(e096, e097, clusters_field = NA)
 ```
 
 ```{r}
+#| fig.alt: >
+#|   Three 2D scatter plots displaying the merge of an existing data set with
+#|   data generated with the clugen function.
 plot_examples_2d(list(e = e096, t = "e096: swiss PCA"),
                  list(e = e097, t = "e097: clugen-generated"),
                  list(e = e098, t = "e098: merged"),
@@ -128,6 +140,10 @@ e101 <- clumerge(e099, e100, fields = "points", clusters_field = "hclusters")
 ```
 
 ```{r}
+#| fig.alt: >
+#|   Three 2D scatter plots displaying the merge of an existing data set with
+#|   data generated with the clugen function keeping each data set as a
+#|   separate cluster.
 plot_examples_2d(list(e = e099, t = "e099: swiss PCA (1 cluster)"),
                  list(e = e100, t = "e100: clugen-generated (1 cluster)"),
                  list(e = e101, t = "e101: merged (2 clusters)"),
@@ -152,6 +168,9 @@ e103 <- list(points = e101$points, hclusters = factor(clusts))
 ```
 
 ```{r}
+#| fig.alt: >
+#|   Three 2D scatter plots displaying the possibility of data augmentation
+#|   with the clumerge function.
 plot_examples_2d(list(e = e101, t = "e101: merged (2 clusters)"),
                  list(e = e102, t = "e102: merged (1 cluster)"),
                  list(e = e103, t = "e103: after clustering (3 clusters)"),

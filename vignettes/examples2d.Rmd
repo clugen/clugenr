@@ -53,6 +53,9 @@ e003 <- clugen(2, 4, 200, c(0, 1), 0, c(10, 10), 10, 1.5, 0.5, seed = seed)
 ```
 
 ```{r}
+#| fig.alt: >
+#|   Three 2D scatter plots of data generated as an example of using the
+#|   direction parameter.
 plot_examples_2d(list(e = e001, t = "e001: direction = [1, 0]"),
                  list(e = e002, t = "e002: direction = [1, 1]"),
                  list(e = e003, t = "e003: direction = [0, 1]"))
@@ -77,6 +80,9 @@ e006 <- clugen(2, 6, 500, c(1, 0), 0, c(10, 10), 10, 1.5, 0.5, seed = seed,
 ```
 
 ```{r}
+#| fig.alt: >
+#|   Three 2D scatter plots of data generated as an example of changing the
+#|   angle_disp parameter and using a custom angle_deltas_fn function.
 plot_examples_2d(list(e = e004, t = "e004: angle_disp = 0"),
                  list(e = e005, t = "e005: angle_disp = π/8"),
                  list(e = e006, t = "e006: custom angle_deltas function"))
@@ -100,6 +106,9 @@ e009 <- clugen(2, 5, 800, c(1, 0), pi / 10, c(10, 10), 30, 0, 0.5, seed = seed,
 ```
 
 ```{r}
+#| fig.alt: >
+#|   Three 2D scatter plots of data generated as an example of using the
+#|   llength parameter.
 plot_examples_2d(list(e = e007, t = "e007: llength = 0"),
                  list(e = e008, t = "e008: llength = 10"),
                  list(e = e009, t = "e009: llength = 30"))
@@ -128,6 +137,9 @@ e012 <- clugen(2, 5, 800, c(1, 0), pi / 10, c(10, 10), 10,  0.1, 0.5,
 ```
 
 ```{r}
+#| fig.alt: >
+#|   Three 2D scatter plots of data generated as an example of changing the
+#|   llength_disp parameter and using a custom llengths_fn function.
 plot_examples_2d(list(e = e010, t = "e010: llength_disp = 0.0"),
                  list(e = e011, t = "e011: llength_disp = 5.0"),
                  list(e = e012, t = "e012: custom llengths function"))
@@ -148,6 +160,9 @@ e015 <- clugen(2, 8, 1000, c(1, 1), pi / 4, c(10, 30), 15, 2, 4, seed = seed)
 ```
 
 ```{r}
+#| fig.alt: >
+#|   Three 2D scatter plots of data generated as an example of using the
+#|   cluster_sep parameter.
 plot_examples_2d(list(e = e013, t = "e013: cluster_sep = [10, 10]"),
                  list(e = e014, t = "e014: cluster_sep = [30, 10]"),
                  list(e = e015, t = "e015: cluster_sep = [10, 30]"))
@@ -176,6 +191,9 @@ e018 <- clugen(2, 8, 1000, c(1, 1), pi / 4, c(10, 10), 10, 2, 2.5, seed = seed,
 ```
 
 ```{r}
+#| fig.alt: >
+#|   Three 2D scatter plots of data generated as an example of changing the
+#|   cluster_offset parameter and using a custom clucenters_fn function.
 plot_examples_2d(list(e = e016, t = "e016: default"),
                  list(e = e017, t = "e017: cluster_offset = [20, -20]"),
                  list(e = e018, t = "e018: custom clucenters function"))
@@ -196,6 +214,9 @@ e021 <- clugen(2, 4, 1000, c(1, 0), pi / 2, c(20, 20), 13, 2, 3.0, seed = seed)
 ```
 
 ```{r}
+#| fig.alt: >
+#|   Three 2D scatter plots of data generated as an example of normal
+#|   projection placement (the default).
 plot_examples_2d(list(e = e019, t = "e019: lateral_disp = 0"),
                  list(e = e020, t = "e020: lateral_disp = 1"),
                  list(e = e021, t = "e021: lateral_disp = 3"))
@@ -213,6 +234,9 @@ e024 <- clugen(2, 4, 1000, c(1, 0), pi / 2, c(20, 20), 13, 2, 3.0, seed = seed,
 ```
 
 ```{r}
+#| fig.alt: >
+#|   Three 2D scatter plots of data generated as an example of uniform
+#|   projection placement (the default).
 plot_examples_2d(list(e = e022, t = "e022: lateral_disp = 0"),
                  list(e = e023, t = "e023: lateral_disp = 1"),
                  list(e = e024, t = "e024: lateral_disp = 3"))
@@ -235,6 +259,9 @@ e027 <- clugen(2, 4, 1000, c(1, 0), pi / 2, c(20, 20), 13, 2, 3.0, seed = seed,
 ```
 
 ```{r}
+#| fig.alt: >
+#|   Three 2D scatter plots of data generated as an example of custom
+#|   projection placement using the Beta distribution.
 plot_examples_2d(list(e = e025, t = "e025: lateral_disp = 0"),
                  list(e = e026, t = "e026: lateral_disp = 1"),
                  list(e = e027, t = "e027: lateral_disp = 3"))
@@ -262,6 +289,9 @@ e030 <- clugen(2, 5, 1500, c(1, 0), pi / 4, c(20, 20), 14, 2, 2.0, seed = seed,
 ```
 
 ```{r}
+#| fig.alt: >
+#|   Three 2D scatter plots of data generated as an example of placing points
+#|   on a hyperplane orthogonal to cluster-supporting line (the default).
 plot_examples_2d(list(e = e028, t = "e028: proj_dist_fn = 'norm' (default)"),
                  list(e = e029, t = "e029: proj_dist_fn = 'unif'"),
                  list(e = e030, t = "e030: custom proj_dist_fn (Beta dist.)"))
@@ -279,6 +309,9 @@ e033 <- clugen(2, 5, 1500, c(1, 0), pi / 4, c(20, 20), 14, 2, 2.0, seed = seed,
 ```
 
 ```{r}
+#| fig.alt: >
+#|   Three 2D scatter plots of data generated as an example of placing points
+#|   around their projection on the cluster-supporting line.
 plot_examples_2d(list(e = e031, t = "e031: proj_dist_fn = 'norm' (default)"),
                  list(e = e032, t = "e032: proj_dist_fn = 'unif'"),
                  list(e = e033, t = "e033: custom proj_dist_fn (Beta dist.)"))
@@ -304,6 +337,9 @@ e036 <- clugen(2, 5, 1500, c(1, 0), pi / 4, c(20, 20), 14, 2, 2.0, seed = seed,
 ```
 
 ```{r}
+#| fig.alt: >
+#|   Three 2D scatter plots of data generated as an example of custom point
+#|   placement by placing points using the exponential distribution.
 plot_examples_2d(list(e = e034, t = "e034: proj_dist_fn = 'norm' (default)"),
                  list(e = e035, t = "e035: proj_dist_fn = 'unif'"),
                  list(e = e036, t = "e036: custom proj_dist_fn (Beta dist.)"))
@@ -343,6 +379,9 @@ e039 <- clugen(2, 4, 1500, c(1, 1), pi, c(20, 20), 0, 0, 5, seed = seed,
 ```
 
 ```{r}
+#| fig.alt: >
+#|   Three 2D scatter plots of data generated as an example of manipulating
+#|   cluster sizes.
 plot_examples_2d(list(e = e037, t = "e037: normal dist. (default)"),
                  list(e = e038, t = "e038: unif. dist. (custom)"),
                  list(e = e039, t = "e039: equal size (custom)"))
@@ -378,6 +417,9 @@ e042 <- clugen(2, 5, 1000, matrix(c(0, 1, 0.25, 0.75, 0.5, 0.5, 0.75, 0.25, 1, 0
 ```
 
 ```{r}
+#| fig.alt: >
+#|   Three 2D scatter plots of data generated as an example of direct
+#|   specification of optional parameters.
 plot_examples_2d(list(e = e040, t = "e040: direct params 1"),
                  list(e = e041, t = "e041: direct params 2"),
                  list(e = e042, t = "e042: direct params 3"))

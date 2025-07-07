@@ -103,6 +103,8 @@ devtools::install()
 Check that it works:
 
 ```{r, out.width = "100%", dpi = 200}
+#| fig.alt: >
+#|   Scatter plot of 2D clusters generated with clugenr.
 library(clugenr)
 x <- clugen(2, 5, 800, c(-1, 1), 0.6, c(4, 6), 5, 0.4, 0.5)
 plot(x$points, col = x$clusters, xlab = "x", ylab = "y", asp = 1)
