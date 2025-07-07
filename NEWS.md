@@ -1,5 +1,3 @@
-# clugenr (development version)
-
 # clugenr 1.0.4
 
 * Minor development-focused updates and fixes.
